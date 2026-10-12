@@ -149,5 +149,16 @@ class TestTgddCrawler(unittest.TestCase):
                 self.assertGreaterEqual(count, min_expected)
 
 
+    def test_politeness_settings(self):
+        """Kiểm tra cấu hình politeness tuân thủ robots.txt (ROBOTSTXT_OBEY=True, delay >= 5s)."""
+        settings = self.spider.custom_settings
+        self.assertTrue(settings.get("ROBOTSTXT_OBEY"), "ROBOTSTXT_OBEY phải được bật là True")
+        self.assertGreaterEqual(settings.get("DOWNLOAD_DELAY", 0), 5.0, "DOWNLOAD_DELAY phải >= 5.0 giây theo Crawl-delay")
+        self.assertEqual(settings.get("CONCURRENT_REQUESTS"), 1, "CONCURRENT_REQUESTS phải bằng 1 để tuần tự hóa")
+        self.assertEqual(settings.get("CONCURRENT_REQUESTS_PER_DOMAIN"), 1, "CONCURRENT_REQUESTS_PER_DOMAIN phải bằng 1")
+        self.assertTrue(settings.get("AUTOTHROTTLE_ENABLED"), "AUTOTHROTTLE_ENABLED phải được bật")
+        self.assertGreaterEqual(settings.get("AUTOTHROTTLE_START_DELAY", 0), 5.0, "AUTOTHROTTLE_START_DELAY phải >= 5.0 giây")
+
+
 if __name__ == "__main__":
     unittest.main()

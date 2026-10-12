@@ -39,14 +39,14 @@ class TgddBaseSpider(scrapy.Spider):
     max_products: int = 50
 
     custom_settings = {
-        "ROBOTSTXT_OBEY": False,
-        "DOWNLOAD_DELAY": 1.0,
-        "CONCURRENT_REQUESTS": 2,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 2,
+        "ROBOTSTXT_OBEY": True,
+        "DOWNLOAD_DELAY": 5.0,
+        "CONCURRENT_REQUESTS": 1,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 1,
         "AUTOTHROTTLE_ENABLED": True,
-        "AUTOTHROTTLE_START_DELAY": 1.0,
-        "AUTOTHROTTLE_MAX_DELAY": 10.0,
-        "AUTOTHROTTLE_TARGET_CONCURRENCY": 1.5,
+        "AUTOTHROTTLE_START_DELAY": 5.0,
+        "AUTOTHROTTLE_MAX_DELAY": 60.0,
+        "AUTOTHROTTLE_TARGET_CONCURRENCY": 1.0,
         "RETRY_TIMES": 3,
         "RETRY_HTTP_CODES": [500, 502, 503, 504, 408, 429],
         "LOG_LEVEL": "INFO",
