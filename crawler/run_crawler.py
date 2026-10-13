@@ -31,6 +31,21 @@ def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = N
     return base_dir / category / f"{batch_id}.jsonl"
 
 
+def ensure_output_path_available(output_path: Path) -> None:
+    """
+    Đảm bảo output path chưa tồn tại.
+
+    Raw snapshot phải immutable:
+    - Không overwrite
+    - Không append vào snapshot cũ
+    """
+    if output_path.exists():
+        raise FileExistsError(
+            f"Output snapshot đã tồn tại: {output_path}. "
+            "Không được overwrite/append vào raw snapshot cũ."
+        )
+
+
 def crawl_category(
     category: str,
     limit: int,
@@ -58,6 +73,7 @@ def crawl_category(
         target_out = get_snapshot_path(category, actual_batch_id)
 
     target_out.parent.mkdir(parents=True, exist_ok=True)
+    ensure_output_path_available(target_out)
 
     print("\n========================================================")
     print(f"BẮT ĐẦU CRAWL: category={category.upper()} (giới hạn ~{limit} sản phẩm)")
@@ -134,23 +150,27 @@ def main():
     start_time = datetime.now()
     results = {}
 
-    if args.category in ("laptop", "all"):
-        count = crawl_category(
-            "laptop",
-            args.limit,
-            output_file=args.output if args.category == "laptop" else None,
-            batch_id=args.batch_id if args.category == "laptop" else None,
-        )
-        results["laptop"] = count
+    try:
+        if args.category in ("laptop", "all"):
+            count = crawl_category(
+                "laptop",
+                args.limit,
+                output_file=args.output if args.category == "laptop" else None,
+                batch_id=args.batch_id if args.category == "laptop" else None,
+            )
+            results["laptop"] = count
 
-    if args.category in ("smartphone", "all"):
-        count = crawl_category(
-            "smartphone",
-            args.limit,
-            output_file=args.output if args.category == "smartphone" else None,
-            batch_id=args.batch_id if args.category == "smartphone" else None,
-        )
-        results["smartphone"] = count
+        if args.category in ("smartphone", "all"):
+            count = crawl_category(
+                "smartphone",
+                args.limit,
+                output_file=args.output if args.category == "smartphone" else None,
+                batch_id=args.batch_id if args.category == "smartphone" else None,
+            )
+            results["smartphone"] = count
+    except FileExistsError as exc:
+        print(f"\n[LỖI] {exc}\n")
+        sys.exit(1)
 
     duration = datetime.now() - start_time
     print("========================================================")

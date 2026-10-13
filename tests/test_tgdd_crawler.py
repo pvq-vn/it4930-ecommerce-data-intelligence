@@ -396,6 +396,68 @@ class TestTgddCrawler(unittest.TestCase):
         )
         self.assertEqual(count, 0, "Khi subprocess lỗi, crawl_category phải trả về 0")
 
+    def test_existing_snapshot_is_rejected(self):
+        """
+        Không cho phép crawl vào output snapshot đã tồn tại.
+        """
+        from crawler.run_crawler import ensure_output_path_available
+
+        existing_file = (
+            PROJECT_ROOT
+            / "data"
+            / "raw"
+            / "tgdd"
+            / "laptop"
+            / "existing_snapshot.jsonl"
+        )
+
+        existing_file.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            existing_file.write_text("existing data\n", encoding="utf-8")
+
+            with self.assertRaises(FileExistsError):
+                ensure_output_path_available(existing_file)
+
+        finally:
+            if existing_file.exists():
+                existing_file.unlink()
+
+    @unittest.mock.patch("subprocess.run")
+    def test_crawl_category_rejects_existing_output(self, mock_subproc):
+        """
+        Nếu output đã tồn tại thì crawl_category phải dừng trước khi gọi Scrapy.
+        """
+        from crawler.run_crawler import crawl_category
+
+        existing_file = (
+            PROJECT_ROOT
+            / "data"
+            / "raw"
+            / "tgdd"
+            / "laptop"
+            / "existing_snapshot.jsonl"
+        )
+
+        existing_file.parent.mkdir(parents=True, exist_ok=True)
+
+        try:
+            existing_file.write_text("existing data\n", encoding="utf-8")
+
+            with self.assertRaises(FileExistsError):
+                crawl_category(
+                    category="laptop",
+                    limit=5,
+                    output_file=str(existing_file),
+                    batch_id="20261013_999999",
+                )
+
+            mock_subproc.assert_not_called()
+
+        finally:
+            if existing_file.exists():
+                existing_file.unlink()
+
 
 if __name__ == "__main__":
     unittest.main()
