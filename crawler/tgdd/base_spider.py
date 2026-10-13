@@ -78,6 +78,12 @@ class TgddBaseSpider(scrapy.Spider):
         self.batch_id = batch_id or now.strftime("%Y%m%d_%H%M%S")
         self.scheduled_products = 0
         self.scraped_items_count = 0
+        self.listing_pages_processed = 0
+        self.listing_failures = 0
+        self.detail_successes = 0
+        self.detail_failures = 0
+        self.attribute_extraction_successes = 0
+        self.attribute_extraction_failures = 0
 
     # ---------------------------------------------------------
     # 1. START REQUESTS (Async generator theo chuẩn Scrapy 2.13+)
@@ -94,7 +100,7 @@ class TgddBaseSpider(scrapy.Spider):
         yield self.make_listing_request(page=1)
 
     # ---------------------------------------------------------
-    # 2. MAKE LISTING REQUEST
+    # 2. MAKE LISTING REQUEST & ERRBACK
     # ---------------------------------------------------------
 
     def make_listing_request(self, page: int):
@@ -130,14 +136,28 @@ class TgddBaseSpider(scrapy.Spider):
             "Isverify": "0",
         }
 
+        # Không dùng dont_filter=True: Scrapy RFPDupeFilter tự động nhận diện
+        # các trang khác nhau dựa trên POST body (chứa pageIndex khác nhau)
+        # đồng thời chặn gửi lặp request cho cùng một page.
         return scrapy.Request(
             url=self.API_URL,
             method="POST",
             body=json.dumps(payload),
             headers=headers,
             callback=self.parse_listing,
+            errback=self.errback_listing,
             meta={"page": page},
-            dont_filter=True,
+        )
+
+    def errback_listing(self, failure):
+        req = failure.request
+        page = req.meta.get("page", 1) if req.meta else 1
+        self.listing_failures += 1
+        self.logger.error(
+            "Listing request thất bại tại page=%s [url=%s]: %s",
+            page,
+            req.url,
+            failure.value,
         )
 
     # ---------------------------------------------------------
@@ -151,9 +171,11 @@ class TgddBaseSpider(scrapy.Spider):
         try:
             body = response.json()
         except Exception as exc:
-            self.logger.error("Không decode được JSON ở page=%s: %s", page, exc)
+            self.logger.error("Không decode được JSON ở listing page=%s (status=%s): %s", page, response.status, exc)
+            self.listing_failures += 1
             return
 
+        self.listing_pages_processed += 1
         data = body.get("data", {})
         products = data.get("products", [])
 
@@ -180,14 +202,19 @@ class TgddBaseSpider(scrapy.Spider):
 
             product_url = item.get("product_url_raw")
             if product_url:
+                # Không dùng dont_filter=True: tránh gửi lặp HTTP request tới cùng URL sản phẩm
                 yield scrapy.Request(
                     url=product_url,
                     callback=self.parse_detail,
                     meta={"item": item},
                     errback=self.errback_detail,
-                    dont_filter=True,
                 )
             else:
+                self.logger.warning(
+                    "Sản phẩm listing không có URL [product_id=%s]: %s",
+                    item.get("product_id_raw"),
+                    item.get("product_name_raw"),
+                )
                 yield item
 
         # Phân trang
@@ -260,10 +287,29 @@ class TgddBaseSpider(scrapy.Spider):
 
     def parse_detail(self, response):
         item = response.meta["item"]
-        self.logger.info("Parsing detail page: %s", response.url)
+        product_id = item.get("product_id_raw", "unknown")
+        self.logger.info("Parsing detail page: %s [product_id=%s, status=%s]", response.url, product_id, response.status)
+        self.detail_successes += 1
 
         # Lấy thông số kỹ thuật (attributes_raw)
-        attributes = self.extract_attributes(response.text)
+        try:
+            attributes = self.extract_attributes(response.text)
+        except Exception as exc:
+            self.logger.error(
+                "Ngoại lệ khi trích xuất attributes tại detail url=%s [product_id=%s]: %s",
+                response.url,
+                product_id,
+                exc,
+            )
+            attributes = {}
+
+        if attributes:
+            self.attribute_extraction_successes += 1
+            self.logger.info("Trích xuất thành công %s thuộc tính kỹ thuật tại %s", len(attributes), response.url)
+        else:
+            self.attribute_extraction_failures += 1
+            self.logger.warning("Không tìm thấy thuộc tính kỹ thuật nào tại detail url=%s [product_id=%s]", response.url, product_id)
+
         item["attributes_raw"] = attributes
 
         # Nếu tên ở listing bị thiếu, lấy fallback từ h1 detail
@@ -309,24 +355,29 @@ class TgddBaseSpider(scrapy.Spider):
                                         str(name).strip(),
                                         str(val).strip(),
                                     )
-            except Exception:
-                pass
+            except json.JSONDecodeError as exc:
+                self.logger.warning("Lỗi decode JSON-LD script tại detail page: %s", exc)
+            except Exception as exc:
+                self.logger.warning("Lỗi không mong muốn khi xử lý JSON-LD script: %s", exc)
 
         # 2. Fallback sang DOM section "Thông số kỹ thuật" nếu LD+JSON không có
         if not attributes:
-            for sec in soup.find_all("section"):
-                sec_text = sec.get_text()
-                if "thông số kỹ thuật" in sec_text.lower():
-                    for el in sec.find_all(["li", "div", "tr", "p"], recursive=True):
-                        # Bỏ qua element cha chứa element con cùng loại để tránh trùng lặp text
-                        if el.find(["li", "div", "tr", "p"]):
-                            continue
-                        txt = el.get_text(strip=True)
-                        if ":" in txt and len(txt) < 150:
-                            parts = txt.split(":", 1)
-                            k, v = parts[0].strip(), parts[1].strip()
-                            if k and v:
-                                self._add_attribute(attributes, k, v)
+            try:
+                for sec in soup.find_all("section"):
+                    sec_text = sec.get_text()
+                    if "thông số kỹ thuật" in sec_text.lower():
+                        for el in sec.find_all(["li", "div", "tr", "p"], recursive=True):
+                            # Bỏ qua element cha chứa element con cùng loại để tránh trùng lặp text
+                            if el.find(["li", "div", "tr", "p"]):
+                                continue
+                            txt = el.get_text(strip=True)
+                            if ":" in txt and len(txt) < 150:
+                                parts = txt.split(":", 1)
+                                k, v = parts[0].strip(), parts[1].strip()
+                                if k and v:
+                                    self._add_attribute(attributes, k, v)
+            except Exception as exc:
+                self.logger.warning("Lỗi khi fallback DOM thông số kỹ thuật: %s", exc)
 
         return attributes
 
@@ -349,9 +400,54 @@ class TgddBaseSpider(scrapy.Spider):
 
     def errback_detail(self, failure):
         req = failure.request
-        self.logger.error("Lỗi khi request detail URL: %s (%s)", req.url, failure.value)
-        item = req.meta.get("item")
+        item = req.meta.get("item") if req.meta else None
+        product_id = item.get("product_id_raw", "unknown") if item else "unknown"
+        product_name = item.get("product_name_raw", "unknown") if item else "unknown"
+
+        self.detail_failures += 1
+        self.attribute_extraction_failures += 1
+        self.logger.error(
+            "Detail request thất bại: url=%s [product_id=%s, name=%s, error=%s]",
+            req.url,
+            product_id,
+            product_name,
+            failure.value,
+        )
         if item:
-            self.logger.warning("Yield item từ listing dù detail page gặp lỗi: %s", req.url)
+            self.logger.warning(
+                "Lưu fallback item từ listing do detail request thất bại [product_id=%s, url=%s]",
+                product_id,
+                req.url,
+            )
             self.scraped_items_count += 1
             yield item
+
+    # ---------------------------------------------------------
+    # 8. SPIDER CLOSED SUMMARY
+    # ---------------------------------------------------------
+
+    def closed(self, reason: str):
+        self.logger.info(
+            "====================================================\n"
+            "CRAWL SUMMARY [%s]:\n"
+            "  - finish_reason: %s\n"
+            "  - listing_pages_processed: %s\n"
+            "  - listing_failures: %s\n"
+            "  - scheduled_products: %s\n"
+            "  - scraped_items_count: %s\n"
+            "  - detail_successes: %s\n"
+            "  - detail_failures: %s\n"
+            "  - attribute_extraction_successes: %s\n"
+            "  - attribute_extraction_failures: %s\n"
+            "====================================================",
+            self.name,
+            reason,
+            self.listing_pages_processed,
+            self.listing_failures,
+            self.scheduled_products,
+            self.scraped_items_count,
+            self.detail_successes,
+            self.detail_failures,
+            self.attribute_extraction_successes,
+            self.attribute_extraction_failures,
+        )

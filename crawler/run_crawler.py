@@ -1,10 +1,9 @@
 import argparse
-import json
-import os
 import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -15,35 +14,57 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 
-def crawl_category(category: str, limit: int, output_file: str = None) -> int:
+def generate_batch_id(dt: Optional[datetime] = None) -> str:
+    """Tạo batch_id từ timestamp (mặc định là datetime hiện tại)."""
+    if dt is None:
+        dt = datetime.now()
+    return dt.strftime("%Y%m%d_%H%M%S")
+
+
+def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = None) -> Path:
+    """
+    Tạo đường dẫn snapshot bất biến (immutable raw snapshot).
+    Bảo toàn snapshot cũ, không thực hiện overwrite.
+    """
+    if base_dir is None:
+        base_dir = PROJECT_ROOT / "data" / "raw" / "tgdd"
+    return base_dir / category / f"{batch_id}.jsonl"
+
+
+def crawl_category(
+    category: str,
+    limit: int,
+    output_file: Optional[str] = None,
+    batch_id: Optional[str] = None,
+) -> int:
     """
     Chạy spider tương ứng qua subprocess để đảm bảo tiến trình Scrapy / Twisted sạch sẽ.
+    Mặc định tạo file immutable raw snapshot dạng <batch_id>.jsonl, bảo toàn snapshot cũ.
     """
-    now_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-
     if category == "laptop":
         spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
-        out_dir = PROJECT_ROOT / "data" / "raw" / "tgdd" / "laptop"
-        default_out = out_dir / "pilot.jsonl"
     elif category == "smartphone":
         spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py"
-        out_dir = PROJECT_ROOT / "data" / "raw" / "tgdd" / "smartphone"
-        default_out = out_dir / "pilot.jsonl"
     else:
         raise ValueError(f"Không hỗ trợ category: {category}")
 
-    out_dir.mkdir(parents=True, exist_ok=True)
-    target_out = Path(output_file) if output_file else default_out
+    # Xác định batch_id và output path
+    actual_batch_id = batch_id or generate_batch_id()
+    if output_file:
+        target_out = Path(output_file)
+        if batch_id is None:
+            actual_batch_id = target_out.stem
+    else:
+        target_out = get_snapshot_path(category, actual_batch_id)
 
-    # Nếu file đã tồn tại, xóa để ghi mới đợt crawl
-    if target_out.exists():
-        target_out.unlink()
+    target_out.parent.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n========================================================")
+    print("\n========================================================")
     print(f"BẮT ĐẦU CRAWL: category={category.upper()} (giới hạn ~{limit} sản phẩm)")
     print(f"Spider: {spider_file.name}")
+    print(f"Batch ID: {actual_batch_id}")
     print(f"Output: {target_out}")
-    print(f"========================================================\n")
+    print("========================================================\n")
 
     cmd = [
         sys.executable,
@@ -53,13 +74,15 @@ def crawl_category(category: str, limit: int, output_file: str = None) -> int:
         str(spider_file),
         "-a",
         f"max_products={limit}",
+        "-a",
+        f"batch_id={actual_batch_id}",
         "-o",
         str(target_out),
     ]
 
     result = subprocess.run(cmd, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
-        print(f"[LỖI] Tiến trình crawl {category} thoát với mã lỗi: {result.returncode}")
+        print(f"\n[LỖI] Tiến trình crawl {category.upper()} thoát với mã lỗi: {result.returncode}")
         return 0
 
     record_count = 0
@@ -69,7 +92,11 @@ def crawl_category(category: str, limit: int, output_file: str = None) -> int:
                 if line.strip():
                     record_count += 1
 
-    print(f"\n[KẾT QUẢ] {category.upper()}: Thu thập thành công {record_count} records vào {target_out.name}\n")
+    if record_count > 0:
+        print(f"\n[KẾT QUẢ] {category.upper()}: Thu thập thành công {record_count} records vào {target_out}\n")
+    else:
+        print(f"\n[CẢNH BÁO] {category.upper()}: Tiến trình hoàn tất nhưng không có record nào được ghi vào {target_out}\n")
+
     return record_count
 
 
@@ -93,26 +120,49 @@ def main():
         default=None,
         help="File đầu ra tùy chỉnh (chỉ dùng khi chọn 1 category)",
     )
+    parser.add_argument(
+        "--batch-id",
+        type=str,
+        default=None,
+        help="Batch ID tùy chỉnh (mặc định tự động sinh theo timestamp)",
+    )
     args = parser.parse_args()
+
+    if args.output and args.category == "all":
+        parser.error("Tùy chọn --output chỉ có thể dùng khi crawl 1 category (laptop hoặc smartphone), không áp dụng cho 'all'.")
 
     start_time = datetime.now()
     results = {}
 
     if args.category in ("laptop", "all"):
-        count = crawl_category("laptop", args.limit, args.output if args.category == "laptop" else None)
+        count = crawl_category(
+            "laptop",
+            args.limit,
+            output_file=args.output if args.category == "laptop" else None,
+            batch_id=args.batch_id if args.category == "laptop" else None,
+        )
         results["laptop"] = count
 
     if args.category in ("smartphone", "all"):
-        count = crawl_category("smartphone", args.limit, args.output if args.category == "smartphone" else None)
+        count = crawl_category(
+            "smartphone",
+            args.limit,
+            output_file=args.output if args.category == "smartphone" else None,
+            batch_id=args.batch_id if args.category == "smartphone" else None,
+        )
         results["smartphone"] = count
 
     duration = datetime.now() - start_time
     print("========================================================")
     print("TỔNG HỢP KẾT QUẢ PILOT CRAWL:")
     for cat, cnt in results.items():
-        print(f"  - {cat.capitalize()}: {cnt} records")
+        status_label = f"{cnt} records" if cnt > 0 else "THẤT BẠI / 0 records"
+        print(f"  - {cat.capitalize()}: {status_label}")
     print(f"Thời gian thực hiện: {duration.total_seconds():.1f}s")
     print("========================================================")
+
+    if any(cnt == 0 for cnt in results.values()):
+        sys.exit(1)
 
 
 if __name__ == "__main__":
