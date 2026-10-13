@@ -48,13 +48,14 @@ def ensure_output_path_available(output_path: Path) -> None:
 
 def crawl_category(
     category: str,
-    limit: int,
+    limit: Optional[int] = 50,
     output_file: Optional[str] = None,
     batch_id: Optional[str] = None,
 ) -> int:
     """
     Chạy spider tương ứng qua subprocess để đảm bảo tiến trình Scrapy / Twisted sạch sẽ.
     Mặc định tạo file immutable raw snapshot dạng <batch_id>.jsonl, bảo toàn snapshot cũ.
+    limit=None biểu diễn chế độ FULL CRAWL (unlimited).
     """
     if category == "laptop":
         spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
@@ -75,8 +76,9 @@ def crawl_category(
     target_out.parent.mkdir(parents=True, exist_ok=True)
     ensure_output_path_available(target_out)
 
+    limit_desc = f"giới hạn ~{limit} sản phẩm" if limit is not None else "FULL CRAWL (không giới hạn)"
     print("\n========================================================")
-    print(f"BẮT ĐẦU CRAWL: category={category.upper()} (giới hạn ~{limit} sản phẩm)")
+    print(f"BẮT ĐẦU CRAWL: category={category.upper()} ({limit_desc})")
     print(f"Spider: {spider_file.name}")
     print(f"Batch ID: {actual_batch_id}")
     print(f"Output: {target_out}")
@@ -89,12 +91,14 @@ def crawl_category(
         "runspider",
         str(spider_file),
         "-a",
-        f"max_products={limit}",
-        "-a",
         f"batch_id={actual_batch_id}",
         "-o",
         str(target_out),
     ]
+    if limit is not None:
+        cmd.extend(["-a", f"max_products={limit}"])
+    else:
+        cmd.extend(["-a", "max_products=none"])
 
     result = subprocess.run(cmd, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
@@ -116,7 +120,7 @@ def crawl_category(
     return record_count
 
 
-def main():
+def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="TV1 - TGDĐ Web Crawler Runner")
     parser.add_argument(
         "--category",
@@ -124,12 +128,22 @@ def main():
         default="all",
         help="Danh mục cần crawl (laptop, smartphone, all)",
     )
-    parser.add_argument(
+
+    # Nhóm mutually exclusive giữa --limit và --full
+    mode_group = parser.add_mutually_exclusive_group(required=False)
+    mode_group.add_argument(
         "--limit",
         type=int,
-        default=50,
-        help="Số lượng sản phẩm mục tiêu (mặc định 50)",
+        default=None,
+        help="Số lượng sản phẩm mục tiêu (mặc định 50 trong chế độ pilot)",
     )
+    mode_group.add_argument(
+        "--full",
+        action="store_true",
+        default=False,
+        help="Thu thập toàn bộ sản phẩm trong danh mục (unlimited, không giới hạn)",
+    )
+
     parser.add_argument(
         "--output",
         type=str,
@@ -142,10 +156,29 @@ def main():
         default=None,
         help="Batch ID tùy chỉnh (mặc định tự động sinh theo timestamp)",
     )
+    return parser
+
+
+def main():
+    parser = build_argument_parser()
     args = parser.parse_args()
+
+    if args.full and args.limit is not None:
+        parser.error(
+            "Không được chỉ định đồng thời cả --full và --limit. "
+            "Chọn --full để crawl toàn bộ hoặc --limit <N> để đặt số lượng cụ thể."
+        )
 
     if args.output and args.category == "all":
         parser.error("Tùy chọn --output chỉ có thể dùng khi crawl 1 category (laptop hoặc smartphone), không áp dụng cho 'all'.")
+
+    # Xác định effective_limit: None nếu --full, args.limit nếu có, mặc định là 50 (pilot mode)
+    if args.full:
+        effective_limit = None
+    elif args.limit is not None:
+        effective_limit = args.limit
+    else:
+        effective_limit = 50
 
     start_time = datetime.now()
     results = {}
@@ -154,7 +187,7 @@ def main():
         if args.category in ("laptop", "all"):
             count = crawl_category(
                 "laptop",
-                args.limit,
+                limit=effective_limit,
                 output_file=args.output if args.category == "laptop" else None,
                 batch_id=args.batch_id if args.category == "laptop" else None,
             )
@@ -163,7 +196,7 @@ def main():
         if args.category in ("smartphone", "all"):
             count = crawl_category(
                 "smartphone",
-                args.limit,
+                limit=effective_limit,
                 output_file=args.output if args.category == "smartphone" else None,
                 batch_id=args.batch_id if args.category == "smartphone" else None,
             )
@@ -173,8 +206,9 @@ def main():
         sys.exit(1)
 
     duration = datetime.now() - start_time
+    mode_label = "FULL CRAWL" if effective_limit is None else f"PILOT CRAWL (limit={effective_limit})"
     print("========================================================")
-    print("TỔNG HỢP KẾT QUẢ PILOT CRAWL:")
+    print(f"TỔNG HỢP KẾT QUẢ {mode_label}:")
     for cat, cnt in results.items():
         status_label = f"{cnt} records" if cnt > 0 else "THẤT BẠI / 0 records"
         print(f"  - {cat.capitalize()}: {status_label}")

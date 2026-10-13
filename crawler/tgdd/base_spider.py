@@ -13,6 +13,9 @@ except ImportError:
     from items import TechProductRawItem
 
 
+_UNSET = object()
+
+
 class TgddBaseSpider(scrapy.Spider):
     """
     Base spider cho sàn Thế Giới Di Động (TGDĐ).
@@ -35,8 +38,8 @@ class TgddBaseSpider(scrapy.Spider):
     cate_id: str = "17"
     referer: str = "https://www.thegioididong.com"
 
-    # Default limits
-    max_products: int = 50
+    # Default limits (pilot mode = 50, full crawl mode = None)
+    max_products: Optional[int] = 50
 
     custom_settings = {
         "ROBOTSTXT_OBEY": True,
@@ -64,14 +67,21 @@ class TgddBaseSpider(scrapy.Spider):
 
     def __init__(
         self,
-        max_products: Optional[int] = None,
+        max_products: Any = _UNSET,
         batch_id: Optional[str] = None,
         *args: Any,
         **kwargs: Any,
     ):
         super().__init__(*args, **kwargs)
 
-        if max_products is not None:
+        if max_products is _UNSET:
+            self.max_products = 50
+        elif max_products is None or (
+            isinstance(max_products, str)
+            and max_products.strip().lower() in ("none", "null", "unlimited", "")
+        ):
+            self.max_products = None
+        else:
             self.max_products = int(max_products)
 
         now = datetime.now().astimezone()
@@ -84,6 +94,9 @@ class TgddBaseSpider(scrapy.Spider):
         self.detail_failures = 0
         self.attribute_extraction_successes = 0
         self.attribute_extraction_failures = 0
+        self.last_listing_page = 0
+        self.stop_reason = "in_progress"
+        self.seen_page_signatures = set()
 
     # ---------------------------------------------------------
     # 1. START REQUESTS (Async generator theo chuẩn Scrapy 2.13+)
@@ -153,6 +166,8 @@ class TgddBaseSpider(scrapy.Spider):
         req = failure.request
         page = req.meta.get("page", 1) if req.meta else 1
         self.listing_failures += 1
+        if self.stop_reason == "in_progress":
+            self.stop_reason = "error/failure"
         self.logger.error(
             "Listing request thất bại tại page=%s [url=%s]: %s",
             page,
@@ -166,6 +181,7 @@ class TgddBaseSpider(scrapy.Spider):
 
     def parse_listing(self, response):
         page = response.meta.get("page", 1)
+        self.last_listing_page = page
         self.logger.info("Parsing listing page=%s (status=%s)", page, response.status)
 
         try:
@@ -173,6 +189,8 @@ class TgddBaseSpider(scrapy.Spider):
         except Exception as exc:
             self.logger.error("Không decode được JSON ở listing page=%s (status=%s): %s", page, response.status, exc)
             self.listing_failures += 1
+            if self.stop_reason == "in_progress":
+                self.stop_reason = "error/failure"
             return
 
         self.listing_pages_processed += 1
@@ -181,7 +199,25 @@ class TgddBaseSpider(scrapy.Spider):
 
         if not products:
             self.logger.info("Không còn sản phẩm ở page=%s. Kết thúc listing.", page)
+            if self.stop_reason == "in_progress":
+                self.stop_reason = "no_more_products"
             return
+
+        # Pagination guard: kiểm tra page signature để tránh infinite loop
+        page_signature = tuple(
+            str(p.get("id") or p.get("productCode") or p.get("url") or "")
+            for p in products
+        )
+        if page_signature in self.seen_page_signatures:
+            self.logger.warning(
+                "Phát hiện page signature bị lặp lại tại page=%s (danh sách sản phẩm giống hệt page trước). "
+                "Dừng pagination để bảo vệ an toàn HTTP crawler.",
+                page,
+            )
+            self.stop_reason = "repeated_page_signature"
+            return
+
+        self.seen_page_signatures.add(page_signature)
 
         self.logger.info(
             "Tìm thấy %s sản phẩm trong response page=%s",
@@ -190,11 +226,12 @@ class TgddBaseSpider(scrapy.Spider):
         )
 
         for p in products:
-            if self.scheduled_products >= self.max_products:
+            if self.max_products is not None and self.scheduled_products >= self.max_products:
                 self.logger.info(
                     "Đạt giới hạn scheduled_products=%s. Dừng lên lịch sản phẩm mới.",
                     self.max_products,
                 )
+                self.stop_reason = "max_products_reached"
                 break
 
             item = self.extract_listing_item(p)
@@ -217,8 +254,10 @@ class TgddBaseSpider(scrapy.Spider):
                 )
                 yield item
 
-        # Phân trang
-        if len(products) > 0 and self.scheduled_products < self.max_products:
+        # Phân trang: tiếp tục khi còn sản phẩm và (chưa đạt max_products hoặc đang chạy full crawl)
+        if len(products) > 0 and (
+            self.max_products is None or self.scheduled_products < self.max_products
+        ):
             next_page = page + 1
             self.logger.info("Tiếp tục crawl listing page=%s", next_page)
             yield self.make_listing_request(page=next_page)
@@ -427,10 +466,15 @@ class TgddBaseSpider(scrapy.Spider):
     # ---------------------------------------------------------
 
     def closed(self, reason: str):
+        if self.stop_reason == "in_progress":
+            self.stop_reason = reason or "finished"
+
         self.logger.info(
             "====================================================\n"
             "CRAWL SUMMARY [%s]:\n"
             "  - finish_reason: %s\n"
+            "  - stop_reason: %s\n"
+            "  - last_listing_page: %s\n"
             "  - listing_pages_processed: %s\n"
             "  - listing_failures: %s\n"
             "  - scheduled_products: %s\n"
@@ -442,6 +486,8 @@ class TgddBaseSpider(scrapy.Spider):
             "====================================================",
             self.name,
             reason,
+            self.stop_reason,
+            self.last_listing_page,
             self.listing_pages_processed,
             self.listing_failures,
             self.scheduled_products,

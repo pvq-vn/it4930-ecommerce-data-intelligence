@@ -458,6 +458,174 @@ class TestTgddCrawler(unittest.TestCase):
             if existing_file.exists():
                 existing_file.unlink()
 
+    def test_spider_max_products_initialization(self):
+        """
+        Kiểm tra khởi tạo max_products:
+        - Mặc định là 50 (pilot mode).
+        - max_products=None hoặc 'none' biểu diễn unlimited (full mode).
+        - max_products=100 nhận đúng số nguyên.
+        """
+        spider_default = TgddBaseSpider()
+        self.assertEqual(spider_default.max_products, 50, "Mặc định không truyền phải là 50")
+
+        spider_pilot = TgddBaseSpider(max_products=50)
+        self.assertEqual(spider_pilot.max_products, 50)
+
+        spider_full_none = TgddBaseSpider(max_products=None)
+        self.assertIsNone(spider_full_none.max_products, "max_products=None phải là unlimited")
+
+        spider_full_str = TgddBaseSpider(max_products="none")
+        self.assertIsNone(spider_full_str.max_products, "max_products='none' phải là unlimited")
+
+        spider_custom = TgddBaseSpider(max_products="100")
+        self.assertEqual(spider_custom.max_products, 100)
+
+    def test_full_mode_cli_parsing(self):
+        """Kiểm tra xử lý đối số dòng lệnh CLI cho chế độ --full và ràng buộc mutually exclusive với --limit."""
+        from crawler.run_crawler import build_argument_parser
+
+        parser = build_argument_parser()
+
+        # 1. Chạy với --full
+        args_full = parser.parse_args(["--category", "laptop", "--full"])
+        self.assertTrue(args_full.full)
+        self.assertIsNone(args_full.limit)
+
+        # 2. Chạy mặc định pilot mode (không --full, không --limit)
+        args_default = parser.parse_args(["--category", "laptop"])
+        self.assertFalse(args_default.full)
+        self.assertIsNone(args_default.limit)
+        # Kiểm tra logic xác định limit: nếu không truyền gì thì limit mặc định là 50
+        effective_limit_default = None if args_default.full else (args_default.limit or 50)
+        self.assertEqual(effective_limit_default, 50)
+
+        # 3. Chạy với --limit 100
+        args_limit = parser.parse_args(["--category", "laptop", "--limit", "100"])
+        self.assertFalse(args_limit.full)
+        self.assertEqual(args_limit.limit, 100)
+        effective_limit_custom = None if args_limit.full else (args_limit.limit or 50)
+        self.assertEqual(effective_limit_custom, 100)
+
+        # 4. Truyền đồng thời --full và --limit phải bị từ chối trực tiếp bởi argparse mutually exclusive group
+        with self.assertRaises(SystemExit):
+            parser.parse_args(["--category", "laptop", "--full", "--limit", "50"])
+
+        with self.assertRaises(SystemExit):
+            parser.parse_args(["--category", "laptop", "--limit", "50", "--full"])
+
+    def test_full_crawl_does_not_stop_at_50_and_continues_pagination(self):
+        """Kiểm tra chế độ full crawl (max_products=None) không dừng ở 50 sản phẩm mà tiếp tục phân trang."""
+        spider = TgddBaseSpider(max_products=None)
+
+        def make_mock_response(page: int, start_idx: int, count: int):
+            products = [
+                {
+                    "id": str(start_idx + i),
+                    "name": f"Product {start_idx + i}",
+                    "url": f"laptop/p-{start_idx + i}",
+                    "productPrices": [{"price": 10000000}],
+                }
+                for i in range(count)
+            ]
+            body_data = {"data": {"products": products}}
+            req = scrapy.Request(url=spider.API_URL, meta={"page": page})
+            return TextResponse(
+                url=spider.API_URL,
+                body=json.dumps(body_data).encode("utf-8"),
+                encoding="utf-8",
+                request=req,
+            )
+
+        # Page 1: 30 sản phẩm (scheduled = 30)
+        resp1 = make_mock_response(page=1, start_idx=1, count=30)
+        yielded1 = list(spider.parse_listing(resp1))
+        pagination_reqs1 = [r for r in yielded1 if isinstance(r, scrapy.Request) and r.callback == spider.parse_listing]
+        self.assertEqual(len(pagination_reqs1), 1)
+        self.assertEqual(pagination_reqs1[0].meta["page"], 2)
+        self.assertEqual(spider.scheduled_products, 30)
+
+        # Page 2: 30 sản phẩm tiếp (scheduled = 60 > 50)
+        resp2 = make_mock_response(page=2, start_idx=31, count=30)
+        yielded2 = list(spider.parse_listing(resp2))
+        pagination_reqs2 = [r for r in yielded2 if isinstance(r, scrapy.Request) and r.callback == spider.parse_listing]
+        self.assertEqual(len(pagination_reqs2), 1)
+        self.assertEqual(pagination_reqs2[0].meta["page"], 3)
+        self.assertEqual(spider.scheduled_products, 60, "Full crawl phải vượt qua mốc 50 sản phẩm")
+
+    def test_pagination_stops_when_products_empty(self):
+        """Kiểm tra crawler dừng pagination khi API trả về danh sách sản phẩm rỗng."""
+        spider = TgddBaseSpider(max_products=None)
+
+        body_data = {"data": {"products": []}}
+        req = scrapy.Request(url=spider.API_URL, meta={"page": 5})
+        resp = TextResponse(
+            url=spider.API_URL,
+            body=json.dumps(body_data).encode("utf-8"),
+            encoding="utf-8",
+            request=req,
+        )
+
+        yielded = list(spider.parse_listing(resp))
+        self.assertEqual(len(yielded), 0, "Không còn sản phẩm thì không yield thêm item hay request nào")
+        self.assertEqual(spider.stop_reason, "no_more_products")
+
+    def test_repeated_page_signature_guard(self):
+        """Kiểm tra pagination guard phát hiện page signature trùng lặp và dừng crawler an toàn."""
+        spider = TgddBaseSpider(max_products=None)
+
+        products = [
+            {
+                "id": "item-101",
+                "name": "Repeat Product",
+                "url": "laptop/repeat-101",
+                "productPrices": [{"price": 15000000}],
+            }
+        ]
+        body_data = {"data": {"products": products}}
+
+        # Page 1 nhận sản phẩm bình thường
+        req1 = scrapy.Request(url=spider.API_URL, meta={"page": 1})
+        resp1 = TextResponse(
+            url=spider.API_URL,
+            body=json.dumps(body_data).encode("utf-8"),
+            encoding="utf-8",
+            request=req1,
+        )
+        yielded1 = list(spider.parse_listing(resp1))
+        self.assertGreater(len(yielded1), 0)
+
+        # Page 2 nhận lại y nguyên danh sách sản phẩm của Page 1
+        req2 = scrapy.Request(url=spider.API_URL, meta={"page": 2})
+        resp2 = TextResponse(
+            url=spider.API_URL,
+            body=json.dumps(body_data).encode("utf-8"),
+            encoding="utf-8",
+            request=req2,
+        )
+        yielded2 = list(spider.parse_listing(resp2))
+        self.assertEqual(len(yielded2), 0, "Khi gặp repeated page signature, dừng pagination ngay lập tức")
+        self.assertEqual(spider.stop_reason, "repeated_page_signature")
+
+    @unittest.mock.patch("subprocess.run")
+    def test_full_crawl_subprocess_command(self, mock_subproc):
+        """Kiểm tra crawl_category ở chế độ full crawl (limit=None) truyền max_products=none vào Scrapy."""
+        from crawler.run_crawler import crawl_category
+
+        mock_subproc.return_value = MagicMock(returncode=0)
+        custom_out = PROJECT_ROOT / "data" / "raw" / "tgdd" / "laptop" / "fake_full.jsonl"
+
+        crawl_category(
+            category="laptop",
+            limit=None,
+            output_file=str(custom_out),
+            batch_id="20261013_fulltest",
+        )
+
+        self.assertTrue(mock_subproc.called)
+        called_cmd = mock_subproc.call_args[0][0]
+        self.assertIn("max_products=none", called_cmd)
+        self.assertIn("batch_id=20261013_fulltest", called_cmd)
+
 
 if __name__ == "__main__":
     unittest.main()
