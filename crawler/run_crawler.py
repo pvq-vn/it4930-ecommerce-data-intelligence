@@ -27,7 +27,8 @@ def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = N
     Bảo toàn snapshot cũ, không thực hiện overwrite.
     """
     if base_dir is None:
-        base_dir = PROJECT_ROOT / "data" / "raw" / source
+        source_folder = "cellphoneS" if source.lower() == "cellphones" else source
+        base_dir = PROJECT_ROOT / "data" / "raw" / source_folder
     return base_dir / category / f"{batch_id}.jsonl"
 
 
@@ -37,7 +38,8 @@ def get_review_snapshot_path(category: str, batch_id: str, base_dir: Optional[Pa
     Bảo toàn snapshot cũ, không thực hiện overwrite.
     """
     if base_dir is None:
-        base_dir = PROJECT_ROOT / "data" / "raw" / source
+        source_folder = "cellphoneS" if source.lower() == "cellphones" else source
+        base_dir = PROJECT_ROOT / "data" / "raw" / source_folder
     return base_dir / f"{category}_reviews" / f"{batch_id}.jsonl"
 
 
@@ -68,18 +70,26 @@ def crawl_category(
     Mặc định tạo file immutable raw snapshot dạng <batch_id>.jsonl, bảo toàn snapshot cũ.
     limit=None biểu diễn chế độ FULL CRAWL (unlimited).
     """
-    if source == "tgdd":
+    src_key = source.lower()
+    if src_key == "tgdd":
         if category == "laptop":
             spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
         elif category == "smartphone":
             spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py"
         else:
             raise ValueError(f"Không hỗ trợ category: {category}")
-    elif source == "fptshop":
+    elif src_key == "fptshop":
         if category == "laptop":
             spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_laptop_spider.py"
         elif category == "smartphone":
             spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_smartphone_spider.py"
+        else:
+            raise ValueError(f"Không hỗ trợ category: {category}")
+    elif src_key in ("cellphones", "cellphoneS".lower()):
+        if category == "laptop":
+            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphone_laptop_spider.py"
+        elif category == "smartphone":
+            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphone_smartphone_spider.py"
         else:
             raise ValueError(f"Không hỗ trợ category: {category}")
     else:
@@ -157,12 +167,12 @@ def crawl_category(
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="TV1 - TGDĐ & FPTShop Web Crawler Runner")
+    parser = argparse.ArgumentParser(description="TV1 - Multi-Source Tech E-Commerce Crawler Runner")
     parser.add_argument(
         "--source",
-        choices=["tgdd", "fptshop", "all"],
+        choices=["tgdd", "fptshop", "cellphones", "cellphoneS", "all"],
         default="tgdd",
-        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, all - mặc định tgdd)",
+        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, cellphones, cellphoneS, all - mặc định tgdd)",
     )
     parser.add_argument(
         "--category",
