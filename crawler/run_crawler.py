@@ -21,14 +21,24 @@ def generate_batch_id(dt: Optional[datetime] = None) -> str:
     return dt.strftime("%Y%m%d_%H%M%S")
 
 
-def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = None) -> Path:
+def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = None, source: str = "tgdd") -> Path:
     """
-    Tạo đường dẫn snapshot bất biến (immutable raw snapshot).
+    Tạo đường dẫn snapshot bất biến (immutable raw snapshot) cho sản phẩm/biến thể.
     Bảo toàn snapshot cũ, không thực hiện overwrite.
     """
     if base_dir is None:
-        base_dir = PROJECT_ROOT / "data" / "raw" / "tgdd"
+        base_dir = PROJECT_ROOT / "data" / "raw" / source
     return base_dir / category / f"{batch_id}.jsonl"
+
+
+def get_review_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = None, source: str = "tgdd") -> Path:
+    """
+    Tạo đường dẫn snapshot bất biến (immutable raw snapshot) cho review/comment.
+    Bảo toàn snapshot cũ, không thực hiện overwrite.
+    """
+    if base_dir is None:
+        base_dir = PROJECT_ROOT / "data" / "raw" / source
+    return base_dir / f"{category}_reviews" / f"{batch_id}.jsonl"
 
 
 def ensure_output_path_available(output_path: Path) -> None:
@@ -51,37 +61,53 @@ def crawl_category(
     limit: Optional[int] = 50,
     output_file: Optional[str] = None,
     batch_id: Optional[str] = None,
+    source: str = "tgdd",
 ) -> int:
     """
     Chạy spider tương ứng qua subprocess để đảm bảo tiến trình Scrapy / Twisted sạch sẽ.
     Mặc định tạo file immutable raw snapshot dạng <batch_id>.jsonl, bảo toàn snapshot cũ.
     limit=None biểu diễn chế độ FULL CRAWL (unlimited).
     """
-    if category == "laptop":
-        spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
-    elif category == "smartphone":
-        spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py"
+    if source == "tgdd":
+        if category == "laptop":
+            spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
+        elif category == "smartphone":
+            spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py"
+        else:
+            raise ValueError(f"Không hỗ trợ category: {category}")
+    elif source == "fptshop":
+        if category == "laptop":
+            spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_laptop_spider.py"
+        elif category == "smartphone":
+            spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_smartphone_spider.py"
+        else:
+            raise ValueError(f"Không hỗ trợ category: {category}")
     else:
-        raise ValueError(f"Không hỗ trợ category: {category}")
+        raise ValueError(f"Không hỗ trợ source: {source}")
 
-    # Xác định batch_id và output path
+    # Xác định batch_id và output paths (product và review riêng biệt)
     actual_batch_id = batch_id or generate_batch_id()
     if output_file:
         target_out = Path(output_file)
         if batch_id is None:
             actual_batch_id = target_out.stem
+        review_out = target_out.parent / f"{target_out.stem}_reviews.jsonl"
     else:
-        target_out = get_snapshot_path(category, actual_batch_id)
+        target_out = get_snapshot_path(category, actual_batch_id, source=source)
+        review_out = get_review_snapshot_path(category, actual_batch_id, source=source)
 
     target_out.parent.mkdir(parents=True, exist_ok=True)
+    review_out.parent.mkdir(parents=True, exist_ok=True)
     ensure_output_path_available(target_out)
+    ensure_output_path_available(review_out)
 
     limit_desc = f"giới hạn ~{limit} sản phẩm" if limit is not None else "FULL CRAWL (không giới hạn)"
     print("\n========================================================")
-    print(f"BẮT ĐẦU CRAWL: category={category.upper()} ({limit_desc})")
+    print(f"BẮT ĐẦU CRAWL: [{source.upper()}] category={category.upper()} ({limit_desc})")
     print(f"Spider: {spider_file.name}")
     print(f"Batch ID: {actual_batch_id}")
-    print(f"Output: {target_out}")
+    print(f"Product Output: {target_out}")
+    print(f"Review Output:  {review_out}")
     print("========================================================\n")
 
     cmd = [
@@ -94,6 +120,8 @@ def crawl_category(
         f"batch_id={actual_batch_id}",
         "-o",
         str(target_out),
+        "-a",
+        f"review_output={str(review_out)}",
     ]
     if limit is not None:
         cmd.extend(["-a", f"max_products={limit}"])
@@ -102,7 +130,7 @@ def crawl_category(
 
     result = subprocess.run(cmd, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
-        print(f"\n[LỖI] Tiến trình crawl {category.upper()} thoát với mã lỗi: {result.returncode}")
+        print(f"\n[LỖI] Tiến trình crawl [{source.upper()}] {category.upper()} thoát với mã lỗi: {result.returncode}")
         return 0
 
     record_count = 0
@@ -112,16 +140,30 @@ def crawl_category(
                 if line.strip():
                     record_count += 1
 
+    review_count = 0
+    if review_out.exists():
+        with open(review_out, "r", encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    review_count += 1
+
     if record_count > 0:
-        print(f"\n[KẾT QUẢ] {category.upper()}: Thu thập thành công {record_count} records vào {target_out}\n")
+        print(f"\n[KẾT QUẢ] [{source.upper()}] {category.upper()}: Thu thập thành công {record_count} product/variant records vào {target_out}")
+        print(f"                                   và {review_count} review records vào {review_out}\n")
     else:
-        print(f"\n[CẢNH BÁO] {category.upper()}: Tiến trình hoàn tất nhưng không có record nào được ghi vào {target_out}\n")
+        print(f"\n[CẢNH BÁO] [{source.upper()}] {category.upper()}: Tiến trình hoàn tất nhưng không có record nào được ghi vào {target_out}\n")
 
     return record_count
 
 
 def build_argument_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="TV1 - TGDĐ Web Crawler Runner")
+    parser = argparse.ArgumentParser(description="TV1 - TGDĐ & FPTShop Web Crawler Runner")
+    parser.add_argument(
+        "--source",
+        choices=["tgdd", "fptshop", "all"],
+        default="tgdd",
+        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, all - mặc định tgdd)",
+    )
     parser.add_argument(
         "--category",
         choices=["laptop", "smartphone", "all"],
@@ -148,7 +190,7 @@ def build_argument_parser() -> argparse.ArgumentParser:
         "--output",
         type=str,
         default=None,
-        help="File đầu ra tùy chỉnh (chỉ dùng khi chọn 1 category)",
+        help="File đầu ra tùy chỉnh (chỉ dùng khi chọn 1 source và 1 category)",
     )
     parser.add_argument(
         "--batch-id",
@@ -169,10 +211,9 @@ def main():
             "Chọn --full để crawl toàn bộ hoặc --limit <N> để đặt số lượng cụ thể."
         )
 
-    if args.output and args.category == "all":
-        parser.error("Tùy chọn --output chỉ có thể dùng khi crawl 1 category (laptop hoặc smartphone), không áp dụng cho 'all'.")
+    if args.output and (args.category == "all" or args.source == "all"):
+        parser.error("Tùy chọn --output chỉ có thể dùng khi crawl 1 source và 1 category cụ thể.")
 
-    # Xác định effective_limit: None nếu --full, args.limit nếu có, mặc định là 50 (pilot mode)
     if args.full:
         effective_limit = None
     elif args.limit is not None:
@@ -180,27 +221,24 @@ def main():
     else:
         effective_limit = 50
 
+    sources = ["tgdd", "fptshop"] if args.source == "all" else [args.source]
+    categories = ["laptop", "smartphone"] if args.category == "all" else [args.category]
+
     start_time = datetime.now()
     results = {}
 
     try:
-        if args.category in ("laptop", "all"):
-            count = crawl_category(
-                "laptop",
-                limit=effective_limit,
-                output_file=args.output if args.category == "laptop" else None,
-                batch_id=args.batch_id if args.category == "laptop" else None,
-            )
-            results["laptop"] = count
-
-        if args.category in ("smartphone", "all"):
-            count = crawl_category(
-                "smartphone",
-                limit=effective_limit,
-                output_file=args.output if args.category == "smartphone" else None,
-                batch_id=args.batch_id if args.category == "smartphone" else None,
-            )
-            results["smartphone"] = count
+        for src in sources:
+            for cat in categories:
+                key = f"{src}_{cat}"
+                count = crawl_category(
+                    cat,
+                    limit=effective_limit,
+                    output_file=args.output if len(sources) == 1 and len(categories) == 1 else None,
+                    batch_id=args.batch_id,
+                    source=src,
+                )
+                results[key] = count
     except FileExistsError as exc:
         print(f"\n[LỖI] {exc}\n")
         sys.exit(1)
@@ -209,9 +247,9 @@ def main():
     mode_label = "FULL CRAWL" if effective_limit is None else f"PILOT CRAWL (limit={effective_limit})"
     print("========================================================")
     print(f"TỔNG HỢP KẾT QUẢ {mode_label}:")
-    for cat, cnt in results.items():
+    for key, cnt in results.items():
         status_label = f"{cnt} records" if cnt > 0 else "THẤT BẠI / 0 records"
-        print(f"  - {cat.capitalize()}: {status_label}")
+        print(f"  - {key.upper()}: {status_label}")
     print(f"Thời gian thực hiện: {duration.total_seconds():.1f}s")
     print("========================================================")
 

@@ -15,3 +15,4 @@ class TgddSmartphoneSpider(TgddBaseSpider):
     url_cate = "dtdd"
     cate_id = "42"
     referer = "https://www.thegioididong.com/dtdd"
+    crawl_reviews = True

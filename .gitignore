@@ -24,3 +24,9 @@ htmlcov/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Temporary & Scratch
+scratch/
+
+# raw data
+data/raw

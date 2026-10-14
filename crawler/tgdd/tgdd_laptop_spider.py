@@ -15,3 +15,4 @@ class TgddLaptopSpider(TgddBaseSpider):
     url_cate = "laptop"
     cate_id = "17"
     referer = "https://www.thegioididong.com/laptop"
+    crawl_reviews = True
