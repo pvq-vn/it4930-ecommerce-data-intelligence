@@ -1,0 +1,354 @@
+test_01_pagination_starts_at_1 (test_cellphones_crawler.TestCellphonesCrawler.test_01_pagination_starts_at_1)
+Kiểm tra request khởi động pagination bắt đầu chính xác từ page=1 (không bao giờ bắt đầu từ 0). ... ok
+test_02_page_0_is_rejected_or_empty (test_cellphones_crawler.TestCellphonesCrawler.test_02_page_0_is_rejected_or_empty)
+Kiểm tra page=0 trả về rỗng theo đặc tính của CellphoneS GraphQL và spider dừng đúng đắn. ... ok
+test_03_page_1_parsing (test_cellphones_crawler.TestCellphonesCrawler.test_03_page_1_parsing)
+Kiểm tra parse page 1 nhận diện đúng các sản phẩm và lên lịch child requests. ... ok
+test_04_page_2_parsing_and_continuation (test_cellphones_crawler.TestCellphonesCrawler.test_04_page_2_parsing_and_continuation)
+Kiểm tra khi page 1 đủ page_size, spider lên lịch page 2. ... ok
+test_05_empty_page_stop (test_cellphones_crawler.TestCellphonesCrawler.test_05_empty_page_stop)
+Kiểm tra khi gặp page rỗng products=[] thì dừng pagination ngay lập tức. ... ok
+test_06_repeated_page_guard (test_cellphones_crawler.TestCellphonesCrawler.test_06_repeated_page_guard)
+Kiểm tra phát hiện lặp lại danh sách sản phẩm giữa các page và kích hoạt guard dừng. ... Phát hiện page signature bị lặp lại tại page=2. Dừng pagination để bảo vệ an toàn crawler.
+ok
+test_07_parent_identity (test_cellphones_crawler.TestCellphonesCrawler.test_07_parent_identity)
+Kiểm tra thông tin parent product được gán chính xác vào canonical item. ... ok
+test_08_child_variant_extraction (test_cellphones_crawler.TestCellphonesCrawler.test_08_child_variant_extraction)
+Kiểm tra trích xuất biến thể con sinh ra các records độc lập với đầy đủ tên và màu sắc. ... ok
+test_09_is_parent_false_child_query (test_cellphones_crawler.TestCellphonesCrawler.test_09_is_parent_false_child_query)
+Kiểm tra child variants query bắt buộc có static.is_parent='false'. ... ok
+test_10_variant_sku_mapping (test_cellphones_crawler.TestCellphonesCrawler.test_10_variant_sku_mapping)
+Kiểm tra variant_sku_raw lấy đúng từ child sku, còn sku_raw giữ parent sku. ... ok
+test_11_variant_price_mapping (test_cellphones_crawler.TestCellphonesCrawler.test_11_variant_price_mapping)
+Kiểm tra mapping giá: current price lấy special_price (nếu có) hoặc price; original price lấy price. ... ok
+test_12_stock_mapping (test_cellphones_crawler.TestCellphonesCrawler.test_12_stock_mapping)
+Kiểm tra availability_raw giữ nguyên raw numeric stock từ API, không normalize ở TV1. ... ok
+test_13_jsonld_attributes (test_cellphones_crawler.TestCellphonesCrawler.test_13_jsonld_attributes)
+Kiểm tra trích xuất technical attributes từ Schema.org JSON-LD additionalProperty. ... ok
+test_14_graphql_attributes_fallback (test_cellphones_crawler.TestCellphonesCrawler.test_14_graphql_attributes_fallback)
+Kiểm tra fallback sang general.attributes khi JSON-LD không có additionalProperty. ... ok
+test_15_dom_attributes_fallback (test_cellphones_crawler.TestCellphonesCrawler.test_15_dom_attributes_fallback)
+Kiểm tra fallback sang DOM parser khi JSON-LD và GraphQL đều rỗng. ... ok
+test_16_review_parsing (test_cellphones_crawler.TestCellphonesCrawler.test_16_review_parsing)
+Kiểm tra parse review response tạo TechReviewRawItem với các trường đầy đủ. ... ok
+test_17_review_pagination_1_based (test_cellphones_crawler.TestCellphonesCrawler.test_17_review_pagination_1_based)
+Kiểm tra review request bắt đầu từ page 1 và tiếp tục page 2 khi total > 5. ... ok
+test_18_review_page_size_5 (test_cellphones_crawler.TestCellphonesCrawler.test_18_review_page_size_5)
+Kiểm tra CellphoneS review phân trang với bước cố định 5 reviews/page. ... ok
+test_19_review_parent_linkage (test_cellphones_crawler.TestCellphonesCrawler.test_19_review_parent_linkage)
+Kiểm tra review được liên kết chính xác với parent product ID và parent URL. ... ok
+test_20_review_variant_sku_remains_none (test_cellphones_crawler.TestCellphonesCrawler.test_20_review_variant_sku_remains_none)
+Kiểm tra bất biến: CellphoneS review không có reliable variant SKU, 3 trường linkage biến thể phải là None. ... ok
+test_21_product_schema_25_fields (test_cellphones_crawler.TestCellphonesCrawler.test_21_product_schema_25_fields)
+Kiểm tra TechProductRawItem có đúng 25 fields canonical. ... ok
+test_22_review_schema_19_fields (test_cellphones_crawler.TestCellphonesCrawler.test_22_review_schema_19_fields)
+Kiểm tra TechReviewRawItem có đúng 19 fields canonical. ... ok
+test_23_immutable_output_behavior (test_cellphones_crawler.TestCellphonesCrawler.test_23_immutable_output_behavior)
+Kiểm tra ensure_output_path_available từ chối ghi đè lên file snapshot đã tồn tại. ... ok
+test_24_duplicate_variant_key_detection (test_cellphones_crawler.TestCellphonesCrawler.test_24_duplicate_variant_key_detection)
+Kiểm tra tính duy nhất của cặp (parent_product_id_raw, variant_sku_raw). ... ok
+test_25_duplicate_review_id_detection (test_cellphones_crawler.TestCellphonesCrawler.test_25_duplicate_review_id_detection)
+Kiểm tra seen_review_ids lọc bỏ các review bị lặp lại. ... ok
+test_26_source_all_includes_cellphones (test_cellphones_crawler.TestCellphonesCrawler.test_26_source_all_includes_cellphones)
+Kiểm tra CLI runner: --source all bao gồm ['tgdd', 'fptshop', 'cellphones'] và choices chỉ dùng canonical. ... ok
+test_27_review_like_count_raw_is_none (test_cellphones_crawler.TestCellphonesCrawler.test_27_review_like_count_raw_is_none)
+Kiểm tra like_count_raw của CellphoneS luôn là None vì nguồn không cung cấp trực tiếp (không ép thành 0). ... ok
+test_28_canonical_schemas_fields_count_and_keys (test_cellphones_crawler.TestCellphonesCrawler.test_28_canonical_schemas_fields_count_and_keys)
+Kiểm tra nghiêm ngặt Product schema = đúng 25 fields và Review schema = đúng 19 fields. ... ok
+test_29_fallback_parent_variant_semantics (test_cellphones_crawler.TestCellphonesCrawler.test_29_fallback_parent_variant_semantics)
+Kiểm tra semantic của fallback parent khi không có child_product: ... ok
+test_case_1_multi_variant_product_cross_source (test_cross_source_contract.TestCrossSourceRawDataContract.test_case_1_multi_variant_product_cross_source)
+Case 1: Multi-variant product ở cả hai nguồn: ... Không tìm thấy thuộc tính kỹ thuật nào tại detail url=https://www.thegioididong.com/dtdd/samsung-galaxy-s26-ultra [product_id=201332]
+ok
+test_case_2_single_configuration_fallback_cross_source (test_cross_source_contract.TestCrossSourceRawDataContract.test_case_2_single_configuration_fallback_cross_source)
+Case 2: Sản phẩm đơn (không có biến thể hoặc không có hasVariant/skus): ... Không tìm thấy thuộc tính kỹ thuật nào tại detail url=https://www.thegioididong.com/laptop/hp-victus-15 [product_id=193571]
+ok
+test_case_3_duplicate_prevention_cross_source (test_cross_source_contract.TestCrossSourceRawDataContract.test_case_3_duplicate_prevention_cross_source)
+Case 3: Chống trùng lặp parent + variant_sku trên mỗi nguồn. ... ok
+test_case_4_review_linkage_cross_source (test_cross_source_contract.TestCrossSourceRawDataContract.test_case_4_review_linkage_cross_source)
+Case 4: Quy tắc liên kết review và variant (variant linkage rule): ... ok
+test_schema_field_sets_match_exactly (test_cross_source_contract.TestCrossSourceRawDataContract.test_schema_field_sets_match_exactly)
+Kiểm tra 100% khớp các trường bắt buộc của Canonical Contract: ... ok
+test_semantic_invariants_across_sources (test_cross_source_contract.TestCrossSourceRawDataContract.test_semantic_invariants_across_sources)
+Kiểm tra các bất biến ngữ nghĩa (Semantic Invariants): ... ok
+test_extract_attributes_ldjson_and_dom_table (test_fptshop_crawler.TestFptshopCrawler.test_extract_attributes_ldjson_and_dom_table)
+Kiểm tra trích xuất thông số kỹ thuật qua LD+JSON và DOM table fallback. ... ok
+test_extract_variants_from_skus_listing (test_fptshop_crawler.TestFptshopCrawler.test_extract_variants_from_skus_listing)
+Kiểm tra trích xuất biến thể từ mảng skus[] trong response listing của FPTShop. ... ok
+test_make_listing_request_structure (test_fptshop_crawler.TestFptshopCrawler.test_make_listing_request_structure)
+Kiểm tra cấu trúc request listing của FPTShop. ... ok
+test_parse_reviews_and_variant_linkage (test_fptshop_crawler.TestFptshopCrawler.test_parse_reviews_and_variant_linkage)
+Kiểm tra parse review và semantic variant linkage của FPTShop. ... ok
+test_pipeline_separates_product_and_review (test_fptshop_crawler.TestFptshopCrawler.test_pipeline_separates_product_and_review)
+Kiểm tra FptshopReviewExportPipeline tách biệt file sản phẩm và file đánh giá. ... ok
+test_single_configuration_fallback (test_fptshop_crawler.TestFptshopCrawler.test_single_configuration_fallback)
+Kiểm tra sản phẩm không có biến thể sinh đúng 1 fallback item với variant_* = None. ... ok
+test_spider_configuration_and_categories (test_fptshop_crawler.TestFptshopCrawler.test_spider_configuration_and_categories)
+Kiểm tra khởi tạo spider và các thuộc tính category/slug của FPTShop. ... ok
+test_child_killed_and_lock_cleaned_on_interrupt (test_run_crawler_lock.TestCrawlCategoryWithLock.test_child_killed_and_lock_cleaned_on_interrupt) ... ok
+test_command_unchanged_for_all_sources_and_lock_tracks_child (test_run_crawler_lock.TestCrawlCategoryWithLock.test_command_unchanged_for_all_sources_and_lock_tracks_child) ... ok
+test_full_mode_passes_max_products_none (test_run_crawler_lock.TestCrawlCategoryWithLock.test_full_mode_passes_max_products_none) ... ok
+test_nonzero_exit_returns_zero_and_keeps_lock (test_run_crawler_lock.TestCrawlCategoryWithLock.test_nonzero_exit_returns_zero_and_keeps_lock) ... ok
+test_refuses_to_start_scrapy_when_lock_was_lost (test_run_crawler_lock.TestCrawlCategoryWithLock.test_refuses_to_start_scrapy_when_lock_was_lost) ... ok
+test_refuses_to_start_scrapy_with_unheld_lock (test_run_crawler_lock.TestCrawlCategoryWithLock.test_refuses_to_start_scrapy_with_unheld_lock) ... ok
+test_without_explicit_lock_acquires_own_and_releases (test_run_crawler_lock.TestCrawlCategoryWithLock.test_without_explicit_lock_acquires_own_and_releases) ... ok
+test_without_explicit_lock_refused_when_other_runner_holds_it (test_run_crawler_lock.TestCrawlCategoryWithLock.test_without_explicit_lock_refused_when_other_runner_holds_it) ... ok
+test_lock_held_by_other_process_is_refused_then_reclaimed_after_kill (test_run_crawler_lock.TestCrossProcessLock.test_lock_held_by_other_process_is_refused_then_reclaimed_after_kill) ... ok
+test_lock_released_by_other_process_can_be_acquired (test_run_crawler_lock.TestCrossProcessLock.test_lock_released_by_other_process_can_be_acquired) ... ok
+test_second_runner_main_exits_before_starting_scrapy (test_run_crawler_lock.TestCrossProcessLock.test_second_runner_main_exits_before_starting_scrapy)
+Một run_crawler.main() thật ở process khác bị từ chối và không bao giờ gọi Popen. ... ok
+test_cellphones_category_all_is_protected_across_laptop_and_smartphone (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_cellphones_category_all_is_protected_across_laptop_and_smartphone) ... ok
+test_help_does_not_need_lock (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_help_does_not_need_lock) ... ok
+test_lock_released_on_file_exists_error (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_lock_released_on_file_exists_error) ... ok
+test_lock_released_when_crawl_fails (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_lock_released_when_crawl_fails) ... ok
+test_lock_released_when_crawl_raises (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_lock_released_when_crawl_raises) ... ok
+test_second_runner_refused_before_any_crawl (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_second_runner_refused_before_any_crawl) ... ok
+test_source_all_holds_single_lock_across_all_crawls (test_run_crawler_lock.TestMainHoldsLockForWholeSequence.test_source_all_holds_single_lock_across_all_crawls) ... ok
+test_current_process_is_alive (test_run_crawler_lock.TestProcessQuery.test_current_process_is_alive) ... ok
+test_finished_process_is_dead (test_run_crawler_lock.TestProcessQuery.test_finished_process_is_dead) ... ok
+test_invalid_pid_is_dead (test_run_crawler_lock.TestProcessQuery.test_invalid_pid_is_dead) ... ok
+test_acquire_success_creates_lock_with_owner_info (test_run_crawler_lock.TestRunnerLockBasics.test_acquire_success_creates_lock_with_owner_info) ... ok
+test_context_manager_releases_on_exception (test_run_crawler_lock.TestRunnerLockBasics.test_context_manager_releases_on_exception) ... ok
+test_register_and_clear_child_keep_lock_owned (test_run_crawler_lock.TestRunnerLockBasics.test_register_and_clear_child_keep_lock_owned) ... ok
+test_release_allows_next_runner_to_acquire (test_run_crawler_lock.TestRunnerLockBasics.test_release_allows_next_runner_to_acquire) ... ok
+test_release_does_not_delete_lock_owned_by_someone_else (test_run_crawler_lock.TestRunnerLockBasics.test_release_does_not_delete_lock_owned_by_someone_else) ... ok
+test_release_is_idempotent (test_run_crawler_lock.TestRunnerLockBasics.test_release_is_idempotent) ... ok
+test_same_instance_cannot_acquire_twice (test_run_crawler_lock.TestRunnerLockBasics.test_same_instance_cannot_acquire_twice) ... ok
+test_second_acquire_is_refused_and_does_not_touch_lock (test_run_crawler_lock.TestRunnerLockBasics.test_second_acquire_is_refused_and_does_not_touch_lock) ... ok
+test_verify_held_fails_without_acquire (test_run_crawler_lock.TestRunnerLockBasics.test_verify_held_fails_without_acquire) ... ok
+test_abandoned_breaker_is_cleaned_up (test_run_crawler_lock.TestStaleLock.test_abandoned_breaker_is_cleaned_up) ... ok
+test_active_breaker_blocks_stale_recovery (test_run_crawler_lock.TestStaleLock.test_active_breaker_blocks_stale_recovery) ... ok
+test_dead_runner_with_orphan_scrapy_child_still_blocks (test_run_crawler_lock.TestStaleLock.test_dead_runner_with_orphan_scrapy_child_still_blocks)
+Runner bị kill nhưng Scrapy child còn chạy -> lock KHÔNG được coi là stale. ... ok
+test_fresh_unreadable_lock_is_not_stale (test_run_crawler_lock.TestStaleLock.test_fresh_unreadable_lock_is_not_stale) ... ok
+test_live_runner_lock_is_not_stale (test_run_crawler_lock.TestStaleLock.test_live_runner_lock_is_not_stale) ... ok
+test_lock_from_other_host_is_never_auto_removed (test_run_crawler_lock.TestStaleLock.test_lock_from_other_host_is_never_auto_removed) ... ok
+test_lock_of_dead_runner_is_reclaimed (test_run_crawler_lock.TestStaleLock.test_lock_of_dead_runner_is_reclaimed) ... ok
+test_old_unreadable_lock_is_stale (test_run_crawler_lock.TestStaleLock.test_old_unreadable_lock_is_stale) ... ok
+test_reused_pid_with_different_start_time_is_stale (test_run_crawler_lock.TestStaleLock.test_reused_pid_with_different_start_time_is_stale) ... ok
+test_stale_recovery_does_not_delete_a_newer_valid_lock (test_run_crawler_lock.TestStaleLock.test_stale_recovery_does_not_delete_a_newer_valid_lock)
+Runner B thấy stale lock cũ, nhưng A đã thay bằng lock mới -> B không được xóa lock của A. ... ok
+test_attributes_preserved_across_variants (test_tgdd_crawler.TestTgddCrawler.test_attributes_preserved_across_variants)
+Kiểm tra attributes_raw vẫn được giữ đầy đủ cho từng variant, ... ok
+test_crawl_category_rejects_existing_output (test_tgdd_crawler.TestTgddCrawler.test_crawl_category_rejects_existing_output)
+Nếu output đã tồn tại thì crawl_category phải dừng trước khi gọi Scrapy. ... ok
+test_crawl_category_subprocess_and_batch_propagation (test_tgdd_crawler.TestTgddCrawler.test_crawl_category_subprocess_and_batch_propagation)
+Kiểm tra crawl_category truyền đúng tham số batch_id, max_products và target output vào Scrapy. ... 2026-10-15 21:23:28 [scrapy.utils.log] INFO: Scrapy 2.19.0 started (bot: scrapybot)
+2026-10-15 21:23:29 [scrapy.utils.log] INFO: Versions:
+{'lxml': '6.1.3',
+ 'libxml2': '2.11.9',
+ 'cssselect': '1.5.0',
+ 'parsel': '1.12.1',
+ 'w3lib': '2.5.0',
+ 'Twisted': '26.4.0',
+ 'Python': '3.14.6 (main, Jun 23 2026, 15:20:04) [MSC v.1944 64 bit (AMD64)]',
+ 'pyOpenSSL': '26.4.0 (OpenSSL 4.0.3 29 Sep 2026)',
+ 'cryptography': '50.0.2',
+ 'Platform': 'Windows-11-10.0.26300-SP0'}
+2026-10-15 21:23:29 [scrapy.crawler] DEBUG: Using AsyncCrawlerProcess
+2026-10-15 21:23:29 [asyncio] DEBUG: Using selector: SelectSelector
+2026-10-15 21:23:29 [scrapy.addons] INFO: Enabled addons:
+[]
+2026-10-15 21:23:29 [scrapy.extensions.telnet] INFO: Telnet Password: 8a3edc03a9dcd7a3
+2026-10-15 21:23:29 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.logcount.LogCount',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.feedexport.FeedExporter',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.throttle.AutoThrottle',
+ 'scrapy.extensions.remote_control.RemoteControl']
+2026-10-15 21:23:29 [scrapy.crawler] INFO: Overridden settings:
+{'AUTOTHROTTLE_ENABLED': True,
+ 'CONCURRENT_REQUESTS': 1,
+ 'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
+ 'DOWNLOAD_DELAY': 5.0,
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'LOG_LEVEL': 'INFO',
+ 'RETRY_HTTP_CODES': [500, 502, 503, 504, 408, 429],
+ 'RETRY_TIMES': 3,
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_LOADER_CLASS': <class 'scrapy.spiderloader.DummySpiderLoader'>,
+ 'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+               '(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'}
+2026-10-15 21:23:30 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2026-10-15 21:23:30 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.start.StartSpiderMiddleware',
+ 'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware',
+ 'scrapy.spidermiddlewares.metacopy.MetaCopyDetectionMiddleware']
+2026-10-15 21:23:30 [scrapy.middleware] INFO: Enabled item pipelines:
+['crawler.tgdd.pipelines.TgddReviewExportPipeline']
+2026-10-15 21:23:30 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:60: ScrapyDeprecationWarning: TgddReviewExportPipeline.open_spider() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.open_spider)
+
+2026-10-15 21:23:30 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:63: ScrapyDeprecationWarning: TgddReviewExportPipeline.close_spider() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.close_spider)
+
+2026-10-15 21:23:30 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:66: ScrapyDeprecationWarning: TgddReviewExportPipeline.process_item() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.process_item)
+
+2026-10-15 21:23:30 [scrapy.core.engine] INFO: Spider opened
+2026-10-15 21:23:30 [crawler.tgdd.pipelines] INFO: TgddReviewExportPipeline m\u1edf file review snapshot: D:\IT4930\data\raw\tgdd\laptop\fake_test_reviews.jsonl
+2026-10-15 21:23:30 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2026-10-15 21:23:30 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2026-10-15 21:23:30 [scrapy.extensions.remote_control] INFO: Remote control HTTP server listening on port 53504 (job 14340-6e49de052bc44dfbab8fda6b575d0874)
+2026-10-15 21:23:30 [tgdd_laptop] INFO: Kh\u1edfi \u0111\u1ed9ng spider tgdd_laptop [category=laptop, max_products=5, batch=20261013_999999]
+2026-10-15 21:23:35 [tgdd_laptop] INFO: Parsing listing page=0 (status=200)
+2026-10-15 21:23:35 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=0
+2026-10-15 21:23:35 [tgdd_laptop] INFO: \u0110\u1ea1t gi\u1edbi h\u1ea1n scheduled_products=5. D\u1eebng l�n l\u1ecbch s\u1ea3n ph\u1ea9m m\u1edbi.
+2026-10-15 21:23:43 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/acer-aspire-lite-14-al14-44p-r0sp-r7-7730u-nx-dmcsv-003 [product_id=194113, status=200]
+2026-10-15 21:23:43 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/acer-aspire-lite-14-al14-44p-r0sp-r7-7730u-nx-dmcsv-003
+2026-10-15 21:23:49 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/dell-15-dc15255-r5-7530u-dc5r5973w1-2y [product_id=209007, status=200]
+2026-10-15 21:23:49 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/dell-15-dc15255-r5-7530u-dc5r5973w1-2y
+2026-10-15 21:23:55 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/macbook-air-13-inch-m5-16gb-512gb [product_id=233437, status=200]
+2026-10-15 21:23:55 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 32 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/macbook-air-13-inch-m5-16gb-512gb
+2026-10-15 21:23:55 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t 10 variants t\u1eeb ProductGroup t\u1ea1i url=https://www.thegioididong.com/laptop/macbook-air-13-inch-m5-16gb-512gb [product_id=233437]
+2026-10-15 21:23:59 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/asus-vivobook-s14-s3407va-core-5-210h-ly146w [product_id=193881, status=200]
+2026-10-15 21:23:59 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/asus-vivobook-s14-s3407va-core-5-210h-ly146w
+FAIL
+test_crawl_category_subprocess_failure_handling (test_tgdd_crawler.TestTgddCrawler.test_crawl_category_subprocess_failure_handling)
+Kiểm tra crawl_category trả về 0 và xử lý lỗi khi subprocess trả về mã thoát khác 0. ... ERROR
+test_duplicate_request_control (test_tgdd_crawler.TestTgddCrawler.test_duplicate_request_control)
+Kiểm tra cơ chế duplicate request control: ... ok
+test_error_observability_and_metrics (test_tgdd_crawler.TestTgddCrawler.test_error_observability_and_metrics)
+Kiểm tra observability: ... Listing request thất bại tại page=1 [url=https://api.thegioididong.com/test]: Connection timeout
+Detail request thất bại: url=https://www.thegioididong.com/fail-url [product_id=999, name=Fail Item, error=HTTP 500 Internal Server Error]
+Lưu fallback item từ listing do detail request thất bại [product_id=999, url=https://www.thegioididong.com/fail-url]
+Lỗi decode JSON-LD script tại detail page: Expecting property name enclosed in double quotes: line 1 column 3 (char 2)
+ok
+test_existing_snapshot_is_rejected (test_tgdd_crawler.TestTgddCrawler.test_existing_snapshot_is_rejected)
+Không cho phép crawl vào output snapshot đã tồn tại. ... ok
+test_extract_attributes_dom_fallback (test_tgdd_crawler.TestTgddCrawler.test_extract_attributes_dom_fallback)
+Kiểm tra trích xuất thuộc tính fallback từ DOM khi không có LD+JSON. ... ok
+test_extract_attributes_from_ld_json (test_tgdd_crawler.TestTgddCrawler.test_extract_attributes_from_ld_json)
+Kiểm tra trích xuất thuộc tính kỹ thuật từ LD+JSON additionalProperty. ... ok
+test_extract_listing_item_preserves_raw_data (test_tgdd_crawler.TestTgddCrawler.test_extract_listing_item_preserves_raw_data)
+Kiểm tra trích xuất dữ liệu listing bảo toàn giá trị gốc (số nguyên, không chuẩn hóa chuỗi). ... ok
+test_full_crawl_does_not_stop_at_50_and_continues_pagination (test_tgdd_crawler.TestTgddCrawler.test_full_crawl_does_not_stop_at_50_and_continues_pagination)
+Kiểm tra chế độ full crawl (max_products=None) không dừng ở 50 sản phẩm mà tiếp tục phân trang. ... ok
+test_full_crawl_subprocess_command (test_tgdd_crawler.TestTgddCrawler.test_full_crawl_subprocess_command)
+Kiểm tra crawl_category ở chế độ full crawl (limit=None) truyền max_products=none vào Scrapy. ... 2026-10-15 21:24:04 [scrapy.utils.log] INFO: Scrapy 2.19.0 started (bot: scrapybot)
+2026-10-15 21:24:04 [scrapy.utils.log] INFO: Versions:
+{'lxml': '6.1.3',
+ 'libxml2': '2.11.9',
+ 'cssselect': '1.5.0',
+ 'parsel': '1.12.1',
+ 'w3lib': '2.5.0',
+ 'Twisted': '26.4.0',
+ 'Python': '3.14.6 (main, Jun 23 2026, 15:20:04) [MSC v.1944 64 bit (AMD64)]',
+ 'pyOpenSSL': '26.4.0 (OpenSSL 4.0.3 29 Sep 2026)',
+ 'cryptography': '50.0.2',
+ 'Platform': 'Windows-11-10.0.26300-SP0'}
+2026-10-15 21:24:04 [scrapy.crawler] DEBUG: Using AsyncCrawlerProcess
+2026-10-15 21:24:04 [asyncio] DEBUG: Using selector: SelectSelector
+2026-10-15 21:24:04 [scrapy.addons] INFO: Enabled addons:
+[]
+2026-10-15 21:24:04 [scrapy.extensions.telnet] INFO: Telnet Password: 008d41ce6aa5071f
+2026-10-15 21:24:05 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.logcount.LogCount',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.feedexport.FeedExporter',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.throttle.AutoThrottle',
+ 'scrapy.extensions.remote_control.RemoteControl']
+2026-10-15 21:24:05 [scrapy.crawler] INFO: Overridden settings:
+{'AUTOTHROTTLE_ENABLED': True,
+ 'CONCURRENT_REQUESTS': 1,
+ 'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
+ 'DOWNLOAD_DELAY': 5.0,
+ 'FEED_EXPORT_ENCODING': 'utf-8',
+ 'LOG_LEVEL': 'INFO',
+ 'RETRY_HTTP_CODES': [500, 502, 503, 504, 408, 429],
+ 'RETRY_TIMES': 3,
+ 'ROBOTSTXT_OBEY': True,
+ 'SPIDER_LOADER_CLASS': <class 'scrapy.spiderloader.DummySpiderLoader'>,
+ 'USER_AGENT': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+               '(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36'}
+2026-10-15 21:24:05 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2026-10-15 21:24:05 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.start.StartSpiderMiddleware',
+ 'scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware',
+ 'scrapy.spidermiddlewares.metacopy.MetaCopyDetectionMiddleware']
+2026-10-15 21:24:05 [scrapy.middleware] INFO: Enabled item pipelines:
+['crawler.tgdd.pipelines.TgddReviewExportPipeline']
+2026-10-15 21:24:05 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:60: ScrapyDeprecationWarning: TgddReviewExportPipeline.open_spider() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.open_spider)
+
+2026-10-15 21:24:05 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:63: ScrapyDeprecationWarning: TgddReviewExportPipeline.close_spider() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.close_spider)
+
+2026-10-15 21:24:05 [py.warnings] WARNING: D:\IT4930\.venv\Lib\site-packages\scrapy\pipelines\__init__.py:66: ScrapyDeprecationWarning: TgddReviewExportPipeline.process_item() requires a spider argument, this is deprecated and the argument will not be passed in future Scrapy versions. If you need to access the spider instance you can save the crawler instance passed to from_crawler() and use its spider attribute.
+  self._check_mw_method_spider_arg(mw.process_item)
+
+2026-10-15 21:24:05 [scrapy.core.engine] INFO: Spider opened
+2026-10-15 21:24:05 [crawler.tgdd.pipelines] INFO: TgddReviewExportPipeline m\u1edf file review snapshot: D:\IT4930\data\raw\tgdd\laptop\fake_full_reviews.jsonl
+2026-10-15 21:24:05 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2026-10-15 21:24:05 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2026-10-15 21:24:05 [scrapy.extensions.remote_control] INFO: Remote control HTTP server listening on port 53517 (job 31104-76b2a32e79ad42aca71c66dab898065a)
+2026-10-15 21:24:05 [tgdd_laptop] INFO: Kh\u1edfi \u0111\u1ed9ng spider tgdd_laptop [category=laptop, max_products=None, batch=20261013_fulltest]
+2026-10-15 21:24:11 [tgdd_laptop] INFO: Parsing listing page=0 (status=200)
+2026-10-15 21:24:11 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=0
+2026-10-15 21:24:11 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=1
+2026-10-15 21:24:17 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/hp-victus-15-fa2731tx-i5-b85lnpa [product_id=193688, status=200]
+2026-10-15 21:24:17 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/hp-victus-15-fa2731tx-i5-b85lnpa
+2026-10-15 21:24:17 [tgdd_laptop] INFO: Parsing listing page=1 (status=200)
+2026-10-15 21:24:17 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=1
+2026-10-15 21:24:17 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=2
+2026-10-15 21:24:23 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-cph99 [product_id=193866, status=200]
+2026-10-15 21:24:23 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-cph99
+2026-10-15 21:24:24 [tgdd_laptop] INFO: Parsing listing page=2 (status=200)
+2026-10-15 21:24:24 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=2
+2026-10-15 21:24:24 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=3
+2026-10-15 21:24:29 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/asus-vivobook-go-15-e1504fa-r5-40-bq350w [product_id=193963, status=200]
+2026-10-15 21:24:29 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/asus-vivobook-go-15-e1504fa-r5-40-bq350w
+2026-10-15 21:24:30 [tgdd_laptop] INFO: Parsing listing page=3 (status=200)
+2026-10-15 21:24:30 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=3
+2026-10-15 21:24:30 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=4
+2026-10-15 21:24:33 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/acer-aspire-lite-15-al15-53p-56qh-core-5-120u-nx-dg3sv-001 [product_id=202032, status=200]
+2026-10-15 21:24:33 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/acer-aspire-lite-15-al15-53p-56qh-core-5-120u-nx-dg3sv-001
+2026-10-15 21:24:35 [tgdd_laptop] INFO: Parsing listing page=4 (status=200)
+2026-10-15 21:24:35 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=4
+2026-10-15 21:24:35 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=5
+2026-10-15 21:24:40 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/acer-gaming-nitro-propanel-anv15-52-73z8-core-7-240h-nh-quasv-001 [product_id=223007, status=200]
+2026-10-15 21:24:40 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 34 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/acer-gaming-nitro-propanel-anv15-52-73z8-core-7-240h-nh-quasv-001
+2026-10-15 21:24:42 [tgdd_laptop] INFO: Parsing listing page=5 (status=200)
+2026-10-15 21:24:42 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=5
+2026-10-15 21:24:42 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=6
+2026-10-15 21:24:45 [tgdd_laptop] INFO: Parsing detail page: https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-cph992 [product_id=194071, status=200]
+2026-10-15 21:24:45 [tgdd_laptop] INFO: Tr�ch xu\u1ea5t th�nh c�ng 39 thu\u1ed9c t�nh k\u1ef9 thu\u1eadt t\u1ea1i https://www.thegioididong.com/laptop/dell-15-dc15250-i5-1334u-cph992
+2026-10-15 21:24:48 [tgdd_laptop] INFO: Parsing listing page=6 (status=200)
+2026-10-15 21:24:48 [tgdd_laptop] INFO: T�m th\u1ea5y 20 s\u1ea3n ph\u1ea9m trong response page=6
+2026-10-15 21:24:48 [tgdd_laptop] INFO: Ti\u1ebfp t\u1ee5c crawl listing page=7
