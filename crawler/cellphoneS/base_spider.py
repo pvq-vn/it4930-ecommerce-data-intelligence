@@ -824,10 +824,10 @@ class CellphonesBaseSpider(scrapy.Spider):
             item["parent_url_raw"] = parent_meta["parent_url"]
             item["sku_raw"] = parent_meta["parent_sku"]
 
-            item["variant_sku_raw"] = parent_meta["parent_sku"]
-            item["variant_name_raw"] = parent_meta["parent_name"]
+            item["variant_sku_raw"] = None
+            item["variant_name_raw"] = None
             item["variant_color_raw"] = None
-            item["variant_url_raw"] = parent_meta["parent_url"]
+            item["variant_url_raw"] = None
             item["availability_raw"] = p_filt.get("stock")
 
             item["price_raw"] = current_price
@@ -982,7 +982,7 @@ class CellphonesBaseSpider(scrapy.Spider):
             review_item["review_text_raw"] = r.get("content")
             review_item["author_raw"] = author
             review_item["review_time_raw"] = r.get("created_at")
-            review_item["like_count_raw"] = 0  # CellphoneS không có like count trực tiếp
+            review_item["like_count_raw"] = None  # CellphoneS không cung cấp like_count trực tiếp
 
             # Invariant bắt buộc: CellphoneS review không có reliable variant SKU
             review_item["review_product_code_raw"] = None

@@ -14,11 +14,16 @@ from crawler.cellphoneS.base_spider import (
     CATALOG_GRAPHQL_URL,
     REVIEW_GRAPHQL_URL,
 )
-from crawler.cellphoneS.cellphone_laptop_spider import CellphonesLaptopSpider
-from crawler.cellphoneS.cellphone_smartphone_spider import CellphonesSmartphoneSpider
+from crawler.cellphoneS.cellphones_laptop_spider import CellphonesLaptopSpider
+from crawler.cellphoneS.cellphones_smartphone_spider import CellphonesSmartphoneSpider
 from crawler.cellphoneS.items import TechProductRawItem, TechReviewRawItem
 from crawler.cellphoneS.pipelines import CellphonesReviewExportPipeline
-from crawler.run_crawler import ensure_output_path_available, get_snapshot_path, get_review_snapshot_path
+from crawler.run_crawler import (
+    ensure_output_path_available,
+    get_snapshot_path,
+    get_review_snapshot_path,
+    build_argument_parser,
+)
 
 
 EXPECTED_PRODUCT_FIELDS = {
@@ -537,6 +542,7 @@ class TestCellphonesCrawler(unittest.TestCase):
         self.assertEqual(rev["rating_raw"], 5)
         self.assertEqual(rev["review_text_raw"], "Máy dùng rất mượt và pin trâu")
         self.assertEqual(rev["attached_files_raw"], ["https://cdn.cellphones.com.vn/photo1.jpg"])
+        self.assertIsNone(rev["like_count_raw"])
 
     # ---------------------------------------------------------
     # 17. REVIEW PAGINATION 1-BASED
@@ -748,3 +754,132 @@ class TestCellphonesCrawler(unittest.TestCase):
         )
         items = list(spider.parse_reviews(res))
         self.assertEqual(len(items), 1)  # Chỉ có 1 review được yield
+
+    # ---------------------------------------------------------
+    # 26. SOURCE ALL INCLUDES CELLPHONES
+    # ---------------------------------------------------------
+    def test_26_source_all_includes_cellphones(self):
+        """Kiểm tra CLI runner: --source all bao gồm ['tgdd', 'fptshop', 'cellphones'] và choices chỉ dùng canonical."""
+        parser = build_argument_parser()
+
+        # Kiểm tra choices chỉ có canonical 'cellphones'
+        source_action = [a for a in parser._actions if a.dest == "source"][0]
+        self.assertEqual(set(source_action.choices), {"tgdd", "fptshop", "cellphones", "all"})
+
+        # Phân giải --source all
+        args_all = parser.parse_args(["--source", "all"])
+        sources_all = ["tgdd", "fptshop", "cellphones"] if args_all.source == "all" else [args_all.source]
+        self.assertEqual(sources_all, ["tgdd", "fptshop", "cellphones"])
+        self.assertIn("cellphones", sources_all)
+
+        # Phân giải --source cellphones
+        args_cellphones = parser.parse_args(["--source", "cellphones"])
+        self.assertEqual(args_cellphones.source, "cellphones")
+
+    # ---------------------------------------------------------
+    # 27. REVIEW LIKE COUNT RAW IS NONE
+    # ---------------------------------------------------------
+    def test_27_review_like_count_raw_is_none(self):
+        """Kiểm tra like_count_raw của CellphoneS luôn là None vì nguồn không cung cấp trực tiếp (không ép thành 0)."""
+        spider = CellphonesSmartphoneSpider(crawl_reviews=True)
+        mock_resp = {
+            "data": {
+                "reviews": {
+                    "matches": [
+                        {
+                            "id": "rev_999",
+                            "content": "Máy rất đẹp và mượt",
+                            "rating_id": 5,
+                            "created_at": "2026-10-14 12:00:00",
+                            "customer": {"fullname": "Lê Văn B"},
+                        }
+                    ],
+                    "total": 1,
+                }
+            }
+        }
+        req = scrapy.Request(
+            url=REVIEW_GRAPHQL_URL,
+            meta={"parent_id": "8888", "parent_url": "https://cellphones.com.vn/p8888.html", "page": 1},
+        )
+        res = TextResponse(
+            url=REVIEW_GRAPHQL_URL,
+            body=json.dumps(mock_resp).encode("utf-8"),
+            encoding="utf-8",
+            request=req,
+        )
+        items = list(spider.parse_reviews(res))
+        self.assertEqual(len(items), 1)
+        rev = items[0]
+        self.assertIsNone(rev["like_count_raw"], "like_count_raw phải là None khi nguồn không cung cấp")
+
+    # ---------------------------------------------------------
+    # 28. CANONICAL SCHEMAS FIELDS COUNT AND KEYS
+    # ---------------------------------------------------------
+    def test_28_canonical_schemas_fields_count_and_keys(self):
+        """Kiểm tra nghiêm ngặt Product schema = đúng 25 fields và Review schema = đúng 19 fields."""
+        prod = TechProductRawItem()
+        rev = TechReviewRawItem()
+
+        self.assertEqual(len(prod.fields), 25, "Product schema phải có chính xác 25 fields")
+        self.assertEqual(set(prod.fields.keys()), EXPECTED_PRODUCT_FIELDS)
+
+        self.assertEqual(len(rev.fields), 19, "Review schema phải có chính xác 19 fields")
+        self.assertEqual(set(rev.fields.keys()), EXPECTED_REVIEW_FIELDS)
+
+    # ---------------------------------------------------------
+    # 29. FALLBACK PARENT VARIANT SEMANTICS
+    # ---------------------------------------------------------
+    def test_29_fallback_parent_variant_semantics(self):
+        """
+        Kiểm tra semantic của fallback parent khi không có child_product:
+        1. fallback parent có variant_sku_raw is None
+        2. fallback parent có variant_name_raw is None
+        3. fallback parent có variant_color_raw is None
+        4. fallback parent có variant_url_raw is None
+        5. fallback parent vẫn giữ sku_raw của parent
+        """
+        parent_meta = {
+            "parent_id": "9999",
+            "parent_name": "Laptop Acer Swift 3",
+            "parent_sku": "ACER-SWIFT-3-SKU",
+            "brand": "Acer",
+            "parent_url": "https://cellphones.com.vn/laptop-acer-swift-3.html",
+            "rating": 4.5,
+            "review_count": 12,
+            "general_attrs": {},
+            "parent_filt": {"price": 18990000, "special_price": 16990000, "stock": 4},
+            "raw_payload": {"general": {"product_id": 9999}, "filterable": {"stock": 4}},
+        }
+
+        items = list(self.laptop_spider.yield_product_items(parent_meta, child_variants=None, attributes={"CPU": "Core i5"}))
+        self.assertEqual(len(items), 1)
+        item = items[0]
+
+        # 1. fallback parent có variant_sku_raw is None
+        self.assertIsNone(item["variant_sku_raw"], "fallback parent có variant_sku_raw is None")
+
+        # 2. fallback parent có variant_name_raw is None
+        self.assertIsNone(item["variant_name_raw"], "fallback parent có variant_name_raw is None")
+
+        # 3. fallback parent có variant_color_raw is None
+        self.assertIsNone(item["variant_color_raw"], "fallback parent có variant_color_raw is None")
+
+        # 4. fallback parent có variant_url_raw is None
+        self.assertIsNone(item["variant_url_raw"], "fallback parent có variant_url_raw is None")
+
+        # 5. fallback parent vẫn giữ sku_raw của parent
+        self.assertEqual(item["sku_raw"], "ACER-SWIFT-3-SKU", "fallback parent vẫn giữ sku_raw của parent")
+
+        # Ràng buộc định danh và contract khác
+        self.assertEqual(item["product_id_raw"], "9999")
+        self.assertEqual(item["parent_product_id_raw"], "9999")
+        self.assertEqual(item["product_name_raw"], "Laptop Acer Swift 3")
+        self.assertEqual(item["parent_product_name_raw"], "Laptop Acer Swift 3")
+        self.assertEqual(item["product_url_raw"], "https://cellphones.com.vn/laptop-acer-swift-3.html")
+        self.assertEqual(item["parent_url_raw"], "https://cellphones.com.vn/laptop-acer-swift-3.html")
+        self.assertEqual(item["availability_raw"], 4)
+        self.assertEqual(item["price_raw"], 16990000)
+        self.assertEqual(item["original_price_raw"], 18990000)
+        self.assertEqual(item["raw_payload"], parent_meta["raw_payload"])
+

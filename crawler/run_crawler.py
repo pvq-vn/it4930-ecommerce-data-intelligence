@@ -85,11 +85,11 @@ def crawl_category(
             spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_smartphone_spider.py"
         else:
             raise ValueError(f"Không hỗ trợ category: {category}")
-    elif src_key in ("cellphones", "cellphoneS".lower()):
+    elif src_key == "cellphones":
         if category == "laptop":
-            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphone_laptop_spider.py"
+            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_laptop_spider.py"
         elif category == "smartphone":
-            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphone_smartphone_spider.py"
+            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_smartphone_spider.py"
         else:
             raise ValueError(f"Không hỗ trợ category: {category}")
     else:
@@ -170,9 +170,9 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="TV1 - Multi-Source Tech E-Commerce Crawler Runner")
     parser.add_argument(
         "--source",
-        choices=["tgdd", "fptshop", "cellphones", "cellphoneS", "all"],
+        choices=["tgdd", "fptshop", "cellphones", "all"],
         default="tgdd",
-        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, cellphones, cellphoneS, all - mặc định tgdd)",
+        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, cellphones, all - mặc định tgdd)",
     )
     parser.add_argument(
         "--category",
@@ -231,7 +231,7 @@ def main():
     else:
         effective_limit = 50
 
-    sources = ["tgdd", "fptshop"] if args.source == "all" else [args.source]
+    sources = ["tgdd", "fptshop", "cellphones"] if args.source == "all" else [args.source]
     categories = ["laptop", "smartphone"] if args.category == "all" else [args.category]
 
     start_time = datetime.now()
