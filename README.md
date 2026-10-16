@@ -1,92 +1,111 @@
 # IT4930 - E-commerce Data Intelligence
 
-## TV1: Web Crawling & Data Acquisition (Thế Giới Di Động - Laptop & Smartphone)
+## TV1: Web Crawling & Data Acquisition (Multi-Source Architecture)
 
-Hệ thống crawler thực tế cho sàn thương mại điện tử Thế Giới Di Động (TGDĐ), phục vụ giai đoạn thu thập dữ liệu gốc (Raw Data) cho bài toán dự đoán giá sản phẩm công nghệ trong đúng 2 danh mục mục tiêu của project: **Laptop** và **Smartphone**.
+Hệ thống crawler thực tế thu thập dữ liệu gốc (Raw Data) cho bài toán phân tích và dự đoán giá sản phẩm công nghệ trong đúng 2 danh mục mục tiêu của project: **Laptop** và **Smartphone**.
 
-> **Phạm vi (Scope)**: Chỉ crawl dữ liệu cho 2 danh mục Laptop (`/laptop`) và Smartphone (`/dtdd`). Không thu thập các danh mục khác của TGDĐ. Không thực hiện chuẩn hóa, làm sạch (cleaning) hay khử trùng ngữ nghĩa (semantic deduplication) tại raw layer (các tác vụ này thuộc TV2).
-
----
-
-### 1. Cấu trúc thư mục
-- `crawler/tgdd/items.py`: Schema dữ liệu thô `TechProductRawItem` theo chuẩn TV1.
-- `crawler/tgdd/base_spider.py`: Spider cơ sở (`TgddBaseSpider`) tích hợp cơ chế request API, phân trang (hỗ trợ cả Pilot mode và Full crawl mode), chốt an toàn chống lặp trang (pagination guard), trích xuất Schema.org JSON-LD và fallback DOM, kiểm soát duplicate request và theo dõi observability.
-- `crawler/tgdd/tgdd_laptop_spider.py`: Spider danh mục Laptop (`/laptop`).
-- `crawler/tgdd/tgdd_smartphone_spider.py`: Spider danh mục Smartphone (`/dtdd`).
-- `crawler/run_crawler.py`: CLI script điều phối chạy crawler, hỗ trợ Pilot mode, Full crawl mode và cơ chế snapshot bất biến (immutable snapshots).
-- `data/raw/tgdd/laptop/`: Thư mục raw snapshots Laptop (`pilot.jsonl`, `<batch_id>.jsonl`).
-- `data/raw/tgdd/smartphone/`: Thư mục raw snapshots Smartphone (`pilot.jsonl`, `<batch_id>.jsonl`).
-- `tests/test_tgdd_crawler.py`: Bộ kiểm thử tự động (Unit tests: schema, raw integrity, duplicate control, observability, immutability, pilot validation, full crawl pagination).
+> **Phạm vi (Scope)**:
+> - Chỉ crawl dữ liệu cho 2 danh mục: **Laptop** và **Smartphone**.
+> - Không thực hiện chuẩn hóa, làm sạch (cleaning) hay khử trùng ngữ nghĩa (semantic deduplication) tại raw layer (các tác vụ này thuộc TV2).
+> - Raw Contract bất biến: **Product = 25 fields**, **Review = 19 fields**.
+> - An toàn dữ liệu thô: Raw snapshots đã crawl là bất biến (immutable), không ghi đè, không append.
 
 ---
 
-### 2. Nguyên tắc & Chính sách Thu thập (Politeness)
-- **Robots.txt Domain chính**: `www.thegioididong.com/robots.txt` quy định `User-agent: *`, `Crawl-delay: 5`. Hai danh mục `/laptop` và `/dtdd` không nằm trong danh sách `Disallow`.
-- **API Domain**: `api.thegioididong.com/robots.txt` trả về HTTP 404 (Not Found), không suy diễn policy riêng cho API. Hệ thống crawler áp dụng cấu hình conservative tuân thủ nghiêm ngặt chính sách của trang www:
-  - `ROBOTSTXT_OBEY = True`
-  - `DOWNLOAD_DELAY = 5.0` (giây, tuân thủ Crawl-delay 5s)
-  - `CONCURRENT_REQUESTS = 1` (tuần tự hóa hoàn toàn, 1 request tại 1 thời điểm)
-  - `CONCURRENT_REQUESTS_PER_DOMAIN = 1`
-  - `AUTOTHROTTLE_ENABLED = True` (start delay 5.0s, max delay 60.0s, target concurrency 1.0)
-  - `RETRY_TIMES = 3` (xử lý retry cho các mã lỗi tạm thời 500, 502, 503, 504, 408, 429)
-  - **Tuyệt đối không tăng tốc**: Không dùng đa luồng, không giảm delay, không bypass anti-bot, không dùng token ẩn.
-- **Kiểm soát trùng lặp HTTP**: Không dùng `dont_filter=True`, Scrapy `RFPDupeFilter` tự động tính fingerprint dựa trên POST body (chứa `pageIndex`) ở listing và URL ở detail, ngăn gửi lặp HTTP request không cần thiết.
-- **Immutable Raw Snapshots**: Mỗi đợt crawl tạo một file snapshot riêng theo timestamp/batch_id (ví dụ: `20261013_081500.jsonl`). Runner từ chối chạy nếu file output đã tồn tại (không overwrite, không append).
-- **Điều kiện dừng phân trang an toàn (Pagination Guard)**:
-  - Khi API trả về mảng sản phẩm rỗng (`products=[]`), crawler dừng với stop_reason `no_more_products`.
-  - Nếu API trả lại cùng một danh sách sản phẩm lặp lại (trùng `page_signature`), crawler phát hiện và dừng với stop_reason `repeated_page_signature` để chống infinite loop.
+### 1. Nguồn Dữ Liệu (Source Support)
+
+Hệ thống crawler thiết kế theo mô hình Registry mở rộng (`SOURCE_REGISTRY` trong `crawler/run_crawler.py`), phân định rõ ràng giữa nguồn đã triển khai và nguồn dự kiến tương lai:
+
+- **Nguồn hiện hành (Implemented)**:
+  - `tgdd`: Thế Giới Di Động (`crawler/tgdd/`)
+  - `fptshop`: FPT Shop (`crawler/fptshop/`)
+  - `cellphones`: CellphoneS (`crawler/cellphoneS/`)
+- **Nguồn kế hoạch/tương lai (Planned / Future)**:
+  - `viettelstore`: Viettel Store (`implemented=False`)
+  - `hoanghamobile`: Hoàng Hà Mobile (`implemented=False`)
+  *(Khi gọi CLI tới các nguồn chưa triển khai, runner sẽ báo lỗi rõ ràng và từ chối chạy, tuyệt đối không âm thầm fallback sang nguồn khác).*
 
 ---
 
-### 3. Cài đặt môi trường
+### 2. Cấu trúc thư mục
+- `crawler/tgdd/`: Spiders và items cho Thế Giới Di Động.
+- `crawler/fptshop/`: Spiders và items cho FPT Shop.
+- `crawler/cellphoneS/`: Spiders và items cho CellphoneS (GraphQL + SSR detail/review).
+- `crawler/run_crawler.py`: CLI Runner tập trung điều phối các nguồn với `RunnerLock` đảm bảo chống chạy đồng thời và kiểm soát an toàn snapshot bất biến.
+- `data/raw/<source>/<category>/`: Thư mục lưu trữ raw snapshots (sản phẩm: `*.jsonl`, đánh giá: `*_reviews.jsonl`).
+- `tests/`: Bộ kiểm thử toàn diện (contract, crawler, runner lock, source routing, an toàn raw data).
+
+---
+
+### 3. Nguyên tắc Thu thập (Politeness & Concurrency Safety)
+- **Robots.txt & Rate Limiting**:
+  - Tuân thủ robots.txt và giới hạn rate limiting theo từng sàn.
+  - Chạy tuần tự an toàn (`CONCURRENT_REQUESTS = 1`, AutoThrottle, Conservative download delay).
+  - Không bypass anti-bot, không sử dụng luồng ngầm gây quá tải hệ thống nguồn.
+- **Tiến trình an toàn (RunnerLock)**:
+  - Cơ chế lock đơn tiến trình atomic (`O_EXCL`), gắn liền với start time/PID protection.
+  - Giữ lock xuyên suốt chuỗi crawl khi chạy `--category all` hoặc `--source all`.
+  - Từ chối khởi động bất kỳ Scrapy subprocess nào nếu lock đang bị giữ bởi tiến trình khác.
+- **Chống trùng lặp HTTP & Ngữ nghĩa**:
+  - Tận dụng Scrapy RFPDupeFilter cho HTTP requests (không dùng `dont_filter=True` tùy tiện).
+  - Kiểm soát trùng lặp ngữ nghĩa ở cấp độ crawler (`seen_parent_ids`, `seen_review_ids`, `seen_page_signatures`).
+- **Immutable Raw Snapshots**:
+  - Mỗi mẻ crawl tạo snapshot mới định danh theo `batch_id` (hoặc timestamp).
+  - Từ chối chạy nếu file snapshot đích đã tồn tại (`ensure_output_path_available`).
+
+---
+
+### 4. Cài đặt môi trường
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-### 4. Thực thi Crawler
+### 5. Thực thi Crawler (`crawler/run_crawler.py`)
 
-#### A. Chế độ Pilot (Mặc định `limit=50` để test nhanh):
+Entry point duy nhất để điều phối crawler là `crawler/run_crawler.py`.
+
+#### A. Chạy riêng từng nguồn (Source Isolation):
 ```bash
-# Chạy cả 2 danh mục (mỗi danh mục 50 sản phẩm):
-python crawler/run_crawler.py --category all --limit 50
+# Chỉ chạy CellphoneS:
+python crawler/run_crawler.py --source cellphones --category laptop --limit 50
+python crawler/run_crawler.py --source cellphones --category smartphone --limit 50
+python crawler/run_crawler.py --source cellphones --category all --limit 50
 
-# Chạy riêng từng danh mục:
-python crawler/run_crawler.py --category laptop --limit 50
-python crawler/run_crawler.py --category smartphone --limit 50
+# Chỉ chạy Thế Giới Di Động:
+python crawler/run_crawler.py --source tgdd --category laptop --limit 50
+python crawler/run_crawler.py --source tgdd --category smartphone --limit 50
+python crawler/run_crawler.py --source tgdd --category all --limit 50
 
-# Lệnh rút gọn (không truyền tham số gì mặc định chạy pilot 50):
-python crawler/run_crawler.py --category laptop
+# Chỉ chạy FPT Shop:
+python crawler/run_crawler.py --source fptshop --category smartphone --limit 50
 ```
 
-#### B. Chế độ Full Crawl (`--full`, thu thập toàn bộ sản phẩm danh mục):
+#### B. Chạy toàn bộ các nguồn đã triển khai:
 ```bash
-# Thu thập toàn bộ Laptop và Smartphone:
-python crawler/run_crawler.py --category all --full
-
-# Thu thập toàn bộ Laptop:
-python crawler/run_crawler.py --category laptop --full
-
-# Thu thập toàn bộ Smartphone:
-python crawler/run_crawler.py --category smartphone --full
-```
-> **Lưu ý**: Tùy chọn `--full` và `--limit` là loại trừ lẫn nhau (mutually exclusive). Nếu truyền đồng thời cả hai, chương trình sẽ báo lỗi và dừng lại.
-
-#### C. Chạy tùy chỉnh file đầu ra hoặc Batch ID (chỉ áp dụng khi chọn 1 danh mục):
-```bash
-python crawler/run_crawler.py --category laptop --limit 50 --output data/raw/tgdd/laptop/test_run.jsonl
-python crawler/run_crawler.py --category laptop --full --batch-id 20261013_081500
+# Chạy tuần tự tất cả các nguồn đã triển khai (tgdd, fptshop, cellphones):
+python crawler/run_crawler.py --source all --category all --limit 50
 ```
 
-#### D. Quy định Entry Point và bảo vệ Snapshot Bất Biến (Immutable Protection):
-> **LƯU Ý BẮT BUỘC**: Luôn sử dụng `python crawler/run_crawler.py` làm entry point duy nhất để chạy crawler trong dự án.
->
-> **Tuyệt đối không chạy trực tiếp `scrapy runspider ... -o ...` từ terminal.** Lệnh gọi trực tiếp Scrapy với tùy chọn `-o` sẽ bỏ qua cơ chế kiểm tra collision (`ensure_output_path_available()`) của runner, có nguy cơ ghi đè hoặc append vào các raw snapshot đã tồn tại (như `pilot.jsonl`), vi phạm nguyên tắc raw data immutability và provenance của TV1.
+#### C. Chế độ Full Crawl (`--full`):
+```bash
+# Full crawl CellphoneS Laptop:
+python crawler/run_crawler.py --source cellphones --category laptop --full
+```
+> **Lưu ý**: Tùy chọn `--full` và `--limit` loại trừ lẫn nhau (mutually exclusive).
+
+#### D. Chỉ định Output hoặc Batch ID tùy chỉnh:
+Tùy chọn `--output` chỉ hợp lệ khi crawl chính xác 1 nguồn và 1 danh mục:
+```bash
+python crawler/run_crawler.py --source cellphones --category laptop --limit 50 --output data/raw/cellphones/laptop/custom_run.jsonl
+```
 
 ---
 
-### 5. Kiểm thử
+### 6. Kiểm thử Tự động
+Tất cả các unit tests không gọi mạng ngoài, không khởi chạy Scrapy thật, và không ghi dữ liệu giả mạo vào `data/raw`:
 ```bash
-python -m unittest discover tests
+python -m unittest discover tests -v
 ```
+

@@ -27,6 +27,50 @@ if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 
+# Registry đăng ký các nguồn crawler (extensible architecture)
+SOURCE_REGISTRY: Dict[str, Dict[str, Any]] = {
+    "tgdd": {
+        "name": "Thế Giới Di Động",
+        "implemented": True,
+        "raw_folder": "tgdd",
+        "spiders": {
+            "laptop": PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py",
+            "smartphone": PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py",
+        },
+    },
+    "fptshop": {
+        "name": "FPT Shop",
+        "implemented": True,
+        "raw_folder": "fptshop",
+        "spiders": {
+            "laptop": PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_laptop_spider.py",
+            "smartphone": PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_smartphone_spider.py",
+        },
+    },
+    "cellphones": {
+        "name": "CellphoneS",
+        "implemented": True,
+        "raw_folder": "cellphoneS",
+        "spiders": {
+            "laptop": PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_laptop_spider.py",
+            "smartphone": PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_smartphone_spider.py",
+        },
+    },
+    "viettelstore": {
+        "name": "Viettel Store",
+        "implemented": False,
+        "raw_folder": "viettelstore",
+        "spiders": {},
+    },
+    "hoanghamobile": {
+        "name": "Hoàng Hà Mobile",
+        "implemented": False,
+        "raw_folder": "hoanghamobile",
+        "spiders": {},
+    },
+}
+
+
 def generate_batch_id(dt: Optional[datetime] = None) -> str:
     """Tạo batch_id từ timestamp (mặc định là datetime hiện tại)."""
     if dt is None:
@@ -40,7 +84,11 @@ def get_snapshot_path(category: str, batch_id: str, base_dir: Optional[Path] = N
     Bảo toàn snapshot cũ, không thực hiện overwrite.
     """
     if base_dir is None:
-        source_folder = "cellphoneS" if source.lower() == "cellphones" else source
+        src_key = source.lower()
+        if src_key in SOURCE_REGISTRY:
+            source_folder = SOURCE_REGISTRY[src_key]["raw_folder"]
+        else:
+            source_folder = "cellphoneS" if src_key == "cellphones" else source
         base_dir = PROJECT_ROOT / "data" / "raw" / source_folder
     return base_dir / category / f"{batch_id}.jsonl"
 
@@ -51,9 +99,14 @@ def get_review_snapshot_path(category: str, batch_id: str, base_dir: Optional[Pa
     Bảo toàn snapshot cũ, không thực hiện overwrite.
     """
     if base_dir is None:
-        source_folder = "cellphoneS" if source.lower() == "cellphones" else source
+        src_key = source.lower()
+        if src_key in SOURCE_REGISTRY:
+            source_folder = SOURCE_REGISTRY[src_key]["raw_folder"]
+        else:
+            source_folder = "cellphoneS" if src_key == "cellphones" else source
         base_dir = PROJECT_ROOT / "data" / "raw" / source_folder
     return base_dir / f"{category}_reviews" / f"{batch_id}.jsonl"
+
 
 
 def ensure_output_path_available(output_path: Path) -> None:
@@ -256,7 +309,7 @@ class RunnerLock:
     def _unlink_quietly(path: Path, attempts: int = 5) -> bool:
         for i in range(attempts):
             try:
-                path.unlink()
+                os.unlink(path)
                 return True
             except FileNotFoundError:
                 return True
@@ -445,29 +498,23 @@ def crawl_category(
             )
 
     src_key = source.lower()
-    if src_key == "tgdd":
-        if category == "laptop":
-            spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_laptop_spider.py"
-        elif category == "smartphone":
-            spider_file = PROJECT_ROOT / "crawler" / "tgdd" / "tgdd_smartphone_spider.py"
-        else:
-            raise ValueError(f"Không hỗ trợ category: {category}")
-    elif src_key == "fptshop":
-        if category == "laptop":
-            spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_laptop_spider.py"
-        elif category == "smartphone":
-            spider_file = PROJECT_ROOT / "crawler" / "fptshop" / "fptshop_smartphone_spider.py"
-        else:
-            raise ValueError(f"Không hỗ trợ category: {category}")
-    elif src_key == "cellphones":
-        if category == "laptop":
-            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_laptop_spider.py"
-        elif category == "smartphone":
-            spider_file = PROJECT_ROOT / "crawler" / "cellphoneS" / "cellphones_smartphone_spider.py"
-        else:
-            raise ValueError(f"Không hỗ trợ category: {category}")
-    else:
-        raise ValueError(f"Không hỗ trợ source: {source}")
+    if src_key not in SOURCE_REGISTRY:
+        raise ValueError(f"Không hỗ trợ source: '{source}'. Các source hợp lệ: {list(SOURCE_REGISTRY.keys())}")
+
+    src_config = SOURCE_REGISTRY[src_key]
+    if not src_config["implemented"]:
+        raise NotImplementedError(
+            f"Source '{source}' ({src_config['name']}) đã được đăng ký nhưng crawler chưa được implement."
+        )
+
+    spiders = src_config.get("spiders", {})
+    if category not in spiders:
+        raise ValueError(f"Source '{source}' không hỗ trợ category '{category}'. Hỗ trợ: {list(spiders.keys())}")
+
+    spider_file = spiders[category]
+    if not spider_file.exists():
+        raise FileNotFoundError(f"Không tìm thấy file spider cho source '{source}', category '{category}': {spider_file}")
+
 
     # Xác định batch_id và output paths (product và review riêng biệt)
     actual_batch_id = batch_id or generate_batch_id()
@@ -563,9 +610,9 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="TV1 - Multi-Source Tech E-Commerce Crawler Runner")
     parser.add_argument(
         "--source",
-        choices=["tgdd", "fptshop", "cellphones", "all"],
+        choices=list(SOURCE_REGISTRY.keys()) + ["all"],
         default="tgdd",
-        help="Sàn thương mại điện tử cần crawl (tgdd, fptshop, cellphones, all - mặc định tgdd)",
+        help=f"Sàn thương mại điện tử cần crawl ({', '.join(SOURCE_REGISTRY.keys())}, all - mặc định tgdd)",
     )
     parser.add_argument(
         "--category",
@@ -617,6 +664,20 @@ def main():
     if args.output and (args.category == "all" or args.source == "all"):
         parser.error("Tùy chọn --output chỉ có thể dùng khi crawl 1 source và 1 category cụ thể.")
 
+    if args.source != "all":
+        src_key = args.source.lower()
+        if src_key not in SOURCE_REGISTRY:
+            parser.error(f"Source không hợp lệ: {args.source}")
+        if not SOURCE_REGISTRY[src_key]["implemented"]:
+            print(
+                f"\n[LỖI] Source '{args.source}' ({SOURCE_REGISTRY[src_key]['name']}) "
+                "đã được ghi nhận nhưng crawler chưa được implement.\n"
+            )
+            sys.exit(1)
+        sources = [src_key]
+    else:
+        sources = [s for s, meta in SOURCE_REGISTRY.items() if meta["implemented"]]
+
     if args.full:
         effective_limit = None
     elif args.limit is not None:
@@ -624,7 +685,6 @@ def main():
     else:
         effective_limit = 50
 
-    sources = ["tgdd", "fptshop", "cellphones"] if args.source == "all" else [args.source]
     categories = ["laptop", "smartphone"] if args.category == "all" else [args.category]
 
     # Acquire lock TRƯỚC mọi crawl subprocess, giữ suốt toàn bộ chuỗi source/category
@@ -654,6 +714,9 @@ def main():
                     )
                     results[key] = count
         except FileExistsError as exc:
+            print(f"\n[LỖI] {exc}\n")
+            sys.exit(1)
+        except NotImplementedError as exc:
             print(f"\n[LỖI] {exc}\n")
             sys.exit(1)
         except CrawlerLockError as exc:

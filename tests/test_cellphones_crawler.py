@@ -762,15 +762,19 @@ class TestCellphonesCrawler(unittest.TestCase):
         """Kiểm tra CLI runner: --source all bao gồm ['tgdd', 'fptshop', 'cellphones'] và choices chỉ dùng canonical."""
         parser = build_argument_parser()
 
-        # Kiểm tra choices chỉ có canonical 'cellphones'
+        # Kiểm tra choices có canonical 'cellphones' và các nguồn đã đăng ký
         source_action = [a for a in parser._actions if a.dest == "source"][0]
-        self.assertEqual(set(source_action.choices), {"tgdd", "fptshop", "cellphones", "all"})
+        self.assertIn("cellphones", source_action.choices)
+        self.assertTrue({"tgdd", "fptshop", "cellphones", "all"}.issubset(set(source_action.choices)))
 
-        # Phân giải --source all
+        # Phân giải --source all (chỉ gồm các nguồn đã implemented)
+        from crawler.run_crawler import SOURCE_REGISTRY
         args_all = parser.parse_args(["--source", "all"])
-        sources_all = ["tgdd", "fptshop", "cellphones"] if args_all.source == "all" else [args_all.source]
+        sources_all = [s for s, meta in SOURCE_REGISTRY.items() if meta["implemented"]] if args_all.source == "all" else [args_all.source]
         self.assertEqual(sources_all, ["tgdd", "fptshop", "cellphones"])
         self.assertIn("cellphones", sources_all)
+        self.assertNotIn("viettelstore", sources_all)
+        self.assertNotIn("hoanghamobile", sources_all)
 
         # Phân giải --source cellphones
         args_cellphones = parser.parse_args(["--source", "cellphones"])
@@ -882,4 +886,243 @@ class TestCellphonesCrawler(unittest.TestCase):
         self.assertEqual(item["price_raw"], 16990000)
         self.assertEqual(item["original_price_raw"], 18990000)
         self.assertEqual(item["raw_payload"], parent_meta["raw_payload"])
+
+    # ---------------------------------------------------------
+    # 30. START REQUESTS & ASYNC START COMPATIBILITY
+    # ---------------------------------------------------------
+    def test_30_start_requests_and_async_start_compatibility(self):
+        """
+        Kiểm tra start_requests() tương thích Scrapy version cũ và start() async generator:
+        - start_requests() sinh đúng 1 request ban đầu với page=1 (không bắt đầu từ page 0).
+        - start() async generator delegate đúng đến start_requests().
+        """
+        import asyncio
+
+        # 1. start_requests() đồng bộ (chuẩn Scrapy Spider)
+        reqs = list(self.phone_spider.start_requests())
+        self.assertEqual(len(reqs), 1)
+        self.assertEqual(reqs[0].meta["page"], 1)
+        self.assertEqual(reqs[0].method, "POST")
+        self.assertFalse(reqs[0].dont_filter, "start request không đặt dont_filter=True")
+
+        # 2. start() async generator (Scrapy 2.13+)
+        async def _collect():
+            res = []
+            async for req in self.phone_spider.start():
+                res.append(req)
+            return res
+
+        async_reqs = asyncio.run(_collect())
+        self.assertEqual(len(async_reqs), 1)
+        self.assertEqual(async_reqs[0].meta["page"], 1)
+        self.assertEqual(async_reqs[0].url, reqs[0].url)
+
+    # ---------------------------------------------------------
+    # 31. SPECIAL_PRICE SEVEN CASES
+    # ---------------------------------------------------------
+    def test_31_price_special_price_seven_cases(self):
+        """
+        Kiểm tra xử lý special_price cho đủ 7 trường hợp:
+        1. int > 0
+        2. float > 0
+        3. numeric string > 0
+        4. "0"
+        5. None
+        6. invalid string
+        7. bool (True/False không được coi là price)
+        """
+        from crawler.cellphoneS.base_spider import CellphonesBaseSpider
+
+        # Kiểm tra helper _parse_positive_price
+        self.assertEqual(CellphonesBaseSpider._parse_positive_price(18000000), 18000000)
+        self.assertEqual(CellphonesBaseSpider._parse_positive_price(18000000.5), 18000000.5)
+        self.assertEqual(CellphonesBaseSpider._parse_positive_price("18000000"), 18000000)
+        self.assertEqual(CellphonesBaseSpider._parse_positive_price("18000000.5"), 18000000.5)
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price("0"))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price(0))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price(None))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price("invalid_price"))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price(""))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price(True))
+        self.assertIsNone(CellphonesBaseSpider._parse_positive_price(False))
+
+        # Kiểm tra áp dụng trong yield_product_items cho cả 7 trường hợp
+        parent_meta = {
+            "parent_id": "1",
+            "parent_name": "Test Phone",
+            "parent_sku": "SKU-P",
+            "brand": "BrandX",
+            "parent_url": "https://cellphones.com.vn/test-phone.html",
+            "rating": 5.0,
+            "review_count": 10,
+            "general_attrs": {},
+            "raw_payload": {},
+        }
+        list_price = 20000000
+
+        cases = [
+            (18000000, 18000000, "1. int"),
+            (18500000.5, 18500000.5, "2. float"),
+            ("17000000", 17000000, "3. numeric string"),
+            ("0", list_price, "4. string 0"),
+            (None, list_price, "5. None"),
+            ("not_a_number", list_price, "6. invalid string"),
+            (True, list_price, "7. bool True"),
+            (False, list_price, "7. bool False"),
+        ]
+
+        for special_val, expected_current, label in cases:
+            child = [
+                {
+                    "general": {"product_id": "c1", "name": f"Variant {label}", "sku": "SKU-C"},
+                    "filterable": {"price": list_price, "special_price": special_val, "stock": 10},
+                }
+            ]
+            items = list(self.phone_spider.yield_product_items(parent_meta, child, {}))
+            self.assertEqual(
+                items[0]["price_raw"],
+                expected_current,
+                f"Trường hợp {label} phải cho current_price={expected_current}, thực tế: {items[0]['price_raw']}",
+            )
+            self.assertEqual(
+                items[0]["original_price_raw"],
+                list_price,
+                f"Trường hợp {label} original_price phải là list_price={list_price}",
+            )
+
+    # ---------------------------------------------------------
+    # 32. JSON-LD ATTRIBUTES @GRAPH SUPPORT
+    # ---------------------------------------------------------
+    def test_32_jsonld_attributes_graph_support(self):
+        """
+        Kiểm tra extract_jsonld_attributes hỗ trợ:
+        - Object trực tiếp có additionalProperty
+        - List JSON-LD
+        - @graph chứa Product/ProductGroup có additionalProperty
+        - Thứ tự ưu tiên: 1. JSON-LD > 2. GraphQL general.attributes > 3. DOM
+        """
+        # Case A: Object trực tiếp
+        html_direct = """
+        <html><head>
+        <script type="application/ld+json">
+        {
+            "@type": "Product",
+            "additionalProperty": [
+                {"name": "RAM", "value": "16 GB"},
+                {"name": "CPU", "value": "Apple M4"}
+            ]
+        }
+        </script>
+        </head></html>
+        """
+        attrs_direct = self.laptop_spider.extract_jsonld_attributes(html_direct)
+        self.assertEqual(attrs_direct.get("RAM"), "16 GB")
+        self.assertEqual(attrs_direct.get("CPU"), "Apple M4")
+
+        # Case B: List JSON-LD
+        html_list = """
+        <html><head>
+        <script type="application/ld+json">
+        [
+            {"@type": "BreadcrumbList"},
+            {
+                "@type": "Product",
+                "additionalProperty": [
+                    {"name": "Màn hình", "value": "14 inch OLED"}
+                ]
+            }
+        ]
+        </script>
+        </head></html>
+        """
+        attrs_list = self.laptop_spider.extract_jsonld_attributes(html_list)
+        self.assertEqual(attrs_list.get("Màn hình"), "14 inch OLED")
+
+        # Case C: @graph chứa Product
+        html_graph = """
+        <html><head>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@graph": [
+                {"@type": "WebSite", "name": "CellphoneS"},
+                {
+                    "@type": "ProductGroup",
+                    "name": "Asus Zenbook 14",
+                    "additionalProperty": [
+                        {"name": "Bộ vi xử lý", "value": "Intel Core Ultra 7"},
+                        {"name": "Ổ cứng", "value": "1 TB SSD"}
+                    ]
+                }
+            ]
+        }
+        </script>
+        </head></html>
+        """
+        attrs_graph = self.laptop_spider.extract_jsonld_attributes(html_graph)
+        self.assertEqual(attrs_graph.get("Bộ vi xử lý"), "Intel Core Ultra 7")
+        self.assertEqual(attrs_graph.get("Ổ cứng"), "1 TB SSD")
+
+    # ---------------------------------------------------------
+    # 33. SEMANTIC PARENT DEDUP REGRESSION
+    # ---------------------------------------------------------
+    def test_33_semantic_parent_dedup_regression(self):
+        """
+        Kiểm tra regression chống duplicate semantic parent:
+        - Parent xuất hiện ở Page 1 được dispatch downstream request.
+        - Nếu parent đó lại xuất hiện ở Page 2, nó bị bỏ qua ngay tại parse_listing.
+        - Không tạo duplicate downstream child_variants / detail / review request.
+        - unique_parents_collected không bị double count.
+        """
+        spider = CellphonesSmartphoneSpider(batch_id="20261016_dedup_test", crawl_reviews=True)
+
+        # Page 1: chứa Parent 1001 và 1002
+        page1_body = {
+            "data": {
+                "products": [
+                    {"general": {"product_id": 1001, "name": "Phone A", "child_product": [2001]}},
+                    {"general": {"product_id": 1002, "name": "Phone B", "child_product": [2002]}},
+                ]
+            }
+        }
+        req1 = scrapy.Request(url="https://api.cellphones.com.vn/v2/graphql/query", meta={"page": 1})
+        resp1 = TextResponse(
+            url=req1.url,
+            body=json.dumps(page1_body).encode("utf-8"),
+            encoding="utf-8",
+            request=req1,
+        )
+        yielded_page1 = list(spider.parse_listing(resp1))
+
+        # Kiểm tra Page 1 yield 2 child requests
+        child_reqs_p1 = [r for r in yielded_page1 if r.callback == spider.parse_child_variants]
+        self.assertEqual(len(child_reqs_p1), 2)
+        self.assertEqual(spider.unique_parents_collected, 2)
+        self.assertIn("1001", spider.seen_parent_ids)
+        self.assertIn("1002", spider.seen_parent_ids)
+
+        # Page 2: lặp lại Parent 1001 và có thêm Parent mới 1003
+        page2_body = {
+            "data": {
+                "products": [
+                    {"general": {"product_id": 1001, "name": "Phone A Repeat", "child_product": [2001]}},
+                    {"general": {"product_id": 1003, "name": "Phone C New", "child_product": [2003]}},
+                ]
+            }
+        }
+        req2 = scrapy.Request(url="https://api.cellphones.com.vn/v2/graphql/query", meta={"page": 2})
+        resp2 = TextResponse(
+            url=req2.url,
+            body=json.dumps(page2_body).encode("utf-8"),
+            encoding="utf-8",
+            request=req2,
+        )
+        yielded_page2 = list(spider.parse_listing(resp2))
+
+        # Kiểm tra Page 2 CHỈ yield child request cho Parent 1003 mới, KHÔNG lặp lại 1001
+        child_reqs_p2 = [r for r in yielded_page2 if r.callback == spider.parse_child_variants]
+        self.assertEqual(len(child_reqs_p2), 1)
+        self.assertEqual(child_reqs_p2[0].meta["child_ids"], ["2003"])
+        self.assertEqual(spider.unique_parents_collected, 3)
+
 

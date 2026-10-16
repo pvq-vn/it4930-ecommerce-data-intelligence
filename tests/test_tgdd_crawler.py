@@ -1,4 +1,5 @@
 import json
+import tempfile
 import unittest
 from datetime import datetime
 from pathlib import Path
@@ -373,42 +374,53 @@ class TestTgddCrawler(unittest.TestCase):
         self.assertNotIn(".unlink()", runner_source, "Runner không được xóa snapshot cũ")
         self.assertNotIn("os.remove(", runner_source, "Runner không được xóa snapshot cũ")
 
-    @unittest.mock.patch("subprocess.run")
-    def test_crawl_category_subprocess_and_batch_propagation(self, mock_subproc):
+    @staticmethod
+    def _create_mock_popen_proc(returncode: int = 0):
+        proc = MagicMock()
+        proc.pid = 99999
+        proc.poll.return_value = returncode
+        proc.wait.return_value = returncode
+        proc.kill = MagicMock()
+        return proc
+
+    @unittest.mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_crawl_category_subprocess_and_batch_propagation(self, mock_popen):
         """Kiểm tra crawl_category truyền đúng tham số batch_id, max_products và target output vào Scrapy."""
         from crawler.run_crawler import crawl_category
 
-        mock_subproc.return_value = MagicMock(returncode=0)
-        custom_out = PROJECT_ROOT / "data" / "raw" / "tgdd" / "laptop" / "fake_test.jsonl"
+        mock_popen.return_value = self._create_mock_popen_proc(returncode=0)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            custom_out = Path(tmpdir) / "test_out.jsonl"
 
-        crawl_category(
-            category="laptop",
-            limit=5,
-            output_file=str(custom_out),
-            batch_id="20261013_999999",
-        )
+            crawl_category(
+                category="laptop",
+                limit=5,
+                output_file=str(custom_out),
+                batch_id="20261013_999999",
+            )
 
-        self.assertTrue(mock_subproc.called)
-        called_cmd = mock_subproc.call_args[0][0]
-        self.assertIn("batch_id=20261013_999999", called_cmd)
-        self.assertIn("max_products=5", called_cmd)
-        self.assertIn(str(custom_out), called_cmd)
+            self.assertTrue(mock_popen.called)
+            called_cmd = mock_popen.call_args[0][0]
+            self.assertIn("batch_id=20261013_999999", called_cmd)
+            self.assertIn("max_products=5", called_cmd)
+            self.assertIn(str(custom_out), called_cmd)
 
-    @unittest.mock.patch("subprocess.run")
-    def test_crawl_category_subprocess_failure_handling(self, mock_subproc):
+    @unittest.mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_crawl_category_subprocess_failure_handling(self, mock_popen):
         """Kiểm tra crawl_category trả về 0 và xử lý lỗi khi subprocess trả về mã thoát khác 0."""
         from crawler.run_crawler import crawl_category
 
-        mock_subproc.return_value = MagicMock(returncode=1)
-        custom_out = PROJECT_ROOT / "data" / "raw" / "tgdd" / "laptop" / "fake_test.jsonl"
+        mock_popen.return_value = self._create_mock_popen_proc(returncode=1)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            custom_out = Path(tmpdir) / "test_out.jsonl"
 
-        count = crawl_category(
-            category="laptop",
-            limit=5,
-            output_file=str(custom_out),
-            batch_id="20261013_999999",
-        )
-        self.assertEqual(count, 0, "Khi subprocess lỗi, crawl_category phải trả về 0")
+            count = crawl_category(
+                category="laptop",
+                limit=5,
+                output_file=str(custom_out),
+                batch_id="20261013_999999",
+            )
+            self.assertEqual(count, 0, "Khi subprocess lỗi, crawl_category phải trả về 0")
 
     def test_existing_snapshot_is_rejected(self):
         """
@@ -416,46 +428,22 @@ class TestTgddCrawler(unittest.TestCase):
         """
         from crawler.run_crawler import ensure_output_path_available
 
-        existing_file = (
-            PROJECT_ROOT
-            / "data"
-            / "raw"
-            / "tgdd"
-            / "laptop"
-            / "existing_snapshot.jsonl"
-        )
-
-        existing_file.parent.mkdir(parents=True, exist_ok=True)
-
-        try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            existing_file = Path(tmpdir) / "existing_snapshot.jsonl"
             existing_file.write_text("existing data\n", encoding="utf-8")
 
             with self.assertRaises(FileExistsError):
                 ensure_output_path_available(existing_file)
 
-        finally:
-            if existing_file.exists():
-                existing_file.unlink()
-
-    @unittest.mock.patch("subprocess.run")
-    def test_crawl_category_rejects_existing_output(self, mock_subproc):
+    @unittest.mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_crawl_category_rejects_existing_output(self, mock_popen):
         """
         Nếu output đã tồn tại thì crawl_category phải dừng trước khi gọi Scrapy.
         """
         from crawler.run_crawler import crawl_category
 
-        existing_file = (
-            PROJECT_ROOT
-            / "data"
-            / "raw"
-            / "tgdd"
-            / "laptop"
-            / "existing_snapshot.jsonl"
-        )
-
-        existing_file.parent.mkdir(parents=True, exist_ok=True)
-
-        try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            existing_file = Path(tmpdir) / "existing_snapshot.jsonl"
             existing_file.write_text("existing data\n", encoding="utf-8")
 
             with self.assertRaises(FileExistsError):
@@ -466,11 +454,7 @@ class TestTgddCrawler(unittest.TestCase):
                     batch_id="20261013_999999",
                 )
 
-            mock_subproc.assert_not_called()
-
-        finally:
-            if existing_file.exists():
-                existing_file.unlink()
+            mock_popen.assert_not_called()
 
     def test_spider_max_products_initialization(self):
         """
@@ -620,25 +604,26 @@ class TestTgddCrawler(unittest.TestCase):
         self.assertEqual(len(yielded2), 0, "Khi gặp repeated page signature, dừng pagination ngay lập tức")
         self.assertEqual(spider.stop_reason, "repeated_page_signature")
 
-    @unittest.mock.patch("subprocess.run")
-    def test_full_crawl_subprocess_command(self, mock_subproc):
+    @unittest.mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_full_crawl_subprocess_command(self, mock_popen):
         """Kiểm tra crawl_category ở chế độ full crawl (limit=None) truyền max_products=none vào Scrapy."""
         from crawler.run_crawler import crawl_category
 
-        mock_subproc.return_value = MagicMock(returncode=0)
-        custom_out = PROJECT_ROOT / "data" / "raw" / "tgdd" / "laptop" / "fake_full.jsonl"
+        mock_popen.return_value = self._create_mock_popen_proc(returncode=0)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            custom_out = Path(tmpdir) / "test_full.jsonl"
 
-        crawl_category(
-            category="laptop",
-            limit=None,
-            output_file=str(custom_out),
-            batch_id="20261013_fulltest",
-        )
+            crawl_category(
+                category="laptop",
+                limit=None,
+                output_file=str(custom_out),
+                batch_id="20261013_fulltest",
+            )
 
-        self.assertTrue(mock_subproc.called)
-        called_cmd = mock_subproc.call_args[0][0]
-        self.assertIn("max_products=none", called_cmd)
-        self.assertIn("batch_id=20261013_fulltest", called_cmd)
+            self.assertTrue(mock_popen.called)
+            called_cmd = mock_popen.call_args[0][0]
+            self.assertIn("max_products=none", called_cmd)
+            self.assertIn("batch_id=20261013_fulltest", called_cmd)
 
     def test_start_requests_from_page_zero(self):
         """Pagination của TGDĐ phải bắt đầu từ pageIndex=0."""

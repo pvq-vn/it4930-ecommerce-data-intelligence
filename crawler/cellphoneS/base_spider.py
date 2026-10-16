@@ -1,7 +1,7 @@
 import json
 import logging
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set, Union
 from urllib.parse import urljoin
 
 import scrapy
@@ -167,10 +167,10 @@ class CellphonesBaseSpider(scrapy.Spider):
         self.seen_review_ids: Set[str] = set()
 
     # ---------------------------------------------------------
-    # 1. START REQUESTS
+    # 1. START REQUESTS (Tương thích chuẩn Scrapy start_requests và Scrapy 2.13+ start)
     # ---------------------------------------------------------
 
-    async def start(self):
+    def start_requests(self):
         self.logger.info(
             "Khởi động spider %s [category=%s, cate_id=%s, max_products=%s, province_id=%s, batch=%s]",
             self.name,
@@ -182,6 +182,10 @@ class CellphonesBaseSpider(scrapy.Spider):
         )
         # Bắt đầu pagination từ page=1 (CellphoneS GraphQL là 1-based pagination, page 0 trả về rỗng)
         yield self.make_listing_request(page=1)
+
+    async def start(self):
+        for req in self.start_requests():
+            yield req
 
     # ---------------------------------------------------------
     # 2. LISTING REQUEST BUILDER & ERRBACK
@@ -264,7 +268,6 @@ class CellphonesBaseSpider(scrapy.Spider):
             callback=self.parse_listing,
             errback=self.errback_listing,
             meta={"page": page},
-            dont_filter=True,
         )
 
     def errback_listing(self, failure):
@@ -338,6 +341,12 @@ class CellphonesBaseSpider(scrapy.Spider):
             if not pid:
                 continue
 
+            # Semantic dedup guard: nếu parent đã được xử lý ở page trước hoặc slot khác,
+            # bỏ qua ngay để không dispatch trùng downstream (child variant, detail, review)
+            if pid in self.seen_parent_ids:
+                self.logger.debug("Bỏ qua parent %s do đã được xử lý trước đó", pid)
+                continue
+
             # Guard 3: Max products guard cho pilot
             if self.max_products is not None and self.scheduled_products >= self.max_products:
                 self.logger.info(
@@ -348,11 +357,9 @@ class CellphonesBaseSpider(scrapy.Spider):
                     self.stop_reason = "max_products_reached"
                 return
 
+            self.seen_parent_ids.add(pid)
+            self.unique_parents_collected += 1
             self.scheduled_products += 1
-
-            if pid not in self.seen_parent_ids:
-                self.seen_parent_ids.add(pid)
-                self.unique_parents_collected += 1
 
             # Dispatch xử lý parent & child variants
             for req in self.dispatch_parent_product(p):
@@ -628,12 +635,31 @@ class CellphonesBaseSpider(scrapy.Spider):
             )
 
     def extract_jsonld_attributes(self, html_text: str) -> Dict[str, Any]:
-        """Trích xuất additionalProperty từ script Schema.org JSON-LD."""
+        """
+        Trích xuất additionalProperty từ script Schema.org JSON-LD.
+        Hỗ trợ:
+        - object trực tiếp có additionalProperty
+        - list JSON-LD
+        - @graph chứa Product/ProductGroup có additionalProperty
+        """
         if not html_text:
             return {}
 
         soup = BeautifulSoup(html_text, "html.parser")
         scripts = soup.find_all("script", type="application/ld+json")
+
+        def _find_additional_property_dicts(obj: Any) -> List[Dict[str, Any]]:
+            items = []
+            if isinstance(obj, dict):
+                if "additionalProperty" in obj and isinstance(obj["additionalProperty"], list):
+                    items.append(obj)
+                if "@graph" in obj:
+                    items.extend(_find_additional_property_dicts(obj["@graph"]))
+            elif isinstance(obj, list):
+                for elem in obj:
+                    items.extend(_find_additional_property_dicts(elem))
+            return items
+
         for s in scripts:
             if not s.string:
                 continue
@@ -642,20 +668,19 @@ class CellphonesBaseSpider(scrapy.Spider):
             except Exception:
                 continue
 
-            candidates = [data] if isinstance(data, dict) else (data if isinstance(data, list) else [])
+            candidates = _find_additional_property_dicts(data)
             for c in candidates:
-                if isinstance(c, dict) and "additionalProperty" in c:
-                    props = c["additionalProperty"]
-                    if isinstance(props, list):
-                        attrs = {}
-                        for p in props:
-                            if isinstance(p, dict) and "name" in p and "value" in p:
-                                k = str(p["name"]).strip()
-                                v = str(p["value"]).strip()
-                                if k:
-                                    attrs[k] = v
-                        if attrs:
-                            return attrs
+                props = c.get("additionalProperty")
+                if isinstance(props, list):
+                    attrs = {}
+                    for p in props:
+                        if isinstance(p, dict) and "name" in p and "value" in p:
+                            k = str(p["name"]).strip()
+                            v = str(p["value"]).strip()
+                            if k:
+                                attrs[k] = v
+                    if attrs:
+                        return attrs
         return {}
 
     def extract_graphql_attributes(self, general_attrs: Any) -> Dict[str, Any]:
@@ -705,6 +730,34 @@ class CellphonesBaseSpider(scrapy.Spider):
 
         return attrs
 
+    @staticmethod
+    def _parse_positive_price(val: Any) -> Optional[Union[int, float]]:
+        """
+        Kiểm tra và trích xuất giá dương từ raw API value.
+        - int / float > 0 -> trả về số đó (bool bị loại bỏ vì bool là subclass của int).
+        - numeric string > 0 (vd "18000000", "18000000.0") -> parse thành int hoặc float tương ứng.
+        - None, "0", 0, số âm, invalid string, boolean -> trả về None.
+        """
+        if val is None or isinstance(val, bool):
+            return None
+        if isinstance(val, (int, float)):
+            return val if val > 0 else None
+        if isinstance(val, str):
+            val_clean = val.strip()
+            if not val_clean:
+                return None
+            try:
+                if val_clean.isdigit():
+                    num = int(val_clean)
+                    return num if num > 0 else None
+                num_f = float(val_clean)
+                if num_f > 0:
+                    return int(num_f) if num_f.is_integer() else num_f
+                return None
+            except ValueError:
+                return None
+        return None
+
     # ---------------------------------------------------------
     # 7. YIELD PRODUCT ITEMS (CANONICAL SCHEMA = 25 FIELDS)
     # ---------------------------------------------------------
@@ -734,9 +787,10 @@ class CellphonesBaseSpider(scrapy.Spider):
                 # Variant price mapping
                 special_price = c_filt.get("special_price")
                 list_price = c_filt.get("price")
+                parsed_special = self._parse_positive_price(special_price)
 
-                if special_price is not None and isinstance(special_price, (int, float)) and special_price > 0:
-                    current_price = special_price
+                if parsed_special is not None:
+                    current_price = parsed_special
                     original_price = list_price
                 else:
                     current_price = list_price
@@ -802,9 +856,10 @@ class CellphonesBaseSpider(scrapy.Spider):
             p_filt = parent_meta.get("parent_filt") or {}
             special_price = p_filt.get("special_price")
             list_price = p_filt.get("price")
+            parsed_special = self._parse_positive_price(special_price)
 
-            if special_price is not None and isinstance(special_price, (int, float)) and special_price > 0:
-                current_price = special_price
+            if parsed_special is not None:
+                current_price = parsed_special
                 original_price = list_price
             else:
                 current_price = list_price
