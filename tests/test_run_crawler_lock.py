@@ -379,12 +379,14 @@ class TestMainHoldsLockForWholeSequence(_LockTestBase):
         m_crawl, code = self._run_main(["--source", "all", "--category", "all", "--limit", "1"],
                                        self._recording_fake(calls))
         self.assertEqual(code, 0)
-        self.assertEqual(m_crawl.call_count, 6)
+        self.assertEqual(m_crawl.call_count, 10)
         self.assertEqual(
             [(s, c) for s, c, _ in calls],
             [("tgdd", "laptop"), ("tgdd", "smartphone"),
              ("fptshop", "laptop"), ("fptshop", "smartphone"),
-             ("cellphones", "laptop"), ("cellphones", "smartphone")],
+             ("cellphones", "laptop"), ("cellphones", "smartphone"),
+             ("viettelstore", "laptop"), ("viettelstore", "smartphone"),
+             ("hoanghamobile", "laptop"), ("hoanghamobile", "smartphone")],
         )
         self.assertEqual(len({t for _, _, t in calls}), 1, "Lock bị release/acquire lại giữa các crawl")
         self.assertFalse(self.lock_path.exists(), "Lock phải được release sau khi runner kết thúc")

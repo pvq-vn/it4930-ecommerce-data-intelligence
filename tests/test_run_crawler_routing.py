@@ -47,17 +47,12 @@ class TestRunCrawlerRouting(unittest.TestCase):
         expected_sources = {"tgdd", "fptshop", "cellphones", "viettelstore", "hoanghamobile"}
         self.assertEqual(set(SOURCE_REGISTRY.keys()), expected_sources)
 
-        # Implemented sources
-        self.assertTrue(SOURCE_REGISTRY["tgdd"]["implemented"])
-        self.assertTrue(SOURCE_REGISTRY["fptshop"]["implemented"])
-        self.assertTrue(SOURCE_REGISTRY["cellphones"]["implemented"])
+        # Implemented sources (all 5 sources are now fully implemented)
+        for src in expected_sources:
+            self.assertTrue(SOURCE_REGISTRY[src]["implemented"], f"Source {src} must be implemented")
 
-        # Future/planned sources
-        self.assertFalse(SOURCE_REGISTRY["viettelstore"]["implemented"])
-        self.assertFalse(SOURCE_REGISTRY["hoanghamobile"]["implemented"])
-
-        # Spider files của implemented sources phải tồn tại trên đĩa
-        for src in ("tgdd", "fptshop", "cellphones"):
+        # Spider files của all sources phải tồn tại trên đĩa
+        for src in expected_sources:
             spiders = SOURCE_REGISTRY[src]["spiders"]
             self.assertIn("laptop", spiders)
             self.assertIn("smartphone", spiders)
@@ -72,19 +67,27 @@ class TestRunCrawlerRouting(unittest.TestCase):
         p_tgdd = get_snapshot_path("laptop", "20261016_000000", source="tgdd")
         p_fpt = get_snapshot_path("laptop", "20261016_000000", source="fptshop")
         p_cps = get_snapshot_path("laptop", "20261016_000000", source="cellphones")
+        p_vts = get_snapshot_path("laptop", "20261016_000000", source="viettelstore")
+        p_hhm = get_snapshot_path("laptop", "20261016_000000", source="hoanghamobile")
 
         self.assertIn("tgdd", str(p_tgdd).lower())
         self.assertIn("fptshop", str(p_fpt).lower())
         self.assertIn("cellphones", str(p_cps).lower())
+        self.assertIn("viettelstore", str(p_vts).lower())
+        self.assertIn("hoanghamobile", str(p_hhm).lower())
 
         # Review paths
         r_tgdd = get_review_snapshot_path("smartphone", "20261016_000000", source="tgdd")
         r_fpt = get_review_snapshot_path("smartphone", "20261016_000000", source="fptshop")
         r_cps = get_review_snapshot_path("smartphone", "20261016_000000", source="cellphones")
+        r_vts = get_review_snapshot_path("smartphone", "20261016_000000", source="viettelstore")
+        r_hhm = get_review_snapshot_path("smartphone", "20261016_000000", source="hoanghamobile")
 
         self.assertIn("tgdd", str(r_tgdd).lower())
         self.assertIn("fptshop", str(r_fpt).lower())
         self.assertIn("cellphones", str(r_cps).lower())
+        self.assertIn("viettelstore", str(r_vts).lower())
+        self.assertIn("hoanghamobile", str(r_hhm).lower())
 
     # -----------------------------------------------------------------------
     # 3. DIRECT CRAWL_CATEGORY ROUTING
@@ -143,30 +146,58 @@ class TestRunCrawlerRouting(unittest.TestCase):
             self.assertNotIn("tgdd", " ".join(cmd).lower())
             self.assertNotIn("cellphone", " ".join(cmd).lower())
 
+    @mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_crawl_category_viettelstore_routes_only_to_viettelstore(self, mock_popen):
+        """crawl_category source='viettelstore' chỉ gọi viettelstore spider."""
+        mock_popen.return_value = _make_fake_proc(0)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out = Path(tmpdir) / "test.jsonl"
+            crawl_category(category="laptop", source="viettelstore", output_file=str(out))
+            cmd = mock_popen.call_args[0][0]
+            self.assertIn("viettelstore_laptop_spider.py", " ".join(cmd))
+            self.assertNotIn("tgdd", " ".join(cmd).lower())
+            self.assertNotIn("hoangha", " ".join(cmd).lower())
+
+            crawl_category(category="smartphone", source="viettelstore", output_file=str(out))
+            cmd2 = mock_popen.call_args[0][0]
+            self.assertIn("viettelstore_smartphone_spider.py", " ".join(cmd2))
+
+    @mock.patch("crawler.run_crawler.subprocess.Popen")
+    def test_crawl_category_hoanghamobile_routes_only_to_hoanghamobile(self, mock_popen):
+        """crawl_category source='hoanghamobile' chỉ gọi hoanghamobile spider."""
+        mock_popen.return_value = _make_fake_proc(0)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out = Path(tmpdir) / "test.jsonl"
+            crawl_category(category="laptop", source="hoanghamobile", output_file=str(out))
+            cmd = mock_popen.call_args[0][0]
+            self.assertIn("hoanghamobile_laptop_spider.py", " ".join(cmd))
+            self.assertNotIn("tgdd", " ".join(cmd).lower())
+            self.assertNotIn("viettel", " ".join(cmd).lower())
+
+            crawl_category(category="smartphone", source="hoanghamobile", output_file=str(out))
+            cmd2 = mock_popen.call_args[0][0]
+            self.assertIn("hoanghamobile_smartphone_spider.py", " ".join(cmd2))
+
     # -----------------------------------------------------------------------
     # 4. FUTURE SOURCES: NO FALLBACK, EXPLICIT NOT IMPLEMENTED
     # -----------------------------------------------------------------------
     @mock.patch("crawler.run_crawler.subprocess.Popen")
-    def test_crawl_category_viettelstore_raises_not_implemented(self, mock_popen):
-        """Source 'viettelstore' chưa implement crawler -> raise NotImplementedError, KHÔNG fallback."""
+    def test_crawl_category_unimplemented_source_raises_not_implemented(self, mock_popen):
+        """Source được đăng ký nhưng chưa implement -> raise NotImplementedError, KHÔNG fallback."""
+        fake_registry = dict(SOURCE_REGISTRY)
+        fake_registry["unimplemented_src"] = {
+            "name": "Unimplemented Mock Source",
+            "implemented": False,
+            "raw_folder": "mock",
+            "spiders": {},
+        }
         with tempfile.TemporaryDirectory() as tmpdir:
             out = Path(tmpdir) / "test.jsonl"
-            with self.assertRaises(NotImplementedError) as ctx:
-                crawl_category(category="laptop", source="viettelstore", output_file=str(out))
-            self.assertIn("Viettel Store", str(ctx.exception))
-            self.assertIn("chưa được implement", str(ctx.exception))
-            mock_popen.assert_not_called()
-
-    @mock.patch("crawler.run_crawler.subprocess.Popen")
-    def test_crawl_category_hoanghamobile_raises_not_implemented(self, mock_popen):
-        """Source 'hoanghamobile' chưa implement crawler -> raise NotImplementedError, KHÔNG fallback."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            out = Path(tmpdir) / "test.jsonl"
-            with self.assertRaises(NotImplementedError) as ctx:
-                crawl_category(category="smartphone", source="hoanghamobile", output_file=str(out))
-            self.assertIn("Hoàng Hà Mobile", str(ctx.exception))
-            self.assertIn("chưa được implement", str(ctx.exception))
-            mock_popen.assert_not_called()
+            with mock.patch("crawler.run_crawler.SOURCE_REGISTRY", fake_registry):
+                with self.assertRaises(NotImplementedError) as ctx:
+                    crawl_category(category="laptop", source="unimplemented_src", output_file=str(out))
+                self.assertIn("chưa được implement", str(ctx.exception))
+                mock_popen.assert_not_called()
 
     @mock.patch("crawler.run_crawler.subprocess.Popen")
     def test_crawl_category_unsupported_source_raises_value_error(self, mock_popen):
@@ -208,6 +239,44 @@ class TestRunCrawlerRouting(unittest.TestCase):
         self.assertNotIn("tgdd", called_sources)
         self.assertNotIn("fptshop", called_sources)
 
+    def test_cli_main_viettelstore_source_isolation(self):
+        """main() với --source viettelstore chỉ chạy viettelstore."""
+        test_argv = ["run_crawler.py", "--source", "viettelstore", "--category", "all", "--limit", "10"]
+        called_sources = []
+
+        def fake_crawl(cat, limit=None, output_file=None, batch_id=None, source="tgdd", run_lock=None):
+            called_sources.append(source)
+            return 1
+
+        with mock.patch("sys.argv", test_argv), \
+             mock.patch("crawler.run_crawler.crawl_category", side_effect=fake_crawl), \
+             mock.patch("crawler.run_crawler.RunnerLock"), \
+             redirect_stdout(io.StringIO()):
+            main()
+
+        self.assertEqual(called_sources, ["viettelstore", "viettelstore"])
+        self.assertNotIn("tgdd", called_sources)
+        self.assertNotIn("hoanghamobile", called_sources)
+
+    def test_cli_main_hoanghamobile_source_isolation(self):
+        """main() với --source hoanghamobile chỉ chạy hoanghamobile."""
+        test_argv = ["run_crawler.py", "--source", "hoanghamobile", "--category", "all", "--limit", "10"]
+        called_sources = []
+
+        def fake_crawl(cat, limit=None, output_file=None, batch_id=None, source="tgdd", run_lock=None):
+            called_sources.append(source)
+            return 1
+
+        with mock.patch("sys.argv", test_argv), \
+             mock.patch("crawler.run_crawler.crawl_category", side_effect=fake_crawl), \
+             mock.patch("crawler.run_crawler.RunnerLock"), \
+             redirect_stdout(io.StringIO()):
+            main()
+
+        self.assertEqual(called_sources, ["hoanghamobile", "hoanghamobile"])
+        self.assertNotIn("tgdd", called_sources)
+        self.assertNotIn("viettelstore", called_sources)
+
     def test_cli_main_tgdd_source_isolation(self):
         """main() với --source tgdd chỉ chạy tgdd."""
         test_argv = ["run_crawler.py", "--source", "tgdd", "--category", "laptop", "--limit", "10"]
@@ -243,7 +312,7 @@ class TestRunCrawlerRouting(unittest.TestCase):
         self.assertEqual(called_sources, ["fptshop"])
 
     def test_cli_main_source_all_runs_only_implemented_sources(self):
-        """main() với --source all chỉ chạy tgdd, fptshop, cellphones (KHÔNG chạy viettelstore / hoanghamobile)."""
+        """main() với --source all chạy tất cả 5 nguồn đã implement."""
         test_argv = ["run_crawler.py", "--source", "all", "--category", "laptop", "--limit", "10"]
         called_sources = []
 
@@ -257,27 +326,21 @@ class TestRunCrawlerRouting(unittest.TestCase):
              redirect_stdout(io.StringIO()):
             main()
 
-        self.assertEqual(called_sources, ["tgdd", "fptshop", "cellphones"])
-        self.assertNotIn("viettelstore", called_sources)
-        self.assertNotIn("hoanghamobile", called_sources)
+        self.assertEqual(called_sources, ["tgdd", "fptshop", "cellphones", "viettelstore", "hoanghamobile"])
 
-    def test_cli_main_viettelstore_rejected_cleanly(self):
-        """main() với --source viettelstore báo lỗi chưa implement và exit(1), không spawn Scrapy."""
-        test_argv = ["run_crawler.py", "--source", "viettelstore", "--category", "laptop"]
-
-        with mock.patch("sys.argv", test_argv), \
-             mock.patch("crawler.run_crawler.subprocess.Popen") as mock_popen, \
-             redirect_stdout(io.StringIO()):
-            with self.assertRaises(SystemExit) as cm:
-                main()
-            self.assertEqual(cm.exception.code, 1)
-            mock_popen.assert_not_called()
-
-    def test_cli_main_hoanghamobile_rejected_cleanly(self):
-        """main() với --source hoanghamobile báo lỗi chưa implement và exit(1), không spawn Scrapy."""
-        test_argv = ["run_crawler.py", "--source", "hoanghamobile", "--category", "smartphone"]
+    def test_cli_main_unimplemented_source_rejected_cleanly(self):
+        """main() với source chưa implement báo lỗi và exit(1), không spawn Scrapy."""
+        fake_registry = dict(SOURCE_REGISTRY)
+        fake_registry["unimplemented_src"] = {
+            "name": "Unimplemented Mock Source",
+            "implemented": False,
+            "raw_folder": "mock",
+            "spiders": {},
+        }
+        test_argv = ["run_crawler.py", "--source", "unimplemented_src", "--category", "laptop"]
 
         with mock.patch("sys.argv", test_argv), \
+             mock.patch("crawler.run_crawler.SOURCE_REGISTRY", fake_registry), \
              mock.patch("crawler.run_crawler.subprocess.Popen") as mock_popen, \
              redirect_stdout(io.StringIO()):
             with self.assertRaises(SystemExit) as cm:

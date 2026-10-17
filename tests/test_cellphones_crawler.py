@@ -771,10 +771,8 @@ class TestCellphonesCrawler(unittest.TestCase):
         from crawler.run_crawler import SOURCE_REGISTRY
         args_all = parser.parse_args(["--source", "all"])
         sources_all = [s for s, meta in SOURCE_REGISTRY.items() if meta["implemented"]] if args_all.source == "all" else [args_all.source]
-        self.assertEqual(sources_all, ["tgdd", "fptshop", "cellphones"])
         self.assertIn("cellphones", sources_all)
-        self.assertNotIn("viettelstore", sources_all)
-        self.assertNotIn("hoanghamobile", sources_all)
+        self.assertEqual(sources_all, ["tgdd", "fptshop", "cellphones", "viettelstore", "hoanghamobile"])
 
         # Phân giải --source cellphones
         args_cellphones = parser.parse_args(["--source", "cellphones"])

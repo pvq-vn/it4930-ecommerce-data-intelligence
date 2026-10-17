@@ -58,15 +58,21 @@ SOURCE_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
     "viettelstore": {
         "name": "Viettel Store",
-        "implemented": False,
+        "implemented": True,
         "raw_folder": "viettelstore",
-        "spiders": {},
+        "spiders": {
+            "laptop": PROJECT_ROOT / "crawler" / "viettelStore" / "viettelstore_laptop_spider.py",
+            "smartphone": PROJECT_ROOT / "crawler" / "viettelStore" / "viettelstore_smartphone_spider.py",
+        },
     },
     "hoanghamobile": {
         "name": "Hoàng Hà Mobile",
-        "implemented": False,
+        "implemented": True,
         "raw_folder": "hoanghamobile",
-        "spiders": {},
+        "spiders": {
+            "laptop": PROJECT_ROOT / "crawler" / "hoanghamobile" / "hoanghamobile_laptop_spider.py",
+            "smartphone": PROJECT_ROOT / "crawler" / "hoanghamobile" / "hoanghamobile_smartphone_spider.py",
+        },
     },
 }
 
