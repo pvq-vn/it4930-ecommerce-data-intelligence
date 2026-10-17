@@ -71,7 +71,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         "AUTOTHROTTLE_MAX_DELAY": 60.0,
         "AUTOTHROTTLE_TARGET_CONCURRENCY": 1.0,
         "RETRY_TIMES": 3,
-        "RETRY_HTTP_CODES": [500, 502, 503, 504, 408, 429, 403, 404],
+        "RETRY_HTTP_CODES": [500, 502, 503, 504, 408, 429, 403],
         "LOG_LEVEL": "INFO",
         "FEED_EXPORT_ENCODING": "utf-8",
         "USER_AGENT": (
@@ -191,7 +191,6 @@ class HoanghamobileBaseSpider(scrapy.Spider):
             callback=self.parse_listing,
             errback=self.errback_listing,
             meta={"page": page},
-            dont_filter=True,
         )
 
     def errback_listing(self, failure):
@@ -294,9 +293,17 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                 else None
             )
 
-            # Trạng thái tồn kho
-            stock_badge = it.find(class_=lambda c: c and any(k in c for k in ["stock", "status", "badge"]))
-            stock_text = stock_badge.text.strip() if stock_badge else "Sẵn hàng"
+            # Trạng thái tồn kho: chỉ nhận diện khi thực sự có keyword tồn kho hợp lệ
+            HOANGHA_VALID_STOCK_KEYWORDS = {
+                "sẵn hàng", "liên hệ", "sắp diễn ra", "tạm hết hàng", "hết hàng",
+                "còn hàng", "đặt trước", "ngừng kinh doanh"
+            }
+            listing_stock = None
+            for badge_el in it.find_all(class_=lambda c: c and any(k in c.lower() for k in ["stock", "status", "sticker"])):
+                b_text = badge_el.text.strip()
+                if b_text.lower() in HOANGHA_VALID_STOCK_KEYWORDS:
+                    listing_stock = b_text
+                    break
 
             listing_data = {
                 "slug": slug,
@@ -304,7 +311,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                 "price": listing_price,
                 "original_price": listing_old_price,
                 "member_price": listing_member_price,
-                "stock": stock_text,
+                "stock": listing_stock,
                 "url": detail_url,
             }
 
@@ -352,15 +359,24 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         listing_data = meta.get("listing_data", {})
         now_iso = datetime.now().astimezone().isoformat()
 
-        def _is_accessory_el(el):
+        HOANGHA_VALID_STOCK_KEYWORDS = {
+            "sẵn hàng", "liên hệ", "sắp diễn ra", "tạm hết hàng", "hết hàng",
+            "còn hàng", "đặt trước", "ngừng kinh doanh"
+        }
+
+        def _is_excluded_price_el(el):
             if not el:
-                return False
+                return True
             for parent in el.parents:
                 classes = parent.get("class", [])
                 class_str = " ".join(classes) if isinstance(classes, list) else str(classes)
                 id_str = str(parent.get("id", ""))
                 combined = f"{class_str} {id_str}".lower()
-                if any(k in combined for k in ["accessory", "accessories", "phu-kien", "phukien", "bundle"]):
+                if any(k in combined for k in [
+                    "accessory", "accessories", "phu-kien", "phukien", "bundle",
+                    "related", "similar", "tuong-tu", "goi-y", "suggest",
+                    "price-tags-member", "member", "installment", "tra-gop"
+                ]):
                     return True
             return False
 
@@ -385,7 +401,10 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                     pass
 
         # 2. Product ID (Primary ID)
-        # Tìm internal numeric product ID trong DOM (quickOrder_productId hoặc ModelID)
+        # Hierarchy:
+        # 1. Hidden inputs: quickOrder_productId, ModelID, ProductId (must be digits)
+        # 2. URL suffix -p(\d+)$ (typical for used/refurbished products)
+        # 3. None (Never use slug or arbitrary text as product_id_raw)
         product_id_raw = None
         for id_name in ["quickOrder_productId", "ModelID", "ProductId"]:
             inp = soup.find("input", id=id_name) or soup.find("input", attrs={"name": id_name})
@@ -393,7 +412,6 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                 product_id_raw = inp["value"].strip()
                 break
 
-        # Nếu không có input hidden, kiểm tra hậu tố -p(\d+) trên URL (thường có ở máy cũ/đổi trả)
         if not product_id_raw:
             pid_url_match = re.search(r"-p(\d+)$", response.url)
             if pid_url_match:
@@ -412,22 +430,27 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         # 4. Product URL
         product_url_raw = self.normalize_url(response.url)
 
-        # 5. Pricing (Quy tắc nghiêm ngặt về phân tách các tầng giá)
+        # 5. Pricing (Precedence: DOM main price -> JSON-LD offer price -> listing_data fallback)
         price_raw = None
         original_price_raw = None
         price_source = "detail"
 
-        # Lấy giá bán chính từ DOM detail (tránh lấy nhầm giá phụ kiện hoặc giá Member)
+        # Lấy giá bán chính từ DOM detail (tránh lấy nhầm giá phụ kiện, related products, hoặc giá Member)
         detail_price_el = None
         for p_el in soup.find_all("div", class_=lambda c: c and "price" in c.split() and "price-last" not in c.split()):
-            if not _is_accessory_el(p_el):
+            if not _is_excluded_price_el(p_el):
                 detail_price_el = p_el
                 break
 
         if detail_price_el and detail_price_el.find("strong"):
-            price_raw = detail_price_el.find("strong").text.strip()
+            p_str = detail_price_el.find("strong").text.strip()
+            if any(c.isdigit() for c in p_str):
+                price_raw = p_str
         elif json_ld_data.get("offers", {}).get("price"):
-            price_raw = str(json_ld_data["offers"]["price"])
+            json_p = str(json_ld_data["offers"]["price"]).strip()
+            if json_p and json_p not in ("0", "None", ""):
+                price_raw = json_p
+                price_source = "json_ld"
 
         # Fallback từ Listing nếu Detail ẩn giá (do khu vực hết hàng hoặc tạm ngưng bán online)
         if not price_raw or price_raw.lower() in ("none", "0", ""):
@@ -439,7 +462,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         # Giá gốc niêm yết (nếu có chiết khấu)
         detail_old_price_el = None
         for p_el in soup.find_all(class_=lambda c: c and "price-last" in c.split()):
-            if not _is_accessory_el(p_el):
+            if not _is_excluded_price_el(p_el):
                 detail_old_price_el = p_el
                 break
 
@@ -452,9 +475,8 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         member_price_raw = listing_data.get("member_price")
         detail_member_el = None
         for p_el in soup.find_all(class_=lambda c: c and "price-tags-member" in c.split()):
-            if not _is_accessory_el(p_el):
-                detail_member_el = p_el
-                break
+            detail_member_el = p_el
+            break
 
         if detail_member_el and detail_member_el.find("strong"):
             member_price_raw = detail_member_el.find("strong").text.strip()
@@ -488,15 +510,40 @@ class HoanghamobileBaseSpider(scrapy.Spider):
             brand_val = json_ld_data["brand"]
             brand_raw = brand_val.get("name") if isinstance(brand_val, dict) else str(brand_val)
 
-        # 8. Availability
-        availability_raw = "Sẵn hàng"
-        avail_schema = json_ld_data.get("offers", {}).get("availability", "")
-        if "InStock" in avail_schema:
-            availability_raw = "Sẵn hàng"
-        elif "OutOfStock" in avail_schema:
+        # 8. Availability (Evidence-based only: absence of evidence = None, KHÔNG default thành "Sẵn hàng")
+        availability_raw = None
+
+        # Evidence 1: Check DOM status / out-of-stock notices in detail area
+        out_of_stock_el = soup.find(class_=lambda c: c and any(k in c.lower() for k in ["out-of-stock", "out_of_stock", "hethang"]))
+        if out_of_stock_el:
             availability_raw = "Tạm hết hàng"
-        elif listing_data.get("stock"):
-            availability_raw = listing_data["stock"]
+        else:
+            status_el = soup.find(class_=lambda c: c and any(k in c.lower() for k in ["status", "stock", "availability"]))
+            if status_el and not _is_excluded_price_el(status_el):
+                st_text = status_el.text.strip().lower()
+                if "tạm dừng đặt hàng" in st_text or "tạm hết hàng" in st_text or "hết hàng" in st_text:
+                    availability_raw = "Tạm hết hàng"
+                elif "sẵn hàng" in st_text or "còn hàng" in st_text:
+                    availability_raw = "Sẵn hàng"
+                elif "liên hệ" in st_text:
+                    availability_raw = "Liên hệ"
+                elif "sắp diễn ra" in st_text:
+                    availability_raw = "Sắp diễn ra"
+
+        # Evidence 2: Check JSON-LD offers.availability
+        if not availability_raw:
+            avail_schema = json_ld_data.get("offers", {}).get("availability", "")
+            if "InStock" in avail_schema:
+                availability_raw = "Sẵn hàng"
+            elif "OutOfStock" in avail_schema:
+                availability_raw = "Tạm hết hàng"
+
+        # Evidence 3: Fallback to valid listing stock if present
+        if not availability_raw and listing_data.get("stock"):
+            if listing_data["stock"].lower() in HOANGHA_VALID_STOCK_KEYWORDS:
+                availability_raw = listing_data["stock"]
+
+        # Nếu không có bất kỳ bằng chứng tồn kho nào, availability_raw giữ nguyên None!
 
         # 9. Technical Attributes (trích xuất từ bảng specs 20+ dòng)
         attributes_raw: Dict[str, Any] = {}
@@ -514,7 +561,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         if installment_monthly_raw:
             attributes_raw["installment_monthly_raw"] = installment_monthly_raw
 
-        # 10. Raw Payload
+        # 10. Raw Payload (Extracted debug provenance dictionary capturing source properties, listing snapshot, and JSON-LD data; NOT a full HTML dump)
         raw_payload = {
             "source": "hoanghamobile",
             "category": self.category,
@@ -565,7 +612,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         yield item
 
         # Hoàng Hà Mobile chỉ có comment/hỏi đáp (Q&A), KHÔNG có customer review theo rating.
-        # Tuyệt đối KHÔNG map Q&A vào TechReviewRawItem theo Rule 6 & 14.
+        # Customer review extraction hiện chưa được hỗ trợ cho Hoàng Hà Mobile và KHÔNG yield TechReviewRawItem.
 
     def _build_item_from_listing(self, listing_data: dict, url: str, now_iso: str, response_status: int):
         """Xây dựng TechProductRawItem dự phòng hoàn toàn từ Listing khi Detail bị lỗi kết nối/HTTP 404/403."""
@@ -593,7 +640,16 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         item["variant_color_raw"] = None
         item["variant_url_raw"] = norm_url
 
-        item["availability_raw"] = listing_data.get("stock") or "Liên hệ"
+        HOANGHA_VALID_STOCK_KEYWORDS = {
+            "sẵn hàng", "liên hệ", "sắp diễn ra", "tạm hết hàng", "hết hàng",
+            "còn hàng", "đặt trước", "ngừng kinh doanh"
+        }
+        listing_st = listing_data.get("stock")
+        if listing_st and listing_st.lower() in HOANGHA_VALID_STOCK_KEYWORDS:
+            item["availability_raw"] = listing_st
+        else:
+            item["availability_raw"] = None
+
         item["price_raw"] = listing_data.get("price")
         item["original_price_raw"] = listing_data.get("original_price")
 

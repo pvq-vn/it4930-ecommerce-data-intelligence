@@ -463,7 +463,133 @@ class TestHoanghamobileCrawler(unittest.TestCase):
         self.assertEqual(it["raw_payload"].get("detail_http_status"), 404)
 
     # ---------------------------------------------------------
-    # 5. PIPELINE & SNAPSHOT ISOLATION
+    # 6. AVAILABILITY, PRICE, PRODUCT ID & VARIANT SEMANTICS
+    # ---------------------------------------------------------
+    def test_availability_semantics_in_stock_and_out_of_stock(self):
+        """Kiểm tra InStock -> Sẵn hàng, OutOfStock / out-of-stock notice -> Tạm hết hàng."""
+        in_stock_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "offers": {"availability": "https://schema.org/InStock", "price": "20000000"}}
+        </script></head><body><div class="price"><strong>20,000,000 ₫</strong></div></body></html>
+        """
+        res_in = _make_html_response("https://hoanghamobile.com/phone-a", in_stock_html)
+        it_in = list(self.phone_spider.parse_detail(res_in))[0]
+        self.assertEqual(it_in["availability_raw"], "Sẵn hàng")
+
+        out_stock_html = """
+        <html><body>
+            <div class="out-of-stock-notice">Sản phẩm tạm dừng đặt hàng trực tuyến</div>
+            <div class="price"><strong>20,000,000 ₫</strong></div>
+        </body></html>
+        """
+        res_out = _make_html_response("https://hoanghamobile.com/phone-b", out_stock_html)
+        it_out = list(self.phone_spider.parse_detail(res_out))[0]
+        self.assertEqual(it_out["availability_raw"], "Tạm hết hàng")
+
+    def test_availability_no_evidence_remains_none(self):
+        """BUG FIX #1: Không có evidence tồn kho thì availability_raw phải là None, không default Sẵn hàng."""
+        no_evidence_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "offers": {"price": "20000000"}}
+        </script></head><body><div class="price"><strong>20,000,000 ₫</strong></div></body></html>
+        """
+        res = _make_html_response("https://hoanghamobile.com/phone-c", no_evidence_html, meta={"listing_data": {}})
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertIsNone(it["availability_raw"], "Không có bằng chứng tồn kho thì availability_raw phải là None")
+
+    def test_availability_listing_stock_fallback_and_irrelevant_badge_ignored(self):
+        """Listing có stock hợp lệ thì fallback, badge khuyến mãi/giảm giá không được coi là stock."""
+        listing_with_valid_stock = {
+            "title": "Phone D", "price": "15,000,000 ₫", "stock": "Sắp diễn ra"
+        }
+        res1 = _make_html_response("https://hoanghamobile.com/phone-d", "<html><body><div class='price'><strong>15,000,000 ₫</strong></div></body></html>", meta={"listing_data": listing_with_valid_stock})
+        it1 = list(self.phone_spider.parse_detail(res1))[0]
+        self.assertEqual(it1["availability_raw"], "Sắp diễn ra")
+
+        # Listing với text không liên quan
+        listing_with_irrelevant = {
+            "title": "Phone E", "price": "15,000,000 ₫", "stock": None
+        }
+        res2 = _make_html_response("https://hoanghamobile.com/phone-e", "<html><body><div class='price'><strong>15,000,000 ₫</strong></div></body></html>", meta={"listing_data": listing_with_irrelevant})
+        it2 = list(self.phone_spider.parse_detail(res2))[0]
+        self.assertIsNone(it2["availability_raw"])
+
+    def test_price_tightening_excludes_related_and_member(self):
+        """BUG FIX #2: Giá từ sản phẩm liên quan, phụ kiện và member không ghi đè price_raw."""
+        html_complex = """
+        <html><body>
+            <div class="product-details">
+                <h1>Laptop Cao Cấp</h1>
+                <div class="price"><strong>35,000,000 ₫</strong></div>
+                <div class="price price-last"><strike>40,000,000 ₫</strike></div>
+                <p class="price-tags-member"><span>Hoàng Hà Member:</span><strong>34,500,000 ₫</strong></p>
+                <div class="installment">Hoặc 5,000,000 ₫ x 6T</div>
+            </div>
+            <div class="similar-products">
+                <div class="item">
+                    <div class="price"><strong>12,000,000 ₫</strong></div>
+                </div>
+            </div>
+            <div class="accessory-bundle">
+                <div class="price"><strong>199,000 ₫</strong></div>
+            </div>
+        </body></html>
+        """
+        res = _make_html_response("https://hoanghamobile.com/laptop/laptop-cao-cap", html_complex)
+        it = list(self.laptop_spider.parse_detail(res))[0]
+        self.assertEqual(it["price_raw"], "35,000,000 ₫")
+        self.assertEqual(it["original_price_raw"], "40,000,000 ₫")
+        self.assertEqual(it["attributes_raw"].get("member_price_raw"), "34,500,000 ₫")
+        self.assertEqual(it["attributes_raw"].get("installment_monthly_raw"), "5,000,000 ₫")
+        self.assertNotEqual(it["price_raw"], "34,500,000 ₫")
+        self.assertNotEqual(it["price_raw"], "12,000,000 ₫")
+        self.assertNotEqual(it["price_raw"], "199,000 ₫")
+
+    def test_product_id_hierarchy(self):
+        """Kiểm tra hierarchy của product_id_raw: hidden input -> URL -p{id} -> None."""
+        # 1. Hidden input
+        html_hidden = '<html><body><input type="hidden" name="quickOrder_productId" value="8888" /></body></html>'
+        res1 = _make_html_response("https://hoanghamobile.com/laptop/some-lap", html_hidden)
+        it1 = list(self.laptop_spider.parse_detail(res1))[0]
+        self.assertEqual(it1["product_id_raw"], "8888")
+
+        # 2. URL có -p{id} (máy cũ/đổi trả)
+        res2 = _make_html_response("https://hoanghamobile.com/kho-san-pham-cu/may-cu-p82479", "<html><body></body></html>")
+        it2 = list(self.phone_spider.parse_detail(res2))[0]
+        self.assertEqual(it2["product_id_raw"], "82479")
+
+        # 3. Không có hidden input và URL không có -p{id} -> None, không invent ID từ slug
+        res3 = _make_html_response("https://hoanghamobile.com/laptop/no-id-laptop", "<html><body></body></html>")
+        it3 = list(self.laptop_spider.parse_detail(res3))[0]
+        self.assertIsNone(it3["product_id_raw"])
+
+    def test_variant_semantics_ui_selector_does_not_duplicate(self):
+        """BUG FIX #4: Trang có nhiều bộ chọn màu/bộ nhớ UI không tự nhân bản variant records."""
+        multi_ui_html = """
+        <html><body>
+            <div class="product-details">
+                <h1>MacBook Pro M3</h1>
+                <div class="price"><strong>45,000,000 ₫</strong></div>
+                <div class="color-selector">
+                    <span class="opt">Space Gray</span>
+                    <span class="opt">Silver</span>
+                </div>
+                <div class="storage-selector">
+                    <span class="opt">512GB</span>
+                    <span class="opt">1TB</span>
+                </div>
+            </div>
+        </body></html>
+        """
+        res = _make_html_response("https://hoanghamobile.com/laptop/macbook-pro-m3", multi_ui_html)
+        items = list(self.laptop_spider.parse_detail(res))
+        prod_items = [i for i in items if isinstance(i, TechProductRawItem)]
+        self.assertEqual(len(prod_items), 1)
+        self.assertIsNone(prod_items[0]["variant_name_raw"])
+        self.assertIsNone(prod_items[0]["variant_color_raw"])
+
+    # ---------------------------------------------------------
+    # 7. PIPELINE & SNAPSHOT ISOLATION
     # ---------------------------------------------------------
     def test_hoanghamobile_pipeline_isolation(self):
         """Pipeline mở và ghi đúng thư mục snapshot data/raw/hoanghamobile."""

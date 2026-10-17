@@ -436,6 +436,134 @@ class TestViettelstoreCrawler(unittest.TestCase):
         self.assertEqual(it["product_id_raw"], "999999")
         self.assertEqual(it["product_name_raw"], "Broken Phone")
         self.assertEqual(it["price_raw"], "5.000.000 ₫")
+        self.assertIsNone(it["availability_raw"])
+
+    # ---------------------------------------------------------
+    # 6. AVAILABILITY, PRICE, PRODUCT ID & VARIANT SEMANTICS
+    # ---------------------------------------------------------
+    def test_availability_semantics_in_stock_and_out_of_stock(self):
+        """Kiểm tra InStock -> Còn hàng, OutOfStock -> Tạm hết hàng."""
+        in_stock_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "offers": {"availability": "https://schema.org/InStock", "price": "10000000"}}
+        </script></head><body><div class="price">10.000.000 ₫</div></body></html>
+        """
+        res_in = _make_html_response("https://viettelstore.vn/phone-pid111.html", in_stock_html, meta={"pid": "111"})
+        it_in = list(self.phone_spider.parse_detail(res_in))[0]
+        self.assertEqual(it_in["availability_raw"], "Còn hàng")
+
+        out_stock_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "offers": {"availability": "https://schema.org/OutOfStock", "price": "10000000"}}
+        </script></head><body><div class="price">10.000.000 ₫</div></body></html>
+        """
+        res_out = _make_html_response("https://viettelstore.vn/phone-pid222.html", out_stock_html, meta={"pid": "222"})
+        it_out = list(self.phone_spider.parse_detail(res_out))[0]
+        self.assertEqual(it_out["availability_raw"], "Tạm hết hàng")
+
+    def test_availability_no_evidence_remains_none(self):
+        """BUG FIX #1: Không tìm thấy evidence tồn kho thì availability_raw là None, không default Còn hàng."""
+        no_evidence_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "offers": {"price": "10000000"}}
+        </script></head><body><div class="price">10.000.000 ₫</div></body></html>
+        """
+        res = _make_html_response("https://viettelstore.vn/phone-pid333.html", no_evidence_html, meta={"pid": "333"})
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertIsNone(it["availability_raw"], "Không có bằng chứng tồn kho thì availability_raw phải là None")
+
+    def test_availability_listing_fallback_and_irrelevant_badge_ignored(self):
+        """Listing có stock hợp lệ thì fallback, badge khuyến mãi/giảm giá không được coi là stock."""
+        listing_with_valid_stock = {
+            "name": "Phone A", "price": "5.000.000 ₫", "stock": "Số lượng có hạn"
+        }
+        res1 = _make_html_response("https://viettelstore.vn/phone-pid444.html", "<html><body><div class='price'>5.000.000 ₫</div></body></html>", meta={"pid": "444", "listing_data": listing_with_valid_stock})
+        it1 = list(self.phone_spider.parse_detail(res1))[0]
+        self.assertEqual(it1["availability_raw"], "Số lượng có hạn")
+
+        # Listing với text không liên quan
+        listing_with_irrelevant = {
+            "name": "Phone B", "price": "5.000.000 ₫", "stock": None
+        }
+        res2 = _make_html_response("https://viettelstore.vn/phone-pid555.html", "<html><body><div class='price'>5.000.000 ₫</div></body></html>", meta={"pid": "555", "listing_data": listing_with_irrelevant})
+        it2 = list(self.phone_spider.parse_detail(res2))[0]
+        self.assertIsNone(it2["availability_raw"])
+
+    def test_price_tightening_excludes_accessories_and_installments(self):
+        """BUG FIX #2: Giá từ khối accessory và khối installment không được ghi đè price_raw."""
+        html_complex_prices = """
+        <html><body>
+            <div class="box-installment">
+                <span class="label">Trả góp 0%</span>
+                <div class="price">1.500.000 ₫ / tháng</div>
+            </div>
+            <div class="accessories">
+                <h4>Phụ kiện mua cùng</h4>
+                <div class="price">150.000 ₫</div>
+            </div>
+            <div class="product-info">
+                <h1>Điện thoại Test</h1>
+                <div class="price">15.990.000 ₫</div>
+                <div class="price-old">18.990.000 ₫</div>
+            </div>
+        </body></html>
+        """
+        res = _make_html_response("https://viettelstore.vn/phone-pid666.html", html_complex_prices, meta={"pid": "666"})
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertEqual(it["price_raw"], "15.990.000 ₫")
+        self.assertEqual(it["original_price_raw"], "18.990.000 ₫")
+        self.assertNotEqual(it["price_raw"], "1.500.000 ₫ / tháng")
+        self.assertNotEqual(it["price_raw"], "150.000 ₫")
+
+    def test_product_id_hierarchy(self):
+        """Kiểm tra hierarchy của product_id_raw: pid URL -> sku numeric -> None."""
+        # 1. pid từ URL
+        res1 = _make_html_response("https://viettelstore.vn/phone-pid123456.html", "<html><body></body></html>", meta={"pid": "123456"})
+        it1 = list(self.phone_spider.parse_detail(res1))[0]
+        self.assertEqual(it1["product_id_raw"], "123456")
+
+        # 2. Không có pid từ URL nhưng có JSON-LD sku numeric
+        json_sku_html = """
+        <html><head><script type="application/ld+json">
+        {"@type": "Product", "sku": "789101"}
+        </script></head><body></body></html>
+        """
+        res2 = _make_html_response("https://viettelstore.vn/phone-no-pid.html", json_sku_html, meta={"pid": None})
+        it2 = list(self.phone_spider.parse_detail(res2))[0]
+        self.assertEqual(it2["product_id_raw"], "789101")
+
+        # 3. Không có pid hợp lệ -> None, không invent ID từ slug
+        res3 = _make_html_response("https://viettelstore.vn/phone-unknown.html", "<html><body></body></html>", meta={"pid": None})
+        it3 = list(self.phone_spider.parse_detail(res3))[0]
+        self.assertIsNone(it3["product_id_raw"])
+
+    def test_variant_semantics_ui_selector_does_not_duplicate(self):
+        """BUG FIX #4: Trang có nhiều nút chọn màu/dung lượng UI không tự nhân bản variant records."""
+        multi_ui_html = """
+        <html><body>
+            <div class="product-info">
+                <h1>Điện thoại Flagship</h1>
+                <div class="price">20.000.000 ₫</div>
+                <div class="color-options">
+                    <button class="btn-color">Titan Xanh</button>
+                    <button class="btn-color">Titan Xám</button>
+                    <button class="btn-color">Titan Đen</button>
+                </div>
+                <div class="storage-options">
+                    <button class="btn-storage">256GB</button>
+                    <button class="btn-storage">512GB</button>
+                </div>
+            </div>
+        </body></html>
+        """
+        res = _make_html_response("https://viettelstore.vn/phone-pid777.html", multi_ui_html, meta={"pid": "777"})
+        items = list(self.phone_spider.parse_detail(res))
+        # Chỉ được sinh ĐÚNG 1 bản ghi TechProductRawItem
+        prod_items = [i for i in items if isinstance(i, TechProductRawItem)]
+        self.assertEqual(len(prod_items), 1)
+        self.assertIsNone(prod_items[0]["variant_name_raw"])
+        self.assertIsNone(prod_items[0]["variant_color_raw"])
+        self.assertIsNone(prod_items[0]["variant_sku_raw"])
 
     # ---------------------------------------------------------
     # 6. PIPELINE & SNAPSHOT ISOLATION

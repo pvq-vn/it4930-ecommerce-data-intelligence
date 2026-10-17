@@ -161,7 +161,6 @@ class ViettelstoreBaseSpider(scrapy.Spider):
             callback=self.parse_listing,
             errback=self.errback_listing,
             meta={"page": page},
-            dont_filter=True,
         )
 
     def errback_listing(self, failure):
@@ -255,11 +254,21 @@ class ViettelstoreBaseSpider(scrapy.Spider):
             old_price_el = it.find(class_="price-old")
             listing_old_price = old_price_el.text.strip() if old_price_el else None
 
+            VIETTEL_VALID_STOCK_KEYWORDS = {
+                "còn hàng", "tạm hết hàng", "hết hàng", "số lượng có hạn",
+                "ngừng kinh doanh", "liên hệ", "đặt trước"
+            }
+            listing_stock = None
+            status_badge = it.find(class_=lambda c: c and any(k in c.lower() for k in ["status", "stock", "availability"]))
+            if status_badge and status_badge.text.strip().lower() in VIETTEL_VALID_STOCK_KEYWORDS:
+                listing_stock = status_badge.text.strip()
+
             listing_data = {
                 "pid": pid,
                 "name": listing_name,
                 "price": listing_price,
                 "old_price": listing_old_price,
+                "stock": listing_stock,
                 "url": detail_url,
             }
 
@@ -294,6 +303,22 @@ class ViettelstoreBaseSpider(scrapy.Spider):
         listing_data = meta.get("listing_data", {})
         now_iso = datetime.now().astimezone().isoformat()
 
+        def _is_excluded_price_el(el):
+            if not el:
+                return True
+            for parent in el.parents:
+                classes = parent.get("class", [])
+                class_str = " ".join(classes) if isinstance(classes, list) else str(classes)
+                id_str = str(parent.get("id", ""))
+                combined = f"{class_str} {id_str}".lower()
+                if any(k in combined for k in [
+                    "accessory", "accessories", "phukien", "phu-kien", "bundle",
+                    "related", "tuong-tu", "goi-y", "suggest",
+                    "installment", "tra-gop", "khuyen-mai", "promotion"
+                ]):
+                    return True
+            return False
+
         soup = BeautifulSoup(response.text, "html.parser")
 
         # 1. Trích xuất Schema.org JSON-LD
@@ -319,51 +344,97 @@ class ViettelstoreBaseSpider(scrapy.Spider):
             product_name = listing_data.get("name")
 
         # 3. Product ID (Primary ID: actual source product ID từ -pid{id})
-        product_id_raw = str(pid) if pid else (json_ld_data.get("sku") or None)
+        # Hierarchy:
+        # 1. pid từ URL -pid(\d+).html (được xác minh là internal ID của Viettel Store)
+        # 2. json_ld sku nếu là chuỗi số nguyên (đối chiếu trùng khớp với pid)
+        # 3. None (không dùng slug hay trường ngẫu nhiên)
+        product_id_raw = None
+        if pid and str(pid).strip().isdigit():
+            product_id_raw = str(pid).strip()
+        elif json_ld_data.get("sku") and str(json_ld_data["sku"]).strip().isdigit():
+            product_id_raw = str(json_ld_data["sku"]).strip()
 
         # 4. Product URL
         product_url_raw = response.url
 
-        # 5. Pricing (Phân biệt rõ ràng: current price vs original price vs installment base price)
+        # 5. Pricing (Phân biệt rõ ràng: current price vs original price vs installment base price vs accessories)
         price_raw = None
         original_price_raw = None
         availability_raw = None
 
-        # Kiểm tra trạng thái "Liên hệ"
-        price_el = soup.find(class_="price")
-        price_text = price_el.text.strip() if price_el else ""
+        # Tìm phần tử giá bán chính thức trong DOM (loại trừ accessories, related, promotion, installment)
+        detail_price_el = None
+        for p_el in soup.find_all(class_=lambda c: c and any(k in c.split() for k in ["price", "price-current", "pro-price"])):
+            classes = p_el.get("class", [])
+            class_str = " ".join(classes) if isinstance(classes, list) else str(classes)
+            if any(k in class_str.lower() for k in ["price-old", "price-last", "strike"]):
+                continue
+            if not _is_excluded_price_el(p_el):
+                detail_price_el = p_el
+                break
 
-        if "liên hệ" in price_text.lower() or "liên hệ" in response.text[:2000].lower():
+        price_text = detail_price_el.text.strip() if detail_price_el else ""
+
+        # Kiểm tra cụ thể trạng thái "Liên hệ" trong khối giá bán hoặc nút mua hàng
+        is_contact_price = False
+        if "liên hệ" in price_text.lower():
+            is_contact_price = True
+        else:
+            status_btn = soup.find(class_=lambda c: c and any(k in c.lower() for k in ["btn-buy", "btn-order", "product-status"]))
+            if status_btn and "liên hệ" in status_btn.text.strip().lower() and not _is_excluded_price_el(status_btn):
+                is_contact_price = True
+
+        if is_contact_price:
             availability_raw = "Liên hệ"
             price_raw = None
             original_price_raw = None
         else:
             # Giá bán chính thức
-            if price_text:
+            if price_text and any(c.isdigit() for c in price_text):
                 price_raw = price_text
             elif json_ld_data.get("offers", {}).get("price"):
-                price_raw = str(json_ld_data["offers"]["price"])
-            else:
-                price_raw = listing_data.get("price")
+                p_val = json_ld_data["offers"]["price"]
+                if p_val and str(p_val).strip() not in ("0", "None", ""):
+                    price_raw = str(p_val).strip()
+            elif listing_data.get("price"):
+                price_raw = listing_data["price"]
 
-            # Giá gốc niêm yết (chỉ lấy khi có giá gạch ngang)
-            old_price_el = soup.find(class_="price-old")
-            if old_price_el and old_price_el.text.strip():
+            # Giá gốc niêm yết (chỉ lấy khi có giá gạch ngang rõ ràng)
+            old_price_el = None
+            for p_el in soup.find_all(class_=lambda c: c and any(k in c.split() for k in ["price-old", "price-last"])):
+                if not _is_excluded_price_el(p_el):
+                    old_price_el = p_el
+                    break
+
+            if old_price_el and old_price_el.text.strip() and any(c.isdigit() for c in old_price_el.text):
                 original_price_raw = old_price_el.text.strip()
             elif listing_data.get("old_price"):
                 original_price_raw = listing_data.get("old_price")
-            else:
-                original_price_raw = None
 
-            # Availability
+            # Availability (Evidence-based: absence of evidence = None, KHÔNG default thành "Còn hàng")
+            avail_schema = json_ld_data.get("offers", {}).get("availability", "")
+            if "InStock" in avail_schema:
+                availability_raw = "Còn hàng"
+            elif "OutOfStock" in avail_schema:
+                availability_raw = "Tạm hết hàng"
+
+            # Check DOM evidence in main product info (#hanghoa or status blocks)
             if not availability_raw:
-                avail_schema = json_ld_data.get("offers", {}).get("availability", "")
-                if "InStock" in avail_schema:
-                    availability_raw = "Còn hàng"
-                elif "OutOfStock" in avail_schema:
-                    availability_raw = "Tạm hết hàng"
-                else:
-                    availability_raw = "Còn hàng"
+                hanghoa_el = soup.find(id="hanghoa") or soup.find(class_=lambda c: c and "product-info" in c)
+                if hanghoa_el:
+                    txt_lower = hanghoa_el.text.lower()
+                    if "tạm hết hàng" in txt_lower or "hết hàng" in txt_lower:
+                        availability_raw = "Tạm hết hàng"
+                    elif "số lượng có hạn" in txt_lower:
+                        availability_raw = "Số lượng có hạn"
+                    elif "còn hàng" in txt_lower:
+                        availability_raw = "Còn hàng"
+
+            # Fallback to valid listing stock if present
+            if not availability_raw and listing_data.get("stock"):
+                availability_raw = listing_data["stock"]
+
+            # Nếu không có bất kỳ bằng chứng tồn kho nào, availability_raw giữ nguyên None
 
         # 6. SKU / MPN trích xuất cho Laptop
         sku_raw = None
@@ -451,7 +522,7 @@ class ViettelstoreBaseSpider(scrapy.Spider):
         if inst_match:
             attributes_raw["installment_base_price_raw"] = inst_match.group(1).strip()
 
-        # 10. Raw Payload
+        # 10. Raw Payload (Extracted debug provenance dictionary capturing source properties, listing snapshot, and JSON-LD data; NOT a full HTML dump)
         raw_payload = {
             "source": "viettelstore",
             "category": self.category,
