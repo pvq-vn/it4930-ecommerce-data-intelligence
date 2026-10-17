@@ -265,6 +265,34 @@ class TestViettelstoreCrawler(unittest.TestCase):
         self.assertIn(b"ProductList5Col2026", req.body)
         self.assertEqual(req.meta["page"], 1)
 
+    def test_start_requests_and_async_start_compatibility(self):
+        """
+        Kiểm tra start_requests() và start() async generator tương thích Scrapy 2.19:
+        - start_requests() sinh đúng 1 request ban đầu với page=1.
+        - start() async generator sinh đúng 1 request ban đầu với page=1.
+        """
+        import asyncio
+
+        # 1. start_requests() đồng bộ (fallback/test)
+        reqs = list(self.phone_spider.start_requests())
+        self.assertEqual(len(reqs), 1)
+        self.assertEqual(reqs[0].meta["page"], 1)
+        self.assertEqual(reqs[0].method, "POST")
+        self.assertIn(b"CatID=010001", reqs[0].body)
+
+        # 2. start() async generator (Scrapy 2.19)
+        async def _collect():
+            res = []
+            async for req in self.phone_spider.start():
+                res.append(req)
+            return res
+
+        async_reqs = asyncio.run(_collect())
+        self.assertEqual(len(async_reqs), 1)
+        self.assertEqual(async_reqs[0].meta["page"], 1)
+        self.assertEqual(async_reqs[0].method, "POST")
+        self.assertIn(b"CatID=010001", async_reqs[0].body)
+
     # ---------------------------------------------------------
     # 4. LISTING PARSING & DEDUPLICATION
     # ---------------------------------------------------------

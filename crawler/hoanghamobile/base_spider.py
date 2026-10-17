@@ -193,6 +193,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
     # ---------------------------------------------------------
 
     async def start(self):
+        """Async generator khởi tạo spider tương thích Scrapy 2.19+."""
         self.logger.info(
             "Khởi động spider %s [category=%s, slug=%s, max_products=%s, batch=%s]",
             self.name,
@@ -497,6 +498,8 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         # 2. Nếu listing_data["original_price"] tồn tại và hợp lệ thì ưu tiên nó.
         # 3. Candidate từ detail chỉ được nhận nếu thực sự thuộc main product price block và hợp lệ về mặt semantic.
         # 4. Nếu candidate original_price_raw nhỏ hơn price_raw thì không dùng candidate đó; trả None nếu không có giá gốc hợp lệ khác.
+        # 5. Nếu price_raw không phải giá số (ví dụ Liên hệ) thì original_price_raw phải là None, trừ khi có bằng chứng rõ ràng rằng đó thực sự là giá niêm yết của chính sản phẩm.
+        #    Cụ thể: price_raw = "Liên hệ" + listing_data["original_price"] = None -> original_price_raw = None.
         original_price_raw = None
         price_num = _parse_numeric_price(price_raw)
 
@@ -509,7 +512,9 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                     original_price_raw = str(listing_orig).strip()
 
         # Bước 2: Nếu listing_data không có hoặc không hợp lệ, tìm candidate từ Detail page
-        if not original_price_raw:
+        # Nếu price_raw không phải giá số (ví dụ "Liên hệ"), candidate strike trong detail
+        # (dễ lẫn phụ kiện / khuyến mãi / voucher) không đủ bằng chứng là giá niêm yết chính sản phẩm -> original_price_raw = None.
+        if not original_price_raw and price_num is not None:
             detail_candidates = []
 
             # 2a. Tìm trong phạm vi main product price block / container của detail_price_el trước
@@ -563,7 +568,7 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                 if cand_num is None or cand_num <= 0:
                     continue
                 # Quy tắc cứng: giá gốc không được nhỏ hơn giá bán
-                if price_num is not None and cand_num < price_num:
+                if cand_num < price_num:
                     continue
                 # Candidate hợp lệ
                 original_price_raw = cand_clean

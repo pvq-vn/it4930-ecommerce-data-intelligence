@@ -292,6 +292,32 @@ class TestHoanghamobileCrawler(unittest.TestCase):
         self.assertEqual(self.phone_spider.slug, "dien-thoai-di-dong")
         self.assertEqual(self.phone_spider.name, "hoanghamobile_smartphone")
 
+    def test_start_requests_and_async_start_compatibility(self):
+        """
+        Kiểm tra start_requests() và start() async generator tương thích Scrapy 2.19:
+        - start_requests() sinh đúng 1 request ban đầu với page=1.
+        - start() async generator sinh đúng 1 request ban đầu với page=1.
+        """
+        import asyncio
+
+        # 1. start_requests() đồng bộ (fallback/test)
+        reqs = list(self.phone_spider.start_requests())
+        self.assertEqual(len(reqs), 1)
+        self.assertEqual(reqs[0].meta["page"], 1)
+        self.assertEqual(reqs[0].url, "https://hoanghamobile.com/dien-thoai-di-dong")
+
+        # 2. start() async generator (Scrapy 2.19)
+        async def _collect():
+            res = []
+            async for req in self.phone_spider.start():
+                res.append(req)
+            return res
+
+        async_reqs = asyncio.run(_collect())
+        self.assertEqual(len(async_reqs), 1)
+        self.assertEqual(async_reqs[0].meta["page"], 1)
+        self.assertEqual(async_reqs[0].url, "https://hoanghamobile.com/dien-thoai-di-dong")
+
     def test_url_normalization_laptop_and_lap_top(self):
         """Kiểm tra chuẩn hóa tiền tố /lap-top/ về /laptop/ và canonical slug."""
         url1 = "https://hoanghamobile.com/lap-top/asus-zenbook-14-ux3405ca-st1713w"
@@ -599,6 +625,38 @@ class TestHoanghamobileCrawler(unittest.TestCase):
             it["original_price_raw"],
             "46,990,000 ₫",
             "Phải ưu tiên listing_data['original_price'] hợp lệ (46,990,000 ₫) thay vì nhầm candidate 13.690.000 ₫ ở detail",
+        )
+
+    def test_original_price_lien_he_with_detail_strike_and_no_listing_original_is_none(self):
+        """
+        REGRESSION TEST 3: price_raw="Liên hệ", detail có <strike>2,490,000 ₫</strike>
+        nhưng listing original = None -> original_price_raw is None.
+        Nếu price_raw không phải giá số và listing không có original_price thì không lấy strike detail.
+        """
+        html = """
+        <html><body>
+            <div class="product-details">
+                <h1>Điện thoại OPPO Find X10 5G 12GB/256GB</h1>
+                <div class="price"><strong>Liên hệ</strong></div>
+                <div class="price price-last"><strike>2,490,000 ₫</strike></div>
+            </div>
+        </body></html>
+        """
+        listing_info = {
+            "title": "Điện thoại OPPO Find X10 5G 12GB/256GB",
+            "price": "Liên hệ",
+            "original_price": None,
+        }
+        res = _make_html_response(
+            "https://hoanghamobile.com/dien-thoai/oppo-find-x10-5g",
+            html,
+            meta={"listing_data": listing_info},
+        )
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertEqual(it["price_raw"], "Liên hệ")
+        self.assertIsNone(
+            it["original_price_raw"],
+            "Khi price_raw='Liên hệ' và listing original=None, strike detail 2,490,000 ₫ không được lấy, original_price_raw phải là None",
         )
 
     def test_product_id_hierarchy(self):

@@ -131,6 +131,7 @@ class ViettelstoreBaseSpider(scrapy.Spider):
     # ---------------------------------------------------------
 
     async def start(self):
+        """Async generator khởi tạo spider tương thích Scrapy 2.19+."""
         self.logger.info(
             "Khởi động spider %s [category=%s, cat_id=%s, max_products=%s, batch=%s]",
             self.name,
