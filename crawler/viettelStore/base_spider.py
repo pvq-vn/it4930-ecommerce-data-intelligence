@@ -130,7 +130,19 @@ class ViettelstoreBaseSpider(scrapy.Spider):
     # 1. START REQUESTS & LISTING PAGINATION
     # ---------------------------------------------------------
 
+    async def start(self):
+        self.logger.info(
+            "Khởi động spider %s [category=%s, cat_id=%s, max_products=%s, batch=%s]",
+            self.name,
+            self.category,
+            self.cat_id,
+            self.max_products,
+            self.batch_id,
+        )
+        yield self.make_listing_request(page=1)
+
     def start_requests(self):
+        """Tương thích ngược đồng bộ (Scrapy cũ / test suite)."""
         yield self.make_listing_request(page=1)
 
     def make_listing_request(self, page: int = 1):

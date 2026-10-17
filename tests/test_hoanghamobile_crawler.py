@@ -545,6 +545,62 @@ class TestHoanghamobileCrawler(unittest.TestCase):
         self.assertNotEqual(it["price_raw"], "12,000,000 ₫")
         self.assertNotEqual(it["price_raw"], "199,000 ₫")
 
+    def test_original_price_semantic_guard_candidate_smaller_than_price_rejected(self):
+        """
+        REGRESSION TEST 1: price_raw = 38.490.000, candidate 550.000 -> original_price_raw is None.
+        Candidate từ detail nhỏ hơn price_raw (nhầm giá phụ kiện/khuyến mãi/trả góp) phải bị loại bỏ.
+        """
+        html = """
+        <html><body>
+            <div class="product-details">
+                <h1>Smartphone Flagship</h1>
+                <div class="price"><strong>38.490.000 ₫</strong></div>
+                <div class="price price-last"><strike>550.000 ₫</strike></div>
+            </div>
+        </body></html>
+        """
+        res = _make_html_response("https://hoanghamobile.com/dien-thoai/flagship", html, meta={"listing_data": {}})
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertEqual(it["price_raw"], "38.490.000 ₫")
+        self.assertIsNone(
+            it["original_price_raw"],
+            "Candidate 550.000 ₫ nhỏ hơn giá bán 38.490.000 ₫ nên phải bị loại bỏ, original_price_raw phải là None",
+        )
+
+    def test_original_price_prioritizes_valid_listing_over_confused_detail(self):
+        """
+        REGRESSION TEST 2: listing có original_price = 46.990.000 trong khi detail nhầm 13.690.000
+        -> kết quả phải là 46.990.000 (ưu tiên listing hợp lệ).
+        """
+        html = """
+        <html><body>
+            <div class="product-details">
+                <h1>Samsung Galaxy Z Fold7 5G 12GB/256GB</h1>
+                <div class="price"><strong>37.990.000 ₫</strong></div>
+            </div>
+            <div class="accessory-section">
+                <div class="price-last"><strike>13.690.000 ₫</strike></div>
+            </div>
+        </body></html>
+        """
+        listing_info = {
+            "title": "Samsung Galaxy Z Fold7 5G 12GB/256GB",
+            "price": "37,990,000 ₫",
+            "original_price": "46,990,000 ₫",
+        }
+        res = _make_html_response(
+            "https://hoanghamobile.com/dien-thoai/samsung-galaxy-z-fold7",
+            html,
+            meta={"listing_data": listing_info},
+        )
+        it = list(self.phone_spider.parse_detail(res))[0]
+        self.assertEqual(it["price_raw"], "37.990.000 ₫")
+        self.assertEqual(
+            it["original_price_raw"],
+            "46,990,000 ₫",
+            "Phải ưu tiên listing_data['original_price'] hợp lệ (46,990,000 ₫) thay vì nhầm candidate 13.690.000 ₫ ở detail",
+        )
+
     def test_product_id_hierarchy(self):
         """Kiểm tra hierarchy của product_id_raw: hidden input -> URL -p{id} -> None."""
         # 1. Hidden input

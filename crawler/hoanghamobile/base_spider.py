@@ -20,6 +20,23 @@ _UNSET = object()
 BASE_WEB_URL = "https://hoanghamobile.com"
 
 
+def _parse_numeric_price(val: Any) -> Optional[float]:
+    """Trích xuất giá trị số từ chuỗi giá (ví dụ: '37.990.000 ₫' -> 37990000.0)."""
+    if val is None:
+        return None
+    if isinstance(val, (int, float)):
+        return float(val) if val > 0 else None
+    cleaned = re.sub(r"[^\d]", "", str(val))
+    if not cleaned:
+        return None
+    try:
+        f = float(cleaned)
+        return f if f > 0 else None
+    except (ValueError, TypeError):
+        return None
+
+
+
 class HoanghamobileBaseSpider(scrapy.Spider):
     """
     Base spider cho sàn Hoàng Hà Mobile (hoanghamobile.com).
@@ -175,7 +192,19 @@ class HoanghamobileBaseSpider(scrapy.Spider):
     # 1. START REQUESTS & LISTING PAGINATION
     # ---------------------------------------------------------
 
+    async def start(self):
+        self.logger.info(
+            "Khởi động spider %s [category=%s, slug=%s, max_products=%s, batch=%s]",
+            self.name,
+            self.category,
+            self.slug,
+            self.max_products,
+            self.batch_id,
+        )
+        yield self.make_listing_request(page=1)
+
     def start_requests(self):
+        """Tương thích ngược đồng bộ (Scrapy cũ / test suite)."""
         yield self.make_listing_request(page=1)
 
     def make_listing_request(self, page: int = 1):
@@ -367,15 +396,18 @@ class HoanghamobileBaseSpider(scrapy.Spider):
         def _is_excluded_price_el(el):
             if not el:
                 return True
-            for parent in el.parents:
-                classes = parent.get("class", [])
+            elements_to_check = [el] + list(el.parents)
+            for item in elements_to_check:
+                classes = item.get("class", [])
                 class_str = " ".join(classes) if isinstance(classes, list) else str(classes)
-                id_str = str(parent.get("id", ""))
+                id_str = str(item.get("id", ""))
                 combined = f"{class_str} {id_str}".lower()
                 if any(k in combined for k in [
                     "accessory", "accessories", "phu-kien", "phukien", "bundle",
                     "related", "similar", "tuong-tu", "goi-y", "suggest",
-                    "price-tags-member", "member", "installment", "tra-gop"
+                    "price-tags-member", "member", "installment", "tra-gop",
+                    "thu-cu", "thucu", "trade-in", "tradein", "old-for-new",
+                    "promotion", "khuyen-mai", "deal", "sp-lien-quan", "box-installment"
                 ]):
                     return True
             return False
@@ -459,17 +491,83 @@ class HoanghamobileBaseSpider(scrapy.Spider):
                 price_source = "listing_fallback"
                 self.logger.info("Detail ẩn giá cho %s, kích hoạt fallback sang listing_data price: %s", slug, price_raw)
 
-        # Giá gốc niêm yết (nếu có chiết khấu)
-        detail_old_price_el = None
-        for p_el in soup.find_all(class_=lambda c: c and "price-last" in c.split()):
-            if not _is_excluded_price_el(p_el):
-                detail_old_price_el = p_el
-                break
+        # Giá gốc niêm yết cũ (original_price_raw)
+        # 1. Giữ original_price_raw là giá niêm yết cũ của chính sản phẩm, không lấy giá member,
+        #    installment, promotion, accessory, related product hay block khác.
+        # 2. Nếu listing_data["original_price"] tồn tại và hợp lệ thì ưu tiên nó.
+        # 3. Candidate từ detail chỉ được nhận nếu thực sự thuộc main product price block và hợp lệ về mặt semantic.
+        # 4. Nếu candidate original_price_raw nhỏ hơn price_raw thì không dùng candidate đó; trả None nếu không có giá gốc hợp lệ khác.
+        original_price_raw = None
+        price_num = _parse_numeric_price(price_raw)
 
-        if detail_old_price_el and detail_old_price_el.find("strike"):
-            original_price_raw = detail_old_price_el.find("strike").text.strip()
-        elif listing_data.get("original_price"):
-            original_price_raw = listing_data["original_price"]
+        # Bước 1: Ưu tiên listing_data["original_price"] nếu tồn tại và hợp lệ (>= price_raw)
+        listing_orig = listing_data.get("original_price")
+        if listing_orig and any(c.isdigit() for c in str(listing_orig)):
+            l_num = _parse_numeric_price(listing_orig)
+            if l_num is not None:
+                if price_num is None or l_num >= price_num:
+                    original_price_raw = str(listing_orig).strip()
+
+        # Bước 2: Nếu listing_data không có hoặc không hợp lệ, tìm candidate từ Detail page
+        if not original_price_raw:
+            detail_candidates = []
+
+            # 2a. Tìm trong phạm vi main product price block / container của detail_price_el trước
+            search_containers = []
+            if detail_price_el:
+                search_containers.append(detail_price_el)
+                if detail_price_el.parent:
+                    search_containers.append(detail_price_el.parent)
+                main_box = detail_price_el.find_parent(
+                    class_=lambda c: c and any(k in c.lower() for k in [
+                        "product-info", "product-details", "product-detail",
+                        "top-product", "product-shop", "detail-info"
+                    ])
+                )
+                if main_box and main_box not in search_containers:
+                    search_containers.append(main_box)
+
+            for container in search_containers:
+                for el in container.find_all(class_=lambda c: c and "price-last" in c.split()):
+                    if not _is_excluded_price_el(el):
+                        st = el.find("strike")
+                        cand_text = st.text.strip() if st else el.text.strip()
+                        if cand_text and cand_text not in detail_candidates:
+                            detail_candidates.append(cand_text)
+                for st in container.find_all("strike"):
+                    if not _is_excluded_price_el(st):
+                        cand_text = st.text.strip()
+                        if cand_text and cand_text not in detail_candidates:
+                            detail_candidates.append(cand_text)
+
+            # 2b. Nếu chưa thấy trong search_containers, mở rộng tìm kiếm toàn soup nhưng loại trừ chặt chẽ
+            if not detail_candidates:
+                for el in soup.find_all(class_=lambda c: c and "price-last" in c.split()):
+                    if not _is_excluded_price_el(el):
+                        st = el.find("strike")
+                        cand_text = st.text.strip() if st else el.text.strip()
+                        if cand_text and cand_text not in detail_candidates:
+                            detail_candidates.append(cand_text)
+                for st in soup.find_all("strike"):
+                    if not _is_excluded_price_el(st):
+                        cand_text = st.text.strip()
+                        if cand_text and cand_text not in detail_candidates:
+                            detail_candidates.append(cand_text)
+
+            # 2c. Kiểm tra tính hợp lệ semantic: candidate >= price_raw
+            for cand in detail_candidates:
+                cand_clean = cand.strip()
+                if not any(c.isdigit() for c in cand_clean):
+                    continue
+                cand_num = _parse_numeric_price(cand_clean)
+                if cand_num is None or cand_num <= 0:
+                    continue
+                # Quy tắc cứng: giá gốc không được nhỏ hơn giá bán
+                if price_num is not None and cand_num < price_num:
+                    continue
+                # Candidate hợp lệ
+                original_price_raw = cand_clean
+                break
 
         # Giá Member và giá trả góp (được tách riêng và lưu vào attributes_raw, KHÔNG map vào price_raw)
         member_price_raw = listing_data.get("member_price")
@@ -651,7 +749,13 @@ class HoanghamobileBaseSpider(scrapy.Spider):
             item["availability_raw"] = None
 
         item["price_raw"] = listing_data.get("price")
-        item["original_price_raw"] = listing_data.get("original_price")
+        listing_orig = listing_data.get("original_price")
+        p_num = _parse_numeric_price(item["price_raw"])
+        l_num = _parse_numeric_price(listing_orig)
+        if listing_orig and (p_num is None or l_num is None or l_num >= p_num):
+            item["original_price_raw"] = listing_orig
+        else:
+            item["original_price_raw"] = None
 
         item["brand_raw"] = None
         item["seller_raw"] = "Hoàng Hà Mobile"
