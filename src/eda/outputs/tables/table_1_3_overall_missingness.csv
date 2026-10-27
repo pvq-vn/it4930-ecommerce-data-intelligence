@@ -1,0 +1,31 @@
+﻿Tên trường,Kiểu dữ liệu,Số mẫu Non-Null,Số mẫu Missing,Tỷ lệ Missing (%),Mức độ thiếu
+max_ram_gb,float64,353,9963,96.58,Cực cao (>80%) [Đặc thù ngành/sàn]
+camera_mp,float64,814,9502,92.11,Cực cao (>80%) [Đặc thù ngành/sàn]
+charger_watt,float64,880,9436,91.47,Cực cao (>80%) [Đặc thù ngành/sàn]
+screen_size_inch,float64,1570,8746,84.78,Cực cao (>80%) [Đặc thù ngành/sàn]
+network_type_norm,str,1720,8596,83.33,Cực cao (>80%) [Đặc thù ngành/sàn]
+total_sold_normalized,float64,1904,8412,81.54,Cực cao (>80%) [Đặc thù ngành/sàn]
+battery_wh,float64,1994,8322,80.67,Cực cao (>80%) [Đặc thù ngành/sàn]
+battery_mah,float64,4159,6157,59.68,Cao (50-80%)
+cpu_norm,str,4773,5543,53.73,Cao (50-80%)
+rating_norm,float64,4863,5453,52.86,Cao (50-80%)
+display_type_norm,str,5691,4625,44.83,Trung bình (25-50%)
+gpu_norm,str,5761,4555,44.15,Trung bình (25-50%)
+installed_ram_gb,float64,6847,3469,33.63,Trung bình (25-50%)
+storage_gb,float64,7670,2646,25.65,Trung bình (25-50%)
+discount_rate,float64,7737,2579,25.0,Thấp (5-25%)
+color_norm,str,8204,2112,20.47,Thấp (5-25%)
+operating_system_norm,str,8698,1618,15.68,Thấp (5-25%)
+review_count_normalized,float64,9207,1109,10.75,Thấp (5-25%)
+original_price_vnd,float64,9503,813,7.88,Thấp (5-25%)
+brand_norm,str,10288,28,0.27,Rất thấp (<5%)
+price_vnd,float64,10300,16,0.16,Rất thấp (<5%)
+has_rating,bool,10316,0,0.0,Không thiếu (0%)
+listing_record_id,str,10316,0,0.0,Không thiếu (0%)
+availability_status,str,10316,0,0.0,Không thiếu (0%)
+is_price_missing,bool,10316,0,0.0,Không thiếu (0%)
+seller_raw,str,10316,0,0.0,Không thiếu (0%)
+source_parent_id,str,10316,0,0.0,Không thiếu (0%)
+product_name,str,10316,0,0.0,Không thiếu (0%)
+source,str,10316,0,0.0,Không thiếu (0%)
+category,str,10316,0,0.0,Không thiếu (0%)

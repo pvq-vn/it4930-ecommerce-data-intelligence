@@ -1,0 +1,13 @@
+### Bảng 2.11: Bảng Tổng hợp Kết quả Kiểm định Thống kê ANOVA & Kruskal-Wallis về Biến thiên Giá
+
+|    | Ngành hàng   | Yếu tố phân loại                    | Cột phân tích   |   Số nhóm so sánh (k) |   Tổng số mẫu (N) |   ANOVA F-statistic |   ANOVA p-value |   Kruskal-Wallis H |   Kruskal p-value | Khác biệt có ý nghĩa thống kê?   |
+|---:|:-------------|:------------------------------------|:----------------|----------------------:|------------------:|--------------------:|----------------:|-------------------:|------------------:|:---------------------------------|
+|  0 | Laptop       | Phân tầng CPU (cpu_tier)            | cpu_tier        |                     6 |              3232 |              757.19 |       0         |            1748.75 |         0         | Có (p < 0.001)                   |
+|  1 | Laptop       | Phân loại GPU (gpu_type)            | gpu_type        |                     4 |              3487 |              399.81 |       3.65e-223 |             927.45 |         9.83e-201 | Có (p < 0.001)                   |
+|  2 | Laptop       | Dung lượng RAM (ram_group)          | ram_group       |                     4 |              2379 |             1346.01 |       0         |            1485.58 |         0         | Có (p < 0.001)                   |
+|  3 | Laptop       | Dung lượng Ổ cứng (storage_group)   | storage_group   |                     4 |              2804 |              582.92 |       2.44e-294 |             828.31 |         3.14e-179 | Có (p < 0.001)                   |
+|  4 | Laptop       | Thương hiệu Laptop (brand_norm)     | brand_norm      |                    13 |              4196 |               88.26 |       1.14e-194 |             878.18 |         2.78e-180 | Có (p < 0.001)                   |
+|  5 | Smartphone   | Bộ nhớ trong ROM (storage_group)    | storage_group   |                     5 |              3549 |              777.66 |       0         |            1736.57 |         0         | Có (p < 0.001)                   |
+|  6 | Smartphone   | Dung lượng RAM (ram_group)          | ram_group       |                     5 |              3438 |              664.67 |       0         |            1546.27 |         0         | Có (p < 0.001)                   |
+|  7 | Smartphone   | Thương hiệu Smartphone (brand_norm) | brand_norm      |                    28 |              4267 |              210.2  |       0         |            2335.59 |         0         | Có (p < 0.001)                   |
+|  8 | Smartphone   | Công nghệ Màn hình (display_group)  | display_group   |                     2 |              3468 |             2954.16 |       0         |            1826.46 |         0         | Có (p < 0.001)                   |

@@ -1,0 +1,4 @@
+﻿,Phân đoạn,N in_stock,Median in_stock,N out_of_stock,Median out_of_stock,Chênh lệch Trung vị (Triệu),Mann-Whitney U,p-value,Ý nghĩa thống kê?,Hiện tượng & Khuyến nghị
+0,Toàn bộ,1895,17.49,5352,17.79,-0.30M (-1.7%),5123010.0,0.5065,Không,in_stock đắt hơn out_of_stock rõ rệt do hàng hết thường là máy đời cũ (EOL). Cần cờ is_out_of_stock cho TV5!
+1,Laptop,543,33.49,2839,23.99,+9.50M (+39.6%),1036181.0,3.98e-37,Có (p < 0.001),in_stock đắt hơn out_of_stock rõ rệt do hàng hết thường là máy đời cũ (EOL). Cần cờ is_out_of_stock cho TV5!
+2,Smartphone,1352,9.8,2513,6.49,+3.30M (+50.9%),1982360.0,1.02e-17,Có (p < 0.001),in_stock đắt hơn out_of_stock rõ rệt do hàng hết thường là máy đời cũ (EOL). Cần cờ is_out_of_stock cho TV5!

@@ -1,0 +1,10 @@
+### Bảng 1.1: Phân bố số lượng sản phẩm theo Nguồn bán và Ngành hàng
+
+| source        |   laptop |   smartphone |   Total |
+|:--------------|---------:|-------------:|--------:|
+| cellphones    |     3912 |         3935 |    7847 |
+| fptshop       |      356 |          464 |     820 |
+| hoanghamobile |       93 |          192 |     285 |
+| tgdd          |      490 |          707 |    1197 |
+| viettelstore  |       23 |          144 |     167 |
+| Total         |     4874 |         5442 |   10316 |

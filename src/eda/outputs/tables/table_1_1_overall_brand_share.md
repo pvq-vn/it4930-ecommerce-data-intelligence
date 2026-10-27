@@ -1,0 +1,15 @@
+### Bảng 1.5: Thị phần Top 10 Thương hiệu Toàn bộ Listing
+
+|         |   count |   share_pct |
+|:--------|--------:|------------:|
+| Apple   |    1683 |       16.31 |
+| ASUS    |    1211 |       11.74 |
+| Samsung |     979 |        9.49 |
+| Xiaomi  |     950 |        9.21 |
+| Lenovo  |     742 |        7.19 |
+| HP      |     525 |        5.09 |
+| Dell    |     495 |        4.8  |
+| OPPO    |     493 |        4.78 |
+| MSI     |     390 |        3.78 |
+| Acer    |     355 |        3.44 |
+| Other   |    2493 |       24.17 |

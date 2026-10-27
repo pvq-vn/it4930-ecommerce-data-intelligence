@@ -1,0 +1,6 @@
+### Bảng 3.1C: Nhận diện và Đánh giá Nhóm Giá Ngoại lai Cực biên (< 500k và > 100M)
+
+|    | Nhóm giá ngoại lai              |   Số lượng (N) |   Tỷ lệ trên N hợp lệ (%) | Đặc điểm sản phẩm                                                                            | Khuyến nghị TV5                                                                                      |
+|---:|:--------------------------------|---------------:|--------------------------:|:---------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------|
+|  0 | Giá cực thấp (< 500.000 VNĐ)    |             97 |                      1.13 | Điện thoại 'cục gạch' (Itel, Masstel, Energizer) và 4 phụ kiện/linh kiện dính nhầm           | Lọc bỏ nếu TV5 chỉ dự đoán Smartphone cảm ứng; giữ lại nếu mô hình có feature os/screen              |
+|  1 | Giá cực cao (> 100.000.000 VNĐ) |             87 |                      1.02 | MacBook Pro M3 Max 128GB/8TB (180M), ROG Strix SCAR 18, MSI Titan 18 HX AI Dragon (130-150M) | Outlier tự nhiên chuẩn xác (True Flagship Outliers). Bắt buộc log-transform target để tránh lệch OLS |
