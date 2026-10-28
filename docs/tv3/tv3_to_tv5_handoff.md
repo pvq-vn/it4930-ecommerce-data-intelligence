@@ -4,11 +4,12 @@
 **Bên bàn giao**: Thành viên 3 (TV3 - Exploratory Data Analysis)  
 **Bên tiếp nhận**: Thành viên 5 (TV5 - Price Prediction Modeling)  
 **Tập dữ liệu đầu vào**: `data/processed/products_processed.jsonl` ($N = 10.316$ listings, 30 trường canonical)  
+**Phụ thuộc môi trường**: [requirements-eda.txt](../../requirements-eda.txt) (`pandas`, `numpy`, `scipy`, `matplotlib`, `seaborn`)  
 **Tài liệu quy chuẩn đối chiếu**:
-- [docs/tv3/tv3.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/tv3/tv3.md)
-- [docs/feature_contracts_tv3_tv8.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/feature_contracts_tv3_tv8.md#L51-L56)
-- [docs/data_contract_tv2_v1.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/data_contract_tv2_v1.md)
-- [docs/data_quality_report_tv2_v1.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/data_quality_report_tv2_v1.md)
+- [tv3.md](tv3.md)
+- [docs/feature_contracts_tv3_tv8.md](../feature_contracts_tv3_tv8.md#L51-L56)
+- [docs/data_contract_tv2_v1.md](../data_contract_tv2_v1.md)
+- [docs/data_quality_report_tv2_v1.md](../data_quality_report_tv2_v1.md)
 
 ---
 
@@ -31,7 +32,7 @@
 
 ## 2. Ma trận Đặc trưng Ứng viên (Candidate Feature Matrix)
 
-*Căn cứ bảng tổng hợp thực nghiệm tại [table_1_3_candidate_features_missingness.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/tables/table_1_3_candidate_features_missingness.md):*
+*Căn cứ bảng tổng hợp thực nghiệm tại [table_1_3_candidate_features_missingness.md](../../src/eda/outputs/tables/table_1_3_candidate_features_missingness.md):*
 
 | Tên đặc trưng (`feature`) | Kiểu dữ liệu | Tỷ lệ thiếu tổng | Thiếu Laptop | Thiếu Phone | Mức ưu tiên TV5 | Đề xuất Chiến lược Tiền xử lý cho TV5 |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
@@ -53,7 +54,7 @@
 
 ## 3. Quy chuẩn Phòng chống Rò rỉ Dữ liệu (Data Leakage Prevention)
 
-*Tuân thủ nghiêm ngặt [docs/feature_contracts_tv3_tv8.md#L55](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/feature_contracts_tv3_tv8.md#L55) và bảng kiểm toán [table_3_3_data_leakage_audit.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/tables/table_3_3_data_leakage_audit.md):*
+*Tuân thủ nghiêm ngặt [docs/feature_contracts_tv3_tv8.md#L55](../feature_contracts_tv3_tv8.md#L55) và bảng kiểm toán [table_3_3_data_leakage_audit.md](../../src/eda/outputs/tables/table_3_3_data_leakage_audit.md):*
 
 ### 3.1. Danh sách ĐEN - Tuyệt đối CẤM đưa vào Huấn luyện (Blacklist)
 

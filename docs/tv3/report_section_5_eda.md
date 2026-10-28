@@ -3,65 +3,69 @@
 **Tác giả phụ trách**: Thành viên 3 (TV3 - Phân tích Khám phá Dữ liệu)  
 **Mã học phần**: IT4930 - Khoa học Dữ liệu & Trí tuệ Kinh doanh  
 **Tập dữ liệu chuẩn hóa**: `data/processed/products_processed.jsonl` ($N = 10.316$ listings, 30 thuộc tính chuẩn hóa)  
-**Căn cứ tài liệu quy chuẩn**: [docs/tv3/tv3.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/tv3/tv3.md) & [docs/feature_contracts_tv3_tv8.md](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/docs/feature_contracts_tv3_tv8.md)
+**Căn cứ tài liệu quy chuẩn**: [tv3.md](tv3.md) & [docs/feature_contracts_tv3_tv8.md](../feature_contracts_tv3_tv8.md)
 
 ---
 
 ## 5.1. Tổng quan Bộ Dữ liệu & Phân bố Thị phần
 
-Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** được cào và làm sạch từ 5 sàn thương mại điện tử và chuỗi bán lẻ công nghệ hàng đầu Việt Nam: **CellphoneS**, **Thế Giới Di Động (TGDD)**, **FPT Shop**, **Hoàng Hà Mobile**, và **Viettel Store**. Dữ liệu tập trung vào hai ngành hàng điện tử tiêu dùng cốt lõi: **Laptop** ($N = 4.417$, chiếm 42.8%) và **Smartphone** ($N = 5.899$, chiếm 57.2%).
+Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** được cào và làm sạch từ 5 sàn thương mại điện tử và chuỗi bán lẻ công nghệ hàng đầu Việt Nam: **CellphoneS**, **Thế Giới Di Động (TGDD)**, **FPT Shop**, **Hoàng Hà Mobile**, và **Viettel Store**. Dữ liệu tập trung vào hai ngành hàng điện tử tiêu dùng cốt lõi: **Laptop** ($N = 4.874$, chiếm 47.25%) và **Smartphone** ($N = 5.442$, chiếm 52.75%).
 
-![Fig 1.1: Phân bố Sản phẩm, Thị phần Sàn và Thương hiệu](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_1_1_overview_distributions.png)
+![Fig 1.1: Phân bố Sản phẩm, Thị phần Sàn và Thương hiệu](../../src/eda/outputs/figures/fig_1_1_overview_distributions.png)
 
 ### 5.1.1. Phân bố Dữ liệu theo Nguồn Thu thập (Platform Distribution)
-*Căn cứ Bảng 1.1A và 1.1B:*
-- **CellphoneS** là nguồn đóng góp dữ liệu lớn nhất với **4.887 sản phẩm (47.4%)**, trong đó cân bằng giữa Laptop (2.072 máy) và Smartphone (2.815 máy).
-- **Thế Giới Di Động (TGDD)** chiếm vị trí thứ hai với **2.355 sản phẩm (22.8%)**, với tỷ trọng Smartphone cao vượt trội (1.810 máy vs 545 laptop).
-- **FPT Shop** đóng góp **1.385 sản phẩm (13.4%)**, tập trung chủ yếu vào ngành hàng Laptop (941 máy vs 444 smartphone).
-- **Hoàng Hà Mobile** và **Viettel Store** lần lượt đóng góp **862 sản phẩm (8.4%)** và **827 sản phẩm (8.0%)**, đóng vai trò phân khúc bán lẻ giá cạnh tranh.
+*Căn cứ Bảng 1.1 và 1.2 (Bảng chéo Nguồn x Ngành hàng):*
+- **CellphoneS** là nguồn đóng góp dữ liệu lớn nhất với **7.847 sản phẩm (76.07%)**, trong đó cân bằng giữa Laptop (3.912 máy) và Smartphone (3.935 máy).
+- **Thế Giới Di Động (TGDD)** chiếm vị trí thứ hai với **1.197 sản phẩm (11.60%)**, trong đó Smartphone chiếm 707 máy và Laptop chiếm 490 máy.
+- **FPT Shop** đóng góp **820 sản phẩm (7.95%)**, bao gồm 356 laptop và 464 smartphone.
+- **Hoàng Hà Mobile** và **Viettel Store** lần lượt đóng góp **285 sản phẩm (2.76%)** và **167 sản phẩm (1.62%)**, đóng vai trò nguồn bổ trợ quan trọng.
 
 ### 5.1.2. Thị phần Thương hiệu (Brand Market Share)
-Cơ cấu thương hiệu phản ánh mức độ tập trung thị trường rất cao (High Market Concentration):
-- **Ngành hàng Smartphone**: Top 3 thương hiệu lớn chiếm tới **76.8%** tổng thị phần niêm yết:
-  1. **Samsung**: Chiếm vị trí số 1 với **1.714 sản phẩm (29.1%)**, trải dài từ phân khúc bình dân Galaxy A đến phân khúc cao cấp Galaxy S và Galaxy Z Fold/Flip.
-  2. **Apple**: Chiếm vị trí thứ hai với **1.565 sản phẩm (26.5%)**, thống trị tuyệt đối phân khúc cận cao cấp và cao cấp.
-  3. **Xiaomi**: Chiếm **1.248 sản phẩm (21.2%)**, dẫn dắt phân khúc tầm trung và giá rẻ hiệu năng cao.
-  4. Các thương hiệu còn lại: OPPO (8.2%), Vivo (4.5%), Realme (3.9%), Honor, Nokia, Asus chiếm thị phần nhỏ.
-- **Ngành hàng Laptop**: Thị trường Laptop phân mảnh hơn với sự cạnh tranh quyết liệt giữa 6 nhà sản xuất lớn:
-  1. **Asus**: Dẫn đầu thị phần với **958 sản phẩm (21.7%)**, bao quát từ ZenBook, VivoBook đến ROG/TUF Gaming.
-  2. **Lenovo**: Đứng thứ hai với **828 sản phẩm (18.7%)**, dẫn đầu dòng doanh nghiệp ThinkPad và IdeaPad.
-  3. **Dell**: Chiếm **699 sản phẩm (15.8%)** (Inspiron, Vostro, Latitude, XPS, Alienware).
-  4. **HP**: Chiếm **665 sản phẩm (15.1%)** (Pavilion, Envy, Omen, Victus).
-  5. **Acer**: Chiếm **436 sản phẩm (9.9%)** (Aspire, Nitro, Predator).
-  6. **Apple (MacBook)**: Chiếm **409 sản phẩm (9.3%)**, định vị riêng biệt trên hệ điều hành macOS và chip Apple Silicon.
+*Căn cứ Bảng 1.3 và 1.4 (Thị phần Top 10 Thương hiệu):*
+- **Ngành hàng Smartphone**: Top 3 thương hiệu lớn chiếm **48.61%** thị phần niêm yết:
+  1. **Samsung**: Chiếm vị trí số 1 với **975 sản phẩm (17.92%)**, phủ khắp từ dòng giá rẻ Galaxy A đến flagship Galaxy S và Z Fold/Flip.
+  2. **Xiaomi**: Chiếm vị trí thứ hai với **948 sản phẩm (17.42%)**, bám đuổi sát nút với ưu thế phân khúc tầm trung và giá rẻ hiệu năng cao.
+  3. **Apple**: Đứng thứ ba với **722 sản phẩm (13.27%)**, thống trị tuyệt đối phân khúc cận cao cấp và cao cấp.
+  4. Các thương hiệu tiếp theo: OPPO (493 máy - 9.06%), Vivo (328 máy - 6.03%), Realme (286 máy - 5.26%), Honor (208 máy - 3.82%), Nubia (189 máy - 3.47%), Tecno (186 máy - 3.42%), Nokia (183 máy - 3.36%). Nhóm còn lại chiếm 16.98%.
+- **Ngành hàng Laptop**: Thị trường Laptop phân hóa rõ nét với 7 nhà sản xuất lớn chiếm tới **95.66%** thị phần:
+  1. **ASUS**: Dẫn đầu thị phần với **1.164 sản phẩm (23.88%)**, bao quát từ ZenBook, VivoBook đến ROG/TUF Gaming.
+  2. **Apple (MacBook)**: Đứng thứ hai với **961 sản phẩm (19.72%)**, định vị riêng biệt trên nền tảng macOS và Apple Silicon.
+  3. **Lenovo**: Đứng thứ ba với **740 sản phẩm (15.18%)**, dẫn đầu dòng doanh nghiệp ThinkPad, IdeaPad và Legion.
+  4. **HP**: Chiếm **523 sản phẩm (10.73%)** (Pavilion, Envy, Omen, Victus).
+  5. **Dell**: Chiếm **495 sản phẩm (10.16%)** (Inspiron, Vostro, Latitude, XPS, Alienware).
+  6. **MSI**: Chiếm **390 sản phẩm (8.00%)** chuyên về laptop gaming và sáng tạo nội dung.
+  7. **Acer**: Chiếm **355 sản phẩm (7.28%)** (Aspire, Nitro, Predator).
+  8. Nhóm khác (Gigabyte, Microsoft Surface, LG Gram,...): Chiếm 4.34% còn lại.
 
 ---
 
 ## 5.2. Phân tích Đặc trưng Biến Giá & Mức độ Chiết khấu
 
-![Fig 1.2: Phân tích Phân phối Biến Giá và Tỷ lệ Chiết khấu](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_1_2_price_and_discount_distributions.png)
+![Fig 1.2: Phân tích Phân phối Biến Giá và Tỷ lệ Chiết khấu](../../src/eda/outputs/figures/fig_1_2_price_and_discount_distributions.png)
 
 ### 5.2.1. Phân phối Bất đối xứng và Hiệu quả của Biến đổi Logarithm
-*Căn cứ Bảng 1.2A và 1.2B:*
+*Căn cứ Bảng 1.7 và 1.8:*
 - Biến giá bán (`price_vnd`) trên quy mô toàn thị trường thể hiện tính chất **bất đối xứng lệch phải rất nặng (Positive Skewness)**:
-  * **Laptop**: Skewness $= \mathbf{+2.47}$, Kurtosis $= \mathbf{+11.39}$. Giá trung vị (Median) đạt **24.99 Triệu VNĐ**, giá trung bình (Mean) bị kéo lên **32.35 Triệu VNĐ** bởi các dòng máy trạm và gaming đỉnh cao.
-  * **Smartphone**: Skewness $= \mathbf{+2.42}$, Kurtosis $= \mathbf{+8.30}$. Giá trung vị đạt **7.19 Triệu VNĐ**, giá trung bình đạt **12.69 Triệu VNĐ**.
+  * **Toàn thị trường**: Giá trung vị (Median) đạt **19.49 Triệu VNĐ**, giá trung bình (Mean) đạt **23.37 Triệu VNĐ**, Skewness $= \mathbf{+3.47}$, Kurtosis $= \mathbf{+34.48}$.
+  * **Laptop** ($N = 4.222$ hợp lệ): Skewness $= \mathbf{+2.89}$, Kurtosis $= \mathbf{+13.54}$. Giá trung vị đạt **26.84 Triệu VNĐ**, giá trung bình bị kéo lên **32.99 Triệu VNĐ** bởi các dòng máy trạm và gaming cao cấp (giá cao nhất lên tới 269.99 triệu VNĐ).
+  * **Smartphone** ($N = 4.326$ hợp lệ): Skewness $= \mathbf{+7.38}$, Kurtosis $= \mathbf{+170.71}$. Giá trung vị đạt **7.99 Triệu VNĐ**, giá trung bình đạt **13.99 Triệu VNĐ**.
 - **Hiệu quả của phép biến đổi $\log_{10}(\text{price})$**:
-  * Sau khi lấy logarit, độ lệch của Laptop giảm ngoạn mục từ $+2.47$ về **$+0.04$** (xấp xỉ phân phối chuẩn đối xứng lý tưởng).
-  * Độ lệch của Smartphone giảm từ $+2.42$ về **$-0.13$**.
+  * Sau khi lấy logarit, độ lệch của Laptop giảm mạnh từ $+2.89$ về **$+0.29$**, độ nhọn Kurtosis giảm từ $+13.54$ về **$+1.07$** (xấp xỉ phân phối chuẩn đối xứng hình chuông lý tưởng).
+  * Độ lệch của Smartphone giảm từ $+7.38$ về **$-0.58$**, độ nhọn giảm từ $+170.71$ về **$+0.89$**.
   * **Khẳng định phương pháp luận**: Biến đổi logarit là điều kiện tiên quyết bắt buộc để các mô hình hồi quy tham số (Linear Regression, Ridge, Lasso) hoạt động hiệu quả, tránh vi phạm giả định về phương sai sai số đồng nhất (Homoscedasticity).
 
 ### 5.2.2. Chiến lược Chiết khấu theo Nguồn Bán (Discount Rate Patterns)
-*Căn cứ Bảng 1.2C:*
-- Tỷ lệ giảm giá trung bình toàn thị trường đạt **$18.6\%$** (Median: $17.1\%$).
-- **Hoàng Hà Mobile** và **CellphoneS** có mức chiết khấu niêm yết cao nhất (trung bình $20.5\%$ – $22.1\%$), phản ánh chiến lược cạnh tranh trực diện về giá sốc.
-- **TGDD** và **FPT Shop** duy trì biên chiết khấu ổn định hơn ($14.8\%$ – $16.5\%$), cạnh tranh bằng hệ sinh thái cửa hàng phủ rộng, quà tặng kèm và dịch vụ hậu mãi.
+*Căn cứ Bảng 1.9:*
+- Tỷ lệ có niêm yết giảm giá toàn thị trường đạt **75.0%** (7.737/10.316 sản phẩm). Mức giảm giá trung bình toàn thị trường đạt **$11.50\%$** (Median: $8.34\%$, Q3: $18.19\%$).
+- **Hoàng Hà Mobile** và **Viettel Store** có mức chiết khấu niêm yết trung bình cao nhất (trung bình **$20.81\%$** và **$14.53\%$**), phản ánh chiến lược cạnh tranh trực diện về giá khuyến mãi.
+- **CellphoneS** duy trì tỷ lệ hàng giảm giá đạt **$77.52\%$** với mức chiết khấu trung bình **$11.70\%$** (Median: $8.57\%$).
+- **TGDD** và **FPT Shop** có mức chiết khấu niêm yết trung bình thận trọng hơn (**$9.05\%$** và **$7.95\%$**), tập trung cạnh tranh bằng độ phủ chuỗi cửa hàng, chính sách hậu mãi và phụ kiện tặng kèm.
 
 ---
 
 ## 5.3. Bức tranh Mức độ Thiếu Dữ liệu (Missingness Profile)
 
-![Fig 1.3: Bản đồ Nhiệt Tỷ lệ Thiếu Dữ liệu](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_1_3_missingness_heatmap.png)
+![Fig 1.3: Bản đồ Nhiệt Tỷ lệ Thiếu Dữ liệu](../../src/eda/outputs/figures/fig_1_3_missingness_heatmap.png)
 
 Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu theo lý thuyết thống kê (Rubin, 1976):
 1. **Missing Completely at Random (MCAR)**:
@@ -79,8 +83,8 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ## 5.4. Phân tích Tương quan Cấu hình - Giá bán & So sánh Đối đầu Laptop vs. Smartphone
 
-![Fig 2.1: Ma trận Tương quan Thứ hạng Spearman](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_2_1_hardware_correlation_heatmaps.png)
-![Fig 2.2: So sánh Đối đầu Cấu trúc Quyết định Giá bán](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_2_2_pricing_drivers_comparison.png)
+![Fig 2.1: Ma trận Tương quan Thứ hạng Spearman](../../src/eda/outputs/figures/fig_2_1_hardware_correlation_heatmaps.png)
+![Fig 2.2: So sánh Đối đầu Cấu trúc Quyết định Giá bán](../../src/eda/outputs/figures/fig_2_2_pricing_drivers_comparison.png)
 
 ### 5.4.1. Cấu trúc Quyết định Giá Ngành hàng Laptop (Workstation & Productivity Asset)
 *Căn cứ Bảng 2.1A, 2.1C, 2.1D, 2.1E, 2.1F:*
@@ -140,9 +144,9 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ## 5.5. Đánh giá Chất lượng Dữ liệu cho Bài toán Hồi quy (Regression Readiness Audit)
 
-![Fig 3.1: Nhận diện Ngoại lai và Ranh giới Phân phối Giá](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_3_1_price_outliers_and_boundaries.png)
-![Fig 3.2: Đa cộng tuyến và Chỉ số VIF](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_3_2_multicollinearity_and_vif.png)
-![Fig 3.3: Tác động của Tồn kho và Price Drift](file:///d:/NMKHDL/it4930-ecommerce-data-intelligence/src/eda/outputs/figures/fig_3_3_availability_price_comparison.png)
+![Fig 3.1: Nhận diện Ngoại lai và Ranh giới Phân phối Giá](../../src/eda/outputs/figures/fig_3_1_price_outliers_and_boundaries.png)
+![Fig 3.2: Đa cộng tuyến và Chỉ số VIF](../../src/eda/outputs/figures/fig_3_2_multicollinearity_and_vif.png)
+![Fig 3.3: Tác động của Tồn kho và Price Drift](../../src/eda/outputs/figures/fig_3_3_availability_price_comparison.png)
 
 ### 5.5.1. Nhận diện Outliers & Dữ liệu biên (Task 3.1)
 *Căn cứ Bảng 3.1A, 3.1B, 3.1C:*
