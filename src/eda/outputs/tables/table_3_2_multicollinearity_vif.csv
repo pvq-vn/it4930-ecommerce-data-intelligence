@@ -1,0 +1,11 @@
+﻿,Ngành hàng,Thuộc tính (Feature),VIF Score,Mức độ Đa cộng tuyến,Mô hình ảnh hưởng nặng,Giải pháp khuyến nghị
+0,Laptop,installed_ram_gb,2.05,Thấp (An toàn),OLS Linear Regression,Chấp nhận được cho hồi quy tuyến tính; an toàn tuyệt đối với GBDT
+1,Laptop,storage_gb,1.51,Thấp (An toàn),OLS Linear Regression,Chấp nhận được cho hồi quy tuyến tính; an toàn tuyệt đối với GBDT
+2,Laptop,battery_wh,2.82,Trung bình,OLS Linear Regression,Chấp nhận được cho hồi quy tuyến tính; an toàn tuyệt đối với GBDT
+3,Laptop,screen_size_inch,1.62,Thấp (An toàn),OLS Linear Regression,Chấp nhận được cho hồi quy tuyến tính; an toàn tuyệt đối với GBDT
+4,Laptop,charger_watt,1.46,Thấp (An toàn),OLS Linear Regression,Chấp nhận được cho hồi quy tuyến tính; an toàn tuyệt đối với GBDT
+5,Smartphone,installed_ram_gb,5.44,Cao (Cảnh báo),OLS Linear Regression,RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT
+6,Smartphone,storage_gb,3.55,Trung bình,OLS Linear Regression,RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT
+7,Smartphone,battery_mah,1.08,Thấp (An toàn),OLS Linear Regression,RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT
+8,Smartphone,charger_watt,2.29,Thấp (An toàn),OLS Linear Regression,RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT
+9,Smartphone,screen_size_inch,1.31,Thấp (An toàn),OLS Linear Regression,RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT

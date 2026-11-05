@@ -1,0 +1,7 @@
+### Bảng 1.8: So sánh Độ lệch (Skewness) và Độ nhọn (Kurtosis) giữa Thang đo Gốc và Thang đo Log
+
+| Phân nhóm       |   Raw Skewness |   Log10 Skewness |   Raw Kurtosis |   Log10 Kurtosis | Đánh giá dạng phân phối   |
+|:----------------|---------------:|-----------------:|---------------:|-----------------:|:--------------------------|
+| Toàn thị trường |           3.47 |            -1    |          34.48 |             1.63 | Hơi lệch trái             |
+| Laptop          |           2.89 |             0.29 |          13.54 |             1.07 | Gần chuẩn (Bell-shaped)   |
+| Smartphone      |           7.38 |            -0.58 |         170.71 |             0.89 | Gần chuẩn (Bell-shaped)   |

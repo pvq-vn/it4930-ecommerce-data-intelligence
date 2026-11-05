@@ -1,0 +1,7 @@
+﻿,Thuộc tính,Số mẫu hợp lệ (N),Tỷ lệ có dữ liệu (%),Pearson r (log_price),p-value (Pearson log),Spearman rho (log_price),p-value (Spearman log),Spearman rho (raw_price),Mức độ tương quan
+0,storage_gb,3549,82.0,0.5644,9.08e-298,0.7045,0.00e+00,0.7045,Rất mạnh (>= 0.7)
+1,installed_ram_gb,3438,79.5,0.6471,0.00e+00,0.6434,0.00e+00,0.6434,Mạnh (0.5 - 0.7)
+2,charger_watt,777,18.0,0.4608,4.26e-42,0.4769,2.25e-45,0.4769,Trung bình (0.3 - 0.5)
+3,screen_size_inch,582,13.5,0.5453,2.17e-46,0.1158,0.0051,0.1158,Yếu (0.1 - 0.3)
+4,battery_mah,3320,76.7,0.2929,1.17e-66,0.0358,0.0389,0.0358,Rất yếu (< 0.1)
+5,camera_mp,614,14.2,0.1805,6.77e-06,0.0277,0.4931,0.0277,Rất yếu (< 0.1)

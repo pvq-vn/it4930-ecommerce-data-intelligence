@@ -61,7 +61,14 @@ Hệ thống crawler thiết kế theo mô hình Registry mở rộng (`SOURCE_R
 ### 4. Cài đặt môi trường
 
 ```bash
+# 1. Cài đặt môi trường crawler cơ bản (TV1):
 pip install -r requirements.txt
+
+# 2. Cài đặt bổ sung môi trường phân tích khám phá dữ liệu (TV3 EDA & Notebooks):
+pip install -r requirements-eda.txt
+
+# Hoặc cài đặt đồng thời toàn bộ phụ thuộc cho dự án:
+pip install -r requirements.txt -r requirements-eda.txt
 ```
 
 ---
