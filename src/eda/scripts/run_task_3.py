@@ -36,9 +36,14 @@ if sys.platform.startswith("win"):
         pass
 
 # Thêm đường dẫn gốc để import module EDA nội bộ
-ROOT_DIR = Path(__file__).resolve().parent.parent.parent.parent
-sys.path.insert(0, str(ROOT_DIR / "src" / "eda" / "scripts"))
-
+# Đảm bảo thư mục chứa module eda_stats, eda_viz luôn nằm trong sys.path
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+REPO_ROOT = SCRIPTS_DIR.parent.parent.parent
+ROOT_DIR = REPO_ROOT
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(1, str(REPO_ROOT))
 from eda_stats import (
     load_processed_products,
     audit_price_outliers_and_boundaries,

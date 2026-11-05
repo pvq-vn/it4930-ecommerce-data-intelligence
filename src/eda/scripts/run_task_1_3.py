@@ -9,6 +9,15 @@ from pathlib import Path
 # Thiết lập encoding UTF-8 cho Windows console
 sys.stdout.reconfigure(encoding="utf-8")
 
+# Đảm bảo thư mục chứa module eda_stats, eda_viz luôn nằm trong sys.path
+SCRIPTS_DIR = Path(__file__).resolve().parent
+if str(SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS_DIR))
+REPO_ROOT = SCRIPTS_DIR.parent.parent.parent
+ROOT_DIR = REPO_ROOT
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(1, str(REPO_ROOT))
+
 from eda_stats import (
     load_processed_products,
     compute_overall_missingness,

@@ -11,7 +11,9 @@
 
 Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** được cào và làm sạch từ 5 sàn thương mại điện tử và chuỗi bán lẻ công nghệ hàng đầu Việt Nam: **CellphoneS**, **Thế Giới Di Động (TGDD)**, **FPT Shop**, **Hoàng Hà Mobile**, và **Viettel Store**. Dữ liệu tập trung vào hai ngành hàng điện tử tiêu dùng cốt lõi: **Laptop** ($N = 4.874$, chiếm 47.25%) và **Smartphone** ($N = 5.442$, chiếm 52.75%).
 
-![Fig 1.1: Phân bố Sản phẩm, Thị phần Sàn và Thương hiệu](../../src/eda/outputs/figures/fig_1_1_overview_distributions.png)
+![Fig 1.1A: Phân bố Sản phẩm theo Nguồn cào và Ngành hàng](../../src/eda/outputs/figures/fig_1_1_source_category_distribution.png)
+![Fig 1.1B: Thị phần Top Thương hiệu Laptop vs Smartphone](../../src/eda/outputs/figures/fig_1_1_brand_market_share.png)
+![Fig 1.1C: Phân phối Thị phần Nhà bán lẻ](../../src/eda/outputs/figures/fig_1_1_seller_market_share.png)
 
 ### 5.1.1. Phân bố Dữ liệu theo Nguồn Thu thập (Platform Distribution)
 *Căn cứ Bảng 1.1 và 1.2 (Bảng chéo Nguồn x Ngành hàng):*
@@ -41,7 +43,8 @@ Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** đư�
 
 ## 5.2. Phân tích Đặc trưng Biến Giá & Mức độ Chiết khấu
 
-![Fig 1.2: Phân tích Phân phối Biến Giá và Tỷ lệ Chiết khấu](../../src/eda/outputs/figures/fig_1_2_price_and_discount_distributions.png)
+![Fig 1.2A: Phân tích Phân phối Biến Giá và Hiệu quả Biến đổi Log](../../src/eda/outputs/figures/fig_1_2_price_distribution_and_log_transform.png)
+![Fig 1.2B: Tỷ lệ Giảm giá Niêm yết theo Nguồn bán](../../src/eda/outputs/figures/fig_1_2_discount_rate_by_source.png)
 
 ### 5.2.1. Phân phối Bất đối xứng và Hiệu quả của Biến đổi Logarithm
 *Căn cứ Bảng 1.7 và 1.8:*
@@ -65,7 +68,9 @@ Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** đư�
 
 ## 5.3. Bức tranh Mức độ Thiếu Dữ liệu (Missingness Profile)
 
-![Fig 1.3: Bản đồ Nhiệt Tỷ lệ Thiếu Dữ liệu](../../src/eda/outputs/figures/fig_1_3_missingness_heatmap.png)
+![Fig 1.3A: Xếp hạng Tỷ lệ Thiếu Dữ liệu của 30 Thuộc tính Toàn thị trường](../../src/eda/outputs/figures/fig_1_3_overall_missingness_ranking.png)
+![Fig 1.3B: Bản đồ Nhiệt Tỷ lệ Thiếu theo Nguồn bán và Ngành hàng](../../src/eda/outputs/figures/fig_1_3_missingness_heatmap_by_source_category.png)
+![Fig 1.3C: So sánh Tỷ lệ Thiếu Thuộc tính Phần cứng giữa Laptop và Smartphone](../../src/eda/outputs/figures/fig_1_3_hardware_missingness_laptop_vs_phone.png)
 
 Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu theo lý thuyết thống kê (Rubin, 1976):
 1. **Missing Completely at Random (MCAR)**:
@@ -100,7 +105,7 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
   * Core i7 / Ryzen 7 (High-end): Trung vị 27.49 Triệu.
   * Apple Silicon (M-series): Trung vị 43.99 Triệu.
   * Core i9 / Ryzen 9 (Flagship/Enthusiast): Trung vị 54.99 Triệu (**gấp 4.60 lần** so với Core i3).
-- **Phân loại GPU Đồ họa (`gpu_type`)** ($F = 502.1, H = 1007.4, p < 10^{-300}$):
+- **Phân loại GPU Đồ họa (`gpu_type`)** (ANOVA $F = \mathbf{399.8}$, Kruskal-Wallis $H = \mathbf{927.5}$, $p < 10^{-200}$):
   * Onboard: Trung vị 19.99 Triệu VNĐ.
   * Card rời (Dedicated GPU - RTX/GTX/Radeon): Trung vị 28.99 Triệu VNĐ (Mean: 35.61 Triệu).
   * Apple GPU: Trung vị 40.99 Triệu VNĐ.
@@ -109,7 +114,7 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ### 5.4.2. Cấu trúc Quyết định Giá Ngành hàng Smartphone (Consumer Experience & Brand Equity)
 *Căn cứ Bảng 2.1B, 2.1G, 2.1H, 2.1I, 2.1J:*
-- **Bộ nhớ trong ROM (`storage_gb`)** là đòn bẩy giãn giá mạnh nhất toàn bộ thị trường ($\rho = \mathbf{+0.702}$, ANOVA $F = 569.8$):
+- **Bộ nhớ trong ROM (`storage_gb`)** là đòn bẩy giãn giá mạnh nhất toàn bộ thị trường ($\rho = \mathbf{+0.704}$, ANOVA $F = \mathbf{777.7}$, Kruskal-Wallis $H = \mathbf{1736.6}$):
   * $\le 64$ GB: Trung vị 3.49 Triệu VNĐ.
   * 128 GB: Trung vị 6.55 Triệu VNĐ.
   * 256 GB: Trung vị 16.49 Triệu VNĐ.
@@ -119,7 +124,7 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 - **Công nghệ Màn hình (`display_group`)** thể hiện năng lực phân hóa giá khủng khiếp nhất toàn thị trường (ANOVA $F = \mathbf{2954.2}$, Kruskal-Wallis $H = \mathbf{1826.5}$, $p < 10^{-300}$):
   * IPS / LCD: Trung vị 3.89 Triệu VNĐ (đại diện phân khúc giá rẻ).
   * OLED / AMOLED: Trung vị 15.99 Triệu VNĐ (đắt gấp **4.11 lần** so với màn LCD).
-- **Thương hiệu định vị (`brand_norm`)** ($F = 562.9, H = 1380.2$):
+- **Thương hiệu định vị (`brand_norm`)** (ANOVA $F = \mathbf{210.2}$, Kruskal-Wallis $H = \mathbf{2335.6}$, $p < 10^{-300}$):
   * Apple đứng đầu với Trung vị 25.49 Triệu VNĐ (Q3: 33.49 Triệu).
   * Samsung đứng thứ hai với Trung vị 15.84 Triệu VNĐ.
   * Xiaomi, OPPO, Vivo, Realme tập trung ở phân khúc 4.0 – 6.5 Triệu VNĐ.
@@ -135,7 +140,7 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 | Khía cạnh đối chiếu | Ngành hàng Laptop | Ngành hàng Smartphone | Khác biệt căn bản |
 | :--- | :--- | :--- | :--- |
 | **Triết lý Định giá** | Thiết bị sản xuất / Tài sản làm việc (*Productivity Asset*). | Thiết bị trải nghiệm cá nhân & phong cách sống (*Consumer Lifestyle*). | Laptop định giá từ chi phí linh kiện lên; Smartphone định giá từ giá trị thương hiệu xuống. |
-| **Đòn bẩy Giá Hàng đầu** | Dung lượng RAM ($\rho = +0.80$) & Phân tầng CPU ($F = 757.2$). | Bộ nhớ trong ROM ($\rho = +0.70$) & Thương hiệu ($F = 562.9$). | Laptop dùng RAM để lọc người dùng chuyên nghiệp; Smartphone dùng ROM để Upsell bậc thang. |
+| **Đòn bẩy Giá Hàng đầu** | Dung lượng RAM ($\rho = +0.80$) & Phân tầng CPU ($F = 757.2$). | Bộ nhớ trong ROM ($\rho = +0.70$) & Thương hiệu ($H = 2335.6, F = 210.2$). | Laptop dùng RAM để lọc người dùng chuyên nghiệp; Smartphone dùng ROM để Upsell bậc thang. |
 | **Ranh giới Phân tách Thị trường** | Card đồ họa rời (Dedicated GPU vs Onboard). | Công nghệ Màn hình (OLED/AMOLED vs IPS/LCD, $F = 2954.2$). | Laptop phân hóa ở năng lực đồ họa; Smartphone phân hóa ở chất lượng thị giác. |
 | **Vai trò Pin & Nguồn điện** | Tương quan đồng biến rất mạnh (Sạc $\rho = +0.72$, Pin Wh $\rho = +0.66$). | Nghịch lý bão hòa vật lý (Pin mAh $\rho = +0.04$, bão hòa 5000 mAh). | Pin Laptop là biến hiệu năng cao cấp; Pin Smartphone là thuộc tính cơ bản tối thiểu. |
 | **Chỉ số Bão hòa / Non-driver** | Kích thước màn hình ($\rho = +0.09$, Ultrabook nhỏ nhưng đắt). | Độ phân giải Camera MP ($\rho = +0.03$, không có ý nghĩa thống kê). | Cả hai ngành hàng đều có những chỉ số phần cứng không mang tính quyết định giá. |

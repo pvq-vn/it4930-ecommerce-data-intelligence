@@ -16,14 +16,14 @@
 ## 1. Tóm tắt Khuyến nghị Kiến trúc Cốt lõi (Executive Summary for TV5)
 
 1. **Phân tách Mô hình (Model Separation)**:  
-   Khuyến nghị TV5 **huấn luyện 2 mô hình hồi quy độc lập**: 1 mô hình riêng cho ngành hàng **Laptop** ($N = 3.382$ bản ghi hợp lệ) và 1 mô hình riêng cho **Smartphone** ($N = 5.166$ bản ghi hợp lệ).  
-   *Cơ sở thực nghiệm (Task 2.2)*: Triết lý định giá của 2 ngành hàng hoàn toàn khác nhau. Laptop định giá theo *Tài nguyên Xử lý Phần cứng* (RAM $\rho = +0.80$, CPU Tier $F = 757.2$, GPU Type $F = 502.1$), trong khi Smartphone định giá theo *Trải nghiệm & Thương hiệu* (ROM $\rho = +0.70$, Công nghệ Màn hình OLED $F = 2954.2$, Thương hiệu Apple/Samsung $F = 562.9$). Việc gộp chung vào 1 mô hình sẽ gây nhiễu trọng số và suy giảm độ chính xác $R^2$.
+   Khuyến nghị TV5 **huấn luyện 2 mô hình hồi quy độc lập**: 1 mô hình riêng cho ngành hàng **Laptop** ($N = 4.222$ bản ghi hợp lệ) và 1 mô hình riêng cho **Smartphone** ($N = 4.326$ bản ghi hợp lệ).  
+   *Cơ sở thực nghiệm (Task 2.2 & Bảng 2.11)*: Triết lý định giá của 2 ngành hàng hoàn toàn khác nhau. Laptop định giá theo *Tài nguyên Xử lý Phần cứng* (RAM $\rho = +0.80$, CPU Tier $F = 757.19$, GPU Type $F = 399.81$), trong khi Smartphone định giá theo *Trải nghiệm & Thương hiệu* (ROM $\rho = +0.70$, Công nghệ Màn hình OLED $F = 2954.16$, Thương hiệu $H = 2335.59$). Việc gộp chung vào 1 mô hình sẽ gây nhiễu trọng số và suy giảm độ chính xác $R^2$.
 
 2. **Lọc Mẫu Mục tiêu (Target Filtering)**:  
-   Loại bỏ triệt để **1.768 bản ghi không hợp lệ** (`is_price_missing == True` hoặc `price_vnd <= 0`), giữ lại đúng **8.548 bản ghi** có giá hợp lệ $> 0$ để huấn luyện và đánh giá mô hình.
+   Loại bỏ triệt để **1.768 bản ghi không hợp lệ** (1.752 bản ghi có `is_price_missing == True` / `price_vnd <= 0` và 16 bản ghi thiếu giá hoàn toàn), giữ lại đúng **8.548 bản ghi sạch** có giá hợp lệ $> 0$ để huấn luyện và đánh giá mô hình (Laptop: 4.222 máy, Smartphone: 4.326 máy).
 
 3. **Biến đổi Target bắt buộc ($\log_{10}$ hoặc $\log(1 + y)$)**:  
-   Do phân phối giá có độ lệch phải rất nặng (Laptop Skewness $= +2.47$, Kurtosis $= +11.39$; Smartphone Skewness $= +2.42$, Kurtosis $= +8.30$) và tồn tại 87 mẫu flagship cực cao ($> 100$ triệu VNĐ), TV5 bắt buộc phải huấn luyện mô hình dự đoán trên thang $\log(1 + y)$ sử dụng `TransformedTargetRegressor(regressor=..., func=np.log1p, inverse_func=np.expm1)`. Biến đổi log giúp giảm Skewness về xấp xỉ phân phối chuẩn (Laptop: $+0.04$, Smartphone: $-0.13$).
+   Do phân phối giá trên thang đo gốc có độ lệch phải rất nặng (Laptop Skewness $= \mathbf{+2.89}$, Kurtosis $= \mathbf{+13.54}$; Smartphone Skewness $= \mathbf{+7.38}$, Kurtosis $= \mathbf{+170.71}$) và tồn tại 87 mẫu flagship cực cao ($> 100$ triệu VNĐ), TV5 bắt buộc phải huấn luyện mô hình dự đoán trên thang $\log(1 + y)$ sử dụng `TransformedTargetRegressor(regressor=..., func=np.log1p, inverse_func=np.expm1)`. Biến đổi log giúp giảm mạnh độ lệch Skewness về xấp xỉ phân phối chuẩn đối xứng (Laptop: $\mathbf{+0.29}$, Smartphone: $\mathbf{-0.58}$).
 
 4. **Ưu tiên Mô hình Cây Quyết định Tăng cường (GBDT)**:  
    Ưu tiên triển khai **LightGBM**, **XGBoost**, hoặc **CatBoost**. Các mô hình GBDT xử lý giá trị thiếu (Missing values) tự nhiên, miễn nhiễm với phân phối lệch và không bị tổn thương bởi hiện tượng đa cộng tuyến giữa RAM và ROM ở Smartphone ($r = +0.83$, $VIF = 5.44$).
@@ -37,16 +37,16 @@
 | Tên đặc trưng (`feature`) | Kiểu dữ liệu | Tỷ lệ thiếu tổng | Thiếu Laptop | Thiếu Phone | Mức ưu tiên TV5 | Đề xuất Chiến lược Tiền xử lý cho TV5 |
 | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
 | `category` | Categorical | 0.0% | 0.0% | 0.0% | **Bắt buộc** | Phân tách tập dữ liệu để huấn luyện 2 mô hình độc lập. |
-| `brand_norm` | Categorical | 0.3% | 0.4% | 0.2% | **Bắt buộc** | Target Encoding (Out-of-fold có smoothing) hoặc One-Hot cho Top 10 brand lớn, còn lại gom vào `'Other'`. |
-| `installed_ram_gb` | Numeric | 33.6% | 20.1% | 45.7% | **Rất cao** | Biến số liên tục. Điền Median có phân tầng theo `(category, brand_norm)`. Bổ sung cờ `is_ram_missing`. |
-| `storage_gb` | Numeric | 25.7% | 24.5% | 26.8% | **Rất cao** | Biến số liên tục. Điền Median có phân tầng theo `(category, brand_norm)`. Tạo biến phân đoạn bậc thang `storage_group`. |
-| `cpu_norm` | Categorical | 53.7% | 31.2% | 73.8% | **Rất cao (Laptop)** | Rút trích phân tầng CPU Tier: Tier 1 (i9/R9), Tier 2 (i7/R7), Tier 3 (i5/R5), Tier 4 (i3/Entry), Apple M-series, gán `'Unknown'`. |
-| `gpu_norm` | Categorical | 44.2% | 15.6% | 69.8% | **Cao (Laptop)** | Chỉ dùng cho Laptop. Tạo cờ nhị phân `is_dedicated_gpu` (Có/Không có GPU rời RTX/GTX/Radeon) và `is_apple_gpu`. |
-| `display_type_norm` | Categorical | 44.8% | 42.1% | 47.3% | **Rất cao (Phone)** | Chỉ dùng mạnh cho Phone. Phân nhóm 3 bậc: OLED/AMOLED (1), IPS/LCD (0), Unknown (-1). Phân hóa giá $F = 2954.2$. |
-| `battery_wh` | Numeric | 80.7% | 59.2% | 100.0% | **Cao (Laptop)** | Chỉ dùng cho Laptop. Tương quan $\rho = +0.66$ với giá. Điền median theo phân khúc GPU/CPU. |
-| `battery_mah` | Numeric | 59.7% | 98.2% | 25.1% | **Trung bình (Phone)**| Chỉ dùng cho Phone. Tương quan $\rho = +0.036$ (bão hòa quanh 5.000 mAh). Tuyệt đối không ép trọng số tuyến tính dương lớn. |
-| `charger_watt` | Numeric | 91.5% | 97.0% | 85.0% | **Xem xét** | Tỷ lệ thiếu cao (>85%). Nếu dùng, bắt buộc tạo cờ `is_charger_missing` và điền median. Tương quan đồng biến $\rho = +0.72$ ở Laptop. |
-| `screen_size_inch` | Numeric | 84.8% | 72.3% | 96.0% | **Xem xét** | Tỷ lệ thiếu rất cao. Tương quan yếu với giá ($\rho = +0.09$). Điền median hoặc cân nhắc loại bỏ để giảm chiều dữ liệu. |
+| `brand_norm` | Categorical | 0.3% | 0.1% | 0.4% | **Bắt buộc** | Target Encoding (Out-of-fold có smoothing) hoặc One-Hot cho Top 10 brand lớn, còn lại gom vào `'Other'`. |
+| `installed_ram_gb` | Numeric | 33.6% | 45.6% | 22.9% | **Rất cao** | Biến số liên tục. Điền Median có phân tầng theo `(category, brand_norm)`. Bổ sung cờ `is_ram_missing`. |
+| `storage_gb` | Numeric | 25.7% | 32.3% | 19.7% | **Rất cao** | Biến số liên tục. Điền Median có phân tầng theo `(category, brand_norm)`. Tạo biến phân đoạn bậc thang `storage_group`. |
+| `cpu_norm` | Categorical | 53.7% | 21.7% | 82.5% | **Rất cao (Laptop)** | Rút trích phân tầng CPU Tier: Tier 1 (i9/R9), Tier 2 (i7/R7), Tier 3 (i5/R5), Tier 4 (i3/Entry), Apple M-series, gán `'Unknown'`. |
+| `gpu_norm` | Categorical | 44.2% | 15.3% | 70.0% | **Cao (Laptop)** | Chỉ dùng cho Laptop. Tạo cờ nhị phân `is_dedicated_gpu` (Có/Không có GPU rời RTX/GTX/Radeon) và `is_apple_gpu`. |
+| `display_type_norm` | Categorical | 44.8% | 70.0% | 22.3% | **Rất cao (Phone)** | Chỉ dùng mạnh cho Phone. Phân nhóm 3 bậc: OLED/AMOLED (1), IPS/LCD (0), Unknown (-1). Phân hóa giá $F = 2954.2$. |
+| `battery_wh` | Numeric | 80.7% | 59.2% | 99.9% | **Cao (Laptop)** | Chỉ dùng cho Laptop. Tương quan $\rho = +0.66$ với giá. Điền median theo phân khúc GPU/CPU. |
+| `battery_mah` | Numeric | 59.7% | 99.5% | 24.1% | **Trung bình (Phone)**| Chỉ dùng cho Phone. Tương quan $\rho = +0.036$ (bão hòa quanh 5.000 mAh). Tuyệt đối không ép trọng số tuyến tính dương lớn. |
+| `charger_watt` | Numeric | 91.5% | 97.9% | 85.7% | **Xem xét** | Tỷ lệ thiếu cao (>85%). Nếu dùng, bắt buộc tạo cờ `is_charger_missing` và điền median. Tương quan đồng biến $\rho = +0.72$ ở Laptop. |
+| `screen_size_inch` | Numeric | 84.8% | 79.8% | 89.2% | **Xem xét** | Tỷ lệ thiếu rất cao. Tương quan yếu với giá ($\rho = +0.09$). Điền median hoặc cân nhắc loại bỏ để giảm chiều dữ liệu. |
 | `seller_raw` | Categorical | 0.0% | 0.0% | 0.0% | **Trung bình** | Frequency Encoding hoặc Target Encoding. Đại diện cho chính sách định giá của từng hệ thống bán lẻ. |
 | `availability_status`| Categorical | 0.0% | 0.0% | 0.0% | **Cao** | Tạo cờ nhị phân `is_out_of_stock` để bù trừ độ lệch giá Price Drift (-28% đến -34% ở hàng hết tồn kho). |
 
