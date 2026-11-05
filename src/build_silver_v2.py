@@ -64,7 +64,7 @@ def normalize_brand(v):
         "oneplus":"OnePlus","tcl":"TCL","infinix":"Infinix",
     }
     return mapping.get(key,s)
-def attr_extract(attrs):
+def attr_extract(attrs, *fallback_texts):
     """Conservative extraction from explicit attribute labels only."""
     empty={"installed_ram_gb":None,"max_ram_gb":None,"battery_mah":None,"battery_wh":None,"charger_watt":None,"cpu_norm":None,"gpu_norm":None,"storage_gb":None,"color_norm":None,"screen_size_inch":None,"operating_system_norm":None,"camera_mp":None,"display_type_norm":None,"network_type_norm":None,"hardware_extraction_confidence":"FAILED"}
     if not isinstance(attrs,dict): return empty
@@ -96,17 +96,46 @@ def attr_extract(attrs):
             elif u=='mah' and any(t in key for t in ['pin','battery']): found['battery_mah'].append(x)
             elif u=='wh' and any(t in key for t in ['pin','battery']): found['battery_wh'].append(x)
             elif u=='w' and any(t in key for t in ['sạc','sac','charger','công suất']): found['charger_watt'].append(x)
-        for n,u in re.findall(r"(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb|inch|in|mp)\b",val.lower()):
+        for n,u in re.findall(r"(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb|inch|in|mp|\")",val.lower()):
             x=float(n.replace(',','.'))
             if u=='tb' and any(t in key for t in ['ổ cứng','lưu trữ','bộ nhớ','storage','memory']): found['storage_gb'].append(x*1024)
             elif u=='gb' and any(t in key for t in ['ổ cứng','lưu trữ','bộ nhớ trong','storage','memory']): found['storage_gb'].append(x)
-            elif u in {'inch','in'} and any(t in key for t in ['màn hình','screen','display','kích thước']): found['screen_size_inch'].append(x)
+            elif u in {'inch','in','"'} and any(t in key for t in ['màn hình','screen','display','kích thước']): found['screen_size_inch'].append(x)
             elif u=='mp' and any(t in key for t in ['camera','cam']): found['camera_mp'].append(x)
-    out={k:(v[0] if len(set(v))==1 else None) for k,v in found.items()}
+    # Keep a representative numeric value when several observations exist;
+    # ambiguity is still exposed through hardware_extraction_confidence.
+    out={}
+    for k,v in found.items():
+        vals=list(dict.fromkeys(v))
+        if not vals: out[k]=None
+        elif k == 'installed_ram_gb': out[k]=min(vals)
+        elif k in {'max_ram_gb','camera_mp'}: out[k]=max(vals)
+        elif k == 'storage_gb': out[k]=min(vals)
+        else: out[k]=vals[0]
     if found['battery_mah']:
         valid_mah=[x for x in found['battery_mah'] if x >= 100]
         out['battery_mah']=max(valid_mah) if valid_mah else max(found['battery_mah'])
-    for k,v in text_found.items(): out[k]=v[0] if len(set(v))==1 else None
+    for k,v in text_found.items():
+        vals=[x for x in dict.fromkeys(v) if str(x).strip().lower() not in {'no_selection','none','n/a'}]
+        out[k]=vals[0] if vals else None
+    fallback=' '.join(str(x) for x in fallback_texts if isinstance(x,str) and x.strip())
+    if fallback:
+        if out['screen_size_inch'] is None:
+            m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(?:inch|in|\")',fallback.lower())
+            if m: out['screen_size_inch']=float(m.group(1).replace(',','.'))
+        if out['installed_ram_gb'] is None:
+            m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(?:gb|g)\s*(?:ram|ddr)',fallback.lower())
+            if m: out['installed_ram_gb']=float(m.group(1).replace(',','.'))
+        if out['storage_gb'] is None:
+            m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb)\s*(?:ssd|hdd|storage|rom)',fallback.lower())
+            if m: out['storage_gb']=float(m.group(1).replace(',','.')) * (1024 if m.group(2)=='tb' else 1)
+    # Guard against numeric tokens from unrelated attributes (for example a
+    # price being interpreted as RAM). Such values are marked missing rather
+    # than silently passed downstream as hardware specifications.
+    if out.get('installed_ram_gb') is not None and not 1 <= out['installed_ram_gb'] <= 256:
+        out['installed_ram_gb']=None
+    if out.get('max_ram_gb') is not None and not 1 <= out['max_ram_gb'] <= 1024:
+        out['max_ram_gb']=None
     n=sum(bool(v) for v in found.values())+sum(bool(v) for v in text_found.values()); amb=any(len(set(v))>1 for v in found.values()) or any(len(set(v))>1 for v in text_found.values())
     out['hardware_extraction_confidence']='FAILED' if n==0 else ('AMBIGUOUS' if amb else 'HIGH')
     return out
@@ -142,7 +171,7 @@ def main():
         # Product-source rating 0 is a no-rating sentinel, not a zero-star score.
         rating_norm=rating if rating is not None and 0<rating<=5 else None
         review_count_norm=None if r.get("source") in {"fptshop","hoanghamobile"} else parse_num(r.get("review_count_raw"))
-        sold,sold_status=parse_total_sold(r.get("total_sold_raw")); attrs=attr_extract(r.get("attributes_raw"));
+        sold,sold_status=parse_total_sold(r.get("total_sold_raw")); attrs=attr_extract(r.get("attributes_raw"),r.get("product_name_raw"),r.get("variant_name_raw"));
         if attrs.get("color_norm") is None and isinstance(r.get("variant_color_raw"),str) and r.get("variant_color_raw").strip(): attrs["color_norm"]=r.get("variant_color_raw").strip()
         x.update({"brand_norm":normalize_brand(r.get("brand_raw")),"price_vnd":p,"price_parse_status":p_status,"original_price_vnd":op,"original_price_parse_status":op_status,"price_normalized":p,"original_price_normalized":op,"price_missing_reason":None if p_status=="OK" else "FAILED","is_price_missing":p==0,"original_price_missing_reason":None if op_status=="OK" else "FAILED","availability_status":availability(r.get("availability_raw"),r.get("source")),"rating_norm":rating_norm,"rating_normalized":rating_norm,"rating_normalized_status":("MISSING" if rating_norm is None else "VALID_0_5"),"has_rating":False if r.get("source")=="hoanghamobile" or rating_norm is None or rating_norm==0 else True,"review_count_normalized":review_count_norm,"total_sold_normalized":sold,"total_sold_parse_status":sold_status,"discount_rate":((op-p)/op if p is not None and op is not None and op>0 and p>=0 and p<=op else None),"discount_status":("VALID" if p is not None and op is not None and op>0 and 0<=p<=op else "NOT_COMPUTED"),"silver_version":"tv2-silver-2.0",**attrs})
         products.append(x)

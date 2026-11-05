@@ -171,7 +171,7 @@ data/processed/products_processed.jsonl
 data/processed/reviews_processed.jsonl
 ```
 
-`products_processed.jsonl` có 10.316 listing và 30 trường, gồm tên sản phẩm, `brand_norm`, giá, rating, availability, `total_sold_normalized` và các thuộc tính phần cứng.
+`products_processed.jsonl` có 10.316 listing và 32 trường, gồm tên sản phẩm, tên biến thể, SKU biến thể, `brand_norm`, giá, rating, availability, total_sold_normalized và các thuộc tính phần cứng.
 
 `reviews_processed.jsonl` có 15.805 review và 14 trường, gồm tên sản phẩm, `rating_raw`, `rating_norm`, nội dung review và `review_usable`.
 
