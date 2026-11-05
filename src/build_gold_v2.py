@@ -48,7 +48,15 @@ def main():
   x=dict(r); x.update({'reply_record_id':f"{r.get('parent_review_record_id')}::{r.get('reply_index')}",'source_parent_id':review_parent.get(r.get('parent_review_record_id')),'gold_version':'tv2-gold-2.0'}); replies.append(x)
  features=[{k:r.get(k) for k in FEATURE_FIELDS} for r in listings]
  parent_names={d['source_parent_id']:normalize_product_name(d.get('representative_parent_name_raw')) for d in dims}
- processed_products=[{'listing_record_id':r.get('listing_record_id'),'source_parent_id':r.get('source_parent_id'),'product_name':parent_names.get(r.get('source_parent_id')),**{k:v for k,v in r.items() if k not in {'listing_record_id','source_parent_id','brand_raw','total_sold_raw'}}} for r in features]
+ processed_products=[]
+ for r in listings:
+  # Prefer the listing/variant name when available so configurations are not
+  # silently represented by the parent model name only.
+  candidate=r.get('variant_name_raw') or r.get('product_name_raw') or parent_names.get(r.get('source_parent_id'))
+  item={'listing_record_id':r.get('listing_record_id'),'source_parent_id':r.get('source_parent_id'),'product_name':normalize_product_name(candidate)}
+  item.update({k:r.get(k) for k in FEATURE_FIELDS if k not in {'listing_record_id','source_parent_id','brand_raw','total_sold_raw'}})
+  item.update({'variant_name_raw':r.get('variant_name_raw'),'variant_sku_raw':r.get('variant_sku_raw')})
+  processed_products.append(item)
  processed_reviews=[{'review_record_id':r.get('review_record_id'),'source_parent_id':r.get('source_parent_id'),'product_name':parent_names.get(r.get('source_parent_id')),**{k:r.get(k) for k in ['source','category','rating_raw']},'rating_norm':review_rating_norm(r.get('rating_raw'),r.get('source')),**{k:r.get(k) for k in ['review_text_normalized','author_raw','review_time_raw','review_usable','is_reply_present','is_attachment_present','review_metadata_suspect_candidate']}} for r in reviews]
  OUT.mkdir(parents=True,exist_ok=True); PROCESSED.mkdir(parents=True,exist_ok=True); write('dim_source_parents.jsonl',dims);write('fact_listings.jsonl',listings);write('fact_listings_features.jsonl',features);write('fact_reviews.jsonl',reviews);write('fact_review_replies.jsonl',replies);write_processed('products_processed.jsonl',processed_products);write_processed('reviews_processed.jsonl',processed_reviews)
  report={'pipeline_stage':'gold_v2','source':'silver_v2','outputs':{'dim_source_parents':len(dims),'fact_listings':len(listings),'fact_listings_features':len(features),'fact_reviews':len(reviews),'fact_review_replies':len(replies),'products_processed':len(features),'reviews_processed':len(processed_reviews)},'feature_fields':FEATURE_FIELDS,'processed_review_fields':list(processed_reviews[0]) if processed_reviews else [],'normalized_fields_in_listings':all('price_vnd' in r and 'availability_status' in r for r in listings),'raw_provenance_preserved':all(r.get('raw_record_id') and r.get('raw_file') for r in listings+reviews),'cross_store_identity_resolved':False}

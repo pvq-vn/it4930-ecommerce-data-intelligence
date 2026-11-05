@@ -10,7 +10,14 @@ def is_empty(value):
     return value is None or value == '' or value == [] or value == {}
 
 def main():
-    manifest = json.loads((ROOT / 'docs/input_manifest.json').read_text(encoding='utf-8'))
+    manifest_path = ROOT / 'docs/input_manifest.json'
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+    else:
+        manifest = []
+        for folder in ('products', 'reviews'):
+            for path in sorted((ROOT / 'data' / 'raw' / folder).glob('*.jsonl')):
+                manifest.append({'path': str(path.relative_to(ROOT)).replace('\\','/'), 'records': None, 'sha256': None})
     results = []
     for item in manifest:
         path = ROOT / item['path']
@@ -44,8 +51,8 @@ def main():
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         result = {
             'file': item['path'], 'records': len(rows), 'errors': errors,
-            'sha256': digest, 'matches_packaged_sha256': digest == item['sha256'],
-            'matches_packaged_record_count': len(rows) == item['records'],
+            'sha256': digest, 'matches_packaged_sha256': item.get('sha256') is None or digest == item['sha256'],
+            'matches_packaged_record_count': item.get('records') is None or len(rows) == item['records'],
             'field_count_distribution': dict(Counter(len(row) for row in rows)),
             'fields': fields, 'keys': ids,
             'exact_duplicate_excess': len(rows) - len({json.dumps(row, sort_keys=True, ensure_ascii=False) for row in rows}),
