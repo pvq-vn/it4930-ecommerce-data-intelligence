@@ -161,8 +161,8 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ### 5.5.2. Đo lường Hiện tượng Đa cộng tuyến & Cảnh báo VIF (Task 3.2)
 *Căn cứ Bảng 3.2A, 3.2B, 3.2C:*
-- Tại ngành hàng Smartphone, **Dung lượng RAM** và **Bộ nhớ ROM** có tương quan chéo Pearson rất cao ($r = \mathbf{+0.833}$), đẩy chỉ số $VIF$ của RAM lên mức **$5.44$** (vượt ngưỡng cảnh báo an toàn $VIF > 5.0$).
-- *Khuyến nghị TV5*: Hiện tượng đa cộng tuyến này sẽ làm phình to phương sai ước lượng trọng số trong mô hình OLS tuyến tính. TV5 cần áp dụng **Ridge Regression ($L_2$ Regularization)** hoặc ưu tiên sử dụng **GBDT (LightGBM/XGBoost/CatBoost)**.
+- Tại ngành hàng Smartphone, **Dung lượng RAM** và **Bộ nhớ ROM** có tương quan chéo Pearson ở mức vừa phải ($r = \mathbf{+0.565}$), với chỉ số $VIF$ của RAM đạt mức **$2.69$** (nằm trong ngưỡng an toàn, giảm đáng kể từ $5.44$ nhờ tập dữ liệu mới trích xuất đầy đủ phân khúc).
+- *Khuyến nghị TV5*: Chỉ số VIF an toàn cho thấy nguy cơ đa cộng tuyến nghiêm trọng đã được giải tỏa, tuy nhiên TV5 vẫn nên áp dụng **Ridge Regression ($L_2$ Regularization)** hoặc ưu tiên sử dụng **GBDT (LightGBM/XGBoost/CatBoost)** để xử lý tối ưu các mối quan hệ phi tuyến.
 
 ### 5.5.3. Phòng chống Rò rỉ Dữ liệu (Task 3.3)
 *Căn cứ Bảng 3.3:*
