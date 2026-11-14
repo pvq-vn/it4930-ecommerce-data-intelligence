@@ -1,6 +1,7 @@
 import re
 import numpy as np
 import pandas as pd
+from sklearn.base import BaseEstimator, TransformerMixin
 from config import *
 
 
@@ -13,7 +14,7 @@ def _extract_storage_from_text(text):
         return float(match_tb.group(1)) * 1024
 
     match_gb = re.search(r'\b(128|256|512|1024|2048)\s*GB\b', text, flags=re.IGNORECASE)
-    if match_tb:
+    if match_gb:
         return float(match_gb.group(1))
 
     return np.nan
@@ -37,62 +38,107 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
     if bad_storage_mask.any():
         df_valid.loc[bad_storage_mask, 'storage_gb'] = df_valid.loc[bad_storage_mask, 'product_name'].apply(_extract_storage_from_text)
 
-    df_valid.drop(columns=[c for c in LEAKAGE_COLS if c in df_valid.columns])
+    df_valid.drop(columns=[c for c in LEAKAGE_COLS if c in df_valid.columns], inplace=True)
     df_laptop = df_valid[df_valid['category_clean'] == 'laptop']
     df_smartphone = df_valid[df_valid['category_clean'] == 'smartphone']
 
     return df_laptop.reset_index(drop=True), df_smartphone.reset_index(drop=True)
 
-def engineer_laptop(df: pd.DataFrame):
-    df_out = df.copy()
+class HardwareFeatureEngineer(BaseEstimator, TransformerMixin):
+    def __init__(self, category, cat_dtype='str'):
+        self.category = category
+        self.cat_dtype = cat_dtype
 
-    df_out['is_ram_missing'] = df_out['ram_gb'].isnull().astype(int)
-    df_out['is_battery_missing'] = df_out['battery_wh'].isnull().astype(int)
+    def _prepare_stateless(self, df: pd.DataFrame) -> pd.DataFrame:
+        if self.category == 'laptop':
+            raw_num = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh']
+            cat_cols = LAPTOP_CAT_FEATURES
+        else:
+            raw_num = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp']
+            cat_cols = SMARTPHONE_CAT_FEATURES
 
-    for col in ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh']:
-        medians = df_out.groupby(['brand'])[col].transform('median')
-        df_out[col] = df_out[col].fillna(medians)
-        df_out[col] = df_out[col].fillna(df_out[col].median())
+        required_cols = raw_num + cat_cols
+        df_out = df.reindex(columns=df.columns.union(required_cols, sort=False)).copy()
 
-    df_out['ram_x_storage'] = df_out['ram_gb'] * df_out['storage_gb']
-    df_out['is_dedicated_gpu'] = df_out['gpu_model'].apply(lambda x: 1 if pd.notnull(x) and any(kw in str(x).lower() for kw in ['rtx', 'gtx', 'radeon', 'rx', 'arc']) else 0)
+        for col in raw_num:
+            df_out[col] = pd.to_numeric(df_out[col], errors='coerce')
 
-    def assign_cpu_tier(cpu):
-        cpu = re.sub(r'[\s\-]+', '', str(cpu).lower())
-        if any(k in cpu for k in ['i9', 'r9', 'ryzen9', 'ultra9', 'core9']):
-            return 5
-        if 'apple' in cpu or cpu.startswith(('m1', 'm2', 'm3', 'm4')):
-            return 4
-        if any(k in cpu for k in ['i7', 'r7', 'ryzen7', 'ultra7', 'core7']):
-            return 3
-        if any(k in cpu for k in ['i5', 'r5', 'ryzen5', 'ultra5', 'core5']):
-            return 2
-        if any(k in cpu for k in ['i3', 'r3', 'ryzen3', 'ultra3', 'core3']):
-            return 1
-        return 0
+        df_out['is_ram_missing'] = df_out['ram_gb'].isnull().astype(int)
+        bat_col = 'battery_wh' if self.category == 'laptop' else 'battery_mah'
+        df_out['is_battery_missing'] = df_out[bat_col].isnull().astype(int)
 
-    df_out['cpu_tier_score'] = df_out['cpu_model'].apply(assign_cpu_tier)
+        if self.category == 'laptop':
+            df_out['is_dedicated_gpu'] = df_out['gpu_model'].apply(
+                lambda x: 1 if pd.notnull(x) and any(
+                    kw in str(x).lower() for kw in ['rtx', 'gtx', 'radeon', 'rx', 'arc']
+                ) else 0
+            )
 
-    for col in LAPTOP_CAT_FEATURES:
-        df_out[col] = df_out[col].fillna('unknown').astype(str)
+            def assign_cpu_tier(cpu):
+                cpu = re.sub(r'[\s\-]+', '', str(cpu).lower())
+                if any(k in cpu for k in ['i9', 'r9', 'ryzen9', 'ultra9', 'core9']):
+                    return 5
+                if 'apple' in cpu or cpu.startswith(('m1', 'm2', 'm3', 'm4')):
+                    return 4
+                if any(k in cpu for k in ['i7', 'r7', 'ryzen7', 'ultra7', 'core7']):
+                    return 3
+                if any(k in cpu for k in ['i5', 'r5', 'ryzen5', 'ultra5', 'core5']):
+                    return 2
+                if any(k in cpu for k in ['i3', 'r3', 'ryzen3', 'ultra3', 'core3']):
+                    return 1
+                return 0
 
-    return df_out
+            df_out['cpu_tier_score'] = df_out['cpu_model'].apply(assign_cpu_tier)
+        else:
+            df_out['is_oled'] = df_out['display_type_norm'].apply(
+                lambda x: 1 if pd.notnull(x) and any(
+                    kw in str(x).lower() for kw in ['oled', 'amoled', 'retina']
+                ) else 0
+            )
 
-def engineer_smartphone(df: pd.DataFrame):
-    df_out = df.copy()
+        for col in cat_cols:
+            df_out[col] = df_out[col].fillna('unknown').astype(str)
 
-    df_out['is_ram_missing'] = df_out['ram_gb'].isnull().astype(int)
-    df_out['is_battery_missing'] = df_out['battery_mah'].isnull().astype(int)
+        return df_out
 
-    for col in ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp']:
-        medians = df_out.groupby(['brand'])[col].transform('median')
-        df_out[col] = df_out[col].fillna(medians)
-        df_out[col] = df_out[col].fillna(df_out[col].median())
+    def fit(self, X: pd.DataFrame, y=None):
+        df_prep = self._prepare_stateless(X)
+        self.num_to_impute_ = (
+            ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh']
+            if self.category == 'laptop'
+            else ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp']
+        )
 
-    df_out['is_rom_high'] = (df_out['storage_gb'] >= 256).astype(int)
-    df_out['is_oled'] = df_out['display_type_norm'].apply(lambda x: 1 if pd.notnull(x) and any(kw in str(x).lower() for kw in ['oled', 'amoled', 'retina']) else 0)
+        self.by_brand_medians_ = {}
+        self.global_medians_ = {}
 
-    for col in SMARTPHONE_CAT_FEATURES:
-        df_out[col] = df_out[col].fillna('unknown').astype(str)
+        brand_clean = df_prep['brand'].str.lower().str.strip()
+        for col in self.num_to_impute_:
+            self.by_brand_medians_[col] = df_prep.groupby(brand_clean)[col].median().dropna().to_dict()
+            global_med = df_prep[col].median()
+            self.global_medians_[col] = np.nan if pd.isna(global_med) else float(global_med)
 
-    return df_out
+        return self
+
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        df_out = self._prepare_stateless(X)
+        brand_clean = df_out['brand'].str.lower().str.strip()
+
+        for col in self.num_to_impute_:
+            fill_vals = brand_clean.map(self.by_brand_medians_[col]).fillna(self.global_medians_[col])
+            df_out[col] = df_out[col].fillna(fill_vals)
+
+        if self.category == 'laptop':
+            df_out['ram_x_storage'] = df_out['ram_gb'] * df_out['storage_gb']
+            num_cols, cat_cols = LAPTOP_NUM_FEATURES, LAPTOP_CAT_FEATURES
+        else:
+            df_out['is_rom_high'] = (df_out['storage_gb'] >= 256).astype(int)
+            num_cols, cat_cols = SMARTPHONE_NUM_FEATURES, SMARTPHONE_CAT_FEATURES
+
+        for col in cat_cols:
+            if self.cat_dtype == 'category':
+                df_out[col] = df_out[col].astype('category')
+            else:
+                df_out[col] = df_out[col].astype(str)
+
+        return df_out[num_cols + cat_cols]

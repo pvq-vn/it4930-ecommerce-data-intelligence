@@ -10,7 +10,7 @@ from features import *
 from utils import *
 
 
-def build_rf_pipeline(num_features, cat_features):
+def build_rf_pipeline(category, cat_features):
     preprocessor = ColumnTransformer(
         transformers=[
             ('cat', OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1), cat_features)
@@ -18,19 +18,20 @@ def build_rf_pipeline(num_features, cat_features):
         remainder='passthrough'
     )
 
-    rf = RandomForestRegressor(random_state=RANDOM_STATE)
     pipeline = Pipeline(
         steps=[
+            ('features_engineer', HardwareFeatureEngineer(category=category, cat_dtype='str')),
             ('preprocessor', preprocessor),
-            ('model', rf)
+            ('model', RandomForestRegressor(random_state=RANDOM_STATE))
         ]
     )
 
     return TransformedTargetRegressor(regressor=pipeline, func=np.log1p, inverse_func=np.expm1)
 
-def train_and_eval(X, y, groups, num_features, cat_features):
+
+def train_and_eval(X, y, groups, category, cat_features):
     X_train, X_test, y_train, y_test, groups_train = split_by_group(X, y, groups)
-    model = build_rf_pipeline(num_features, cat_features)
+    model = build_rf_pipeline(category, cat_features)
 
     param_distributions = {
         'regressor__model__n_estimators': [200, 300, 500],
@@ -41,21 +42,21 @@ def train_and_eval(X, y, groups, num_features, cat_features):
     }
 
     gkf = GroupKFold(n_splits=10)
-    search = RandomizedSearchCV(model, param_distributions, n_iter=25, cv=gkf, scoring='neg_mean_absolute_error', random_state=RANDOM_STATE, n_jobs=-1)
+    search = RandomizedSearchCV(
+        model, param_distributions, n_iter=25, cv=gkf,
+        scoring='neg_mean_absolute_error', random_state=RANDOM_STATE, n_jobs=-1
+    )
     search.fit(X_train, y_train, groups=groups_train)
     best_model = search.best_estimator_
     y_pred = best_model.predict(X_test)
 
     return best_model, evaluate_metrics(y_test, y_pred)
 
+
 if __name__ == '__main__':
-    df_laptop_raw, df_smartphone_raw = load_and_split_data(CLEANED_DATA_PATH, PROCESSED_DATA_PATH)
-
-    df_lap = engineer_laptop(df_laptop_raw)
-    df_sma = engineer_smartphone(df_smartphone_raw)
-
-    X_lap, y_lap, g_lap = prepare_modeling_data(df_lap, LAPTOP_NUM_FEATURES, LAPTOP_CAT_FEATURES)
-    X_sma, y_sma, g_sma = prepare_modeling_data(df_sma, SMARTPHONE_NUM_FEATURES, SMARTPHONE_CAT_FEATURES)
+    df_lap, df_sma = load_and_split_data(CLEANED_DATA_PATH, PROCESSED_DATA_PATH)
+    X_lap, y_lap, g_lap = prepare_raw_data(df_lap)
+    X_sma, y_sma, g_sma = prepare_raw_data(df_sma)
 
     results = {}
 
@@ -63,12 +64,12 @@ if __name__ == '__main__':
     rf_result_dir.mkdir(parents=True, exist_ok=True)
 
     print("Training Random Forest (Laptop)")
-    model_lap, metrics_lap = train_and_eval(X_lap, y_lap, g_lap, LAPTOP_NUM_FEATURES, LAPTOP_CAT_FEATURES)
+    model_lap, metrics_lap = train_and_eval(X_lap, y_lap, g_lap, 'laptop', LAPTOP_CAT_FEATURES)
     joblib.dump(model_lap, rf_result_dir / 'rf_laptop.pkl')
     results['laptop'] = metrics_lap
 
     print("Training Random Forest (Smartphone)")
-    model_sma, metrics_sma = train_and_eval(X_sma, y_sma, g_sma, SMARTPHONE_NUM_FEATURES, SMARTPHONE_CAT_FEATURES)
+    model_sma, metrics_sma = train_and_eval(X_sma, y_sma, g_sma, 'smartphone', SMARTPHONE_CAT_FEATURES)
     joblib.dump(model_sma, rf_result_dir / 'rf_smartphone.pkl')
     results['smartphone'] = metrics_sma
 

@@ -6,15 +6,10 @@ from sklearn.model_selection import GroupShuffleSplit
 from config import *
 
 
-def prepare_modeling_data(df: pd.DataFrame, num_features: list, cat_features: list, cat_dtype='str'):
-    X = df[num_features + cat_features].copy()
+def prepare_raw_data(df: pd.DataFrame):
     y = df[TARGET_COL].copy()
     groups = df[GROUP_COL].copy()
-
-    for col in cat_features:
-        if cat_dtype == 'category':
-            X[col] = X[col].astype('category')
-
+    X = df.drop(columns=[TARGET_COL, GROUP_COL], errors='ignore').copy()
     return X, y, groups
 
 def split_by_group(X: pd.DataFrame, y: pd.DataFrame, groups: pd.DataFrame, test_size=0.2):

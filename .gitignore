@@ -34,3 +34,4 @@ data/raw
 scratch_test_out.txt
 
 test.*
+catboost_info/
