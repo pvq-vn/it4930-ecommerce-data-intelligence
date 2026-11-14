@@ -1,0 +1,1326 @@
+﻿canonical_product_id,category,brand,model_clean,cpu_model,ram_gb,storage_gb,gpu_model,price_min,price_median,price_max,listing_count,retailer_count,retailers,total_reviews,avg_rating,degree,exclusivity
+80f6e507c1fb4403,smartphone,Xiaomi,17T 5G,Dimensity 8500-Ultra,12.0,512.0,,15990000.0,17590000.0,18790000.0,12,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,137664.0,4.9363636363636365,4,competitive
+09cc97bcc46c8991,smartphone,Xiaomi,POCO M5,Helio G99,4.0,64.0,,3750000.0,3750000.0,3750000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+e6bbd442709b8238,smartphone,ASUS,ROG Phone 2,Snapdragon 855 Plus,12.0,512.0,,21990000.0,21990000.0,21990000.0,1,1,CellphoneS,31.0,4.8,1,exclusive
+36e0efd33782806a,smartphone,Vsmart,Active 3,Helio P60,4.0,64.0,,3490000.0,3490000.0,3490000.0,1,1,CellphoneS,0.0,,1,exclusive
+a9d9c27a9fa5ea78,smartphone,Apple,iPhone XS Max,Apple A12 Bionic,,256.0,,25000000.0,28500000.0,28500000.0,9,1,CellphoneS,9.0,5.0,1,exclusive
+21b3ee59952ef197_s1,smartphone,Xiaomi,Redmi Note 10S,Helio G95,8.0,128.0,,4690000.0,4690000.0,4690000.0,1,1,CellphoneS,37.0,4.9,1,exclusive
+21b3ee59952ef197_s2,smartphone,Xiaomi,Redmi Note 10S,Helio G95,8.0,128.0,,6490000.0,6490000.0,6490000.0,3,1,CellphoneS,0.0,,1,exclusive
+40d7c2b554f70f26,smartphone,Samsung,Galaxy A70,Snapdragon 675,6.0,128.0,,9290000.0,9290000.0,9290000.0,1,1,CellphoneS,4.0,5.0,1,exclusive
+35ad869f002e443b_s1,smartphone,Samsung,Galaxy J4 Plus,Snapdragon 425,,16.0,,2300000.0,2300000.0,2300000.0,1,1,CellphoneS,0.0,,1,exclusive
+35ad869f002e443b_s2,smartphone,Samsung,Galaxy J4 Plus,Snapdragon 425,,16.0,,3490000.0,3490000.0,3490000.0,3,1,CellphoneS,0.0,,1,exclusive
+759e9578d989a0f7,smartphone,Samsung,Galaxy S8,Exynos 8895,,64.0,,15990000.0,15990000.0,15990000.0,1,1,CellphoneS,0.0,,1,exclusive
+6a8634a5265b83c6,smartphone,Samsung,Galaxy Note 4,Unknown,,,,8635000.0,8635000.0,8635000.0,1,1,CellphoneS,0.0,,1,exclusive
+d3573a7b6b89d0cd,smartphone,OPPO,A92,Snapdragon 665,8.0,128.0,,5740000.0,5740000.0,5740000.0,1,1,CellphoneS,10.0,4.7,1,exclusive
+075669053dc438b2,smartphone,OPPO,A31,Helio P35,6.0,128.0,,4190000.0,4690000.0,4690000.0,3,1,CellphoneS,2.0,5.0,1,exclusive
+926020f110cda267,smartphone,OPPO,F11 Pro,Helio P70,6.0,128.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,0.0,,1,exclusive
+976481c5db4026cd,smartphone,BKAV,Bphone 3 Pro,Snapdragon 660,,64.0,,10490000.0,10490000.0,10490000.0,1,1,CellphoneS,0.0,,1,exclusive
+cc9baebdf40ea351,smartphone,Huawei,Y9 (2019),Kirin 659,,32.0,,4990000.0,4990000.0,4990000.0,1,1,CellphoneS,0.0,,1,exclusive
+2df9a6dc93a759b1,smartphone,Huawei,Y9 (2019),HiSilicon Kirin 659,,32.0,,4990000.0,4990000.0,4990000.0,1,1,CellphoneS,0.0,,1,exclusive
+bd1e1d59f21770b9,smartphone,Xiaomi,Mi MIX 2 Special Edition,Snapdragon 835,,128.0,,15990000.0,15990000.0,15990000.0,1,1,CellphoneS,0.0,,1,exclusive
+02a2d57bdc4a667c,smartphone,Samsung,Galaxy S 2019,Exynos,,128.0,,20990000.0,20990000.0,20990000.0,1,1,CellphoneS,0.0,,1,exclusive
+a576687e7654d779,smartphone,Nokia,3.2,Snapdragon 429,3.0,32.0,,3290000.0,3290000.0,3290000.0,1,1,CellphoneS,0.0,,1,exclusive
+818f14be4afafcf4,smartphone,Nokia,7.2,Snapdragon 660,4.0,64.0,,6190000.0,6190000.0,6190000.0,1,1,CellphoneS,19.0,4.5,1,exclusive
+fa13da3afcc87eab_s1,smartphone,Vsmart,Joy 3,Snapdragon 632,2.0,32.0,,2090000.0,2090000.0,2090000.0,1,1,CellphoneS,66.0,4.8,1,exclusive
+fa13da3afcc87eab_s2,smartphone,Vsmart,Joy 3,Snapdragon 632,4.0,64.0,,3290000.0,3290000.0,3290000.0,3,1,CellphoneS,81.0,4.8,1,exclusive
+c8b2e77f873db448,smartphone,ASUS,ZenFone Max Pro M2,Snapdragon 660 AIE,,32.0,,5290000.0,5290000.0,5290000.0,1,1,CellphoneS,6.0,5.0,1,exclusive
+6953505210110c7a_s1,smartphone,Vsmart,Joy 2 Plus,Unknown,2.0,32.0,,1990000.0,1990000.0,1990000.0,1,1,CellphoneS,10.0,5.0,1,exclusive
+6953505210110c7a_s2,smartphone,Vsmart,Joy 2 Plus,Unknown,,,,3690000.0,3690000.0,3690000.0,3,1,CellphoneS,0.0,,1,exclusive
+fc387733fc1b2d20,smartphone,OPPO,A52,Snapdragon 665,6.0,128.0,,4990000.0,4990000.0,4990000.0,1,1,CellphoneS,0.0,,1,exclusive
+ceeb228d64acca29_s1,smartphone,Xiaomi,Redmi Note 9 Pro,Snapdragon 720G,6.0,64.0,,5750000.0,5750000.0,5750000.0,1,1,CellphoneS,10.0,5.0,1,exclusive
+ceeb228d64acca29_s2,smartphone,Xiaomi,Redmi Note 9 Pro,Snapdragon 720G,6.0,128.0,,6990000.0,6990000.0,6990000.0,3,1,CellphoneS,30.0,4.6,1,exclusive
+e79af693093dbb3b,smartphone,Samsung,Galaxy A50s,Exynos 9610,4.0,64.0,,6990000.0,6990000.0,6990000.0,1,1,CellphoneS,5.0,4.8,1,exclusive
+13f2b364c1b6dd40,smartphone,Gofly,A8,Unknown,,,,290000.0,290000.0,290000.0,1,1,CellphoneS,0.0,,1,exclusive
+92965464b0c5ce5a,smartphone,Neffos,N105,SC6531E,,,,190000.0,190000.0,190000.0,1,1,CellphoneS,0.0,,1,exclusive
+34651dab60ec7a0d,smartphone,Xiaomi,Mi MIX 2,Snapdragon 835,,64.0,,7750000.0,7750000.0,7750000.0,1,1,CellphoneS,0.0,,1,exclusive
+20645104b0015b11,smartphone,Huawei,P30,HiSilicon Kirin 980,8.0,128.0,,17990000.0,17990000.0,17990000.0,1,1,CellphoneS,0.0,,1,exclusive
+91d45b768cbcf2d5,smartphone,Huawei,P30 Pro,HiSilicon Kirin 980,8.0,256.0,,23990000.0,23990000.0,23990000.0,1,1,CellphoneS,0.0,,1,exclusive
+89172f5f557508fd_s1,smartphone,Huawei,P30 Lite,Kirin 710,6.0,128.0,,5490000.0,5490000.0,5490000.0,3,1,CellphoneS,0.0,,1,exclusive
+89172f5f557508fd_s2,smartphone,Huawei,P30 Lite,Kirin 710,6.0,128.0,,7490000.0,7490000.0,7490000.0,1,1,CellphoneS,0.0,,1,exclusive
+d1abfa282da87c50,smartphone,Nokia,800 Tough,Qualcomm 205,,4.0,,1990000.0,1990000.0,1990000.0,1,1,CellphoneS,4.0,4.2,1,exclusive
+5d2652b80c3e6d69,smartphone,Vsmart,Live,Snapdragon 675,6.0,64.0,,3790000.0,3790000.0,3790000.0,1,1,CellphoneS,77.0,4.7,1,exclusive
+9df560b3d26bc4c4_s1,smartphone,Apple,iPhone 11,Apple A13 Bionic,4.0,96.0,,8490000.0,9040000.0,9590000.0,4,1,CellphoneS,464.0,4.9,1,exclusive
+9df560b3d26bc4c4_s2,smartphone,Apple,iPhone 11,Apple A13 Bionic,4.0,128.0,,11990000.0,13990000.0,13990000.0,5,1,CellphoneS,288.0,4.9,1,exclusive
+9df560b3d26bc4c4_s3,smartphone,Apple,iPhone 11,Apple A13 Bionic,4.0,256.0,,19990000.0,19990000.0,19990000.0,6,1,CellphoneS,48.0,4.9,1,exclusive
+add441d5f662b00b,smartphone,Vsmart,Bee 5,MediaTek MT6739WW,,16.0,,1590000.0,1590000.0,1590000.0,1,1,CellphoneS,0.0,,1,exclusive
+9fa436f54182bcd2,smartphone,Samsung,Galaxy Note 20 Ultra 5G,Exynos 990,12.0,256.0,,32990000.0,32990000.0,32990000.0,4,1,CellphoneS,132.0,4.9,1,exclusive
+255562352881bbf6,smartphone,Samsung,Galaxy A21s,Exynos 850,3.0,32.0,,4690000.0,4690000.0,4690000.0,4,1,CellphoneS,12.0,4.2,1,exclusive
+88bb23c50cc4dd9a,smartphone,Samsung,Galaxy M14,Exynos 1330,4.0,64.0,,5290000.0,5290000.0,5290000.0,3,1,CellphoneS,6.0,4.9,1,exclusive
+fcf336d718b2b4ec,smartphone,Samsung,Galaxy S20+ BTS Edition,Exynos 990,8.0,128.0,,24990000.0,24990000.0,24990000.0,1,1,CellphoneS,20.0,5.0,1,exclusive
+f6da2eae2bae9bd0_s1,smartphone,Samsung,Galaxy Note 10,Exynos 9825,8.0,256.0,,13800000.0,13800000.0,13800000.0,1,1,CellphoneS,13.0,4.8,1,exclusive
+f6da2eae2bae9bd0_s2,smartphone,Samsung,Galaxy Note 10+,Exynos 9825,12.0,256.0,,26990000.0,26990000.0,26990000.0,1,1,CellphoneS,27.0,4.7,1,exclusive
+a93ff9e9e6072332,smartphone,Samsung,Galaxy S20,Exynos 990,8.0,128.0,,21490000.0,23990000.0,23990000.0,4,1,CellphoneS,52.0,4.325,1,exclusive
+a2c3e068e23737d8,smartphone,Xiaomi,Redmi Note 10 Pro,Snapdragon 732G,8.0,128.0,,5790000.0,6090000.0,6090000.0,7,1,CellphoneS,209.0,4.742857142857143,1,exclusive
+a62fde4a7f8c93b5_s1,smartphone,Xiaomi,POCO F2 Pro,Snapdragon 865,6.0,128.0,,12490000.0,12490000.0,12490000.0,3,1,CellphoneS,9.0,4.3,1,exclusive
+a62fde4a7f8c93b5_s2,smartphone,Xiaomi,POCO F2 Pro,Snapdragon 865,8.0,256.0,,14990000.0,14990000.0,14990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+243c57eb239daace,smartphone,Xiaomi,Mi Note 10 Lite,Snapdragon 730G,7.0,96.0,,8990000.0,9490000.0,9990000.0,6,1,CellphoneS,27.0,4.6,1,exclusive
+77af9cf9da1407aa,smartphone,Xiaomi,Redmi 8,Snapdragon 439,4.0,64.0,,2500000.0,2800000.0,2800000.0,5,1,CellphoneS,0.0,,1,exclusive
+bdc7db6262be0482_s1,smartphone,Xiaomi,Redmi Note 8,Snapdragon 665,3.0,48.0,,3990000.0,4240000.0,4490000.0,6,1,CellphoneS,78.0,4.8500000000000005,1,exclusive
+bdc7db6262be0482_s2,smartphone,Xiaomi,Redmi Note 8,Snapdragon 665,4.0,128.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+176aa77729ca2d57,smartphone,Xiaomi,Redmi 6A,Helio A22,,16.0,,2190000.0,2190000.0,2599000.0,9,1,CellphoneS,0.0,,1,exclusive
+78653b1b6853893b_s1,smartphone,Xiaomi,Redmi S2,Snapdragon 625,,32.0,,3690000.0,3870000.0,3990000.0,4,1,CellphoneS,3.0,3.0,1,exclusive
+78653b1b6853893b_s2,smartphone,Xiaomi,Redmi S2,Snapdragon 625,,64.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,0.0,,1,exclusive
+df0c5b9261bfa8b2,smartphone,Honor,Honor 8A,Helio P35,,32.0,,2990000.0,2990000.0,2990000.0,4,1,CellphoneS,0.0,,1,exclusive
+502697e2f32d8939,smartphone,Honor,Honor 7C,Snapdragon 450,,32.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,0.0,,1,exclusive
+8a1207f86ae386b0,smartphone,Honor,Honor 9 Lite,Kirin 659,,32.0,,3490000.0,3490000.0,3490000.0,3,1,CellphoneS,0.0,,1,exclusive
+eed3f2a45a15b32f,smartphone,Honor,Honor 10,Kirin 970,,128.0,,9990000.0,9990000.0,9990000.0,2,1,CellphoneS,0.0,,1,exclusive
+01fe1384a62ed115,smartphone,Samsung,Galaxy A80,Snapdragon 730,8.0,128.0,,14990000.0,14990000.0,14990000.0,4,1,CellphoneS,60.0,4.5,1,exclusive
+caf9d3bd4b323931,smartphone,OPPO,Reno 3,Helio P90,8.0,128.0,,6150000.0,6150000.0,6150000.0,3,1,CellphoneS,27.0,4.6,1,exclusive
+e52a20aef2e328ba,smartphone,OPPO,A73,Snapdragon 662,6.0,128.0,,5490000.0,5490000.0,5490000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+15b331c9daf22f9b,smartphone,OPPO,A83,Helio P23,,32.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,0.0,,1,exclusive
+36ef124365026501,smartphone,OPPO,F3 Lite,Snapdragon 435,,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+1747113d0594d11d,smartphone,OPPO,A7,Snapdragon 450,,64.0,,4590000.0,4590000.0,4590000.0,2,1,CellphoneS,0.0,,1,exclusive
+5f0131fcb3c58492,smartphone,Energizer,Power Max P20,Spreadtrum SC6531E,,,,590000.0,590000.0,590000.0,1,1,CellphoneS,0.0,,1,exclusive
+9c7d047b084618cf,smartphone,Energizer,Energy E12,Spreadtrum SC6531E,,,,290000.0,290000.0,290000.0,1,1,CellphoneS,0.0,,1,exclusive
+c14f82dc284da89f,smartphone,BlackBerry,Key2 LE,Snapdragon 636,,64.0,,11790000.0,11790000.0,11790000.0,3,1,CellphoneS,0.0,,1,exclusive
+df2926c82bd532b1,smartphone,Sharp,Aquos S3,Snapdragon 630,,64.0,,4500000.0,4500000.0,4500000.0,1,1,CellphoneS,0.0,,1,exclusive
+5dc474b259236ff8,smartphone,Itel,IT2171,Unknown,,,,230000.0,230000.0,230000.0,3,1,CellphoneS,0.0,,1,exclusive
+7a1c9616f795444d,smartphone,Itel,IT5022,Unknown,,,,280000.0,280000.0,280000.0,1,1,CellphoneS,0.0,,1,exclusive
+a25f477a1d7802ea,smartphone,Itel,IT2580,Unknown,,4.0,,350000.0,350000.0,350000.0,2,1,CellphoneS,0.0,,1,exclusive
+5458a0fc6e52f559,smartphone,Masstel,Play 30,Unknown,,,,590000.0,590000.0,590000.0,2,1,CellphoneS,0.0,,1,exclusive
+3756421495c7e1d9,smartphone,Masstel,Fami S,Unknown,,,,590000.0,590000.0,590000.0,2,1,CellphoneS,0.0,,1,exclusive
+d0c7c4185bad82d2,smartphone,Masstel,Fami 12,Unisoc T107,,,,490000.0,490000.0,490000.0,3,1,CellphoneS,0.0,,1,exclusive
+cb9fb8453900d2f0,smartphone,Masstel,IZI 280,Unknown,,,,450000.0,450000.0,450000.0,2,1,CellphoneS,0.0,,1,exclusive
+9e2ca0a7da050e8b,smartphone,Masstel,IZI 206,MT6261M,,,,290000.0,290000.0,290000.0,2,1,CellphoneS,0.0,,1,exclusive
+8bb7fab18d654a87,smartphone,Itel,IT2123V,Unknown,,,,200000.0,200000.0,200000.0,1,1,CellphoneS,0.0,,1,exclusive
+cc6172f2bfab5307_s1,smartphone,Realme,Realme 5,Snapdragon 665,3.0,32.0,,3690000.0,3690000.0,3690000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+cc6172f2bfab5307_s2,smartphone,Realme,Realme 5,Snapdragon 665,4.0,128.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,0.0,,1,exclusive
+ab72d0b0ad1f258c,smartphone,Nokia,Nokia 3.1,MT6750,,16.0,,2490000.0,2490000.0,2490000.0,3,1,CellphoneS,0.0,,1,exclusive
+976e4edf2d6d217d,smartphone,Nubia,Nubia A56,T7200,4.0,64.0,,2050000.0,2050000.0,2050000.0,2,1,CellphoneS,0.0,,1,exclusive
+47fbebbfcce209ec,smartphone,Realme,Realme 3,Helio P60,4.0,64.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,0.0,,1,exclusive
+1355710fda454b4d,smartphone,Realme,Realme 2 Pro,Snapdragon 660,4.0,64.0,,5290000.0,5440000.0,5790000.0,4,1,CellphoneS,0.0,,1,exclusive
+b94aa35a67f2b0a0,smartphone,Realme,Realme 5i,Snapdragon 665,4.0,64.0,,3390000.0,3390000.0,3390000.0,2,1,CellphoneS,22.0,4.6,1,exclusive
+67c234143d6bb3ee,smartphone,Xiaomi,Mi A3,Snapdragon 665,4.0,64.0,,3490000.0,3990000.0,3990000.0,3,1,CellphoneS,0.0,,1,exclusive
+0c533dd938ed3fe8,smartphone,Xiaomi,Redmi 7A,Snapdragon 439,2.0,32.0,,2050000.0,2050000.0,2050000.0,2,1,CellphoneS,0.0,,1,exclusive
+696ee07fc22908d1_s1,smartphone,Xiaomi,Mi 9 SE,Snapdragon 730G,6.0,128.0,,6290000.0,6290000.0,6290000.0,2,1,CellphoneS,0.0,,1,exclusive
+696ee07fc22908d1_s2,smartphone,Xiaomi,Mi 9 SE,Snapdragon 730G,6.0,128.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,0.0,,1,exclusive
+705bfeacfc0abbad_s1,smartphone,Huawei,Mate 20 Pro,Kirin 980,,128.0,,13990000.0,13990000.0,13990000.0,3,1,CellphoneS,0.0,,1,exclusive
+705bfeacfc0abbad_s2,smartphone,Huawei,Mate 20 Pro,Kirin 980,,128.0,,21990000.0,21990000.0,21990000.0,1,1,CellphoneS,0.0,,1,exclusive
+dbb70ef043164bf3,smartphone,Huawei,Mate 20,Kirin 980,,128.0,,15990000.0,15990000.0,15990000.0,2,1,CellphoneS,0.0,,1,exclusive
+89aede419ad42d70,smartphone,Huawei,P30 Pro,Kirin 980,8.0,256.0,,22990000.0,22990000.0,22990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+4b5a70d573eb85f6_s1,smartphone,Vsmart,Star 4,Helio P35,2.0,16.0,,1850000.0,2050000.0,2050000.0,4,1,CellphoneS,0.0,,1,exclusive
+4b5a70d573eb85f6_s2,smartphone,Vsmart,Star 4,Helio P35,3.0,32.0,,2490000.0,2490000.0,2490000.0,4,1,CellphoneS,12.0,5.0,1,exclusive
+285cccc33cb31a8a,smartphone,Huawei,Y6p,Helio P22,4.0,64.0,,3490000.0,3490000.0,3490000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+95a91b9f0cd777ee,smartphone,Vsmart,Star,Snapdragon 215,2.0,16.0,,1290000.0,1290000.0,1290000.0,3,1,CellphoneS,18.0,5.0,1,exclusive
+0429e8102b2f22d9,smartphone,Vsmart,Bee,Unknown,1.0,16.0,,990000.0,990000.0,990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+eb7f7394eedf3254,smartphone,Realme,C65,Helio G85,8.0,128.0,,4430000.0,4430000.0,4430000.0,1,1,CellphoneS,0.0,,1,exclusive
+a2f270b46eceda8f,smartphone,Samsung,Galaxy 2021 phiên bản đặc biệt,Exynos 2100,12.0,128.0,,33990000.0,33990000.0,33990000.0,1,1,CellphoneS,0.0,,1,exclusive
+dd4ce4131b54770b_s1,smartphone,Apple,iPhone 8,Apple A11 Bionic,,64.0,,10020000.0,10020000.0,10020000.0,1,1,CellphoneS,0.0,,1,exclusive
+dd4ce4131b54770b_s2,smartphone,Apple,iPhone 8,Apple A11 Bionic,2.0,96.0,,13620000.0,14060000.0,14500000.0,6,1,CellphoneS,0.0,,1,exclusive
+e2f4803d61b8c68b,smartphone,Apple,iPhone 7 Plus,Apple A10 Fusion,3.0,80.0,,9480000.0,9990000.0,10990000.0,10,1,CellphoneS,70.0,4.75,1,exclusive
+b68b48d3e5811602_s1,smartphone,Apple,iPhone XS,Apple A12 Bionic,,64.0,,15930000.0,15930000.0,15930000.0,1,1,CellphoneS,2.0,4.5,1,exclusive
+b68b48d3e5811602_s2,smartphone,Apple,iPhone XS,Apple A12 Bionic,,256.0,,22000000.0,23990000.0,24590000.0,7,1,CellphoneS,6.0,4.75,1,exclusive
+b68b48d3e5811602_s3,smartphone,Apple,iPhone XS,Apple A12 Bionic,,256.0,,28000000.0,28000000.0,28000000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+34cadc64b91bac18,smartphone,Apple,iPhone X,Apple A11 Bionic,,160.0,,19000000.0,20500000.0,22000000.0,4,1,CellphoneS,6.0,4.3,1,exclusive
+50eeccbce02732cf_s1,smartphone,Apple,iPhone 8 Plus,Apple A11 Bionic,3.0,64.0,,13210000.0,13920000.0,15000000.0,7,1,CellphoneS,115.0,4.885714285714286,1,exclusive
+50eeccbce02732cf_s2,smartphone,Apple,iPhone 8 Plus,Apple A11 Bionic,,256.0,,19990000.0,19990000.0,19990000.0,3,1,CellphoneS,0.0,,1,exclusive
+994243401cfbeb64,smartphone,Apple,iPhone 6S,Apple A9,,32.0,,7000000.0,7000000.0,7000000.0,4,1,CellphoneS,0.0,,1,exclusive
+03063bb33030871b,smartphone,OPPO,Reno 10x Zoom,Snapdragon 730G,8.0,256.0,,18990000.0,18990000.0,18990000.0,2,1,CellphoneS,0.0,,1,exclusive
+67f2fa1249a39aad,smartphone,OPPO,Reno,Snapdragon 710,6.0,256.0,,8990000.0,8990000.0,8990000.0,3,1,CellphoneS,0.0,,1,exclusive
+b89bf88ae521d87e_s1,smartphone,OPPO,A12,Helio P35,3.0,32.0,,2990000.0,2990000.0,2990000.0,4,1,CellphoneS,8.0,5.0,1,exclusive
+b89bf88ae521d87e_s2,smartphone,OPPO,A12,Helio P35,4.0,64.0,,3690000.0,3690000.0,3690000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+c73f8900f86cd35b,smartphone,OPPO,Reno 3 Pro,Helio P95,8.0,256.0,,8190000.0,8190000.0,8190000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+02f06534427c2128,smartphone,OPPO,R17 Pro,Snapdragon 710,,128.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,0.0,,1,exclusive
+71be152c7d1fb335,smartphone,OPPO,F9,Helio P60,6.0,64.0,,5500000.0,5500000.0,5500000.0,1,1,CellphoneS,0.0,,1,exclusive
+99e740f360c9d62a,smartphone,Xiaomi,Mi 11 Lite 4G,Snapdragon 732,8.0,128.0,,7990000.0,7990000.0,7990000.0,1,1,CellphoneS,0.0,,1,exclusive
+42c6c9b4524a5604,smartphone,Xiaomi,Redmi GO,Snapdragon 425,,8.0,,1890000.0,1890000.0,1890000.0,2,1,CellphoneS,0.0,,1,exclusive
+988b28b8e04e9082_s1,smartphone,Xiaomi,Redmi 6,Helio P22,,32.0,,2390000.0,2390000.0,2390000.0,3,1,CellphoneS,0.0,,1,exclusive
+988b28b8e04e9082_s2,smartphone,Xiaomi,Redmi 6,Helio P22,3.0,64.0,,4190000.0,4190000.0,4190000.0,6,1,CellphoneS,0.0,,1,exclusive
+ee845c73daf25071,smartphone,Xiaomi,Mi 8 Pro,Snapdragon 845,,128.0,,10190000.0,10190000.0,10190000.0,1,1,CellphoneS,0.0,,1,exclusive
+b0fb98aea7f3a2a8,smartphone,Xiaomi,Mi A2,Snapdragon 660,,32.0,,5990000.0,5990000.0,5990000.0,5,1,CellphoneS,0.0,,1,exclusive
+80f45a7eb526a9af,smartphone,Xiaomi,Redmi Note 5,Snapdragon 636,,64.0,,5690000.0,5690000.0,5690000.0,4,1,CellphoneS,0.0,,1,exclusive
+7c4e5aad85c9f29c_s1,smartphone,Xiaomi,Mi 8,Snapdragon 845,,64.0,,9190000.0,9190000.0,9190000.0,3,1,CellphoneS,0.0,,1,exclusive
+7c4e5aad85c9f29c_s2,smartphone,Xiaomi,Mi 8,Snapdragon 845,,128.0,,13990000.0,13990000.0,13990000.0,3,1,CellphoneS,0.0,,1,exclusive
+7345188420905815,smartphone,Samsung,Galaxy M35 5G,Exynos 1380,8.0,256.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,0.0,,1,exclusive
+79f6bd750dbdbd1a_s1,smartphone,Samsung,Galaxy Z Flip4,Snapdragon 8+ Gen 1,8.0,256.0,,11190000.0,11490000.0,11490000.0,9,1,CellphoneS,42.0,4.888888888888889,1,exclusive
+79f6bd750dbdbd1a_s2,smartphone,Samsung,Galaxy Z Flip4,Snapdragon 8+ Gen 1,8.0,256.0,,25990000.0,25990000.0,25990000.0,1,1,CellphoneS,0.0,,1,exclusive
+1d5ab0fc4ccca714,smartphone,Samsung,Galaxy Fold,Snapdragon 855,12.0,512.0,,50000000.0,50000000.0,50000000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+f494b8b16c62625e,smartphone,Samsung,Galaxy S9+,Exynos 9810,,64.0,,23490000.0,23490000.0,23490000.0,2,1,CellphoneS,0.0,,1,exclusive
+7713495f95f0ae7e,smartphone,Honor,Honor 8X,Kirin 710,,64.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,0.0,,1,exclusive
+02fc020e99655f54_s1,smartphone,Samsung,Galaxy S22 Ultra,Snapdragon 8 Gen 1,12.0,256.0,,18990000.0,18990000.0,18990000.0,4,1,CellphoneS,172.0,4.8,1,exclusive
+02fc020e99655f54_s2,smartphone,Samsung,Galaxy S22 Ultra,Snapdragon 8 Gen 1,12.0,512.0,,30990000.0,36990000.0,36990000.0,12,1,CellphoneS,324.0,5.0,1,exclusive
+bfe12f6a3841f6e0_s1,smartphone,Apple,iPhone XR,Apple A12 Bionic,3.0,64.0,,11990000.0,11990000.0,11990000.0,3,1,CellphoneS,69.0,5.0,1,exclusive
+bfe12f6a3841f6e0_s2,smartphone,Apple,iPhone XR,Apple A12 Bionic,3.0,128.0,,14990000.0,16990000.0,16990000.0,8,1,CellphoneS,58.0,5.0,1,exclusive
+bfe12f6a3841f6e0_s3,smartphone,Apple,iPhone XR,Apple A12 Bionic,,160.0,,18500000.0,19250000.0,20000000.0,12,1,CellphoneS,0.0,,1,exclusive
+4f559edf960006db_s1,smartphone,Apple,iPhone 6,Apple A8,,32.0,,5900000.0,5900000.0,5900000.0,1,1,CellphoneS,0.0,,1,exclusive
+4f559edf960006db_s2,smartphone,Apple,iPhone 6,Apple A8,,32.0,,7290000.0,7290000.0,7290000.0,2,1,CellphoneS,0.0,,1,exclusive
+66a00293574e445b,smartphone,Cat,S42H+,MediaTek Helio,3.0,32.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,0.0,,1,exclusive
+d2001c27d647a6cb,smartphone,Energizer,Energy E241S,Spreadtrum SC9820E,,4.0,,890000.0,890000.0,890000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+1f921f2864d009c1,smartphone,Sharp,R1,MediaTek MT6737,,32.0,,1490000.0,1490000.0,1490000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+c9abd4f8e13da214,smartphone,Sharp,A2 Lite,MediaTek MT6737,,32.0,,2190000.0,2190000.0,2190000.0,2,1,CellphoneS,0.0,,1,exclusive
+e2234736b97f8a91,smartphone,Sharp,A2,MediaTek MT6750T,,64.0,,2490000.0,2490000.0,2490000.0,2,1,CellphoneS,0.0,,1,exclusive
+6fb2d00876ac4099_s1,smartphone,BlackBerry,Keyone,Snapdragon 625,,32.0,,6690000.0,6690000.0,6690000.0,1,1,CellphoneS,0.0,,1,exclusive
+6fb2d00876ac4099_s2,smartphone,BlackBerry,Keyone,Snapdragon 625,,32.0,,8990000.0,8990000.0,8990000.0,1,1,CellphoneS,0.0,,1,exclusive
+f64ec10abcf69ede,smartphone,Sharp,Aquos S2,Snapdragon 630,,64.0,,3090000.0,3090000.0,3090000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+97c23dcfd7ff8d61,smartphone,Itel,IT5091,Unknown,,,,350000.0,350000.0,350000.0,1,1,CellphoneS,0.0,,1,exclusive
+671514144e97a89d_s1,smartphone,Realme,3,Helio P60,3.0,32.0,,3090000.0,3090000.0,3090000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+671514144e97a89d_s2,smartphone,Realme,3,Helio P60,3.0,32.0,,3990000.0,3990000.0,3990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+cf937241a578f52b,smartphone,Tecno,Pova Neo,UNISOC T606,5.0,128.0,,3350000.0,3350000.0,3350000.0,2,1,CellphoneS,4.0,4.5,1,exclusive
+330411a3fa62ce2b,smartphone,Xiaomi,Mi Mix 3,Snapdragon 845,,128.0,,12990000.0,12990000.0,12990000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+1a57ddd9565385bb_s1,smartphone,Xiaomi,Redmi Note 6 Pro,Snapdragon 636,,32.0,,3990000.0,3990000.0,3990000.0,4,1,CellphoneS,0.0,,1,exclusive
+1a57ddd9565385bb_s2,smartphone,Xiaomi,Redmi Note 6 Pro,Snapdragon 636,,64.0,,5690000.0,5690000.0,5690000.0,4,1,CellphoneS,0.0,,1,exclusive
+ca9d08be741d6e15,smartphone,Samsung,Galaxy 2021 phiên bản 2,Exynos 2100,8.0,128.0,,27990000.0,27990000.0,27990000.0,1,1,CellphoneS,0.0,,1,exclusive
+ce6de6441cc6b4ff,smartphone,Realme,5i,Snapdragon 665,3.0,32.0,,3290000.0,3290000.0,3290000.0,2,1,CellphoneS,0.0,,1,exclusive
+eb1f0efa533ae422,smartphone,Realme,Realme 5 Pro,Snapdragon 712 AIE,4.0,128.0,,5990000.0,5990000.0,6990000.0,5,1,CellphoneS,47.0,5.0,1,exclusive
+2513097231cb4a87,smartphone,Realme,Realme 2,Snapdragon 450,,64.0,,4490000.0,4490000.0,4490000.0,3,1,CellphoneS,0.0,,1,exclusive
+16420df48bc8f6eb,smartphone,Realme,Realme 6i,Helio G80,4.0,128.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,0.0,,1,exclusive
+2b85111e139ab422,smartphone,Realme,Realme 6 Pro,Snapdragon 720G,8.0,128.0,,7290000.0,7290000.0,7290000.0,2,1,CellphoneS,0.0,,1,exclusive
+e9aa7507207efc1d,smartphone,Vivo,Vivo Y20,Snapdragon 460,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+31aea2f4b1854dbd,smartphone,Vivo,Vivo Y50,Snapdragon 665,8.0,128.0,,6290000.0,6290000.0,6290000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+e448bfe059ca6e3c,smartphone,Vivo,Vivo Y03t,T612,4.0,64.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+9ee4f5a9f9fa39ed,smartphone,Nokia,Nokia 3.2,Snapdragon 429,2.0,16.0,,2490000.0,2490000.0,2490000.0,1,1,CellphoneS,0.0,,1,exclusive
+33f5f488620f54e7,smartphone,Nokia,Nokia 3.1 Plus,Helio P22,3.0,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b63211dd312d6218,smartphone,Nokia,Nokia 5.3,Snapdragon 665,3.0,64.0,,3290000.0,3290000.0,3290000.0,3,1,CellphoneS,45.0,4.4,1,exclusive
+3fec0a1cd809ce1f,smartphone,Nokia,Nokia C2,Spreadtrum SC7731E,1.0,16.0,,1690000.0,1690000.0,1690000.0,1,1,CellphoneS,1.0,3.0,1,exclusive
+db48cec3b71132b4,smartphone,Nokia,C2,Spreadtrum SC7731E,1.0,16.0,,1690000.0,1690000.0,1690000.0,1,1,CellphoneS,1.0,3.0,1,exclusive
+fead7c28b9b667ef,smartphone,Nokia,Nokia 2.3,MediaTek Helio A22,2.0,32.0,,1990000.0,1990000.0,1990000.0,2,1,CellphoneS,20.0,4.8,1,exclusive
+5168e18f917bd84b,smartphone,Nokia,2.3,Helio A22,2.0,32.0,,1990000.0,1990000.0,1990000.0,1,1,CellphoneS,10.0,4.8,1,exclusive
+28d72c68b0a7082c,smartphone,Nokia,Nokia 2.2,MediaTek Helio A22,2.0,16.0,,1990000.0,1990000.0,1990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+e0922a7641b5bb36,smartphone,Nokia,Nokia 210,MediaTek MT6260A,,,,779000.0,779000.0,779000.0,3,1,CellphoneS,0.0,,1,exclusive
+19274c0b96e30a3d,smartphone,Nokia,Nokia 106,MTK6261D,,,,390000.0,390000.0,390000.0,1,1,CellphoneS,0.0,,1,exclusive
+60297cef388a4e3a,smartphone,Nokia,Nokia 8.1,Snapdragon 710,,64.0,,6590000.0,6590000.0,6590000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+50bf24dcf4d37e69,smartphone,Nokia,Nokia 8.3 5G,Snapdragon 765G,8.0,128.0,,12990000.0,12990000.0,12990000.0,1,1,CellphoneS,14.0,4.8,1,exclusive
+3c9452f98d7d0b6f,smartphone,Nokia,Nokia 2720,Qualcomm 205,,4.0,,1990000.0,1990000.0,1990000.0,1,1,CellphoneS,0.0,,1,exclusive
+54dbb44dcd72c834,smartphone,Nokia,Nokia 216,Unknown,,,,740000.0,740000.0,740000.0,3,1,CellphoneS,0.0,,1,exclusive
+9cc66dd956881ef1,smartphone,Samsung,Galaxy J2 Core,Exynos 7570,,8.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,0.0,,1,exclusive
+74e33ee24f2abdf1,smartphone,ASUS,Zenfone Max M2,Snapdragon 632,4.0,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,10.0,4.6,1,exclusive
+bd6a3e72f6383d59,smartphone,ASUS,Zenfone Live L1,Snapdragon 425,,16.0,,1490000.0,1490000.0,1490000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+81b58c21290aef74,smartphone,ASUS,Zenfone Max Pro M1,Snapdragon 636,,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+ed379057a0eaaaf4,smartphone,Samsung,Galaxy Note 9,Exynos 9810,,128.0,,22990000.0,22990000.0,22990000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+8d8702c899cbf4dd,smartphone,ZTE,Blade A31 Plus,Unisoc SC9863A,2.0,32.0,,1390000.0,1390000.0,1390000.0,1,1,CellphoneS,0.0,,1,exclusive
+2fb01a9c376dc529,smartphone,Vsmart,Star 4,MediaTek Helio P35,2.0,32.0,,2290000.0,2290000.0,2290000.0,1,1,CellphoneS,0.0,,1,exclusive
+248aa6028f0aba27,smartphone,Huawei,Y9s 2019,Kirin 710F,,128.0,,5990000.0,5990000.0,5990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+63c739435c3c309d,smartphone,Samsung,Galaxy A51,Exynos 9610,6.0,64.0,,7990000.0,7990000.0,7990000.0,1,1,CellphoneS,0.0,,1,exclusive
+e0df8133325dfd69,smartphone,Huawei,P40 Pro,Kirin 990 5G,8.0,256.0,,23990000.0,23990000.0,23990000.0,2,1,CellphoneS,14.0,4.3,1,exclusive
+b161242afac87fee,smartphone,Huawei,Nova 7i,Kirin 810,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,22.0,4.6,1,exclusive
+518bf87e9af9ed07,smartphone,Vsmart,Star 3,Snapdragon 215,2.0,16.0,,1990000.0,1990000.0,1990000.0,4,1,CellphoneS,40.0,4.6,1,exclusive
+82d119b37ba4726a,smartphone,Huawei,Mate 30 Pro,Kirin 990,8.0,256.0,,21990000.0,21990000.0,21990000.0,1,1,CellphoneS,10.0,4.7,1,exclusive
+31af48e43e891844,smartphone,Huawei,Y9 Prime 2019,Kirin 710F,4.0,128.0,,5490000.0,5490000.0,5490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+ea157f92e365e88e_s1,smartphone,Xiaomi,Redmi 13,MediaTek Helio G91 Ultra,6.0,128.0,,2490000.0,2490000.0,2490000.0,1,1,CellphoneS,0.0,,1,exclusive
+ea157f92e365e88e_s2,smartphone,Xiaomi,Redmi 13,MediaTek Helio G91 Ultra,6.0,128.0,,3990000.0,3990000.0,3990000.0,1,1,CellphoneS,0.0,,1,exclusive
+b42c25a2adc505a0,smartphone,Nothing,CMF Phone 1,Dimensity 7300 5G,8.0,256.0,,7090000.0,7090000.0,7090000.0,2,1,CellphoneS,0.0,,1,exclusive
+50da5a496e03507e_s1,smartphone,Tecno,Spark Go 1,Unisoc T615,4.0,64.0,,1490000.0,1490000.0,1490000.0,2,1,CellphoneS,0.0,,1,exclusive
+50da5a496e03507e_s2,smartphone,Tecno,Spark Go 1,Unisoc T615,4.0,64.0,,1860000.0,1860000.0,1860000.0,2,1,CellphoneS,30.0,4.9,1,exclusive
+fbb27c7f87d022db,smartphone,Vivo,Y20 (2021),MediaTek Helio P35,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b02a86954c509910,smartphone,Xiaomi,Redmi A2,MediaTek Helio G36,3.0,32.0,,2190000.0,2190000.0,2190000.0,3,1,CellphoneS,0.0,,1,exclusive
+3310c7748c05c894,smartphone,Huawei,Y7 Pro 2019,Snapdragon 450,,32.0,,3490000.0,3490000.0,3490000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+4cc1e1fcf26cd48d,smartphone,Tecno,Spark 8C,Unisoc T606,3.0,96.0,,2250000.0,2325000.0,2400000.0,6,1,CellphoneS,99.0,4.8,1,exclusive
+2b9093b0ffdd89ef,smartphone,Bphone,A40,MediaTek Helio G85,4.0,64.0,,3600000.0,3600000.0,3600000.0,1,1,CellphoneS,6.0,4.8,1,exclusive
+ccbad89844ad12dc,smartphone,ASUS,ROG Phone 5S,Snapdragon 888+,16.0,256.0,,16490000.0,17690000.0,17690000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+bec29242748a13f5,smartphone,Vsmart,Aris,Snapdragon 730,8.0,128.0,,5990000.0,6690000.0,6690000.0,5,1,CellphoneS,420.0,4.9,1,exclusive
+027ff331a950feb3,smartphone,Masstel,Lux 20,Unisoc T107,,,,500000.0,500000.0,500000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+f6ef53ffbfb9be5e_s1,smartphone,Samsung,Galaxy Z Fold3 5G,Snapdragon 888 5G,12.0,256.0,,21490000.0,21490000.0,21490000.0,1,1,CellphoneS,0.0,,1,exclusive
+f6ef53ffbfb9be5e_s2,smartphone,Samsung,Galaxy Z Fold3 5G,Snapdragon 888 5G,12.0,384.0,,41990000.0,43490000.0,44990000.0,6,1,CellphoneS,51.0,4.95,1,exclusive
+e56d5a2e4ad2874b,smartphone,OnePlus,10T 5G,Snapdragon 8+ Gen 1,12.0,192.0,,13990000.0,14990000.0,15990000.0,2,1,CellphoneS,1.0,5.0,1,exclusive
+ea6d14e48c218815,smartphone,TCL,408,MTK MT6762,4.0,128.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+59a0e36c883ad063,smartphone,Realme,9i,Snapdragon 680 4G,4.0,64.0,,5490000.0,5490000.0,5490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+b159fc2c7b30d24b,smartphone,Realme,2 Pro,Snapdragon 660,6.0,64.0,,5790000.0,5790000.0,5790000.0,1,1,CellphoneS,0.0,,1,exclusive
+52ea56c76974f2ba,smartphone,Nubia,Red Magic 6s Pro,Snapdragon 888+,16.0,256.0,,15990000.0,15990000.0,15990000.0,1,1,CellphoneS,0.0,,1,exclusive
+c25c7af5dcbb41e9,smartphone,Xiaomi,POCO X5 5G,Snapdragon 695 5G,8.0,256.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,6.0,4.0,1,exclusive
+a43d9d51cac9ff7a,smartphone,Bphone,Bphone A60,Helio G85,6.0,128.0,,4990000.0,4990000.0,4990000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+30b05d72a63fe208,smartphone,Masstel,IZI 30 4G,Unisoc UMS9117,,,,600000.0,600000.0,600000.0,2,1,CellphoneS,0.0,,1,exclusive
+24967b378e50d7b3,smartphone,Realme,Realme C25Y,Unisoc T618,4.0,64.0,,4690000.0,4690000.0,4690000.0,2,1,CellphoneS,0.0,,1,exclusive
+64c899aaf14d4e06,smartphone,Nokia,Nokia C30,Spreadtrum SC9863A,2.0,32.0,,2990000.0,2990000.0,2990000.0,1,1,CellphoneS,2.0,4.0,1,exclusive
+2095ab1b0043e321,smartphone,Xiaomi,POCO M5s,Helio G95,5.0,96.0,,3590000.0,3820000.0,4050000.0,6,1,CellphoneS,18.0,4.75,1,exclusive
+3f5837596ae1a33b,smartphone,Energizer,Energy E20,Unknown,,,,650000.0,650000.0,650000.0,1,1,CellphoneS,0.0,,1,exclusive
+fbe17b87d55d18fd,smartphone,Tecno,Pova 4 Pro,Helio G99,8.0,256.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,22.0,4.9,1,exclusive
+2339b3e3e8c5d6d3,smartphone,Itel,Itel 9211 4G,Unknown,,,,490000.0,490000.0,490000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+bdc4d26273249479,smartphone,Realme,Realme C2,Helio P22,2.0,24.0,,2690000.0,2740000.0,2790000.0,4,1,CellphoneS,2.0,5.0,1,exclusive
+d3c35b236e137b4e,smartphone,TCL,TCL 40SE,Helio G37,6.0,256.0,IMG GE8320,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+5660c3e9fbf47b8a_s1,smartphone,Vsmart,Star 5,MediaTek Helio G35,3.0,32.0,,2690000.0,2690000.0,2690000.0,3,1,CellphoneS,87.0,4.8,1,exclusive
+5660c3e9fbf47b8a_s2,smartphone,Vsmart,Star 5,MediaTek Helio G35,4.0,64.0,,3290000.0,3290000.0,3290000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+43ae0315c7ae6e1e_s1,smartphone,Nubia,Z60S Pro,Snapdragon 8 Gen 2,12.0,256.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,8.0,4.9,1,exclusive
+43ae0315c7ae6e1e_s2,smartphone,Nubia,Z60S Pro,Snapdragon 8 Gen 2,16.0,1024.0,,13990000.0,13990000.0,13990000.0,1,1,CellphoneS,0.0,,1,exclusive
+714b9aa3051b17ba,smartphone,Cat,B40,Unisoc T117,,,,2490000.0,2490000.0,2490000.0,1,1,CellphoneS,0.0,,1,exclusive
+509cf56443021785,smartphone,Tecno,Pova 2,MediaTek Helio G85,6.0,128.0,,3750000.0,3750000.0,3750000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+5ede0598d9256c44,smartphone,Itel,9310 4G,Unknown,,,,650000.0,650000.0,650000.0,2,1,CellphoneS,10.0,4.0,1,exclusive
+b0e425b567c4c644_s1,smartphone,Nokia,C21 Plus,Unisoc SC9863A,2.0,32.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+b0e425b567c4c644_s2,smartphone,Nokia,C21 Plus,Unisoc SC9863A,2.0,64.0,,2890000.0,2890000.0,3190000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+81201e2baacf18eb,smartphone,Nokia,110,SPRD 6531E,,,,500000.0,500000.0,500000.0,2,1,CellphoneS,0.0,,1,exclusive
+a5b676926bf472be_s1,smartphone,Nubia,Red Magic 6R,Snapdragon 888 5G,8.0,128.0,,9490000.0,9490000.0,9490000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+a5b676926bf472be_s2,smartphone,Nubia,Red Magic 6R,Snapdragon 888 5G,12.0,256.0,,11990000.0,11990000.0,11990000.0,1,1,CellphoneS,0.0,,1,exclusive
+671a9bb76c240f91_s1,smartphone,Apple,iPhone 14 Plus,Apple A15 Bionic,6.0,192.0,,15990000.0,16990000.0,17990000.0,12,1,CellphoneS,210.0,4.8500000000000005,1,exclusive
+671a9bb76c240f91_s2,smartphone,Apple,iPhone 14 Plus,Apple A15 Bionic,6.0,512.0,,25590000.0,25590000.0,25590000.0,6,1,CellphoneS,0.0,,1,exclusive
+d1d725bc685cedd7,smartphone,Realme,Narzo 30A,MediaTek Helio G85,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+aa5467b1c351f132,smartphone,Vivo,Y17S,MediaTek Helio G85,4.0,96.0,,3390000.0,3590000.0,3790000.0,4,1,CellphoneS,14.0,4.6,1,exclusive
+84cb3cf8553296cd,smartphone,Samsung,Galaxy J4,Exynos 7 Quad 7570,,16.0,,2890000.0,2890000.0,2890000.0,3,1,CellphoneS,0.0,,1,exclusive
+0c88fdee596d96cb_s1,smartphone,Vivo,T1X,Snapdragon 680,1.0,64.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,18.0,5.0,1,exclusive
+0c88fdee596d96cb_s2,smartphone,Vivo,T1X,Snapdragon 680,8.0,128.0,,5990000.0,5990000.0,5990000.0,2,1,CellphoneS,4.0,4.5,1,exclusive
+ddc52e05542c580c,smartphone,Nubia,Red Magic 7 Pusar,Snapdragon 8 Gen 1,16.0,256.0,,18990000.0,18990000.0,18990000.0,1,1,CellphoneS,0.0,,1,exclusive
+4d233b50438c7180,smartphone,Xiaomi,11 Lite 5G NE,Snapdragon 778G,8.0,128.0,,9490000.0,9490000.0,9490000.0,3,1,CellphoneS,31.0,4.8,1,exclusive
+c4c25f29e65d62bd,smartphone,Masstel,IZI 120,Unknown,,,,230000.0,230000.0,230000.0,3,1,CellphoneS,0.0,,1,exclusive
+ed8a7b6797df504d_s1,smartphone,Realme,C30s,Unisoc SC9863A1,2.0,48.0,,1890000.0,1940000.0,1990000.0,4,1,CellphoneS,20.0,4.8,1,exclusive
+ed8a7b6797df504d_s2,smartphone,Realme,C30s,Unisoc SC9863A1,4.0,64.0,,3190000.0,3190000.0,3190000.0,2,1,CellphoneS,0.0,,1,exclusive
+5bb765527b3139fd,smartphone,Realme,C11 2021,Spreadtrum SC9863A,4.0,64.0,,3790000.0,3790000.0,3790000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+0110d4ee870447d3,smartphone,Tecno,POVA 5,Helio G99,8.0,192.0,,3690000.0,3790000.0,3890000.0,6,1,CellphoneS,159.0,4.9,1,exclusive
+b15f28143231f627_s1,smartphone,Realme,C51,Unisoc T612,3.0,96.0,,2090000.0,2240000.0,2390000.0,4,1,CellphoneS,32.0,4.7,1,exclusive
+b15f28143231f627_s2,smartphone,Realme,C51,Unisoc T612,6.0,256.0,,3390000.0,3390000.0,3390000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+97110c41339eb265,smartphone,Samsung,Galaxy J4 Core,Snapdragon 425,,16.0,,3090000.0,3090000.0,3090000.0,3,1,CellphoneS,0.0,,1,exclusive
+802c75d7903a1bff,smartphone,Nokia,G10,Helio G25,4.0,64.0,,3690000.0,3690000.0,3690000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+0b81cd37e0ead5a5_s1,smartphone,Vsmart,Joy 4,Snapdragon 665,3.0,64.0,,3290000.0,3440000.0,3590000.0,6,1,CellphoneS,225.0,4.7,1,exclusive
+0b81cd37e0ead5a5_s2,smartphone,Vsmart,Joy 4,Snapdragon 665,6.0,64.0,,3990000.0,3990000.0,3990000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+6f1955f7ccba6078,smartphone,Vsmart,Bee 3,MediaTek MT6739WW,,16.0,,1590000.0,1590000.0,1590000.0,3,1,CellphoneS,0.0,,1,exclusive
+da604d022227372a,smartphone,Samsung,Galaxy Z Flip3 5G,Snapdragon 888,8.0,128.0,,24990000.0,24990000.0,26990000.0,9,1,CellphoneS,28.0,5.0,1,exclusive
+acf23e7e3037611f,smartphone,TCL,408,MediaTek MT6762,4.0,64.0,,2290000.0,2290000.0,2290000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+c5794b2df40ce32d,smartphone,Realme,C11,MediaTek Helio G35,2.0,32.0,,2790000.0,2790000.0,2790000.0,2,1,CellphoneS,18.0,4.8,1,exclusive
+4dd4d77b25776db8,smartphone,Samsung,Galaxy A20s,Unknown,4.0,64.0,,5390000.0,5390000.0,5390000.0,3,1,CellphoneS,0.0,,1,exclusive
+7c372b8ca5e666c1,smartphone,Xiaomi,Redmi 9C,MediaTek Helio G35,4.0,128.0,,2750000.0,2850000.0,2890000.0,8,1,CellphoneS,57.0,4.6625,1,exclusive
+4e4a77222f50aa4d_s1,smartphone,Samsung,Galaxy J6 Plus,Snapdragon 425,,32.0,,4000.0,4000.0,4000.0,1,1,CellphoneS,0.0,,1,exclusive
+4e4a77222f50aa4d_s2,smartphone,Samsung,Galaxy J6 Plus,Snapdragon 425,,32.0,,4290000.0,4290000.0,4290000.0,2,1,CellphoneS,0.0,,1,exclusive
+5e54023686676560_s1,smartphone,Vsmart,Active 1,Snapdragon 660,4.0,64.0,,1990000.0,1990000.0,1990000.0,1,1,CellphoneS,1.0,4.0,1,exclusive
+5e54023686676560_s2,smartphone,Vsmart,Active 1,Snapdragon 660,4.0,64.0,,3290000.0,3290000.0,3290000.0,1,1,CellphoneS,1.0,4.0,1,exclusive
+ca02a713d6dd85b4,smartphone,OnePlus,Nord CE 5G,Snapdragon 750G,8.0,128.0,,7590000.0,7790000.0,7990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+44f9b8a4811f6b2f,smartphone,Nokia,C31,Unisoc 9863A1,3.0,80.0,,3190000.0,3440000.0,3690000.0,4,1,CellphoneS,14.0,4.9,1,exclusive
+224497ff3ca19106,smartphone,Honor,X5B Plus,Helio G36,4.0,128.0,PowerVR GE8320,2940000.0,2940000.0,2940000.0,1,1,CellphoneS,0.0,,1,exclusive
+4f3c0279b17d9951,smartphone,Samsung,Galaxy Z Fold2 5G,Snapdragon 865+,12.0,256.0,,49990000.0,50000000.0,50000000.0,6,1,CellphoneS,2.0,5.0,1,exclusive
+a57a293f6b6a0abf,smartphone,Tecno,Spark 10 Pro,Helio G88,8.0,192.0,,2890000.0,3090000.0,3290000.0,4,1,CellphoneS,40.0,5.0,1,exclusive
+e60e9cbd0a5cfd68,smartphone,Vivo,Y22S,Snapdragon 680,6.0,128.0,,5290000.0,5640000.0,5990000.0,4,1,CellphoneS,2.0,5.0,1,exclusive
+2e65c5cb608a5643,smartphone,Masstel,Fami 60S 4G,Unisoc T107,,,,650000.0,700000.0,700000.0,3,1,CellphoneS,2.0,5.0,1,exclusive
+7e712cc201b0b1f5,smartphone,Realme,C3i,Helio G70,2.0,32.0,,2590000.0,2590000.0,2590000.0,2,1,CellphoneS,0.0,,1,exclusive
+cc642145ef825c7d,smartphone,Tecno,Camon 20,Helio G85,8.0,256.0,,3590000.0,3590000.0,3590000.0,3,1,CellphoneS,18.0,4.8,1,exclusive
+d583db507932d598,smartphone,Itel,8010 4G,Unknown,,,,390000.0,390000.0,390000.0,1,1,CellphoneS,7.0,5.0,1,exclusive
+478f577a556a7b2d,smartphone,Samsung,Galaxy Fold5,Snapdragon 8 Gen 2 for Galaxy,12.0,1024.0,,38990000.0,38990000.0,38990000.0,3,1,CellphoneS,0.0,,1,exclusive
+b38b941643298bcc_s1,smartphone,ASUS,ROG Phone 5S,Snapdragon 888 Plus,16.0,512.0,,17790000.0,17790000.0,17790000.0,1,1,CellphoneS,17.0,4.9,1,exclusive
+b38b941643298bcc_s2,smartphone,ASUS,ROG Phone 5S,Snapdragon 888 Plus,16.0,512.0,,22990000.0,22990000.0,22990000.0,1,1,CellphoneS,17.0,4.9,1,exclusive
+1cb82eee707b4905,smartphone,Tecno,Spark Go,Unknown,3.0,64.0,,1990000.0,1990000.0,1990000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+6da64724a095a0f4,smartphone,Vivo,Y02s,Helio P35,3.0,48.0,,3290000.0,3290000.0,3290000.0,4,1,CellphoneS,6.0,4.75,1,exclusive
+3b26729b4d88e5e9,smartphone,Nokia,C21 Plus,Spreadtrum SC9863A,3.0,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b50097edc5cbb42e,smartphone,INOI,288S 4G,Unknown,,,,1190000.0,1190000.0,1190000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+ed8f672e8dfed83c,smartphone,Apple,iPhone 13 Pro,Apple A15,6.0,1024.0,,25990000.0,25990000.0,25990000.0,5,1,CellphoneS,5.0,5.0,1,exclusive
+a52c26ae46d7b360,smartphone,Nokia,Nokia G21,Unisoc T606,4.0,128.0,,4290000.0,4290000.0,4290000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+007b48c83afb6c15,smartphone,Nokia,Nokia C21 Plus,Unisoc SC9863A,3.0,64.0,,3190000.0,3190000.0,3190000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+c60559b596cc8ab7,smartphone,ZTE,ZTE Blade V40,Unisoc T618,5.0,128.0,,2290000.0,2290000.0,2290000.0,2,1,CellphoneS,38.0,4.8,1,exclusive
+67aa664815dca848,smartphone,Vivo,Vivo Y03t,Unisoc T612,4.0,128.0,,3290000.0,3290000.0,3290000.0,2,1,CellphoneS,0.0,,1,exclusive
+9b9b51f3fd9228e2,smartphone,Nokia,Nokia C20,Unisoc SC9863A,2.0,16.0,,2290000.0,2290000.0,2290000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+dad7527da715c066,smartphone,Vsmart,Vsmart Active 3,MediaTek Helio P60,4.0,64.0,,3490000.0,3490000.0,3490000.0,3,1,CellphoneS,84.0,5.0,1,exclusive
+af1fe408da4e15e9,smartphone,Vivo,Vivo Y02A,MediaTek Helio P35,3.0,32.0,,2790000.0,2790000.0,2790000.0,2,1,CellphoneS,0.0,,1,exclusive
+dbcc7fbe5829f854,smartphone,Realme,Realme C21Y,Unisoc T610,4.0,64.0,,4290000.0,4290000.0,4290000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+6b543f48b1e8e27c,smartphone,TCL,TCL 40SE,MediaTek Helio G37,4.0,128.0,,3390000.0,3390000.0,3390000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+1603c18e30835e3b,smartphone,Samsung,Samsung Galaxy A10s,MediaTek Helio P22,2.0,32.0,,3690000.0,3690000.0,3690000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+40fd4cd6de1570a0,smartphone,OnePlus,OnePlus Nord N10 5G,Snapdragon 690 5G,6.0,128.0,,4590000.0,4590000.0,4590000.0,1,1,CellphoneS,6.0,4.7,1,exclusive
+0290d604561db4d1,smartphone,Nubia,Nubia V80 Max,Unisoc T7250,4.0,128.0,,3690000.0,3990000.0,3990000.0,5,2,CellphoneS|TGDĐ,6188.0,5.0,2,competitive
+8f6333f0f6d8f0e9_s1,smartphone,Nubia,V80 Max,Unisoc T7250,6.0,128.0,,3590000.0,3890000.0,4090000.0,20,4,CellphoneS|FPT|Hoàng Hà|Viettel,4.0,4.733333333333333,4,competitive
+8f6333f0f6d8f0e9_s2,smartphone,Nubia,V80 Max,Unisoc T7250,8.0,256.0,,4390000.0,4690000.0,4990000.0,12,2,CellphoneS|FPT,22.0,5.0,2,competitive
+ed3629d88ae52436,smartphone,OnePlus,8T 5G,Snapdragon 865,12.0,256.0,,10990000.0,10990000.0,10990000.0,1,1,CellphoneS,0.0,,1,exclusive
+a9619e09bc8e6509,smartphone,TCL,406S,Helio G25,4.0,64.0,,1990000.0,1990000.0,1990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b9a7be93607eb687,smartphone,ZTE,Blade A52,Unisoc SC9863A,3.0,64.0,,1790000.0,1890000.0,1990000.0,6,1,CellphoneS,30.0,4.8500000000000005,1,exclusive
+4d950a60b5c8511a,smartphone,Nokia,2.4,Helio P22,2.0,32.0,,2690000.0,2690000.0,2690000.0,3,1,CellphoneS,159.0,4.9,1,exclusive
+9dcbfe12cd92eafc,smartphone,Realme,XT,Snapdragon 712AIE,8.0,128.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,8.0,4.2,1,exclusive
+0d9eef9536f9d5c7,smartphone,Nokia,5310,MT6260A,,,,989000.0,989000.0,989000.0,2,1,CellphoneS,0.0,,1,exclusive
+fda50ca87e16a451,smartphone,Xiaomi,Poco F4,Snapdragon 870 5G,8.0,256.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+a9a4e82833008f18,smartphone,Xiaomi,POCO F4,Snapdragon 870,6.0,128.0,,8990000.0,8990000.0,9990000.0,5,1,CellphoneS,29.0,4.94,1,exclusive
+2333b04bb40ebdbc,smartphone,Samsung,Galaxy S21 Plus 5G,Exynos 2100,8.0,256.0,,28990000.0,28990000.0,28990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+a7961906e4a8033d_s1,smartphone,Nokia,105 4G,Unknown,,,,590000.0,590000.0,590000.0,2,1,CellphoneS,16.0,5.0,1,exclusive
+a7961906e4a8033d_s2,smartphone,Nokia,105 4G,Unknown,,,,820000.0,820000.0,820000.0,1,1,CellphoneS,8.0,5.0,1,exclusive
+a04c4b702ab6e59e,smartphone,Energizer,Energy E100,Unknown,,,,490000.0,490000.0,490000.0,1,1,CellphoneS,0.0,,1,exclusive
+672a08db4ef71e2d,smartphone,Infinix,Hot 40i,Unisoc T606,6.0,192.0,,2290000.0,2390000.0,2490000.0,8,1,CellphoneS,148.0,4.95,1,exclusive
+667218772e2c9361,smartphone,Nokia,X10,Snapdragon 480 5G,6.0,128.0,,5490000.0,5490000.0,5490000.0,1,1,CellphoneS,16.0,4.8,1,exclusive
+85d9b63a3d176103,smartphone,Nokia,G11 Plus,Unisoc T606,3.0,64.0,,3590000.0,3590000.0,3590000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+cb6ae626f0f9e64a_s1,smartphone,Apple,iPhone 14,Apple A15 Bionic,6.0,192.0,,16290000.0,16640000.0,16990000.0,12,1,CellphoneS,366.0,4.95,1,exclusive
+cb6ae626f0f9e64a_s2,smartphone,Apple,iPhone 14,Apple A15 Bionic,6.0,512.0,,21990000.0,21990000.0,21990000.0,6,1,CellphoneS,0.0,,1,exclusive
+95675cfbc2dec546,smartphone,Tecno,Spark 20C,MTK G36,4.0,128.0,,2300000.0,2300000.0,2300000.0,4,1,CellphoneS,12.0,5.0,1,exclusive
+aecc9b218e009179,smartphone,ZTE,Blade A54,Unisoc SC9863A,4.0,128.0,,2090000.0,2090000.0,2090000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+7765d18f9a4bb344,smartphone,Vivo,T1 5G,Snapdragon 778G 5G,4.0,128.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,14.0,4.9,1,exclusive
+da200922f84379c0,smartphone,Infinix,Hot 30i,Unisoc T606,6.0,128.0,,1890000.0,1990000.0,2090000.0,8,1,CellphoneS,204.0,4.8,1,exclusive
+bbfea299e86594a3,smartphone,Xiaomi,Redmi 9T,Snapdragon 662,5.0,96.0,,3990000.0,4195000.0,4400000.0,8,1,CellphoneS,152.0,4.9,1,exclusive
+61ddf79adcfb8455,smartphone,Realme,C25Y,Unisoc T618,4.0,128.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,0.0,,1,exclusive
+8ed213e946cb4a90,smartphone,Tecno,POP 5 LTE,Unisoc SC9863A,2.0,32.0,,2150000.0,2150000.0,2150000.0,2,1,CellphoneS,0.0,,1,exclusive
+d9be00fa6f00942c,smartphone,Nokia,5.4,Snapdragon 662,4.0,128.0,,4190000.0,4190000.0,4990000.0,3,1,CellphoneS,285.0,4.9,1,exclusive
+927256f4018ebb6d,smartphone,Tecno,Pova Neo 4G,Helio G25,3.0,64.0,,2750000.0,2750000.0,2750000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+957bd97bc2eb89e8,smartphone,OnePlus,Nord 3,Dimensity 9000,16.0,256.0,,11950000.0,11950000.0,11950000.0,1,1,CellphoneS,3.0,4.7,1,exclusive
+1569cf8fe7140c49,smartphone,Xiaomi,Redmi 10,Helio G88,4.0,64.0,,3190000.0,3190000.0,3490000.0,5,1,CellphoneS,75.0,4.88,1,exclusive
+d48f5310996bb7b0,smartphone,Samsung,Galaxy A8 Star,Snapdragon 660,,64.0,,10090000.0,10090000.0,10090000.0,2,1,CellphoneS,0.0,,1,exclusive
+c64b0d32d8e30243,smartphone,Nubia,RedMagic 7,Snapdragon 8 Gen 1,12.0,128.0,,15990000.0,15990000.0,15990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+0cf31e1a0771572d,smartphone,Nokia,G22,Unisoc T606,4.0,128.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,10.0,4.8,1,exclusive
+57eaa4a3cf02cf40,smartphone,Xiaomi,POCO X4 GT,Dimensity 8100,8.0,192.0,,5790000.0,5890000.0,5990000.0,6,1,CellphoneS,102.0,4.8999999999999995,1,exclusive
+7deacd74982e9eca,smartphone,Samsung,Galaxy Z Fold4,Snapdragon 8 Plus Gen 1,12.0,384.0,,22490000.0,23490000.0,24490000.0,6,1,CellphoneS,132.0,5.0,1,exclusive
+514277767146e541,smartphone,Samsung,Galaxy J6,Exynos 7 Octa 7870,,32.0,,3990000.0,3990000.0,3990000.0,3,1,CellphoneS,0.0,,1,exclusive
+10424564c73b74ca,smartphone,Nokia,C20,Spreadtrum SC9863A,2.0,32.0,,2490000.0,2490000.0,2490000.0,2,1,CellphoneS,68.0,5.0,1,exclusive
+e51bd4dc1a5ebf40,smartphone,Apple,iPhone 11 Pro,Apple A13 Bionic,4.0,256.0,,25000000.0,28000000.0,30000000.0,12,1,CellphoneS,44.0,4.9,1,exclusive
+3b872776e6ead895,smartphone,Vivo,Y30,MediaTek Helio P35,4.0,128.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,0.0,,1,exclusive
+cb9c6ce7200492f0_s1,smartphone,Apple,iPhone SE 2020,Apple A13 Bionic,3.0,96.0,,8990000.0,9290000.0,9590000.0,6,1,CellphoneS,15.0,5.0,1,exclusive
+cb9c6ce7200492f0_s2,smartphone,Apple,iPhone SE 2020,Apple A13 Bionic,3.0,256.0,,16490000.0,16490000.0,16490000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+6c846b78e0ad43e0,smartphone,Infinix,Note 30 5G,MediaTek Dimensity 6080,8.0,256.0,,5290000.0,5290000.0,5290000.0,3,1,CellphoneS,33.0,4.9,1,exclusive
+84623a1c203398ab,smartphone,Vivo,X50 Pro,Snapdragon 765G,8.0,256.0,,19990000.0,19990000.0,19990000.0,1,1,CellphoneS,0.0,,1,exclusive
+498f89f13bdc4659,smartphone,OnePlus,Nord CE 3 Lite,Snapdragon 695 5G,8.0,256.0,,5690000.0,5690000.0,5690000.0,2,1,CellphoneS,20.0,4.9,1,exclusive
+b0ebeffb5dcb868f_s1,smartphone,Apple,iPhone 15 Pro,Apple A17 Pro,8.0,192.0,,22990000.0,23990000.0,24990000.0,8,1,CellphoneS,116.0,4.9,1,exclusive
+b0ebeffb5dcb868f_s2,smartphone,Apple,iPhone 15 Pro,Apple A17 Pro,8.0,512.0,,29990000.0,29990000.0,29990000.0,4,1,CellphoneS,0.0,,1,exclusive
+b0ebeffb5dcb868f_s3,smartphone,Apple,iPhone 15 Pro,Apple A17 Pro,8.0,1024.0,,35990000.0,35990000.0,35990000.0,4,1,CellphoneS,0.0,,1,exclusive
+fe88d4138b5bd453,smartphone,Realme,9 Pro Plus,Dimensity 920 5G,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+2d1bbbd84f72600a,smartphone,Samsung,Galaxy Z Fold5,Snapdragon 8 Gen 2 for Galaxy,12.0,384.0,,27990000.0,28990000.0,29990000.0,6,1,CellphoneS,15.0,5.0,1,exclusive
+c7a81861828e4180,smartphone,Huawei,Nova 5T,Kirin 980,8.0,128.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+e53f6a4de4526c67_s1,smartphone,Tecno,Spark 7T,Helio G35,4.0,64.0,,2650000.0,2650000.0,2650000.0,2,1,CellphoneS,0.0,,1,exclusive
+e53f6a4de4526c67_s2,smartphone,Tecno,Spark 7T,Helio G35,6.0,128.0,,3490000.0,3490000.0,3490000.0,1,1,CellphoneS,0.0,,1,exclusive
+a0fce7a64c5f1bfc,smartphone,Xiaomi,Mi Note 10 Pro,Snapdragon 730G,8.0,256.0,,14990000.0,14990000.0,14990000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+55dc29d86a2ec7a7,smartphone,Nokia,C30,Spreadtrum SC9863A,3.0,32.0,,3450000.0,3450000.0,3450000.0,2,1,CellphoneS,4.0,4.5,1,exclusive
+a24aebd521c70066,smartphone,Vivo,Y02t,Helio P35,4.0,64.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,0.0,,1,exclusive
+f025820126a78689,smartphone,Huawei,P30,Kirin 980,8.0,128.0,,16990000.0,16990000.0,16990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+fa58c404fa316563,smartphone,Realme,11 Pro,Dimensity 7050 5G,8.0,256.0,,7790000.0,7790000.0,7790000.0,1,1,CellphoneS,4.0,5.0,1,exclusive
+dc53b17b23123b76,smartphone,Realme,Realme 11 Pro,Dimensity 7050,8.0,256.0,,7790000.0,7790000.0,7790000.0,1,1,CellphoneS,4.0,5.0,1,exclusive
+7b44cb8e333bd36c,smartphone,Masstel,Masstel izi 16 4G,Unisoc UMS9117,,,,450000.0,450000.0,450000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+e311c52dde31a7aa_s1,smartphone,Apple,iPhone SE 2022,Apple A15 Bionic,4.0,64.0,,9990000.0,10390000.0,10390000.0,3,1,CellphoneS,15.0,4.8,1,exclusive
+e311c52dde31a7aa_s2,smartphone,Apple,iPhone SE 2022,Apple A15 Bionic,4.0,128.0,,11990000.0,11990000.0,11990000.0,3,1,CellphoneS,0.0,,1,exclusive
+e311c52dde31a7aa_s3,smartphone,Apple,iPhone SE 2022,Apple A15 Bionic,4.0,256.0,,15990000.0,15990000.0,15990000.0,3,1,CellphoneS,0.0,,1,exclusive
+55e0b8a34e39689b,smartphone,Tecno,Camon 20 Pro,Helio G99,8.0,256.0,,4600000.0,4600000.0,4600000.0,2,1,CellphoneS,20.0,4.9,1,exclusive
+f2382c049ef541c4,smartphone,Realme,Realme C3,Helio G70,3.0,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,50.0,5.0,1,exclusive
+fd3d2277a4fc5e31,smartphone,Sony,Xperia 10 VI,Snapdragon 6 Gen 1,8.0,128.0,,8290000.0,8290000.0,8290000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+05bc67d83bd7e70d,smartphone,ASUS,ROG Phone 6 Diablo,Snapdragon 8+ Gen 1,16.0,512.0,,17990000.0,17990000.0,17990000.0,1,1,CellphoneS,0.0,,1,exclusive
+3de17feeade3b420,smartphone,ZTE,Blade A72,Unisoc T606,3.0,128.0,,1990000.0,1990000.0,1990000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+609ba1604199e50b,smartphone,Realme,Realme C35,Unisoc T616,4.0,96.0,,4290000.0,4640000.0,4990000.0,4,1,CellphoneS,4.0,4.5,1,exclusive
+0770f999d07bfc13,smartphone,Nothing,CMF Phone 1,Dimensity 7300,8.0,128.0,,6490000.0,6490000.0,6490000.0,2,1,CellphoneS,0.0,,1,exclusive
+07309c0a073afb1c,smartphone,Realme,Realme 9,Snapdragon 680,8.0,128.0,,6990000.0,6990000.0,6990000.0,3,1,CellphoneS,0.0,,1,exclusive
+0eb3fd2679d00e9a,smartphone,Itel,Itel S23,Unisoc T606,8.0,128.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,20.0,5.0,1,exclusive
+0ea919642d80601b,smartphone,Samsung,Galaxy A01,Snapdragon 439,2.0,16.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+ef7f7d3b1453043b_s1,smartphone,Samsung,Galaxy Z Fold6,Snapdragon 8 Gen 3 for Galaxy,12.0,256.0,,29990000.0,29990000.0,31990000.0,8,1,CellphoneS,110.0,4.9,1,exclusive
+ef7f7d3b1453043b_s2,smartphone,Samsung,Galaxy Z Fold6,Snapdragon 8 Gen 3 for Galaxy,12.0,1024.0,,45490000.0,45490000.0,45490000.0,3,1,CellphoneS,0.0,,1,exclusive
+2ac328e58c6b2dad,smartphone,Realme,Realme 8 5G,Dimensity 700,8.0,128.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+ca71f17c09bda812_s1,smartphone,Apple,iPhone 12 mini,Apple A14 Bionic,4.0,160.0,,9990000.0,10490000.0,10990000.0,2,1,CellphoneS,16.0,4.85,1,exclusive
+ca71f17c09bda812_s2,smartphone,Apple,iPhone 12 mini,Apple A14 Bionic,4.0,128.0,,12690000.0,14990000.0,14990000.0,11,1,CellphoneS,99.0,4.754545454545454,1,exclusive
+ca71f17c09bda812_s3,smartphone,Apple,iPhone 12 mini,Apple A14 Bionic,4.0,256.0,,15990000.0,15990000.0,15990000.0,5,1,CellphoneS,5.0,5.0,1,exclusive
+d0984a8c8c043b17,smartphone,Infinix,Hot 30,Helio G88,8.0,256.0,,3990000.0,3990000.0,3990000.0,3,1,CellphoneS,72.0,4.9,1,exclusive
+b9be13237efe493d,smartphone,Nothing,Phone 3A,Snapdragon 7s Gen 3,8.0,128.0,,8790000.0,8790000.0,9990000.0,3,1,CellphoneS,0.0,,1,exclusive
+03e17a243c43dfe2,smartphone,Nokia,215 4G,Unisoc UMS9117,,,,980000.0,980000.0,980000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+cdec79030d21d50b,smartphone,Realme,7 Pro,Snapdragon 720G,8.0,128.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,26.0,4.8,1,exclusive
+3117b915bb87d75e,smartphone,Realme,C20,Helio G35,2.0,32.0,,2690000.0,2690000.0,2690000.0,2,1,CellphoneS,0.0,,1,exclusive
+96a316173c64548f,smartphone,Realme,12 4G,Snapdragon 685,8.0,256.0,,7990000.0,7990000.0,7990000.0,1,1,CellphoneS,0.0,,1,exclusive
+3d90c6d20e9d5f9a,smartphone,Nokia,8210 4G,Unisoc T107,,,,1570000.0,1570000.0,1570000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+bd489c1229436130,smartphone,Xiaomi,Poco X3 GT,Dimensity 1100,8.0,128.0,,6290000.0,6290000.0,6290000.0,3,1,CellphoneS,12.0,4.5,1,exclusive
+ebdb48f1cff25e47,smartphone,Samsung,Galaxy M52 5G,Snapdragon 778G 5G,8.0,128.0,,7390000.0,7390000.0,7390000.0,2,1,CellphoneS,32.0,4.8,1,exclusive
+616b16a0ed0517f2,smartphone,Nubia,Red Magic 6s Pro Cyborg,Snapdragon 888+ 5G,12.0,128.0,,13990000.0,13990000.0,13990000.0,1,1,CellphoneS,7.0,4.9,1,exclusive
+c8017d3e95c34ab7,smartphone,Tecno,Spark 20,Helio G85,8.0,128.0,,3050000.0,3050000.0,3050000.0,2,1,CellphoneS,20.0,4.8,1,exclusive
+6009321ad8804f24,smartphone,Tecno,Spark 20,MediaTek Helio G85,8.0,128.0,,3050000.0,3050000.0,3050000.0,2,1,CellphoneS,20.0,4.8,1,exclusive
+e7721eaf34003642,smartphone,Xiaomi,POCO X3 NFC,Snapdragon 732G,6.0,96.0,,5000000.0,5350000.0,5700000.0,4,1,CellphoneS,56.0,4.6,1,exclusive
+1f1083891bc2fdb3,smartphone,Vivo,V25 Pro,MediaTek Dimensity 1300,8.0,128.0,,13990000.0,13990000.0,13990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+9f90aa2775751fb9,smartphone,Vsmart,Active 3,MediaTek Helio P60,6.0,64.0,,3990000.0,3990000.0,3990000.0,4,1,CellphoneS,344.0,4.8,1,exclusive
+206311eed692cfec,smartphone,Vivo,Y18S,MediaTek Helio G85,6.0,128.0,,4190000.0,4190000.0,4190000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+b106c298ce22a32a,smartphone,Cat,S62 Pro,Snapdragon 660,6.0,128.0,,18990000.0,18990000.0,18990000.0,1,1,CellphoneS,0.0,,1,exclusive
+886457fed09cd646,smartphone,Realme,5s,Snapdragon 665,,128.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,2.0,3.0,1,exclusive
+309ed643e39c4eb7,smartphone,ZTE,Blade A55,Unisoc SC9863A1,4.0,96.0,,1890000.0,1940000.0,1990000.0,4,1,CellphoneS,22.0,5.0,1,exclusive
+f5a686afa6e33597,smartphone,Vsmart,Aris Pro,Snapdragon 730,8.0,128.0,,8490000.0,8490000.0,9990000.0,3,1,CellphoneS,81.0,4.9,1,exclusive
+b64664c0a8b8a2e6,smartphone,Apple,iPhone 13 Pro,Apple A15 Bionic,6.0,256.0,,21990000.0,24490000.0,25490000.0,15,1,CellphoneS,75.0,4.566666666666666,1,exclusive
+d6bb6f679da52c57_s1,smartphone,Apple,iPhone 12,Apple A14 Bionic,4.0,96.0,,9390000.0,9940000.0,10490000.0,12,1,CellphoneS,714.0,4.8500000000000005,1,exclusive
+d6bb6f679da52c57_s2,smartphone,Apple,iPhone 12,Apple A14 Bionic,4.0,256.0,,23990000.0,23990000.0,23990000.0,6,1,CellphoneS,6.0,5.0,1,exclusive
+7ee45ebaa3921ef1,smartphone,Nubia,Red Magic 7 Supernova,Snapdragon 8 Gen 1,18.0,256.0,,19990000.0,19990000.0,19990000.0,1,1,CellphoneS,3.0,4.7,1,exclusive
+8face5c8b3888c62,smartphone,Samsung,Galaxy S21 Ultra 5G,Exynos 2100,12.0,256.0,,33990000.0,33990000.0,33990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+6f0860b1b512f7cd,smartphone,Samsung,Galaxy A73,Snapdragon 778G 5G,8.0,192.0,,11990000.0,12490000.0,12990000.0,6,1,CellphoneS,102.0,4.8500000000000005,1,exclusive
+c3d0a312642eac1d,smartphone,ASUS,ROG Phone 6 Batman,Snapdragon 8+ Gen 1,12.0,256.0,,14990000.0,14990000.0,14990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+81fe02055e67ab01,smartphone,Vivo,X80 Pro,Snapdragon 8 Gen 1,12.0,256.0,,29990000.0,29990000.0,29990000.0,1,1,CellphoneS,0.0,,1,exclusive
+3706782e03c5c0ae,smartphone,Samsung,Galaxy Z Flip5,Snapdragon 8 Gen 2 for Galaxy,8.0,256.0,,25990000.0,25990000.0,25990000.0,4,1,CellphoneS,16.0,4.5,1,exclusive
+9e2c884c6e8795e4,smartphone,Itel,P55,Unisoc T606,8.0,128.0,,2690000.0,2690000.0,2690000.0,2,1,CellphoneS,26.0,5.0,1,exclusive
+82693f8d0967c0e6,smartphone,Vivo,U10,Snapdragon 665,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,0.0,,1,exclusive
+18851c8b4ac5796b,smartphone,Tecno,Spark 30C,Helio G81,4.0,128.0,,2190000.0,2190000.0,2190000.0,2,1,CellphoneS,40.0,4.9,1,exclusive
+11a7aea2958e17d7,smartphone,Vivo,Y53S,Helio G80,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b771103a3346038f,smartphone,OPPO,Reno11 Pro 5G,Dimensity 8200,12.0,512.0,,16090000.0,16090000.0,16090000.0,1,1,CellphoneS,0.0,,1,exclusive
+741f4894304f2f5b,smartphone,Xiaomi,Redmi Note 11 Pro 5G,Snapdragon 695,8.0,128.0,,5590000.0,5590000.0,5590000.0,3,1,CellphoneS,21.0,4.9,1,exclusive
+2c437cbfc9b9e9a9,smartphone,Vivo,X80,Dimensity 9000,12.0,256.0,,19990000.0,19990000.0,19990000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+1f43929f796a6aa0_s1,smartphone,Samsung,Galaxy Z Flip6,Snapdragon 8 Gen 3 for Galaxy,12.0,256.0,,16990000.0,16990000.0,16990000.0,5,1,CellphoneS,100.0,5.0,1,exclusive
+1f43929f796a6aa0_s2,smartphone,Samsung,Galaxy Z Flip6,Snapdragon 8 Gen 3 for Galaxy,12.0,512.0,,21990000.0,21990000.0,21990000.0,4,1,CellphoneS,0.0,,1,exclusive
+3beef940766b7aaf,smartphone,Masstel,IZI T2 4G,Unisoc T107,,,,500000.0,500000.0,500000.0,3,2,CellphoneS|Hoàng Hà,10.0,4.8,2,competitive
+0a0cec5268b162bc_s1,smartphone,Apple,iPhone 13 mini,Apple A15 Bionic,4.0,256.0,,19990000.0,21990000.0,23000000.0,11,1,CellphoneS,11.0,5.0,1,exclusive
+0a0cec5268b162bc_s2,smartphone,Apple,iPhone 13 mini,Apple A15 Bionic,4.0,512.0,,27490000.0,27490000.0,27490000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+971d4eb43e3afd3d,smartphone,Tecno,Spark 10,Helio G37,8.0,128.0,,2890000.0,2890000.0,2890000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+de6866b1526b6243,smartphone,Tecno,POVA 3,Helio G88,6.0,128.0,,4190000.0,4190000.0,4190000.0,1,1,CellphoneS,9.0,4.9,1,exclusive
+f01bef4fc8a1f631,smartphone,Vivo,Y21S,Helio G80,5.0,128.0,,4990000.0,5240000.0,5490000.0,4,1,CellphoneS,2.0,5.0,1,exclusive
+7fc4e3bf02e50144,smartphone,Xiaomi,POCO X5 Pro,Snapdragon 778G 5G,7.0,192.0,,6550000.0,6970000.0,7390000.0,6,1,CellphoneS,51.0,4.9,1,exclusive
+a589632447abc6f9,smartphone,Nubia,Red Magic 6,Snapdragon 888 5G,12.0,128.0,,16990000.0,16990000.0,16990000.0,1,1,CellphoneS,12.0,4.8,1,exclusive
+f1d39db325845950,smartphone,Realme,C60,Unisoc T612,4.0,64.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+3984acdc27dc716d,smartphone,Xiaomi,Redmi 10 5G,Dimensity 700 5G,4.0,64.0,,3790000.0,3790000.0,3790000.0,3,1,CellphoneS,9.0,4.3,1,exclusive
+0d0b93f3d1a6a0c9,smartphone,Vivo,V27e,Helio G99,8.0,256.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+fa6d57b28abba3cc,smartphone,Tecno,Pova 2,Helio G85,4.0,64.0,,3190000.0,3190000.0,3190000.0,3,1,CellphoneS,21.0,5.0,1,exclusive
+8abdf035fbe9e6e2,smartphone,Vivo,Y36,Snapdragon 680,8.0,192.0,,5190000.0,5690000.0,6190000.0,4,1,CellphoneS,12.0,4.7,1,exclusive
+ec7fd8d808a1d16f,smartphone,Vivo,V25,Dimensity 900 5G,8.0,128.0,,10490000.0,10490000.0,10490000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+0f3733062612cbb4,smartphone,Xiaomi,Redmi 10A,Helio G25,2.0,32.0,,1790000.0,1790000.0,1790000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+6296c4f2a4aab99b,smartphone,Samsung,Galaxy S22 Plus,Snapdragon 8 Gen 1,8.0,192.0,,16990000.0,16990000.0,16990000.0,8,1,CellphoneS,24.0,5.0,1,exclusive
+3e275902396b7d91,smartphone,Xiaomi,Redmi 10 (2022),Helio G88,4.0,128.0,,3800000.0,4045000.0,4290000.0,2,1,CellphoneS,0.0,,1,exclusive
+78849a935633cdfe,smartphone,Vivo,Y03,MediaTek Helio G85,4.0,64.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+cdbc046fb09f0210,smartphone,Xiaomi,Redmi 10,MediaTek Helio G88,4.0,128.0,,3650000.0,3650000.0,3993000.0,3,1,CellphoneS,90.0,4.8,1,exclusive
+f5bba6cdb6d061fa,smartphone,Nokia,105 (2019),Unknown,,,,480000.0,500000.0,520000.0,6,1,CellphoneS,30.0,4.8999999999999995,1,exclusive
+a5ef4daa03ce2fb1,smartphone,Realme,9i,Snapdragon 680,6.0,128.0,,6490000.0,6490000.0,6490000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+e6b1369793eb1704,smartphone,OPPO,Reno 7 Pro,Dimensity 1200 Max,12.0,256.0,,9990000.0,9990000.0,9990000.0,2,1,CellphoneS,0.0,,1,exclusive
+40db8722ce8c161e_s1,smartphone,Apple,iPhone 13,Apple A15,4.0,128.0,,13490000.0,13490000.0,15290000.0,6,1,CellphoneS,2022.0,5.0,1,exclusive
+40db8722ce8c161e_s2,smartphone,Apple,iPhone 13,Apple A15,4.0,256.0,,16990000.0,16990000.0,16990000.0,6,1,CellphoneS,36.0,4.7,1,exclusive
+40db8722ce8c161e_s3,smartphone,Apple,iPhone 13,Apple A15,4.0,512.0,,20990000.0,22690000.0,24390000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+40db8722ce8c161e_s4,smartphone,Apple,iPhone 13,Apple A15,4.0,512.0,,25500000.0,25500000.0,25500000.0,4,1,CellphoneS,4.0,5.0,1,exclusive
+32175084684f5502,smartphone,Samsung,Galaxy M32,MediaTek Helio G80,8.0,128.0,,4550000.0,4550000.0,4550000.0,3,1,CellphoneS,18.0,4.8,1,exclusive
+3d514692201daba9,smartphone,Nokia,2660 Flip,Unisoc T107,,,,1590000.0,1590000.0,1590000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+6977c380fd55cc44,smartphone,Sony,Xperia 10 V,Snapdragon 695 5G,8.0,128.0,,7490000.0,7490000.0,7490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+4b1d88d78af557c8,smartphone,Samsung,Galaxy M21,Exynos 9611,4.0,64.0,,5490000.0,5490000.0,5490000.0,2,1,CellphoneS,20.0,4.9,1,exclusive
+4617e162f2fb4ff1,smartphone,Xiaomi,Redmi 9,MediaTek Helio G80,3.0,32.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+cb3f8bb4bdf15ff7,smartphone,OPPO,A98 5G,Snapdragon 695 5G,8.0,256.0,,5790000.0,5790000.0,5790000.0,1,1,CellphoneS,0.0,,1,exclusive
+eb7be7b6597e3343,smartphone,Vivo,Y15s,MediaTek Helio P35,3.0,32.0,,3490000.0,3490000.0,3490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+997763fe933d464a,smartphone,Xiaomi,Redmi 8A,Snapdragon 439,2.0,32.0,,500000.0,500000.0,500000.0,3,1,CellphoneS,18.0,5.0,1,exclusive
+6c31aa32e4d0dd61,smartphone,Bphone,A50,Helio G85,4.0,128.0,,4090000.0,4090000.0,4090000.0,1,1,CellphoneS,3.0,4.7,1,exclusive
+09562a3a9c4c444e_s1,smartphone,Samsung,Galaxy S22,Snapdragon 8 Gen 1,8.0,256.0,,14790000.0,14790000.0,14790000.0,4,1,CellphoneS,12.0,5.0,1,exclusive
+09562a3a9c4c444e_s2,smartphone,Samsung,Galaxy S22,Snapdragon 8 Gen 1,8.0,128.0,,21990000.0,21990000.0,21990000.0,4,1,CellphoneS,8.0,5.0,1,exclusive
+ac6942b0515f21cd,smartphone,Nokia,3.4,Snapdragon 460,4.0,64.0,,3290000.0,3290000.0,3690000.0,3,1,CellphoneS,162.0,4.9,1,exclusive
+61d9ac0a820760f2_s1,smartphone,Apple,iPhone 14 Pro,Apple A16 Bionic,6.0,192.0,,22990000.0,23990000.0,24990000.0,8,1,CellphoneS,108.0,4.75,1,exclusive
+61d9ac0a820760f2_s2,smartphone,Apple,iPhone 14 Pro,Apple A16 Bionic,6.0,768.0,,28990000.0,33490000.0,33990000.0,8,1,CellphoneS,16.0,5.0,1,exclusive
+86b93c187ca05501,smartphone,Vivo,V25e,Helio G99,8.0,128.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+bc4e7e8d2f92442f,smartphone,Xiaomi,Poco M3,Snapdragon 662,,64.0,,3190000.0,3190000.0,3190000.0,2,1,CellphoneS,0.0,,1,exclusive
+f29603b5b62e7186,smartphone,ZTE,Blade V50 Design,Unisoc T606,8.0,192.0,,2790000.0,2890000.0,2990000.0,6,1,CellphoneS,153.0,4.8500000000000005,1,exclusive
+21394c2dac6a3521,smartphone,Xiaomi,Redmi A2,Helio G36,2.0,32.0,,1590000.0,1590000.0,1590000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+e89fd6da6fd08a39,smartphone,Masstel,Fami 25,T107,,,,650000.0,650000.0,650000.0,3,1,CellphoneS,0.0,,1,exclusive
+32bd691321910f34,smartphone,Nokia,110 4G,Unknown,,,,840000.0,840000.0,840000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+c9558b008b031c20,smartphone,Realme,C55,Helio G88,7.0,192.0,,3480000.0,3585000.0,3690000.0,4,1,CellphoneS,68.0,4.95,1,exclusive
+ec6658b050cdf3dc,smartphone,Realme,10,Helio G99,8.0,256.0,,7190000.0,7190000.0,7190000.0,2,1,CellphoneS,28.0,5.0,1,exclusive
+79a7fe5ad6091d91,smartphone,Masstel,Izi S8,T107,,,,485000.0,485000.0,485000.0,3,1,CellphoneS,0.0,,1,exclusive
+63979b8b31343453,smartphone,Samsung,Galaxy S23 Plus,Snapdragon 8 Gen 2,8.0,384.0,,19990000.0,21490000.0,22990000.0,8,1,CellphoneS,44.0,5.0,1,exclusive
+73d6dcafee4554d9_s1,smartphone,Apple,iPhone 12 Pro Max,Apple A14 Bionic,6.0,192.0,,23490000.0,25540000.0,27590000.0,8,1,CellphoneS,732.0,4.95,1,exclusive
+73d6dcafee4554d9_s2,smartphone,Apple,iPhone 12 Pro Max,Apple A14 Bionic,6.0,512.0,,31000000.0,33000000.0,33000000.0,4,1,CellphoneS,16.0,4.8,1,exclusive
+5c41c764d621c14a,smartphone,OPPO,A57,MediaTek Helio G35,4.0,128.0,,3790000.0,3790000.0,3790000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+06be08080439aee3,smartphone,OPPO,Reno8 T 4G,Helio G99,8.0,256.0,,6290000.0,6290000.0,6290000.0,2,1,CellphoneS,8.0,4.2,1,exclusive
+b636669dc7f84985_s1,smartphone,Apple,iPhone 13 Pro Max,Apple A15 Bionic,6.0,256.0,,22990000.0,23990000.0,25990000.0,15,1,CellphoneS,1080.0,4.666666666666667,1,exclusive
+b636669dc7f84985_s2,smartphone,Apple,iPhone 13 Pro Max,Apple A15 Bionic,6.0,1024.0,,27990000.0,27990000.0,27990000.0,5,1,CellphoneS,20.0,4.8,1,exclusive
+9d420c8e143a92a4,smartphone,Vivo,V23 5G,Dimensity 920,8.0,128.0,,12990000.0,12990000.0,12990000.0,2,1,CellphoneS,0.0,,1,exclusive
+461c20f03a1ff836,smartphone,OPPO,A16K,MediaTek Helio G35,3.0,32.0,,2390000.0,2390000.0,2390000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+8bb1f41062823bab,smartphone,Vivo,Y18,MediaTek Helio G85,8.0,128.0,,2890000.0,2890000.0,2890000.0,1,1,CellphoneS,0.0,,1,exclusive
+df3380eecdcc74d4,smartphone,Realme,9 Pro,Snapdragon 695 5G,8.0,128.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,14.0,5.0,1,exclusive
+cc761399ec89622b,smartphone,Masstel,izi 22,ASR Platform,,,,470000.0,470000.0,470000.0,2,1,CellphoneS,0.0,,1,exclusive
+1c380ff389023683,smartphone,OPPO,Find X3 Pro 5G,Snapdragon 888,12.0,256.0,,18790000.0,18790000.0,18790000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+80fd76460cc388c8,smartphone,Realme,5,Snapdragon 665 AIE,3.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,16.0,4.8,1,exclusive
+7b900e6175ff8c2c,smartphone,Nubia,Red Magic 6S Pro Ghost,Snapdragon 888+ 5G,16.0,256.0,,20490000.0,20490000.0,20490000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+4512e41bcd68665d,smartphone,Tecno,Pova 4 Pro,MediaTek Helio G99,8.0,128.0,,4590000.0,4590000.0,4590000.0,2,1,CellphoneS,10.0,4.8,1,exclusive
+7e45fb2e955f124d,smartphone,OnePlus,11,Snapdragon 8 Gen 2,8.0,128.0,,15990000.0,15990000.0,15990000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+d7b8d7af97183797,smartphone,Xiaomi,Redmi Note 8 Pro,MediaTek Helio G90T,6.0,96.0,,5490000.0,5740000.0,5990000.0,8,1,CellphoneS,168.0,4.699999999999999,1,exclusive
+34d27e70c8d463d0_s1,smartphone,Realme,8 Pro,Snapdragon 720G,8.0,128.0,,4590000.0,4590000.0,4590000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+34d27e70c8d463d0_s2,smartphone,Realme,8 Pro,Snapdragon 720G,8.0,128.0,,8690000.0,8690000.0,8690000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+a2a4490820057d0c,smartphone,Nokia,G50,Snapdragon 480,6.0,128.0,,6490000.0,6490000.0,6490000.0,2,1,CellphoneS,42.0,4.7,1,exclusive
+558da8d4d73f06b0,smartphone,OPPO,Reno 4 Pro,Snapdragon 720G,8.0,256.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,42.0,5.0,1,exclusive
+ee669468b83e2bd7,smartphone,OPPO,A1K,Helio P22,2.0,32.0,,2690000.0,2690000.0,2690000.0,2,1,CellphoneS,0.0,,1,exclusive
+b8e1f31c65a0818e,smartphone,Vivo,V29E,Snapdragon 695,8.0,256.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+d22f9a8dc61c5cbb,smartphone,Vivo,Y35,Snapdragon 680,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+6813f10fcd5afc7c,smartphone,Realme,8,Helio G95,8.0,128.0,,7290000.0,7290000.0,7290000.0,2,1,CellphoneS,14.0,5.0,1,exclusive
+c0620aa7c2e7639a,smartphone,Xiaomi,Redmi 9,Helio G80,4.0,64.0,,2950000.0,2950000.0,2950000.0,1,1,CellphoneS,11.0,5.0,1,exclusive
+da2ea16039183cb5,smartphone,Xiaomi,Redmi 9 4G,Helio G80,4.0,64.0,,2950000.0,2950000.0,2950000.0,2,1,CellphoneS,22.0,5.0,1,exclusive
+cb44aefd1add0b17,smartphone,Vivo,X60 Pro,Snapdragon 870,3.0,256.0,,19990000.0,19990000.0,19990000.0,1,1,CellphoneS,7.0,4.6,1,exclusive
+98280e1be9777aa5,smartphone,Vivo,X60 Pro 5G,Snapdragon 870,3.0,256.0,,19990000.0,19990000.0,19990000.0,1,1,CellphoneS,7.0,4.6,1,exclusive
+05ec9f04f4250972,smartphone,Realme,C12,Helio G35,3.0,32.0,,3490000.0,3490000.0,3490000.0,2,1,CellphoneS,10.0,4.6,1,exclusive
+2bb7e2e9b9cdf0e9,smartphone,Vivo,Y33S,Helio G80,8.0,128.0,,6690000.0,6690000.0,6990000.0,3,1,CellphoneS,0.0,,1,exclusive
+58e2cc4351abc611_s1,smartphone,OPPO,Reno5 5G,Snapdragon 765G,8.0,128.0,,6990000.0,6990000.0,6990000.0,1,1,CellphoneS,6.0,4.8,1,exclusive
+58e2cc4351abc611_s2,smartphone,OPPO,Reno5 5G,Snapdragon 765G,8.0,128.0,,8990000.0,8990000.0,8990000.0,1,1,CellphoneS,6.0,4.8,1,exclusive
+ff216acd053a0142,smartphone,Xiaomi,Redmi Note 12S,Helio G96,8.0,256.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,18.0,4.8,1,exclusive
+b33e2adbbf2bd42a,smartphone,Vivo,V30E,Snapdragon 6 Gen 1,12.0,256.0,,10490000.0,10490000.0,10490000.0,1,1,CellphoneS,0.0,,1,exclusive
+80ab5a1385b07c31,smartphone,OPPO,A96,Snapdragon 680,8.0,128.0,,5090000.0,5090000.0,5090000.0,2,1,CellphoneS,0.0,,1,exclusive
+b4e051af31da84ff,smartphone,INOI,Note 13s,Unisoc T606,8.0,256.0,,3390000.0,3390000.0,3390000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+c18c01fcfb66abf1,smartphone,Vivo,V30 5G,Snapdragon 7 Gen 3,12.0,512.0,,13590000.0,13590000.0,13590000.0,1,1,CellphoneS,0.0,,1,exclusive
+aa907e1104a719e8,smartphone,Xiaomi,12T Pro,Snapdragon 8+ Gen 1,12.0,256.0,,14690000.0,14690000.0,14690000.0,3,1,CellphoneS,36.0,4.8,1,exclusive
+352cb28ec81069ff,smartphone,Apple,iPhone 12 Pro,Apple A14 Bionic,6.0,256.0,,24990000.0,24990000.0,27500000.0,12,1,CellphoneS,220.0,5.0,1,exclusive
+5367257f2f74f327_s1,smartphone,Apple,iPhone 15,Apple A16 Bionic,6.0,128.0,,19990000.0,21990000.0,21990000.0,13,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,456288.0,4.927272727272728,4,competitive
+5367257f2f74f327_s2,smartphone,Apple,iPhone 15,Apple A16 Bionic,6.0,256.0,,23990000.0,24940000.0,26990000.0,18,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,455863.0,4.8500000000000005,4,competitive
+2b8ff0865021c067,smartphone,Infinix,Note 40 Pro,MediaTek Helio G99 Ultimate,8.0,256.0,,5790000.0,5790000.0,5790000.0,4,1,CellphoneS,68.0,4.8,1,exclusive
+3a21d30eb176fb90,smartphone,Xiaomi,Mi 10T Pro 5G,Snapdragon 865,8.0,128.0,,10200000.0,10200000.0,10200000.0,3,1,CellphoneS,48.0,5.0,1,exclusive
+5491415b900ea28e,smartphone,OPPO,A17K,MediaTek Helio G35,3.0,64.0,,2290000.0,2290000.0,2290000.0,2,1,CellphoneS,12.0,4.7,1,exclusive
+e6c08489f1363b2c,smartphone,Vivo,Y11,Snapdragon 439,3.0,32.0,,2990000.0,2990000.0,2990000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+655105efd5f98b97,smartphone,Tecno,SPARK Go 2024,Unisoc T606,4.0,64.0,,1800000.0,1800000.0,1800000.0,4,1,CellphoneS,48.0,5.0,1,exclusive
+655c0bccfdac7281,smartphone,Honor,X5c Plus,MediaTek Helio G81,4.0,96.0,,3490000.0,3640000.0,3790000.0,4,1,CellphoneS,0.0,,1,exclusive
+15152ecf00def362,smartphone,OPPO,A94,MediaTek Helio P95,8.0,128.0,,5690000.0,5690000.0,5690000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+b294b138854655c5,smartphone,Xiaomi,Mi 10T Pro,Snapdragon 865,8.0,256.0,,11200000.0,11200000.0,11200000.0,3,1,CellphoneS,84.0,4.7,1,exclusive
+fe2912e3c8296d0a,smartphone,Nokia,6300 4G,Unknown,,4.0,,1290000.0,1290000.0,1290000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+d84b90f999abedd8,smartphone,Realme,C21Y,Spreadtrum T610,3.0,32.0,,3690000.0,3690000.0,3690000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+818abe22f8b3588d,smartphone,Xiaomi,Redmi Note 11 Pro Plus 5G,Dimensity 920,8.0,256.0,,6090000.0,6090000.0,6090000.0,3,1,CellphoneS,99.0,4.9,1,exclusive
+960681bdb1bc5488,smartphone,Realme,C33,Unisoc T612,3.0,48.0,,1850000.0,2020000.0,2190000.0,6,1,CellphoneS,27.0,5.0,1,exclusive
+54e2a279ee435b6c,smartphone,Samsung,Galaxy M34 5G,Exynos 1280,8.0,128.0,,5890000.0,5890000.0,5890000.0,3,1,CellphoneS,45.0,4.8,1,exclusive
+0b6045f970d117de,smartphone,Vivo,Y19,Helio P65,6.0,128.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,0.0,,1,exclusive
+07bae70b453a032d,smartphone,Samsung,Galaxy A01 Core,MT6739WW,1.0,16.0,,1990000.0,1990000.0,1990000.0,3,1,CellphoneS,9.0,4.7,1,exclusive
+e353442d11f788eb,smartphone,Vivo,V20 SE,Snapdragon 665,8.0,128.0,,7190000.0,7190000.0,7190000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+41fc275c21bcd33a,smartphone,Masstel,izi T8,ASR3603S,,,,530000.0,530000.0,530000.0,2,1,CellphoneS,0.0,,1,exclusive
+cbc098a9261e06ee,smartphone,Samsung,Galaxy Z Flip,Snapdragon 855 Plus,8.0,256.0,,36000000.0,36000000.0,36000000.0,2,1,CellphoneS,8.0,4.8,1,exclusive
+73aab9368cefa6d8,smartphone,Tecno,Spark 20 Pro Plus,Helio G99,8.0,256.0,,3990000.0,3990000.0,3990000.0,3,1,CellphoneS,96.0,4.9,1,exclusive
+ee379dbd083d5a3b,smartphone,Nokia,C32,Unisoc SC9863A,4.0,128.0,,2390000.0,2390000.0,2390000.0,2,1,CellphoneS,16.0,5.0,1,exclusive
+e3144fe31199af69,smartphone,Realme,Realme C15,Snapdragon 460,4.0,64.0,,4190000.0,4190000.0,4190000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+efbf3220b204eda1,smartphone,Vivo,Vivo Y100,Snapdragon 685,8.0,256.0,,7690000.0,7690000.0,7690000.0,2,1,CellphoneS,0.0,,1,exclusive
+bf145215c9eb7a95,smartphone,OPPO,Oppo A15,Helio P35,3.0,32.0,,3290000.0,3290000.0,3290000.0,2,1,CellphoneS,6.0,4.0,1,exclusive
+7dff4a089e3d008c,smartphone,Nubia,Nubia A36,T7200,4.0,64.0,,3190000.0,3190000.0,3190000.0,3,1,CellphoneS,0.0,,1,exclusive
+45a952a96e4b4988,smartphone,Infinix,Infinix Note 30,Helio G99,8.0,256.0,,3590000.0,3590000.0,3590000.0,3,1,CellphoneS,84.0,4.9,1,exclusive
+16e00e06b6b35882,smartphone,Realme,Realme 7i,Snapdragon 662,8.0,128.0,,6290000.0,6290000.0,6290000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+d7266a80e66cafa6_s1,smartphone,Apple,iPhone Duo,Apple A20 Pro,,256.0,,4190000.0,4190000.0,4190000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+d7266a80e66cafa6_s2,smartphone,Apple,iPhone Duo,Apple A20 Pro,,256.0,,64990000.0,64990000.0,71490000.0,12,4,CellphoneS|FPT|TGDĐ|Viettel,620.0,4.775,4,competitive
+d7266a80e66cafa6_s3,smartphone,Apple,iPhone Duo,Apple A20 Pro,,1024.0,,84490000.0,84490000.0,84490000.0,5,3,CellphoneS|FPT|Viettel,12.0,4.83,3,competitive
+d7266a80e66cafa6_s4,smartphone,Apple,iPhone Duo,Apple A20 Pro,,2048.0,,103990000.0,103990000.0,103990000.0,5,3,CellphoneS|FPT|Viettel,12.0,4.92,3,competitive
+1f08219642bc35d5,smartphone,Nokia,Nokia 150 2020,Unknown,,,,680000.0,700000.0,700000.0,3,1,CellphoneS,0.0,,1,exclusive
+3a003e7a79145988,smartphone,Xiaomi,Redmi Note 9S,Snapdragon 720G,4.0,64.0,,5490000.0,5490000.0,5490000.0,3,1,CellphoneS,108.0,4.8,1,exclusive
+07288c0c90402c23,smartphone,Samsung,Galaxy M14 5G,Exynos 1330,4.0,128.0,,4490000.0,4490000.0,4490000.0,3,1,CellphoneS,78.0,4.8,1,exclusive
+ccb1e6faecb9367e,smartphone,Realme,C25,MediaTek Helio G70,4.0,128.0,,4690000.0,4690000.0,4690000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+f2bdf545b09a2b20,smartphone,Realme,C11 2021,Unisoc SC9863A,2.0,32.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,4.0,4.5,1,exclusive
+7d6d9cecf85e092d,smartphone,OPPO,A17,MediaTek Helio G35,4.0,64.0,,3490000.0,3490000.0,3490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+77c661fdf356322b,smartphone,Samsung,Galaxy A20s,Snapdragon 450,3.0,32.0,,4390000.0,4390000.0,4390000.0,3,1,CellphoneS,0.0,,1,exclusive
+3ea589c4234b57b9,smartphone,Honor,X5B,MediaTek Helio G36,4.0,64.0,,2160000.0,2160000.0,2160000.0,2,1,CellphoneS,0.0,,1,exclusive
+b82a5548c4e33439,smartphone,OPPO,Reno7 5G,MediaTek Dimensity 900,8.0,256.0,,7590000.0,7590000.0,7590000.0,2,1,CellphoneS,0.0,,1,exclusive
+4188917211ad29b2_s1,smartphone,Apple,iPhone 15 Plus,Apple A16 Bionic,6.0,128.0,,17690000.0,17690000.0,17690000.0,6,2,CellphoneS|Hoàng Hà,360.0,4.8,2,competitive
+4188917211ad29b2_s2,smartphone,Apple,iPhone 15 Plus,Apple A16 Bionic,6.0,256.0,,21290000.0,21290000.0,21690000.0,6,2,CellphoneS|Hoàng Hà,85.0,4.8,2,competitive
+4188917211ad29b2_s3,smartphone,Apple,iPhone 15 Plus,Apple A16 Bionic,6.0,512.0,,26490000.0,28490000.0,28490000.0,5,1,CellphoneS,5.0,5.0,1,exclusive
+340a28f7160a919b,smartphone,Vivo,V23e,MediaTek Helio G96,8.0,128.0,,8490000.0,8490000.0,8490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+c7eca3db9c744079,smartphone,Nubia,V70 Max,Unisoc T606,6.0,128.0,,2390000.0,2590000.0,2590000.0,5,1,CellphoneS,0.0,,1,exclusive
+a4af02848b675cc6,smartphone,Xiaomi,Redmi Note 11S,MediaTek Helio G96,8.0,128.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,48.0,4.8,1,exclusive
+8142e8ad73b2e368_s1,smartphone,Xiaomi,Redmi Note 10,Snapdragon 678,4.0,64.0,,4250000.0,4250000.0,5100000.0,5,1,CellphoneS,210.0,4.82,1,exclusive
+8142e8ad73b2e368_s2,smartphone,Xiaomi,Redmi Note 10,Snapdragon 678,6.0,128.0,,5490000.0,5490000.0,5490000.0,1,1,CellphoneS,51.0,4.7,1,exclusive
+a50bfb96d340dc64,smartphone,Samsung,Galaxy A54,Exynos 1380,8.0,256.0,,7890000.0,7890000.0,7890000.0,4,1,CellphoneS,48.0,4.8,1,exclusive
+fa93fd9ad4ce2d2d,smartphone,Vivo,V50 Lite 5G,MediaTek Dimensity 6300,12.0,256.0,,10990000.0,10990000.0,10990000.0,2,1,CellphoneS,0.0,,1,exclusive
+84674913d50aa006,smartphone,Realme,11,MediaTek Helio G99,8.0,128.0,,4590000.0,4590000.0,4590000.0,2,1,CellphoneS,20.0,5.0,1,exclusive
+041dd7dba2db1e79,smartphone,Masstel,Fami 8 4G,Unisoc T107,,,,580000.0,580000.0,580000.0,2,1,CellphoneS,0.0,,1,exclusive
+3527a098be29315b,smartphone,Viettel,T2 4G,Unisoc T107,,,,530000.0,530000.0,530000.0,2,1,CellphoneS,8.0,4.8,1,exclusive
+1aabc9fc4aa35b2c,smartphone,OPPO,Reno8 Pro,Dimensity 8100-MAX,12.0,256.0,,18990000.0,18990000.0,18990000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+705c7193c06a7b4b,smartphone,OPPO,A16,Helio G35,3.0,32.0,,2790000.0,2790000.0,2790000.0,2,1,CellphoneS,0.0,,1,exclusive
+21c7e084915a3816,smartphone,Infinix,Note 50,Helio G100 Ultimate,8.0,256.0,,5590000.0,5590000.0,5590000.0,2,1,CellphoneS,0.0,,1,exclusive
+3d4be77747a0793c,smartphone,OPPO,Reno10,Dimensity 7050,8.0,192.0,,7990000.0,8240000.0,8490000.0,2,1,CellphoneS,6.0,4.65,1,exclusive
+c8eed9a4f3c8c30d,smartphone,INOI,A72,Unisoc T310,4.0,128.0,,2490000.0,2490000.0,2490000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+bfaa7d482391a14a,smartphone,Vivo,Y02,MediaTek Helio P22,2.0,32.0,,2790000.0,2790000.0,2790000.0,2,1,CellphoneS,0.0,,1,exclusive
+27a1caaab6e2b801,smartphone,Samsung,Galaxy S10+,Exynos 9820,,128.0,,12400000.0,12400000.0,12400000.0,4,1,CellphoneS,44.0,4.8,1,exclusive
+db6ff73018ee9832,smartphone,OPPO,A76,Snapdragon 680 4G,6.0,128.0,,4190000.0,4190000.0,4190000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+075b0ea5e1db2b72,smartphone,Xiaomi,Redmi 12C,MediaTek Helio G85,4.0,64.0,,2190000.0,2190000.0,2190000.0,3,1,CellphoneS,75.0,4.9,1,exclusive
+85cfbf7627990868,smartphone,Xiaomi,POCO M5,MediaTek Helio G99,6.0,128.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,42.0,4.9,1,exclusive
+35697f08c96e2ce2,smartphone,Nokia,8000 4G,Snapdragon 210,,4.0,,1390000.0,1390000.0,1390000.0,1,1,CellphoneS,5.0,5.0,1,exclusive
+89929a0a6d53b512,smartphone,OPPO,Reno11 5G,MediaTek Dimensity 7050,8.0,256.0,,9050000.0,9050000.0,9050000.0,1,1,CellphoneS,0.0,,1,exclusive
+78f1994244540a08,smartphone,Samsung,Galaxy A30s,Exynos 7904,4.0,64.0,,6290000.0,6290000.0,6290000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+966248b3b48eec8b,smartphone,Vivo,V19,Snapdragon 712,8.0,128.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,0.0,,1,exclusive
+96cf9e98ed3c0049,smartphone,ASUS,ROG Phone 7 Ultimate,Snapdragon 8 Gen 2,16.0,512.0,,26190000.0,26190000.0,26190000.0,1,1,CellphoneS,10.0,4.9,1,exclusive
+9b9f169a39439e85,smartphone,Realme,6,Helio G90T,4.0,128.0,,5990000.0,5990000.0,5990000.0,2,1,CellphoneS,36.0,4.8,1,exclusive
+65c24777f43ae4d6,smartphone,Xiaomi,Redmi 10C,Snapdragon 680,4.0,128.0,,3050000.0,3050000.0,3050000.0,3,1,CellphoneS,15.0,4.8,1,exclusive
+2320b6f661bac69e,smartphone,Realme,C17,Snapdragon 460,6.0,128.0,,5290000.0,5290000.0,5290000.0,2,1,CellphoneS,0.0,,1,exclusive
+a5fbbecf9c17d07f,smartphone,OPPO,A55,Helio G35,4.0,64.0,,3490000.0,3490000.0,3490000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+2814f303b7ba9c13,smartphone,Vivo,Y72 5G,Dimensity 700,8.0,128.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,4.0,4.5,1,exclusive
+766f038d101b62c2,smartphone,Xiaomi,Redmi Note 10 5G,Dimensity 700,4.0,128.0,,4950000.0,4950000.0,4950000.0,4,1,CellphoneS,92.0,5.0,1,exclusive
+32f600e2d0d7eb15,smartphone,Samsung,Galaxy A72,Snapdragon 720G,8.0,256.0,,11490000.0,11490000.0,11490000.0,4,1,CellphoneS,64.0,4.8,1,exclusive
+f841f56083b18204,smartphone,Sony,Xperia 1 V,Snapdragon 8 Gen 2,12.0,256.0,,20190000.0,20190000.0,20190000.0,2,1,CellphoneS,0.0,,1,exclusive
+aa92d6346ec2689b,smartphone,Samsung,Galaxy S23 FE,Exynos 2200,8.0,256.0,,11890000.0,11890000.0,11890000.0,2,1,CellphoneS,20.0,4.8,1,exclusive
+2e9e52fab1d4579d,smartphone,Vivo,Y20s,Snapdragon 460,6.0,128.0,,4990000.0,4990000.0,4990000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+4d6fdf979c51a29e,smartphone,Samsung,Galaxy Note 10 Lite,Exynos 9810,8.0,128.0,,11490000.0,11490000.0,11490000.0,2,1,CellphoneS,60.0,4.6,1,exclusive
+7d63d5a78e466ebb,smartphone,Realme,C67,Snapdragon 685,8.0,128.0,,4290000.0,4290000.0,4290000.0,2,1,CellphoneS,34.0,4.9,1,exclusive
+78dada367b50ad93,smartphone,Samsung,Galaxy A04s,Exynos 850,4.0,64.0,,2750000.0,2750000.0,2750000.0,3,1,CellphoneS,0.0,,1,exclusive
+416f1d1fbab0bc75,smartphone,Tecno,Camon 30,Helio G99 Ultimate,8.0,256.0,,4590000.0,4590000.0,4990000.0,7,1,CellphoneS,206.0,4.814285714285715,1,exclusive
+b8b89fa986615752,smartphone,OPPO,A93,Helio P95,8.0,128.0,,6490000.0,6490000.0,6490000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+485e6c6e2ea5e39b,smartphone,OPPO,A93,MediaTek Helio P95,8.0,128.0,,6490000.0,6490000.0,6490000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+31e138297ddf62fe,smartphone,Infinix,Hot 50,MediaTek Helio G100,8.0,256.0,,3790000.0,3790000.0,3790000.0,4,1,CellphoneS,16.0,5.0,1,exclusive
+a9976a1ec4a1b57e,smartphone,Vivo,Y21,MediaTek Helio P35,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+d0eb0e8207ebd977,smartphone,Nubia,A56,Unisoc T7200,4.0,128.0,,3190000.0,3390000.0,3390000.0,6,3,CellphoneS|FPT|TGDĐ,7110.0,4.8999999999999995,3,competitive
+f9479f9c0111b22d,smartphone,Realme,C53,Unisoc Tiger T612,8.0,256.0,,3750000.0,3750000.0,3750000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+f6ff699371118354,smartphone,Samsung,Galaxy A03s,MediaTek MT6765,4.0,64.0,,3690000.0,3690000.0,3690000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+de45449ac48a7bd0,smartphone,Samsung,Galaxy S24,Exynos 2400,8.0,384.0,,14990000.0,15890000.0,16790000.0,8,1,CellphoneS,28.0,5.0,1,exclusive
+67584b55e13f7c6f_s1,smartphone,Apple,iPhone Air,Apple A19 Pro,12.0,256.0,,22990000.0,23690000.0,23890000.0,9,3,CellphoneS|FPT|Hoàng Hà,44.0,4.95,3,competitive
+67584b55e13f7c6f_s2,smartphone,Apple,iPhone Air,Apple A19 Pro,12.0,512.0,Apple 5-core GPU,28990000.0,28990000.0,31990000.0,11,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,13178.0,4.95,4,competitive
+67584b55e13f7c6f_s3,smartphone,Apple,iPhone Air,Apple A19 Pro,,1024.0,,41590000.0,41590000.0,41590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+72b034092fd7e847,smartphone,Xiaomi,POCO X4 Pro,Snapdragon 695 5G,6.0,128.0,,6090000.0,6090000.0,6090000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+00d9d39b9a024dd8,smartphone,Realme,Note 60,Unisoc T612,4.0,64.0,,2490000.0,2490000.0,2490000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+9dbc03d155b79128,smartphone,Apple,iPhone 13 mini,Apple A15,4.0,128.0,,17490000.0,17490000.0,17490000.0,6,1,CellphoneS,6.0,5.0,1,exclusive
+d6fdcbc0cf92d49c,smartphone,Xiaomi,Redmi Note 12,Snapdragon 685,8.0,128.0,,3790000.0,4290000.0,4290000.0,7,1,CellphoneS,387.0,4.9,1,exclusive
+9f7e8d00993c9683,smartphone,Vivo,Y16,MediaTek Helio P35,1.0,128.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+f9dce73b9d7c8d97,smartphone,Nubia,V60 Design,Unisoc T606,6.0,256.0,,2690000.0,2690000.0,2690000.0,3,1,CellphoneS,45.0,4.9,1,exclusive
+ea0fb4e5ab4d9291,smartphone,OPPO,A74,Snapdragon 662,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,0.0,,1,exclusive
+0e5438b6e5102c71,smartphone,Samsung,Galaxy A03,Unisoc T606,3.0,32.0,,2150000.0,2150000.0,2150000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+0ef877e09bf39e02,smartphone,Realme,Note 50,Unisoc Tiger T612,4.0,128.0,,2790000.0,2790000.0,2790000.0,1,1,CellphoneS,0.0,,1,exclusive
+b2589beba04ceca4,smartphone,Honor,400 Lite 5G,MediaTek Dimensity 7025-Ultra,12.0,256.0,,7690000.0,7690000.0,7690000.0,1,1,CellphoneS,0.0,,1,exclusive
+676ac9992f4eea89,smartphone,ASUS,ROG Phone 7,Snapdragon 8 Gen 2,16.0,512.0,,21490000.0,21490000.0,21490000.0,2,1,CellphoneS,22.0,4.9,1,exclusive
+6cbe35eb8773966d_s1,smartphone,Xiaomi,Redmi Note 9,Helio G85,4.0,128.0,,3800000.0,3800000.0,3800000.0,1,1,CellphoneS,0.0,,1,exclusive
+6cbe35eb8773966d_s2,smartphone,Xiaomi,Redmi Note 9,Helio G85,4.0,128.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,0.0,,1,exclusive
+3fbc65a93db68b98,smartphone,OPPO,Reno7 4G,Snapdragon 680,8.0,128.0,,6000000.0,6000000.0,6000000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+0fde392fba1384cb,smartphone,TCL,40 NxtPaper,Helio G88,8.0,256.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+544f4bca23a22814,smartphone,Xiaomi,Mi 11,Snapdragon 888,8.0,256.0,,15200000.0,15200000.0,15200000.0,2,1,CellphoneS,24.0,4.8,1,exclusive
+08ef1537af338f16,smartphone,Itel,RS4,Helio G99 Ultimate,8.0,256.0,,3290000.0,3290000.0,3390000.0,5,1,CellphoneS,93.0,4.94,1,exclusive
+9b61bd8a987497a9,smartphone,Samsung,Galaxy S23 FE 5G,Exynos 2200,8.0,128.0,,14890000.0,14890000.0,14890000.0,2,1,CellphoneS,14.0,4.9,1,exclusive
+d7f6b2f921685cfa,smartphone,Masstel,izi T5 Plus 4G,Unisoc T107,,,,530000.0,550000.0,550000.0,7,3,CellphoneS|FPT|Viettel,3.0,5.0,3,competitive
+eafb38e5c8e2010c,smartphone,OPPO,Reno8 4G,Snapdragon 680,8.0,256.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+b7877d930653fa40_s1,smartphone,Nubia,Z70 Ultra 5G,Snapdragon 8 Elite,12.0,256.0,,16990000.0,16990000.0,16990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+b7877d930653fa40_s2,smartphone,Nubia,Z70 Ultra 5G,Snapdragon 8 Elite,16.0,512.0,,22990000.0,22990000.0,22990000.0,1,1,CellphoneS,0.0,,1,exclusive
+f7c17972cc84787c,smartphone,Xiaomi,Redmi A1,Helio A22,2.0,32.0,,1690000.0,1690000.0,1690000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+0f4ac1cb32848510,smartphone,Samsung,Galaxy A52s 5G,Snapdragon 778G 5G,8.0,128.0,,10990000.0,10990000.0,10990000.0,4,1,CellphoneS,112.0,4.9,1,exclusive
+99bcdcd76071a8b5,smartphone,OPPO,Reno8 Z,Snapdragon 695 5G,8.0,256.0,,10490000.0,10490000.0,10490000.0,2,1,CellphoneS,0.0,,1,exclusive
+1c842dbe1fa070a5,smartphone,Xiaomi,Redmi Note 12 Pro 4G,Snapdragon 732G,8.0,256.0,,5690000.0,5690000.0,5690000.0,3,1,CellphoneS,51.0,4.5,1,exclusive
+790a20d2fb41ef85,smartphone,Xiaomi,Redmi 9A,Helio G25,2.0,32.0,,1850000.0,1850000.0,1850000.0,1,1,CellphoneS,32.0,4.9,1,exclusive
+5694600cbbadaee5,smartphone,Xiaomi,Redmi 9A,MediaTek Helio G25,2.0,32.0,,1850000.0,1850000.0,1850000.0,2,1,CellphoneS,64.0,4.9,1,exclusive
+26dd847ad41b0c21,smartphone,OPPO,A15s,MediaTek Helio P35,4.0,64.0,,3790000.0,3790000.0,3790000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+aee635978320bffd,smartphone,OPPO,A54,MediaTek Helio P35,4.0,128.0,,4690000.0,4690000.0,4690000.0,2,1,CellphoneS,0.0,,1,exclusive
+116e6d2d8ff4a4a0,smartphone,Samsung,Galaxy A14 4G,Exynos 850,4.0,128.0,,2990000.0,2990000.0,2990000.0,3,1,CellphoneS,12.0,4.8,1,exclusive
+ec336a5c0a3e83b7,smartphone,Nubia,Red Magic 6 Pro,Snapdragon 888,16.0,256.0,,18590000.0,18590000.0,18590000.0,1,1,CellphoneS,11.0,4.8,1,exclusive
+76c5b1df8732d10b,smartphone,Infinix,Hot 40 Pro Free Fire,MediaTek Helio G99,8.0,256.0,,3450000.0,3450000.0,3450000.0,4,1,CellphoneS,136.0,5.0,1,exclusive
+a032c605e8469fe1,smartphone,OPPO,A18,MediaTek Helio G85,4.0,64.0,,2890000.0,2890000.0,3190000.0,3,1,CellphoneS,12.0,4.9,1,exclusive
+9d49dfbfe9bbd480,smartphone,OPPO,A77s,Snapdragon 680 4G,8.0,128.0,,4790000.0,4790000.0,4790000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+377908226af58dbc,smartphone,Nubia,Z70S Ultra 5G,Snapdragon 8 Elite,12.0,256.0,,19990000.0,19990000.0,19990000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+b24957f1889465dc_s1,smartphone,Benco,V91,Unisoc T606,4.0,128.0,,170000.0,170000.0,170000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+b24957f1889465dc_s2,smartphone,Benco,V91,Unisoc T606,4.0,128.0,,2690000.0,2690000.0,2690000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+c51dd383d1616ef8_s1,smartphone,Meizu,Mblu 21,Spreadtrum T606,4.0,64.0,,2290000.0,2290000.0,2290000.0,3,1,CellphoneS,72.0,4.8,1,exclusive
+c51dd383d1616ef8_s2,smartphone,Meizu,Mblu 21,Spreadtrum T606,6.0,128.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,57.0,4.7,1,exclusive
+667f77e17fd29432,smartphone,Xiaomi,13 Lite,Snapdragon 7 Gen 1,8.0,256.0,,8290000.0,8290000.0,8290000.0,3,1,CellphoneS,12.0,4.8,1,exclusive
+5ccb84d1a573d73c,smartphone,OPPO,Find X2,Snapdragon 865,12.0,256.0,,18990000.0,18990000.0,18990000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+8f5e5ee271b97869,smartphone,Apple,iPhone 11 Pro Max,Apple A13 Bionic,4.0,160.0,,29000000.0,30500000.0,32000000.0,8,1,CellphoneS,108.0,5.0,1,exclusive
+bdd82bc380ae41bd,smartphone,Xiaomi,Redmi Note 10S,MediaTek Helio G95,8.0,128.0,,4690000.0,4690000.0,4690000.0,2,1,CellphoneS,74.0,4.9,1,exclusive
+500f01abc8463f84,smartphone,Xiaomi,Redmi Note 11,Snapdragon 680,4.0,96.0,,3890000.0,3990000.0,4090000.0,6,1,CellphoneS,231.0,4.7,1,exclusive
+760922c30f74fe30,smartphone,OnePlus,OnePlus 11,Snapdragon 8 Gen 2,12.0,256.0,,18990000.0,18990000.0,18990000.0,1,1,CellphoneS,0.0,,1,exclusive
+4f6cfac8f6b0b579,smartphone,Samsung,Galaxy Note 20 Ultra,Exynos 990,8.0,256.0,,29990000.0,29990000.0,29990000.0,3,1,CellphoneS,24.0,5.0,1,exclusive
+986e03cb6c7a09b9,smartphone,Xiaomi,Redmi Note 12 Pro 5G,MediaTek Dimensity 1080,8.0,256.0,,6590000.0,6590000.0,6590000.0,3,1,CellphoneS,84.0,4.9,1,exclusive
+54a5bc7872af6f8d,smartphone,Vivo,V21 5G,Dimensity 800U,8.0,128.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+aabb4dc7b71942bf,smartphone,Vivo,V21,Dimensity 800U,8.0,128.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+9dd3b642845ecd63_s1,smartphone,Vivo,Y04,Unisoc T7225,4.0,64.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,0.0,,1,exclusive
+9dd3b642845ecd63_s2,smartphone,Vivo,Y04,Unisoc T7225,6.0,128.0,,3790000.0,3790000.0,3790000.0,2,1,CellphoneS,0.0,,1,exclusive
+2ab763ae3d10a4c6,smartphone,Samsung,Galaxy A11,Snapdragon 450,3.0,32.0,,2990000.0,2990000.0,2990000.0,3,1,CellphoneS,33.0,4.9,1,exclusive
+3ef7c327e564c139,smartphone,OPPO,A38,Helio G85,6.0,128.0,,3690000.0,3690000.0,3690000.0,2,1,CellphoneS,0.0,,1,exclusive
+59ae3bc73ada3605,smartphone,Samsung,Galaxy A04,Helio P35,3.0,32.0,,1950000.0,1950000.0,1950000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+aa1a5aeae5e505e7,smartphone,Xiaomi,Mi 11 Lite 5G,Snapdragon 780G,8.0,128.0,,10490000.0,10490000.0,10490000.0,3,1,CellphoneS,396.0,4.7,1,exclusive
+eb4175cdb9bdde25_s1,smartphone,Apple,iPhone 14 Pro Max,Apple A16 Bionic,6.0,192.0,,25590000.0,26790000.0,27990000.0,8,1,CellphoneS,624.0,4.9,1,exclusive
+eb4175cdb9bdde25_s2,smartphone,Apple,iPhone 14 Pro Max,Apple A16 Bionic,6.0,768.0,,35190000.0,38690000.0,41990000.0,8,1,CellphoneS,20.0,5.0,1,exclusive
+551178c4ec36837e,smartphone,Xiaomi,POCO M6,Helio G91-Ultra,6.0,128.0,,3190000.0,3190000.0,3190000.0,3,1,CellphoneS,105.0,4.9,1,exclusive
+354b061f8c127b96,smartphone,OPPO,A95,Snapdragon 662,8.0,128.0,,5090000.0,5090000.0,5090000.0,2,1,CellphoneS,8.0,4.2,1,exclusive
+71b73326a492148c,smartphone,Infinix,Hot 50 Pro Plus,MediaTek Helio G100,8.0,256.0,,4790000.0,4790000.0,4790000.0,4,1,CellphoneS,68.0,4.9,1,exclusive
+fdfe7a940d44f0c2,smartphone,Samsung,Galaxy A22,MediaTek Helio G80,6.0,128.0,,5890000.0,5890000.0,5890000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+f24eb69143fced10,smartphone,Xiaomi,Xiaomi 11 Lite 5G NE,Snapdragon 778G,8.0,128.0,,9490000.0,9490000.0,9490000.0,3,1,CellphoneS,45.0,4.7,1,exclusive
+86613f481485f2f6,smartphone,Samsung,Galaxy M15 5G,Dimensity 6100+,6.0,128.0,,5890000.0,5890000.0,5890000.0,2,1,CellphoneS,0.0,,1,exclusive
+8640c35b7394dd00,smartphone,OPPO,Reno11 F 5G,Dimensity 7050,8.0,256.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+ec4f0876b716deca,smartphone,Xiaomi,13 Pro,Snapdragon 8 Gen 2,12.0,256.0,,24490000.0,24490000.0,24490000.0,1,1,CellphoneS,0.0,,1,exclusive
+038c610cfe78cf8b,smartphone,Xiaomi,Xiaomi 13 Pro,Snapdragon 8 Gen 2,12.0,256.0,,24490000.0,24490000.0,24490000.0,1,1,CellphoneS,0.0,,1,exclusive
+fae83aa0ef359c97,smartphone,Vivo,Y28,Helio G85,8.0,192.0,,5790000.0,6140000.0,6490000.0,4,1,CellphoneS,0.0,,1,exclusive
+39018dbf2283c50b,smartphone,OPPO,A53,Snapdragon 460,4.0,128.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+1abf952685102f29,smartphone,ASUS,ROG Phone 5,Snapdragon 888,16.0,256.0,,18990000.0,18990000.0,18990000.0,2,1,CellphoneS,138.0,4.9,1,exclusive
+2dd9ef607043ff3f,smartphone,Honor,Play 10,Helio G81,4.0,128.0,,3290000.0,3540000.0,3790000.0,8,3,CellphoneS|FPT|TGDĐ,32398.0,4.966666666666667,3,competitive
+58f5f5a132f76a98,smartphone,Samsung,Galaxy A23 5G,Snapdragon 695 5G,4.0,128.0,,4150000.0,4150000.0,4150000.0,2,1,CellphoneS,26.0,4.8,1,exclusive
+58fb2c21ba1d01ed,smartphone,Samsung,Galaxy S20 Ultra,Exynos 990,12.0,128.0,,29990000.0,29990000.0,29990000.0,3,1,CellphoneS,51.0,4.9,1,exclusive
+1c6c5a42ef3b7bb0,smartphone,Xiaomi,Xiaomi 12 Pro,Snapdragon 8 Gen 1,12.0,256.0,,14090000.0,14090000.0,14090000.0,3,1,CellphoneS,9.0,4.7,1,exclusive
+dee2686d74bda1b6,smartphone,Realme,Realme 7,Helio G95,8.0,128.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,36.0,4.8,1,exclusive
+4036374656f3d720,smartphone,Itel,Itel RS4,Helio G99 Ultimate,8.0,128.0,,2990000.0,2990000.0,2990000.0,2,1,CellphoneS,26.0,5.0,1,exclusive
+0935d3bf56b0d4f1,smartphone,OPPO,OPPO A5i,Snapdragon 6s 4G Gen 1,4.0,64.0,,3290000.0,3290000.0,3290000.0,2,1,CellphoneS,0.0,,1,exclusive
+1e41683e77e2be52,smartphone,OPPO,Oppo A9 2020,Snapdragon 665,8.0,128.0,,5100000.0,5100000.0,5100000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+3335c75e5b325179,smartphone,Xiaomi,Xiaomi 11T Pro,Snapdragon 888,12.0,256.0,,11990000.0,11990000.0,11990000.0,3,1,CellphoneS,90.0,4.7,1,exclusive
+952c9abd9fb194fb,smartphone,Samsung,Galaxy A32,Helio G80,6.0,128.0,,6490000.0,6490000.0,6490000.0,4,1,CellphoneS,80.0,4.8,1,exclusive
+c4d37eed0520d7dd,smartphone,OPPO,Oppo A57,Helio G35,4.0,64.0,,3790000.0,3790000.0,3790000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+9ce41969fe47cdd0,smartphone,Samsung,Galaxy S20 FE,Snapdragon 865,8.0,256.0,,7200000.0,7200000.0,7200000.0,2,1,CellphoneS,128.0,4.8,1,exclusive
+1d9da0f829ddc376_s1,smartphone,OPPO,Reno12 5G,Dimensity 7300,12.0,256.0,,9690000.0,9690000.0,9990000.0,3,2,CellphoneS|FPT,26.0,4.7,2,competitive
+1d9da0f829ddc376_s2,smartphone,OPPO,Reno12 5G,Dimensity 7300,12.0,512.0,,16090000.0,16090000.0,16090000.0,2,1,CellphoneS,0.0,,1,exclusive
+1ec7e67877a2f683,smartphone,Samsung,Galaxy A33 5G,Exynos 1280,6.0,128.0,,7290000.0,7290000.0,7290000.0,4,1,CellphoneS,44.0,4.8,1,exclusive
+144126e065ac0a0d,smartphone,Xiaomi,Redmi A3,Helio G36,4.0,128.0,,2390000.0,2390000.0,2390000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+cc4d90400ea8b302,smartphone,Nubia,Neo,Unisoc T820,8.0,256.0,,3990000.0,3990000.0,3990000.0,2,1,CellphoneS,126.0,4.9,1,exclusive
+b5339768987ac68e,smartphone,Xiaomi,11T,Dimensity 1200 Ultra,8.0,128.0,,10990000.0,10990000.0,10990000.0,3,1,CellphoneS,111.0,4.8,1,exclusive
+4aa3ac2c72f4ed5c_s1,smartphone,Samsung,Galaxy S23 Ultra,Snapdragon 8 Gen 2,10.0,384.0,,19490000.0,20890000.0,22290000.0,8,1,CellphoneS,300.0,4.9,1,exclusive
+4aa3ac2c72f4ed5c_s2,smartphone,Samsung,Galaxy S23 Ultra,Snapdragon 8 Gen 2,12.0,1024.0,,44990000.0,44990000.0,44990000.0,4,1,CellphoneS,4.0,5.0,1,exclusive
+54004898745b3d8b,smartphone,Samsung,Galaxy A05s,Snapdragon 680,5.0,128.0,,3290000.0,3320000.0,3350000.0,6,1,CellphoneS,72.0,5.0,1,exclusive
+3a9a1686b8fe39d9,smartphone,Samsung,Galaxy Note 20,Exynos 990,8.0,256.0,,23990000.0,23990000.0,23990000.0,3,1,CellphoneS,21.0,4.9,1,exclusive
+41ea5eb09d417f3d,smartphone,Masstel,izi 15 4G,Unisoc UMS9117,,,,420000.0,440000.0,460000.0,4,2,CellphoneS|FPT,14.0,4.95,2,competitive
+32870fa1c3410afa,smartphone,Sony,Xperia 1 VI,Snapdragon 8 Gen 3,12.0,256.0,,22990000.0,22990000.0,22990000.0,3,1,CellphoneS,0.0,,1,exclusive
+b6ec0631f24df03f,smartphone,Infinix,Note 50 Pro,Helio G100 Ultimate,12.0,256.0,,6560000.0,6560000.0,6560000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+b0bbf463a2bc37db,smartphone,Xiaomi,Redmi Note 11 Pro,Helio G96,8.0,128.0,,5790000.0,5790000.0,5790000.0,3,1,CellphoneS,96.0,4.8,1,exclusive
+b57a27ae1f5fc627,smartphone,Xiaomi,12T,Dimensity 8100 Ultra,8.0,128.0,,5490000.0,5490000.0,5490000.0,3,1,CellphoneS,480.0,5.0,1,exclusive
+d0a1018c9233bbb4,smartphone,Xiaomi,12,Snapdragon 8 Gen 1,8.0,256.0,,12590000.0,12590000.0,12590000.0,1,1,CellphoneS,4.0,4.5,1,exclusive
+35627e6f280e418b,smartphone,Xiaomi,Xiaomi 12,Snapdragon 8 Gen 1,8.0,256.0,,12590000.0,12590000.0,12590000.0,2,1,CellphoneS,8.0,4.5,1,exclusive
+6c08001ed4b4057a,smartphone,OPPO,Reno7 Z 5G,Snapdragon 695 5G,8.0,128.0,,7000000.0,7000000.0,7000000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+3b98882e2d6f202b,smartphone,OPPO,A58,Helio G85,8.0,128.0,,4500000.0,4500000.0,4500000.0,2,1,CellphoneS,0.0,,1,exclusive
+5fea3fbb3527d678,smartphone,Nokia,110 4G Pro,Unisoc T107,,,,850000.0,850000.0,850000.0,2,1,CellphoneS,36.0,4.9,1,exclusive
+1bd6514bd58d01ae,smartphone,Xiaomi,Redmi Note 13 Pro Plus 5G,Dimensity 7200 Ultra,8.0,256.0,,6490000.0,6490000.0,6490000.0,3,1,CellphoneS,123.0,4.9,1,exclusive
+3a68f22bfc41ad33,smartphone,Vivo,Y19S,Unisoc T612,8.0,128.0,,4390000.0,4390000.0,4390000.0,3,1,CellphoneS,0.0,,1,exclusive
+89a56ca6a3d9d3c7,smartphone,OPPO,Reno 2F,Helio P70,8.0,128.0,,6300000.0,6300000.0,6300000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+685a2e6fcbd22e88,smartphone,Samsung,Galaxy A31,MediaTek Helio P65,6.0,128.0,,5790000.0,5790000.0,5790000.0,3,1,CellphoneS,33.0,4.6,1,exclusive
+09d638c52b5f1fd6,smartphone,Itel,P55 Plus,Unisoc T606,8.0,128.0,,2590000.0,2590000.0,2590000.0,2,1,CellphoneS,18.0,4.7,1,exclusive
+d0c68dc2017cbb80,smartphone,Samsung,Galaxy Z Flip 7,Exynos 2500,12.0,384.0,,22990000.0,23990000.0,24990000.0,6,1,CellphoneS,138.0,5.0,1,exclusive
+1e95fab3f1103590,smartphone,OPPO,Reno 4,Snapdragon 720G,8.0,128.0,,8490000.0,8490000.0,8490000.0,3,1,CellphoneS,24.0,4.8,1,exclusive
+66c6a0d5285fa5c1,smartphone,Samsung,Galaxy A13 4G,Exynos 850,4.0,128.0,,4190000.0,4190000.0,4190000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+9d825c5f3394fd02,smartphone,Tecno,Spark 40,MediaTek Helio G91,6.0,128.0,,3790000.0,3790000.0,3790000.0,3,1,CellphoneS,0.0,,1,exclusive
+0efaef63bed90223,smartphone,Vivo,X70 Pro,Dimensity 1200,12.0,256.0,,19990000.0,19990000.0,19990000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+e2d95448095af881,smartphone,OPPO,Reno6 Z 5G,Dimensity 800U,8.0,128.0,,6590000.0,6690000.0,6790000.0,2,1,CellphoneS,14.0,4.9,1,exclusive
+906ff5e9a61c4fc3_s1,smartphone,Samsung,Galaxy S21 FE 5G,Exynos 2100,8.0,256.0,,8110000.0,8110000.0,8110000.0,1,1,CellphoneS,0.0,,1,exclusive
+906ff5e9a61c4fc3_s2,smartphone,Samsung,Galaxy S21 FE 5G,Exynos 2100,6.0,128.0,,11490000.0,11590000.0,11690000.0,2,1,CellphoneS,4.0,4.0,1,exclusive
+906ff5e9a61c4fc3_s3,smartphone,Samsung,Galaxy S21 FE 5G,Exynos 2100,8.0,256.0,,14840000.0,15690000.0,15990000.0,5,1,CellphoneS,4.0,4.0,1,exclusive
+ccd8907745bb40d5,smartphone,OPPO,Reno8 5G,Dimensity 1300,8.0,256.0,,13990000.0,13990000.0,13990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+e0d0880d543ae45c_s1,smartphone,OPPO,A3,Snapdragon 6s 4G Gen1,6.0,128.0,,4500000.0,4500000.0,4500000.0,2,1,CellphoneS,26.0,5.0,1,exclusive
+e0d0880d543ae45c_s2,smartphone,OPPO,A3,Snapdragon 6s 4G Gen1,8.0,256.0,,5780000.0,5780000.0,5780000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+258c02e416acd093,smartphone,Samsung,Galaxy A52,Snapdragon 720G,8.0,128.0,,9290000.0,9290000.0,9290000.0,3,1,CellphoneS,42.0,4.6,1,exclusive
+f87fc3a7d06379a7,smartphone,Tecno,Spark Go 2,Unisoc T7250,4.0,64.0,,2490000.0,2490000.0,2490000.0,4,1,CellphoneS,8.0,5.0,1,exclusive
+934d47672f4a57c8_s1,smartphone,ASUS,ROG Phone 6,Snapdragon 8+ Gen 1,12.0,256.0,,14490000.0,14990000.0,16990000.0,3,1,CellphoneS,58.0,4.966666666666667,1,exclusive
+934d47672f4a57c8_s2,smartphone,ASUS,ROG Phone 6,Snapdragon 8+ Gen 1,16.0,512.0,,17990000.0,17990000.0,17990000.0,1,1,CellphoneS,18.0,4.9,1,exclusive
+d9a4bf6476389c2e,smartphone,Xiaomi,Xiaomi 13,Snapdragon 8 Gen 2,8.0,256.0,,16490000.0,16490000.0,16490000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+7b96b0a00225b0d8,smartphone,OPPO,Reno10 5G,Dimensity 7050,8.0,256.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,4.0,4.8,1,exclusive
+43b204fc3d70607a,smartphone,OPPO,A60,Snapdragon 680,8.0,128.0,,5050000.0,5050000.0,5050000.0,1,1,CellphoneS,0.0,,1,exclusive
+d91425495850709d,smartphone,Samsung,Galaxy A53 5G,Exynos 1280,8.0,128.0,,9990000.0,9990000.0,9990000.0,4,1,CellphoneS,44.0,4.9,1,exclusive
+276e371cc6f563df,smartphone,Samsung,Galaxy A34,Dimensity 1080,8.0,128.0,,7090000.0,7090000.0,7090000.0,3,1,CellphoneS,36.0,5.0,1,exclusive
+b1e60ad4457a9fed,smartphone,Samsung,Galaxy A71,Snapdragon 730,8.0,128.0,,10490000.0,10490000.0,10490000.0,4,1,CellphoneS,144.0,4.8,1,exclusive
+f4ca65d82c9ecd0c,smartphone,Samsung,Galaxy A12,Helio G35,4.0,128.0,,4290000.0,4290000.0,4290000.0,3,1,CellphoneS,69.0,4.8,1,exclusive
+6bbc892ff1337f26,smartphone,Samsung,Galaxy A20,Exynos 7884,3.0,3.0,,4190000.0,4190000.0,4190000.0,3,1,CellphoneS,0.0,,1,exclusive
+0157078f238bc752,smartphone,OPPO,Find N5,Snapdragon 8 Elite,16.0,512.0,,44180000.0,44180000.0,44180000.0,2,1,CellphoneS,16.0,5.0,1,exclusive
+0ef4dbce1dbecf6f,smartphone,Samsung,Galaxy A51,Exynos 9611,6.0,128.0,,7990000.0,7990000.0,7990000.0,5,1,CellphoneS,155.0,4.8,1,exclusive
+9fb2bcb9a8ef89d4,smartphone,Samsung,Galaxy A23,Snapdragon 680,4.0,128.0,,3600000.0,3600000.0,3600000.0,3,1,CellphoneS,24.0,4.8,1,exclusive
+4a04d2c160abea20,smartphone,Xiaomi,13T,Dimensity 8200 Ultra,12.0,256.0,,10590000.0,10590000.0,10590000.0,3,1,CellphoneS,66.0,4.9,1,exclusive
+dd65b9cf69560bba,smartphone,OPPO,A5i,Snapdragon 6s 4G Gen1,4.0,128.0,,3690000.0,3690000.0,3690000.0,2,1,CellphoneS,0.0,,1,exclusive
+540fb397a32cc699,smartphone,OPPO,Reno8 T 5G,Snapdragon 695 5G,8.0,128.0,,7890000.0,7890000.0,7890000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+a28218d654e91217,smartphone,Masstel,izi S5 4G,UNISOC T107,,,,440000.0,440000.0,440000.0,3,1,CellphoneS,0.0,,1,exclusive
+4e9bcaff10f622fe,smartphone,Honor,X7C,Snapdragon 685,8.0,256.0,,4300000.0,4300000.0,4300000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+998888889125246b,smartphone,Xiaomi,POCO C71,Unisoc T7250,4.0,128.0,,2390000.0,2390000.0,2390000.0,3,1,CellphoneS,0.0,,1,exclusive
+587b09be80ad0337,smartphone,OPPO,Reno 5,Snapdragon 720G,8.0,128.0,,8690000.0,8690000.0,8690000.0,1,1,CellphoneS,28.0,4.9,1,exclusive
+b010d9ac9be93a4e,smartphone,OPPO,Reno5,Snapdragon 720G,8.0,128.0,,8690000.0,8690000.0,8690000.0,1,1,CellphoneS,28.0,4.9,1,exclusive
+c8ab94163ef18b84,smartphone,OPPO,A5i Pro,Snapdragon 6s 4G Gen1,8.0,128.0,,6290000.0,6290000.0,6290000.0,3,2,CellphoneS|FPT,2.0,5.0,2,competitive
+d3ca81bbf095b436,smartphone,Honor,400 5G,Snapdragon 7 Gen 3,12.0,512.0,,12450000.0,12990000.0,12990000.0,3,2,CellphoneS|TGDĐ,2165.0,4.9,2,competitive
+101f8b550b7e73e4_s1,smartphone,Apple,iPhone 15 Pro Max,Apple A17 Pro,8.0,384.0,,24990000.0,26740000.0,28490000.0,8,1,CellphoneS,864.0,4.75,1,exclusive
+101f8b550b7e73e4_s2,smartphone,Apple,iPhone 15 Pro Max,Apple A17 Pro,8.0,1024.0,,31990000.0,31990000.0,31990000.0,4,1,CellphoneS,24.0,4.7,1,exclusive
+f27eaaf058263479,smartphone,Samsung,Galaxy M55 5G,Snapdragon 7 Gen 1,8.0,256.0,,6990000.0,6990000.0,6990000.0,2,1,CellphoneS,14.0,4.9,1,exclusive
+25b03ced757139bd,smartphone,Samsung,Galaxy S23,Snapdragon 8 Gen 2,8.0,256.0,,24990000.0,24990000.0,24990000.0,4,1,CellphoneS,8.0,5.0,1,exclusive
+0a3902ba8d64a046,smartphone,Tecno,Spark Go 3,UNISOC T7250,4.0,64.0,,3290000.0,3290000.0,3490000.0,4,2,CellphoneS|Hoàng Hà,0.0,,2,competitive
+5e4c23c643c8f97b,smartphone,Nubia,RedMagic 8S Pro,Snapdragon 8 Gen 2,12.0,256.0,,18990000.0,18990000.0,18990000.0,1,1,CellphoneS,2.0,5.0,1,exclusive
+9becaa00677a73b0,smartphone,Nubia,V70 Design,Unisoc T606,8.0,128.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+06fc3c7826581ce9,smartphone,Nokia,105 4G Pro,Unisoc T107,,,,780000.0,780000.0,780000.0,2,1,CellphoneS,44.0,4.8,1,exclusive
+14cf0f582504dc88,smartphone,Samsung,Galaxy S21 FE,Exynos 2100,8.0,128.0,,8800000.0,8800000.0,8800000.0,4,1,CellphoneS,60.0,4.8,1,exclusive
+4b8da6b4331f3397,smartphone,OPPO,Reno6 5G,Dimensity 900,8.0,128.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,10.0,4.8,1,exclusive
+a9028a92b899b681_s1,smartphone,Meizu,Mblu 22 Pro NFC,Helio G81,5.0,192.0,,3315000.0,3502500.0,3690000.0,4,1,CellphoneS,0.0,,1,exclusive
+a9028a92b899b681_s2,smartphone,Meizu,Mblu 22 Pro NFC,Helio G81,8.0,256.0,,4090000.0,4090000.0,4090000.0,1,1,CellphoneS,0.0,,1,exclusive
+fd9a33e9396d6b19,smartphone,Nokia,3210 4G,Unisoc T107,,,,1490000.0,1490000.0,1490000.0,4,2,CellphoneS|Hoàng Hà,30.0,4.9,2,competitive
+14684657bfe7426a,smartphone,Tecno,SPARK 30 Pro Transformer,Helio G100,8.0,256.0,,3890000.0,3890000.0,3890000.0,3,1,CellphoneS,48.0,4.8,1,exclusive
+cdb47a09c765f555,smartphone,Samsung,Galaxy S23,Snapdragon 8 Gen 2 for Galaxy,8.0,128.0,,13790000.0,13790000.0,13790000.0,4,1,CellphoneS,164.0,5.0,1,exclusive
+265362b2f5b5608f,smartphone,OPPO,A18,Helio G85,4.0,128.0,,3190000.0,3190000.0,3190000.0,1,1,CellphoneS,12.0,4.9,1,exclusive
+c6ca3488c240aeea,smartphone,Tecno,Camon 30S,MediaTek G100,8.0,256.0,,4090000.0,4090000.0,4090000.0,3,1,CellphoneS,204.0,4.8,1,exclusive
+40e5229a7482c9b6,smartphone,Samsung,Galaxy A14,MediaTek Dimensity 700,4.0,128.0,,4200000.0,4200000.0,4200000.0,3,1,CellphoneS,6.0,4.5,1,exclusive
+f9043a570f4f81cc,smartphone,Tecno,Pova 6,MediaTek G99 Ultimate,8.0,256.0,,5390000.0,5390000.0,5390000.0,3,1,CellphoneS,75.0,4.9,1,exclusive
+5639a9c2bb24ff94,smartphone,Xiaomi,Redmi Note 9,MediaTek Helio G85,3.0,64.0,,3990000.0,3990000.0,3990000.0,4,1,CellphoneS,4.0,5.0,1,exclusive
+c6d3ede84378d62e,smartphone,Xiaomi,Mi 11 5G,Snapdragon 888,8.0,128.0,,14200000.0,14200000.0,14200000.0,1,1,CellphoneS,5.0,4.6,1,exclusive
+eb1c85056379386e,smartphone,Xiaomi,Redmi Note 13 Pro 5G,Snapdragon 7s Gen 2,10.0,384.0,Adreno 710,6290000.0,6640000.0,6990000.0,6,1,CellphoneS,144.0,4.6499999999999995,1,exclusive
+b5067b9ce563e565,smartphone,OPPO,A58 4G,Helio G85,6.0,128.0,,4090000.0,4090000.0,4090000.0,2,1,CellphoneS,12.0,5.0,1,exclusive
+0b96da1a46c01b4a,smartphone,Tecno,Spark 40,Helio G91,8.0,256.0,,4190000.0,4190000.0,4190000.0,3,1,CellphoneS,0.0,,1,exclusive
+78da9de767fbede0,smartphone,ASUS,ROG Phone 3,Snapdragon 865+,12.0,512.0,,16990000.0,16990000.0,16990000.0,1,1,CellphoneS,37.0,4.9,1,exclusive
+0ea9089eb95451b9,smartphone,Realme,13+ 5G,Dimensity 7300 Energy,8.0,256.0,,6590000.0,6590000.0,6590000.0,2,1,CellphoneS,24.0,4.9,1,exclusive
+02d5b651d152eccd,smartphone,OPPO,Reno14 F,Snapdragon 6 Gen 1,8.0,256.0,,10100000.0,10100000.0,10100000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+6008b58d5c09ccde,smartphone,Vivo,V20,Snapdragon 720G,8.0,128.0,,8490000.0,8490000.0,8490000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+f738f9b437825294,smartphone,Samsung,Galaxy S24 Plus,Exynos 2400,12.0,384.0,,16590000.0,17790000.0,18990000.0,8,1,CellphoneS,72.0,5.0,1,exclusive
+d74c54ab9ae11a7e,smartphone,Samsung,Galaxy A16,Helio G99,4.0,128.0,,3390000.0,3390000.0,3390000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+3e4987a2e69c1fff,smartphone,Vivo,Y12s,Snapdragon 439,3.0,32.0,,3290000.0,3290000.0,3290000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+7a7e1f9db3052b23,smartphone,Samsung,Galaxy A06,Helio G85,4.0,128.0,,2590000.0,2590000.0,2590000.0,3,1,CellphoneS,42.0,4.9,1,exclusive
+6f6ebfa18510ba88,smartphone,OPPO,A3X,Snapdragon 6s 4G Gen1,6.0,128.0,,4210000.0,4210000.0,4210000.0,2,1,CellphoneS,0.0,,1,exclusive
+1df308fa8ac4d70f,smartphone,OPPO,Reno13 F 4G,Helio G100,8.0,256.0,,8530000.0,8530000.0,8530000.0,2,1,CellphoneS,42.0,5.0,1,exclusive
+ff53a823c58d5d20,smartphone,Tecno,Pova 6 Neo,Helio G99 Ultimate,8.0,128.0,,3890000.0,3890000.0,3890000.0,1,1,CellphoneS,91.0,4.9,1,exclusive
+7115a7249a90d6cf,smartphone,Tecno,Pova 6 Neo,MediaTek Helio G99 Ultimate,8.0,128.0,,3890000.0,3890000.0,3890000.0,2,1,CellphoneS,182.0,4.9,1,exclusive
+dc3041691c7c7d89,smartphone,OPPO,Find N3 Flip,MediaTek Dimensity 9200,12.0,256.0,,13990000.0,13990000.0,13990000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+54eba3e647f8a3cc,smartphone,Samsung,Galaxy A54 5G,Exynos 1380,8.0,128.0,,7390000.0,7390000.0,7390000.0,3,1,CellphoneS,18.0,5.0,1,exclusive
+12b67b4fd7acf1ae,smartphone,Samsung,Galaxy A25 5G,Exynos 1280,6.0,128.0,,4690000.0,4690000.0,4790000.0,4,2,CellphoneS|Hoàng Hà,69.0,4.9,2,competitive
+1c33c7c96233fb07,smartphone,Xiaomi,Redmi 13C,MediaTek Helio G85,6.0,128.0,,2990000.0,2990000.0,2990000.0,3,1,CellphoneS,57.0,4.9,1,exclusive
+fffdd23795f2d31f,smartphone,Meizu,Mblu 22,Unisoc SC9863A,3.0,96.0,,2990000.0,2990000.0,2990000.0,6,1,CellphoneS,3.0,5.0,1,exclusive
+e6820b0290e264c2,smartphone,Samsung,Galaxy Z Fold 7,Snapdragon 8 Elite For Galaxy,12.0,384.0,,38590000.0,39540000.0,40490000.0,6,1,CellphoneS,375.0,5.0,1,exclusive
+a977e87723a50b54,smartphone,Nokia,220 4G,Unisoc T107,,,,1100000.0,1100000.0,1100000.0,4,2,CellphoneS|FPT,42.0,4.85,2,competitive
+cadc291269137031_s1,smartphone,Tecno,POVA 7,MediaTek Helio G100 Ultimate,8.0,192.0,,170000.0,170000.0,170000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+cadc291269137031_s2,smartphone,Tecno,Pova 7,MediaTek Helio G100 Ultimate,8.0,192.0,,4490000.0,4740000.0,4990000.0,6,1,CellphoneS,51.0,4.6499999999999995,1,exclusive
+3056cec6cf0ffdce,smartphone,Nothing,Phone 2A,MediaTek Dimensity 7200 Pro,12.0,256.0,,8490000.0,8490000.0,8490000.0,1,1,CellphoneS,3.0,5.0,1,exclusive
+3b59a657c577d86e,smartphone,Nothing,Phone 2A,Dimensity 7200 Pro,8.0,128.0,,7190000.0,7190000.0,8490000.0,3,1,CellphoneS,23.0,4.866666666666666,1,exclusive
+afaaf689d7f17bd8,smartphone,Nokia,HMD 105 4G,Unisoc 8910,,,,750000.0,750000.0,750000.0,7,3,CellphoneS|FPT|Viettel,44.0,4.671428571428572,3,competitive
+b0263f276baab335,smartphone,Samsung,Galaxy A05,Helio G85,4.0,128.0,,2790000.0,2790000.0,2790000.0,3,1,CellphoneS,48.0,4.9,1,exclusive
+8be63ecb17928060,smartphone,Nubia,Neo 2,Unisoc T820,8.0,256.0,,4290000.0,4290000.0,4290000.0,3,1,CellphoneS,672.0,4.9,1,exclusive
+d2c53569af9b4255,smartphone,Tecno,Pova Curve 2 5G,Dimensity 7100,8.0,256.0,,7990000.0,9390000.0,9390000.0,4,2,CellphoneS|Viettel,3.0,5.0,2,competitive
+dd47ed3a76eec7d8,smartphone,Tecno,Camon 40,Helio G100 Ultimate,8.0,256.0,,5090000.0,5380000.0,5390000.0,9,2,CellphoneS|Viettel,9.0,5.0,2,competitive
+fe115b0b80f9d5fd,smartphone,Samsung,Galaxy A02s,Snapdragon 450,4.0,64.0,,3350000.0,3590000.0,3590000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+7600d389fdba6284,smartphone,Vsmart,Live 4,Snapdragon 675,6.0,64.0,,4290000.0,4290000.0,4290000.0,3,1,CellphoneS,300.0,4.8,1,exclusive
+1b67a0c9b6da7a21,smartphone,OPPO,A6,Snapdragon 685,8.0,256.0,,10690000.0,11490000.0,11490000.0,14,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,239808.0,4.933333333333334,5,competitive
+cbb5d1ef359440ee,smartphone,Nubia,Air 5G,Unisoc T8300,8.0,256.0,,5490000.0,5490000.0,5490000.0,5,3,CellphoneS|FPT|Hoàng Hà,0.0,4.9,3,competitive
+4b1a48f4690c1f5d,smartphone,Xiaomi,Poco X5 5G,Snapdragon 695,6.0,128.0,,4490000.0,4490000.0,4490000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+abe55bfadfd22fb0,smartphone,Honor,X7d 5G,Snapdragon 6s Gen 3,8.0,256.0,,6890000.0,7090000.0,7490000.0,4,4,CellphoneS|FPT|Hoàng Hà|Viettel,0.0,5.0,4,competitive
+a400c376c8c1eac8,smartphone,Samsung,Galaxy M55,Snapdragon 7 Gen 1,12.0,256.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,48.0,4.8,1,exclusive
+7390e5958f957e71,smartphone,Samsung,Galaxy A35,Exynos 1380,8.0,128.0,,6190000.0,6190000.0,6190000.0,3,1,CellphoneS,54.0,4.9,1,exclusive
+8c95a9f334e780b5,smartphone,OPPO,Reno13 F 5G,Snapdragon 6 Gen 1,12.0,256.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,16.0,4.9,1,exclusive
+e724920c6b9a9b92,smartphone,OPPO,Reno12 F 5G,Dimensity 6300,8.0,256.0,,7120000.0,7120000.0,7120000.0,2,1,CellphoneS,18.0,4.8,1,exclusive
+e0649d7cc225fe8a,smartphone,Tecno,Camon 40 Pro,Helio G100 Ultimate,8.0,256.0,,5790000.0,5790000.0,5790000.0,4,1,CellphoneS,36.0,4.9,1,exclusive
+d6d4f03655791f77,smartphone,OPPO,A78,Snapdragon 680,8.0,256.0,,5490000.0,5490000.0,5490000.0,2,1,CellphoneS,12.0,5.0,1,exclusive
+bfaf268b85d1ba03,smartphone,Samsung,Galaxy S25 Plus,Snapdragon 8 Elite,12.0,512.0,,21590000.0,21590000.0,21590000.0,4,1,CellphoneS,4.0,5.0,1,exclusive
+4dfeccc01c58ab80,smartphone,Masstel,Alpha 5,ASR,,,,1050000.0,1050000.0,1050000.0,2,1,CellphoneS,2.0,4.0,1,exclusive
+9b38ac0ddae0e36a,smartphone,Xiaomi,Redmi 14C,Helio G81-Ultra,4.0,128.0,,2850000.0,2850000.0,2850000.0,2,1,CellphoneS,72.0,4.9,1,exclusive
+092b29a323bd37e5,smartphone,Tecno,Spark 50,Helio G81,4.0,128.0,,4590000.0,4590000.0,4590000.0,3,2,CellphoneS|Viettel,0.0,,2,competitive
+25e698d6f7432d6f_s1,smartphone,OPPO,A6t,Snapdragon 685,4.0,64.0,,4990000.0,4990000.0,4990000.0,7,4,CellphoneS|FPT|TGDĐ|Viettel,5602.0,5.0,4,competitive
+25e698d6f7432d6f_s2,smartphone,OPPO,A6t,Snapdragon 685,4.0,128.0,,7090000.0,7090000.0,8090000.0,8,4,CellphoneS|FPT|TGDĐ|Viettel,5604.0,5.0,4,competitive
+25e698d6f7432d6f_s3,smartphone,OPPO,A6t,Snapdragon 685,6.0,256.0,,8790000.0,8790000.0,8990000.0,5,3,CellphoneS|FPT|TGDĐ,2805.0,5.0,3,competitive
+647f3f1d6d0a37aa,smartphone,OPPO,Find X9,Dimensity 9500,14.0,384.0,Mali Drage MC12,22990000.0,24990000.0,26990000.0,4,1,CellphoneS,26.0,5.0,1,exclusive
+942e37464477a299,smartphone,Nubia,Neo 3 5G,Unisoc T8300,8.0,256.0,,5090000.0,5090000.0,5090000.0,3,1,CellphoneS,78.0,5.0,1,exclusive
+3af7c6cb065407fb,smartphone,Honor,X6C,Helio G81 Ultra,6.0,128.0,,4290000.0,4290000.0,4290000.0,1,1,CellphoneS,0.0,,1,exclusive
+c765d902cacc9e79,smartphone,Honor,X6C,MediaTek Helio G81 Ultra,6.0,128.0,,4290000.0,4290000.0,4290000.0,1,1,CellphoneS,0.0,,1,exclusive
+162c3a3cbe0bc605_s1,smartphone,Samsung,Galaxy S24 Ultra,Snapdragon 8 Gen 3,12.0,512.0,,23990000.0,23990000.0,23990000.0,4,1,CellphoneS,32.0,4.9,1,exclusive
+162c3a3cbe0bc605_s2,smartphone,Samsung,Galaxy S24 Ultra,Snapdragon 8 Gen 3,12.0,1024.0,,44490000.0,44490000.0,44490000.0,4,1,CellphoneS,12.0,4.7,1,exclusive
+ac6c0062f3f0f697,smartphone,OPPO,Find N3,Snapdragon 8 Gen 2,16.0,512.0,,25590000.0,25590000.0,25590000.0,2,1,CellphoneS,8.0,5.0,1,exclusive
+01cc78202685e440,smartphone,Huawei,Mate X7,Unknown,16.0,512.0,,42990000.0,42990000.0,42990000.0,2,1,CellphoneS,0.0,,1,exclusive
+f3c1cde8cd454de2,smartphone,Nubia,Neo 5 Max 5G,MediaTek D7100,8.0,256.0,,8790000.0,8790000.0,9790000.0,3,1,CellphoneS,0.0,,1,exclusive
+582b440e7a8debe3_s1,smartphone,Nubia,V80 Design,Unisoc T7280,4.0,128.0,,3490000.0,3690000.0,3990000.0,17,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,17400.0,5.0,5,competitive
+582b440e7a8debe3_s2,smartphone,Nubia,V80 Design,Unisoc T7280,8.0,128.0,,4290000.0,4290000.0,4290000.0,3,1,FPT,0.0,5.0,1,exclusive
+f2f78b6c602be25f,smartphone,Xiaomi,Xiaomi 15 5G,Snapdragon 8 Elite,12.0,512.0,,18990000.0,18990000.0,18990000.0,3,1,CellphoneS,9.0,4.7,1,exclusive
+c3459e8ebdd99933,smartphone,Nubia,Neo 3 4G,Unisoc T8100,8.0,128.0,,5290000.0,5290000.0,5290000.0,3,1,CellphoneS,135.0,5.0,1,exclusive
+e78a9be4d97d9a5a_s1,smartphone,Apple,iPhone 16 Plus,Apple A18,8.0,128.0,,24490000.0,25890000.0,28990000.0,30,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,268475.0,4.921739130434783,4,competitive
+e78a9be4d97d9a5a_s2,smartphone,Apple,iPhone 16 Plus,Apple A18,8.0,512.0,,29390000.0,29390000.0,29390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+34d169dd01f7a704,smartphone,Xiaomi,Redmi Note 13 Pro 4G,Helio G99-Ultra,8.0,128.0,,4690000.0,4690000.0,4690000.0,3,1,CellphoneS,123.0,5.0,1,exclusive
+9fbc0fa9f4f716e4,smartphone,Xiaomi,Xiaomi 14 Ultra 5G,Snapdragon 8 Gen 3,16.0,512.0,,24090000.0,24090000.0,24090000.0,2,1,CellphoneS,6.0,4.7,1,exclusive
+236d5a6514c2913d,smartphone,Samsung,Galaxy A15 LTE,MediaTek G99,8.0,128.0,,4290000.0,4290000.0,4290000.0,3,1,CellphoneS,216.0,4.9,1,exclusive
+9ff7c3da285f3116_s1,smartphone,Samsung,Galaxy S25 Ultra,Snapdragon 8 Elite for Galaxy,12.0,256.0,,23990000.0,24090000.0,24190000.0,2,2,CellphoneS|Viettel,108.0,4.785,2,competitive
+9ff7c3da285f3116_s2,smartphone,Samsung,Galaxy S25 Ultra,Snapdragon 8 Elite for Galaxy,12.0,512.0,,29490000.0,29490000.0,29490000.0,4,1,CellphoneS,60.0,4.9,1,exclusive
+9ff7c3da285f3116_s3,smartphone,Samsung,Galaxy S25 Ultra,Snapdragon 8 Elite for Galaxy,12.0,1024.0,,35490000.0,35490000.0,35490000.0,4,1,CellphoneS,8.0,5.0,1,exclusive
+38194fccc08abad5,smartphone,Meizu,Mblu 22 Pro NFC,MediaTek Helio G81,4.0,128.0,,3315000.0,3315000.0,3315000.0,1,1,CellphoneS,0.0,,1,exclusive
+fa4bc0cd2dfea284,smartphone,Xiaomi,Xiaomi 14,Snapdragon 8 Gen 3,12.0,256.0,,18990000.0,18990000.0,18990000.0,3,1,CellphoneS,54.0,4.9,1,exclusive
+42cf3a332f76442a,smartphone,OPPO,Find X9 Pro,Dimensity 9500,16.0,512.0,,32990000.0,32990000.0,32990000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+356fdc850cad8487,smartphone,OPPO,A79,Dimensity 6020,8.0,256.0,,7060000.0,7060000.0,7060000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+98b58e5eb5d0c55d,smartphone,Samsung,Galaxy S25,Snapdragon 8 Elite,12.0,512.0,,20090000.0,20090000.0,20090000.0,4,1,CellphoneS,0.0,,1,exclusive
+b0e800f815e25ee9,smartphone,Samsung,Galaxy A16 5G,Dimensity 6300,8.0,128.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,42.0,4.8,1,exclusive
+e12ca2195e09c562,smartphone,Xiaomi,POCO X7 5G,Dimensity 7300-Ultra,12.0,512.0,,7490000.0,7740000.0,7990000.0,6,2,CellphoneS|FPT,0.0,5.0,2,competitive
+60a5d69676ed1b20,smartphone,Samsung,Galaxy A36,Snapdragon 6 Gen 3,8.0,128.0,,7490000.0,7490000.0,7490000.0,3,1,CellphoneS,33.0,5.0,1,exclusive
+9f4570671fc63c55,smartphone,Xiaomi,POCO X6 Pro 5G,Dimensity 8300-Ultra,8.0,256.0,,7540000.0,7540000.0,7540000.0,3,1,CellphoneS,561.0,4.9,1,exclusive
+3bb4cde846d8e8af,smartphone,Honor,Magic V5,Snapdragon 8 Elite,16.0,512.0,,32990000.0,32990000.0,33490000.0,3,2,CellphoneS|Hoàng Hà,2.0,5.0,2,competitive
+324fef6c5147eb5d,smartphone,Tecno,SPARK 30 5G,Dimensity 6300,6.0,128.0,,3290000.0,3290000.0,3290000.0,3,1,CellphoneS,0.0,,1,exclusive
+db5151ccc4be5891,smartphone,OPPO,A6t Pro,Snapdragon 685,8.0,128.0,,10990000.0,10990000.0,10990000.0,6,3,CellphoneS|FPT|TGDĐ,2678.0,5.0,3,competitive
+c8715d49efb9e133,smartphone,Xiaomi,14T,Dimensity 8300 Ultra,12.0,512.0,,11290000.0,11290000.0,11290000.0,2,1,CellphoneS,98.0,5.0,1,exclusive
+0a6a444248b7646b,smartphone,Samsung,Galaxy A26,Exynos 1380,8.0,128.0,,6090000.0,6090000.0,6090000.0,3,1,CellphoneS,21.0,4.7,1,exclusive
+3d3a357b9f38c02d_s1,smartphone,Apple,iPhone 16 Pro,Apple A18 Pro,8.0,128.0,,23990000.0,24990000.0,27990000.0,9,2,CellphoneS|Hoàng Hà,360.0,4.85,2,competitive
+3d3a357b9f38c02d_s2,smartphone,Apple,iPhone 16 Pro,Apple A18 Pro,,768.0,,31990000.0,33990000.0,35990000.0,8,1,CellphoneS,8.0,5.0,1,exclusive
+05819109258f516d,smartphone,Samsung,Galaxy Z Fold8 5G,Snapdragon 8 Elite Gen 5,16.0,1024.0,,57990000.0,57990000.0,57990000.0,1,1,CellphoneS,0.0,,1,exclusive
+8765f6181b725087,smartphone,Honor,X7d,Snapdragon 685,8.0,192.0,,5690000.0,6290000.0,6690000.0,20,4,CellphoneS|FPT|TGDĐ|Viettel,42351.0,4.96,4,competitive
+c5ccd4399a50f656,smartphone,OPPO,Find X5 Pro 5G,Snapdragon 8 Gen 1,12.0,256.0,,12290000.0,12290000.0,12290000.0,2,1,CellphoneS,12.0,4.7,1,exclusive
+41bb3312e03888f1,smartphone,Meizu,Lucky 08 5G,Snapdragon 7s Gen 2,8.0,256.0,,5500000.0,5500000.0,5975000.0,5,1,CellphoneS,42.0,5.0,1,exclusive
+62d7ece2ded239e1_s1,smartphone,Samsung,Galaxy S26 Plus,Exynos 2600,12.0,256.0,,23490000.0,23790000.0,23990000.0,6,3,CellphoneS|Hoàng Hà|Viettel,62.0,5.0,3,competitive
+62d7ece2ded239e1_s2,smartphone,Samsung,Galaxy S26 Plus,Exynos 2600,12.0,512.0,,28990000.0,28990000.0,29790000.0,6,3,CellphoneS|Hoàng Hà|Viettel,68.0,4.99,3,competitive
+37497b02913eec83_s1,smartphone,Samsung,Galaxy S26 Ultra,Snapdragon 8 Elite Gen 5,12.0,256.0,,29490000.0,29490000.0,31990000.0,9,3,CellphoneS|Hoàng Hà|Viettel,221.0,5.0,3,competitive
+37497b02913eec83_s2,smartphone,Samsung,Galaxy S26 Ultra,Snapdragon 8 Elite Gen 5,12.0,512.0,,35640000.0,37790000.0,42490000.0,14,3,CellphoneS|Hoàng Hà|Viettel,161.0,5.0,3,competitive
+133ca559169c15c4,smartphone,Tecno,Spark 40 Pro+,MediaTek Helio G200,8.0,256.0,,5190000.0,5190000.0,5190000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+2c79d32f75101b62,smartphone,Samsung,Galaxy S24 FE 5G,Exynos 2400e,8.0,128.0,,11490000.0,11990000.0,12490000.0,8,2,CellphoneS|FPT,32.0,4.7,2,competitive
+8c28a1afedb94e73,smartphone,OPPO,A6 Pro,MediaTek Helio G100,8.0,128.0,,8190000.0,8290000.0,8290000.0,7,3,CellphoneS|FPT|Hoàng Hà,0.0,5.0,3,competitive
+35be1d1b260dd407,smartphone,OPPO,Reno14 5G,MediaTek Dimensity 8350,12.0,256.0,,12990000.0,15200000.0,15500000.0,5,4,CellphoneS|FPT|Hoàng Hà|Viettel,8.0,5.0,4,competitive
+76388d68b07a0b10_s1,smartphone,Xiaomi,POCO F9 Ultra 5G,Snapdragon 8 Elite Gen 5,12.0,256.0,,22790000.0,22790000.0,22790000.0,2,1,CellphoneS,0.0,,1,exclusive
+76388d68b07a0b10_s2,smartphone,Xiaomi,POCO F9 Ultra 5G,Snapdragon 8 Elite Gen 5,16.0,1024.0,,28990000.0,28990000.0,28990000.0,2,1,CellphoneS,12.0,5.0,1,exclusive
+b6e7520bc1b676e9_s1,smartphone,Samsung,Galaxy Z Fold8 Ultra 5G,Snapdragon 8 Elite Gen 5,12.0,256.0,,48490000.0,48990000.0,54790000.0,11,2,CellphoneS|FPT,0.0,5.0,2,competitive
+b6e7520bc1b676e9_s2,smartphone,Samsung,Galaxy Z Fold8 Ultra 5G,Snapdragon 8 Elite Gen 5,16.0,1024.0,,63990000.0,63990000.0,63990000.0,1,1,CellphoneS,0.0,,1,exclusive
+4d8d44d3f5e4ebff,smartphone,Xiaomi,Redmi Note 13 Pro,MediaTek Helio G99-Ultra,8.0,256.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,27.0,4.9,1,exclusive
+3eeccc6c21fe0158_s1,smartphone,Apple,iPhone 16,Apple A18,8.0,256.0,,12990000.0,12990000.0,12990000.0,1,1,Viettel,1.0,5.0,1,exclusive
+3eeccc6c21fe0158_s2,smartphone,Apple,iPhone 16,Apple A18,8.0,128.0,,22190000.0,22990000.0,24990000.0,22,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,164720.0,4.925,4,competitive
+3eeccc6c21fe0158_s3,smartphone,Apple,iPhone 16,Apple A18,8.0,512.0,,26990000.0,26990000.0,31590000.0,8,3,CellphoneS|FPT|Hoàng Hà,10.0,5.0,3,competitive
+1ef606a2cba0de98,smartphone,Xiaomi,Redmi A7 Pro,Unisoc T7250,4.0,128.0,,3990000.0,4290000.0,4490000.0,16,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,318336.0,4.927272727272728,5,competitive
+62f64279ea850cd1,smartphone,Nubia,Nubia Z60S Pro,Snapdragon 8 Gen 2,16.0,512.0,,11490000.0,11490000.0,11490000.0,3,1,CellphoneS,9.0,5.0,1,exclusive
+655329c58305a57a,smartphone,Honor,Honor X8d,Snapdragon 6s 4G Gen 2,8.0,128.0,,7390000.0,7390000.0,7390000.0,3,1,CellphoneS,0.0,,1,exclusive
+5c93088a79a1d81a_s1,smartphone,Apple,iPhone 17e,Apple A19,,256.0,,19990000.0,20990000.0,20990000.0,11,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,11416.0,4.385714285714286,5,competitive
+5c93088a79a1d81a_s2,smartphone,Apple,iPhone 17e,Apple A19,,512.0,,26490000.0,26990000.0,26990000.0,9,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,3805.0,4.975,5,competitive
+cc8501f28a05fe43,smartphone,OPPO,OPPO A6c,Unisoc T7250,4.0,64.0,,4690000.0,4690000.0,4690000.0,2,1,CellphoneS,0.0,,1,exclusive
+2c76270d0e2dc2f9,smartphone,Xiaomi,Redmi 15C NFC,Helio G81-Ultra,8.0,256.0,,4990000.0,4990000.0,4990000.0,3,1,CellphoneS,3.0,5.0,1,exclusive
+32c4908b1625796a,smartphone,Xiaomi,Redmi Note 13,Snapdragon 685,6.0,128.0,,3790000.0,3790000.0,3790000.0,3,1,CellphoneS,150.0,5.0,1,exclusive
+0d6036e405604fb7,smartphone,Xiaomi,Xiaomi 15T Pro 5G,Dimensity 9400+,12.0,512.0,,15990000.0,15990000.0,15990000.0,2,1,CellphoneS,30.0,5.0,1,exclusive
+9a7ce83deda6d23f_s1,smartphone,Samsung,Galaxy S25 FE,Exynos 2400,8.0,128.0,,12490000.0,13590000.0,13590000.0,6,3,CellphoneS|Hoàng Hà|Viettel,277.0,5.0,3,competitive
+9a7ce83deda6d23f_s2,smartphone,Samsung,Galaxy S25 FE,Exynos 2400,8.0,512.0,,20290000.0,20290000.0,20290000.0,2,1,CellphoneS,10.0,5.0,1,exclusive
+445cec0ab518ff8a,smartphone,Honor,Honor X9d,Snapdragon 6 Gen 4,12.0,512.0,,12990000.0,12990000.0,12990000.0,2,1,CellphoneS,6.0,5.0,1,exclusive
+353e544af338d947,smartphone,Nubia,Nubia Neo 5 GT,Dimensity 7400,12.0,256.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,0.0,,1,exclusive
+fa16f0bb7bd992e7,smartphone,Nubia,Neo 5 GT,MediaTek D7400,12.0,256.0,,9990000.0,9990000.0,9990000.0,1,1,CellphoneS,0.0,,1,exclusive
+d8dc0180b372a2fe,smartphone,Samsung,Galaxy S25 Edge,Snapdragon 8 Elite for Galaxy,12.0,256.0,,18990000.0,19990000.0,19990000.0,4,2,CellphoneS|Viettel,61.0,5.0,2,competitive
+d1c992cb7aabc06d,smartphone,Samsung,Galaxy A55,Exynos 1480,8.0,128.0,,7590000.0,7590000.0,7590000.0,3,1,CellphoneS,123.0,4.9,1,exclusive
+c2f2c43e6b51bdfe_s1,smartphone,Samsung,Galaxy S26,Exynos 2600,12.0,256.0,,20990000.0,22090000.0,22090000.0,6,3,CellphoneS|Hoàng Hà|Viettel,69.0,5.0,3,competitive
+c2f2c43e6b51bdfe_s2,smartphone,Samsung,Galaxy S26,Exynos 2600,12.0,512.0,Xclipse 960,25990000.0,26990000.0,26990000.0,6,3,CellphoneS|Hoàng Hà|Viettel,69.0,5.0,3,competitive
+cb8d5f7852458579,smartphone,Itel,P55 Plus NFC,Unisoc T606,8.0,256.0,,3409000.0,3409000.0,3490000.0,4,2,CellphoneS|FPT,18.0,5.0,2,competitive
+f320dc789cc7651a,smartphone,Xiaomi,17T Pro,Dimensity 9500,12.0,1024.0,,20990000.0,23990000.0,23990000.0,4,2,CellphoneS|Viettel,0.0,,2,competitive
+39fa080231f0f4b4_s1,smartphone,OPPO,A6c,Unisoc T7250,4.0,64.0,,4490000.0,4690000.0,4690000.0,6,4,FPT|Hoàng Hà|TGDĐ|Viettel,74720.0,4.95,4,competitive
+39fa080231f0f4b4_s2,smartphone,OPPO,A6c,Unisoc T7250,4.0,128.0,Mali-G57,5490000.0,5690000.0,5690000.0,8,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,74720.0,4.95,5,competitive
+6dd72a139d8f9bd9,smartphone,Honor,Honor 400 5G,Snapdragon 7 Gen 3,12.0,256.0,,12450000.0,12450000.0,12450000.0,1,1,CellphoneS,1.0,5.0,1,exclusive
+dbeff9fa72de4cbf,smartphone,Samsung,Galaxy A07,MediaTek Helio G99,8.0,256.0,,4290000.0,4290000.0,4690000.0,5,2,CellphoneS|FPT,3.0,5.0,2,competitive
+ae4c00951731b78e,smartphone,Xiaomi,Redmi 17 5G,Snapdragon 4 Gen 5,4.0,128.0,,5290000.0,5790000.0,6090000.0,14,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,42000.0,4.933333333333334,5,competitive
+9ddbf09bc7c916b0,smartphone,Sony,Xperia 10 VII,Snapdragon 6 Gen 3,8.0,128.0,,9990000.0,9990000.0,9990000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+e7bbb1281ec62884,smartphone,Honor,Honor 400 Pro 5G,Snapdragon 8 Gen 3,12.0,512.0,,14990000.0,14990000.0,14990000.0,2,1,CellphoneS,2.0,5.0,1,exclusive
+d90939c05ae2eef9,smartphone,Xiaomi,Xiaomi 15 Ultra,Snapdragon 8 Elite,16.0,512.0,,25490000.0,25490000.0,27990000.0,3,1,CellphoneS,18.0,4.9,1,exclusive
+06152d17ad82bc57,smartphone,OPPO,Find X8,Dimensity 9400,16.0,512.0,,18490000.0,18490000.0,18490000.0,2,1,CellphoneS,68.0,4.9,1,exclusive
+b5e25dde73768f43,smartphone,OPPO,Reno10 Pro Plus 5G,Snapdragon 8+ Gen 1,12.0,256.0,,9890000.0,9890000.0,9890000.0,2,1,CellphoneS,34.0,4.9,1,exclusive
+ec51c30f04f78f01,smartphone,Xiaomi,Xiaomi 15T 5G,Dimensity 8400 Ultra,12.0,512.0,,12390000.0,12390000.0,12390000.0,3,1,CellphoneS,51.0,5.0,1,exclusive
+10a84af3bb9de05a,smartphone,Xiaomi,Redmi 15C,MediaTek Helio G81-Ultra,4.0,128.0,,3690000.0,3690000.0,3690000.0,3,1,CellphoneS,0.0,,1,exclusive
+6bc6ade244074c49_s1,smartphone,Samsung,Galaxy A06 5G,Unknown,4.0,128.0,,2590000.0,2590000.0,2590000.0,3,1,CellphoneS,51.0,4.9,1,exclusive
+6bc6ade244074c49_s2,smartphone,Samsung,Galaxy A06 5G,Unknown,4.0,128.0,,3920000.0,3920000.0,3920000.0,3,1,FPT,0.0,4.9,1,exclusive
+6e703f579e99383d,smartphone,Sony,Xperia 1 VII,Snapdragon 8 Elite,12.0,256.0,,23990000.0,23990000.0,23990000.0,3,1,CellphoneS,0.0,,1,exclusive
+a2d6c15daabcd20b,smartphone,Xiaomi,POCO F9 Ultra,Snapdragon 8 Elite Gen 5,16.0,512.0,,23790000.0,24690000.0,25790000.0,6,2,CellphoneS|TGDĐ,660.0,5.0,2,competitive
+9c3dc17480a80ee1_s1,smartphone,Samsung,Galaxy Z Fold8,Snapdragon 8 Elite Gen 5,12.0,256.0,,37490000.0,37490000.0,37490000.0,1,1,Viettel,12.0,4.92,1,exclusive
+9c3dc17480a80ee1_s2,smartphone,Samsung,Galaxy Z Fold8,Snapdragon 8 Elite Gen 5,12.0,512.0,,46990000.0,48790000.0,48790000.0,4,2,CellphoneS|Viettel,0.0,,2,competitive
+d5ae2c930d099f28,smartphone,Nubia,Neo 3 GT,Unisoc T9100,12.0,256.0,,7490000.0,7490000.0,7490000.0,2,1,CellphoneS,118.0,4.9,1,exclusive
+38b266c81f9741dc,smartphone,Nubia,Neo 3 GT 5G,Unisoc T9100,12.0,256.0,,7490000.0,7490000.0,7490000.0,1,1,CellphoneS,59.0,4.9,1,exclusive
+0e22a446deadf7f2,smartphone,Xiaomi,Redmi Note 14 5G,MediaTek Dimensity 7025 Ultra,8.0,256.0,,6390000.0,6440000.0,6490000.0,2,2,CellphoneS|Hoàng Hà,21.0,4.7,2,competitive
+ade1b89dd675b7c5,smartphone,Xiaomi,Redmi Note 14 5G,Dimensity 7025 Ultra,8.0,256.0,,6490000.0,6490000.0,6490000.0,3,2,CellphoneS|Viettel,44.0,4.466666666666667,2,competitive
+c60f7671da5d5dae,smartphone,Samsung,Galaxy S25,Snapdragon 8 Elite for Galaxy,12.0,256.0,,17490000.0,17490000.0,17490000.0,2,1,CellphoneS,12.0,5.0,1,exclusive
+027da9f40a1ec0e0,smartphone,Samsung,Galaxy Mới 1,Snapdragon 8 Elite for Galaxy,12.0,256.0,,17490000.0,17490000.0,17490000.0,2,1,CellphoneS,12.0,5.0,1,exclusive
+4e140283700e85d5,smartphone,Xiaomi,Redmi 15 5G,Snapdragon 6s Gen 3,8.0,256.0,,5990000.0,5990000.0,6290000.0,3,2,CellphoneS|Viettel,0.0,,2,competitive
+c0b57c585f1af7a6,smartphone,OPPO,Reno15 F 5G,Snapdragon 6 Gen 1,8.0,256.0,,10990000.0,11990000.0,11990000.0,5,3,CellphoneS|FPT|Hoàng Hà,57.0,5.0,3,competitive
+5839ca1268971b37,smartphone,Nubia,Neo 5 GT Special Edition,Dimensity 7400,12.0,256.0,,12990000.0,12990000.0,12990000.0,2,1,CellphoneS,0.0,,1,exclusive
+e3d6a551001c837c,smartphone,Honor,600 5G,Snapdragon 7 Gen 4,8.0,256.0,,14490000.0,16190000.0,16190000.0,10,3,CellphoneS|FPT|Viettel,0.0,5.0,3,competitive
+f37bab4b69d01da1,smartphone,Nothing,Phone 2A Plus,Dimensity 7350 Pro,12.0,256.0,,7990000.0,7990000.0,7990000.0,2,1,CellphoneS,14.0,4.9,1,exclusive
+6046020d51ffa7d4,smartphone,Honor,600S 5G,Snapdragon 4 Gen 4,6.0,128.0,,9190000.0,9190000.0,9490000.0,9,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,96.0,4.942857142857143,5,competitive
+11194314f669318b,smartphone,Sony,Xperia 1 VIII,Snapdragon 8 Elite Gen 5,12.0,256.0,,37990000.0,37990000.0,37990000.0,2,1,CellphoneS,0.0,,1,exclusive
+b6bfd972baffdbd0,smartphone,Sony,Xperia 1 VIII 5G,Snapdragon 8 Elite Gen 5,12.0,256.0,,37990000.0,37990000.0,37990000.0,2,1,CellphoneS,0.0,,1,exclusive
+34022fa443527b07,smartphone,Xiaomi,POCO X7 Pro 5G,Dimensity 8400-Ultra,12.0,256.0,,8490000.0,8490000.0,8490000.0,3,1,CellphoneS,252.0,5.0,1,exclusive
+e8b2ab1013db5f73,smartphone,Xiaomi,Xiaomi 15,Snapdragon 8 Elite,12.0,256.0,,16990000.0,16990000.0,16990000.0,3,1,CellphoneS,24.0,4.9,1,exclusive
+2801f7b6f3cfed3e,smartphone,Xiaomi,Redmi 17,Helio G91 Ultra,6.0,256.0,,6090000.0,6390000.0,6890000.0,9,3,CellphoneS|FPT|Viettel,16.0,5.0,3,competitive
+de166745d6b9bde2_s1,smartphone,Honor,X9d 5G,Snapdragon 6 Gen 4,8.0,256.0,,10190000.0,11990000.0,12190000.0,5,2,CellphoneS|FPT,0.0,5.0,2,competitive
+de166745d6b9bde2_s2,smartphone,Honor,X9d 5G,Snapdragon 6 Gen 4,12.0,256.0,,12990000.0,12990000.0,13990000.0,6,2,FPT|Viettel,0.0,5.0,2,competitive
+4c0d3b618b13959b,smartphone,Samsung,Galaxy A08,Helio G99+,4.0,64.0,,4590000.0,4590000.0,4590000.0,2,1,CellphoneS,0.0,,1,exclusive
+97c270a3f494fa18,smartphone,Samsung,Galaxy A08,MediaTek Helio G99,4.0,64.0,,4490000.0,4590000.0,4590000.0,3,3,CellphoneS|Hoàng Hà|TGDĐ,4103.0,5.0,3,competitive
+271259b01810e785_s1,smartphone,Apple,iPhone 16e,Apple A18,,128.0,,13490000.0,14290000.0,14290000.0,3,2,CellphoneS|Hoàng Hà,98.0,4.9,2,competitive
+271259b01810e785_s2,smartphone,Apple,iPhone 16e,Apple A18,8.0,256.0,,16190000.0,17490000.0,18350000.0,6,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,6355.0,4.9799999999999995,4,competitive
+6788ce019c58bc6f,smartphone,Samsung,Galaxy A18,MediaTek Helio G99+,6.0,128.0,,7190000.0,7190000.0,7190000.0,6,2,CellphoneS|FPT,0.0,5.0,2,competitive
+bfa275a452867fd5_s1,smartphone,Apple,iPhone 16 Pro Max,Apple A18 Pro,8.0,256.0,,30790000.0,30990000.0,36690000.0,6,2,CellphoneS|Hoàng Hà,1472.0,4.9,2,competitive
+bfa275a452867fd5_s2,smartphone,Apple,iPhone 16 Pro Max,Apple A18 Pro,,1024.0,,37990000.0,42390000.0,42990000.0,9,2,CellphoneS|Hoàng Hà,224.0,4.9,2,competitive
+efb578a30d73b9a4,smartphone,Xiaomi,Redmi A7,Unisoc T7250,3.0,64.0,,3090000.0,3090000.0,3490000.0,11,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,15261.0,5.0,5,competitive
+9e4bff610b2ed69b,smartphone,Xiaomi,POCO X8 Pro Max,MediaTek Dimensity 9500s,12.0,512.0,,15490000.0,15490000.0,15490000.0,3,1,CellphoneS,24.0,5.0,1,exclusive
+543f7f66828558e7,smartphone,Samsung,Galaxy A07 5G,MediaTek Dimensity 6300 5G,4.0,128.0,,4390000.0,4490000.0,4590000.0,9,3,CellphoneS|FPT|TGDĐ,127680.0,4.95,3,competitive
+f9d3e3fa18801d9c,smartphone,Xiaomi,Xiaomi 17 Ultra 5G,Snapdragon 8 Elite Gen 5,16.0,1024.0,,34990000.0,34990000.0,34990000.0,3,1,CellphoneS,0.0,,1,exclusive
+0d02ed345072c83d,smartphone,Xiaomi,Xiaomi 17 Ultra,Snapdragon 8 Elite Gen 5,16.0,512.0,,30990000.0,30990000.0,30990000.0,3,1,CellphoneS,15.0,5.0,1,exclusive
+831eb18b63e94cf9,smartphone,Samsung,Galaxy A17,MediaTek Helio G99,8.0,128.0,,5790000.0,5790000.0,5790000.0,3,1,CellphoneS,6.0,5.0,1,exclusive
+f8945e7f24e3e24e,smartphone,Meizu,Mblu Note 21 Pro,MediaTek Helio G99,8.0,256.0,,4540000.0,4540000.0,4540000.0,3,1,CellphoneS,0.0,,1,exclusive
+1b70fb7c34f60069,smartphone,OPPO,Reno15 5G,Snapdragon 7 Gen 4,12.0,256.0,,13790000.0,13990000.0,14990000.0,6,4,CellphoneS|Hoàng Hà|TGDĐ|Viettel,58060.0,4.9,4,competitive
+1acf12696e8e85de,smartphone,Xiaomi,Redmi Note 14,MediaTek Helio G99-Ultra,6.0,128.0,,4690000.0,4690000.0,5290000.0,4,2,CellphoneS|Hoàng Hà,381.0,4.9,2,competitive
+ebc2d2eb7018c8d7,smartphone,Samsung,Galaxy S24 Ultra,Snapdragon 8 Gen 3 For Galaxy,12.0,256.0,,25290000.0,25290000.0,25290000.0,4,1,CellphoneS,236.0,4.9,1,exclusive
+082b93aa047df17e,smartphone,Tecno,Pova Curve 2 5G,MediaTek Dimensity 7100,8.0,128.0,,8170000.0,8170000.0,8170000.0,3,1,CellphoneS,0.0,,1,exclusive
+2413b7c5aa34cfb0,smartphone,OPPO,Find X9 Ultra,Snapdragon 8 Elite Gen 5,12.0,512.0,,45990000.0,45990000.0,45990000.0,5,3,CellphoneS|TGDĐ|Viettel,748.0,4.95,3,competitive
+d5978adbd45f12f6,smartphone,Samsung,Galaxy A56 5G,Exynos 1580,8.0,128.0,,9190000.0,9190000.0,9190000.0,1,1,CellphoneS,22.0,4.9,1,exclusive
+198a61aca7eb96ed,smartphone,Samsung,Galaxy A56,Exynos 1580,8.0,128.0,,9190000.0,9190000.0,9190000.0,3,1,CellphoneS,66.0,4.9,1,exclusive
+038bb3acdf2deed4,smartphone,OPPO,Find N6,Snapdragon 8 Elite Gen 5,16.0,512.0,,64990000.0,64990000.0,64990000.0,3,2,CellphoneS|Viettel,8.0,5.0,2,competitive
+6e9600fc38c6183f_s1,smartphone,Apple,iPhone 17 Pro Max,Apple A19 Pro,12.0,256.0,,33790000.0,34990000.0,40490000.0,12,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,815131.0,4.9799999999999995,5,competitive
+6e9600fc38c6183f_s2,smartphone,Apple,iPhone 17 Pro Max,Apple A19 Pro,12.0,1024.0,,40990000.0,46990000.0,47490000.0,18,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,1628388.0,4.976470588235294,5,competitive
+6e9600fc38c6183f_s3,smartphone,Apple,iPhone 17 Pro Max,Apple A19 Pro,12.0,2048.0,,59490000.0,60140000.0,60490000.0,10,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,814246.0,4.977777777777778,5,competitive
+94849282e957186a,smartphone,Xiaomi,Redmi Note 17 5G,Snapdragon 4 Gen 4,6.0,128.0,,7490000.0,8290000.0,8790000.0,14,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,57612.0,4.933333333333334,5,competitive
+65a8234a3dab5058,smartphone,OPPO,A6 Pro,Helio G100,8.0,256.0,,9490000.0,9990000.0,9990000.0,8,3,CellphoneS|FPT|TGDĐ,342675.0,4.5875,3,competitive
+2dffef5c1021630b_s1,smartphone,Xiaomi,17T Pro 5G,Dimensity 9500,12.0,512.0,,19790000.0,22290000.0,22490000.0,11,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,40264.0,4.94,4,competitive
+2dffef5c1021630b_s2,smartphone,Xiaomi,17T Pro 5G,Dimensity 9500,12.0,1024.0,,24090000.0,24090000.0,24090000.0,2,1,TGDĐ,13420.0,4.9,1,exclusive
+da6bd6bad99e0be6,smartphone,Xiaomi,Redmi Note 14 Pro Plus,Snapdragon 7s Gen 3,8.0,256.0,,7650000.0,7650000.0,7650000.0,3,1,CellphoneS,264.0,5.0,1,exclusive
+d8cecdb9864b876d,smartphone,Xiaomi,Redmi Note 14 Pro Plus 5G,Snapdragon 7s Gen 3,8.0,256.0,,7650000.0,7770000.0,7890000.0,2,2,CellphoneS|Viettel,88.0,5.0,2,competitive
+31e743f04c0ec3fb,smartphone,Xiaomi,POCO F8 Pro 5G,Snapdragon 8 Elite,12.0,256.0,,15990000.0,15990000.0,15990000.0,6,2,CellphoneS|FPT,36.0,4.9,2,competitive
+ff18b38cd535e356,smartphone,Xiaomi,Redmi Note 15 Pro 5G,Dimensity 7400-Ultra,12.0,256.0,,9190000.0,9690000.0,10290000.0,9,4,CellphoneS|FPT|TGDĐ|Viettel,41568.0,4.9625,4,competitive
+aa561ca85b0c2d1e,smartphone,Samsung,Galaxy Z Flip8 5G,Exynos 2600,12.0,256.0,,27490000.0,27640000.0,27790000.0,6,2,CellphoneS|FPT,0.0,4.9,2,competitive
+9cc829529ef49f0b,smartphone,Xiaomi,Redmi Note 15 Pro,Helio G200-Ultra,12.0,256.0,,7290000.0,7690000.0,8590000.0,11,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,117717.0,4.966666666666667,5,competitive
+ffdc2af37c5d6495,smartphone,Samsung,Galaxy A07,Helio G99,4.0,128.0,,4190000.0,4190000.0,4190000.0,3,1,CellphoneS,12.0,5.0,1,exclusive
+9387fd35120f0aa6_s1,smartphone,Samsung,Galaxy A27 5G,Snapdragon 6 Gen 3,6.0,128.0,,80000.0,80000.0,80000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+9387fd35120f0aa6_s2,smartphone,Samsung,Galaxy A27 5G,Snapdragon 6 Gen 3,6.0,128.0,,7990000.0,7990000.0,7990000.0,7,3,CellphoneS|FPT|Viettel,0.0,5.0,3,competitive
+45014718078b8175_s1,smartphone,Apple,iPhone 17 Pro,Apple A19 Pro,12.0,256.0,,31490000.0,31990000.0,37490000.0,12,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,112316.0,4.972727272727273,5,competitive
+45014718078b8175_s2,smartphone,Apple,iPhone 17 Pro,Apple A19 Pro,12.0,1024.0,,37990000.0,42690000.0,44990000.0,21,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,222757.0,4.968421052631579,5,competitive
+f3c2fb0457152478_s1,smartphone,Apple,iPhone 17,Apple A19,8.0,256.0,,25490000.0,26490000.0,26990000.0,17,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,327939.0,4.96875,5,competitive
+f3c2fb0457152478_s2,smartphone,Apple,iPhone 17,Apple A19,8.0,512.0,,30990000.0,33490000.0,34590000.0,16,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,262165.0,4.973333333333333,5,competitive
+549fed19b66da639,smartphone,Xiaomi,Redmi Note 15 5G,Snapdragon 6 Gen 3,6.0,128.0,,5990000.0,6040000.0,6390000.0,8,4,CellphoneS|Hoàng Hà|TGDĐ|Viettel,68265.0,4.95,4,competitive
+ca207ecfd080d33a,smartphone,Xiaomi,Redmi Note 17 Pro 5G,Snapdragon 6s Gen 4,6.0,256.0,,9190000.0,9990000.0,10190000.0,11,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,49041.0,4.966666666666667,5,competitive
+7b7586fdbebd03c7,smartphone,Samsung,Galaxy S25 Plus,Snapdragon 8 Elite for Galaxy,12.0,256.0,,19350000.0,19350000.0,19350000.0,4,1,CellphoneS,32.0,5.0,1,exclusive
+123e6af33682f367,smartphone,Honor,X9C 5G,Snapdragon 6 Gen 1,12.0,256.0,,7290000.0,7290000.0,7290000.0,2,1,CellphoneS,0.0,,1,exclusive
+40191a2497b0264b,smartphone,Nubia,Neo 5 GT,Dimensity 7400,8.0,256.0,,8990000.0,8990000.0,8990000.0,2,1,CellphoneS,4.0,5.0,1,exclusive
+1d501908ed11cdca,smartphone,Xiaomi,Redmi Note 15,Helio G100-Ultra,6.0,128.0,,4990000.0,5190000.0,5190000.0,8,4,CellphoneS|FPT|TGDĐ|Viettel,123882.0,4.985714285714286,4,competitive
+add8668d226cd9ec,smartphone,Nubia,Neo 5 5G,Unisoc T9300,8.0,128.0,,6190000.0,6190000.0,7190000.0,11,2,CellphoneS|FPT,4.0,5.0,2,competitive
+d88c62c80a859470,smartphone,Xiaomi,Redmi Note 17 Pro Max 5G,Snapdragon 6 Gen 5,8.0,512.0,,14290000.0,15990000.0,16190000.0,8,4,CellphoneS|FPT|Hoàng Hà|Viettel,3.0,5.0,4,competitive
+c6882f3372471a5d,smartphone,OPPO,Find X9s,Dimensity 9500s,12.0,256.0,,24990000.0,24990000.0,24990000.0,4,2,CellphoneS|Viettel,12.0,5.0,2,competitive
+7f3fe77bde1a6b01,smartphone,Samsung,Galaxy S26 FE 5G,Exynos 2500,8.0,128.0,,15990000.0,16490000.0,16790000.0,10,4,CellphoneS|FPT|Hoàng Hà|TGDĐ,17814.0,4.95,4,competitive
+ec5072c88f0dfb05,smartphone,OPPO,A7 Pro 5G,Dimensity 6360 Max,6.0,256.0,,11940000.0,12990000.0,12990000.0,4,3,CellphoneS|Hoàng Hà|TGDĐ,1959.0,5.0,3,competitive
+e13768d486f32923,smartphone,Xiaomi,POCO X8 Pro Max,Dimensity 9500s,12.0,256.0,,14490000.0,14490000.0,14490000.0,3,1,CellphoneS,36.0,4.9,1,exclusive
+ad663849f9bf7a62,smartphone,Xiaomi,Redmi Note 17,Snapdragon 6s Gen 2,4.0,128.0,,5690000.0,6290000.0,6490000.0,7,3,CellphoneS|FPT|Viettel,0.0,5.0,3,competitive
+beff9a0e230a26c0,smartphone,Samsung,Galaxy A17 5G,Exynos 1330,8.0,128.0,,6490000.0,6690000.0,7190000.0,11,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,512113.0,4.82,5,competitive
+acd753f56a0aa5e1_s1,smartphone,Apple,iPhone 18 Pro,Apple A20 Pro,,256.0,,38490000.0,38990000.0,45490000.0,22,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,22975.0,4.963125,5,competitive
+acd753f56a0aa5e1_s2,smartphone,Apple,iPhone 18 Pro,Apple A20 Pro,,1024.0,,57990000.0,58490000.0,58490000.0,12,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,11309.0,4.934285714285714,5,competitive
+acd753f56a0aa5e1_s3,smartphone,Apple,iPhone 18 Pro,Apple A20 Pro,,2048.0,,77490000.0,77990000.0,77990000.0,14,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,22603.0,4.938888888888889,5,competitive
+431693276c4339e0,smartphone,Samsung,Galaxy S25 Ultra,Snapdragon 8 Elite,12.0,256.0,,24190000.0,24190000.0,25490000.0,4,2,CellphoneS|Hoàng Hà,135.0,4.7,2,competitive
+713b97dddfb5e724_s1,smartphone,Apple,iPhone 18 Pro Max,Apple A20 Pro,,512.0,,41490000.0,47990000.0,48490000.0,23,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,161241.0,4.958235294117648,5,competitive
+713b97dddfb5e724_s2,smartphone,Apple,iPhone 18 Pro Max,Apple A20 Pro,,1024.0,,60490000.0,61490000.0,61490000.0,14,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,214447.0,4.9188888888888895,5,competitive
+713b97dddfb5e724_s3,smartphone,Apple,iPhone 18 Pro Max,Apple A20 Pro,,2048.0,,79990000.0,80990000.0,80990000.0,13,5,CellphoneS|FPT|Hoàng Hà|TGDĐ|Viettel,160846.0,4.9375,5,competitive
+08482b3cdb25d9ba,smartphone,OPPO,Reno16 F,Dimensity 7300-Energy,8.0,256.0,,14990000.0,14990000.0,14990000.0,3,1,CellphoneS,0.0,,1,exclusive
+1ed95971e38ae96f,smartphone,Samsung,Galaxy A37 5G,Exynos 1480,8.0,128.0,,9390000.0,9990000.0,9990000.0,15,4,CellphoneS|FPT|TGDĐ|Viettel,279375.0,4.945454545454546,4,competitive
+73f9c91061fa3bc6_s1,smartphone,Samsung,Galaxy A57 5G,Exynos 1680,8.0,128.0,,70000.0,70000.0,70000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+73f9c91061fa3bc6_s2,smartphone,Samsung,Galaxy A57 5G,Exynos 1680,8.0,128.0,,10490000.0,10990000.0,11290000.0,9,3,CellphoneS|FPT|Viettel,65.0,5.0,3,competitive
+f7d86e02a93d727b,smartphone,Honor,600s 5G,Unknown,8.0,256.0,,10990000.0,10990000.0,10990000.0,3,1,FPT,0.0,5.0,1,exclusive
+10a505f4a852945f,smartphone,Nubia,V70 Design,Unknown,8.0,256.0,,3890000.0,4190000.0,4190000.0,5,1,FPT,0.0,5.0,1,exclusive
+9a05dfbe6ff2318d,smartphone,Honor,Magic V5 5G,Unknown,16.0,512.0,,33990000.0,33990000.0,33990000.0,3,1,FPT,0.0,5.0,1,exclusive
+4a92eebb1e7e1291,smartphone,Samsung,Galaxy A26 5G,Exynos 1380,8.0,128.0,,6490000.0,7100000.0,7340000.0,7,3,FPT|TGDĐ|Viettel,407623.0,4.671428571428572,3,competitive
+0ad1da14f1f12a52,smartphone,Samsung,Galaxy S25 Edge 5G,Unknown,12.0,256.0,,20450000.0,20450000.0,20450000.0,2,1,FPT,0.0,4.9,1,exclusive
+5e0bd694fc963381,smartphone,Nubia,Fold 5G,Unknown,12.0,256.0,,29990000.0,29990000.0,29990000.0,1,1,FPT,0.0,,1,exclusive
+4afc8a04f5fee16a,smartphone,Tecno,Spark 40,Unknown,8.0,256.0,,3890000.0,3890000.0,3890000.0,1,1,FPT,0.0,5.0,1,exclusive
+4b6dc6bd8f75aa68_s1,smartphone,Nothing,Phone (4a),Unknown,8.0,256.0,,10090000.0,11890000.0,11990000.0,10,2,FPT|TGDĐ,848.0,4.9,2,competitive
+4b6dc6bd8f75aa68_s2,smartphone,Nothing,Phone (4a),Unknown,12.0,256.0,,12990000.0,13990000.0,13990000.0,6,1,FPT,0.0,,1,exclusive
+cb261e18be9350b5,smartphone,Samsung,Galaxy XCover7 Pro 5G,Unknown,6.0,128.0,,14230000.0,14230000.0,14230000.0,1,1,FPT,0.0,,1,exclusive
+d5865052641eaf9e,smartphone,Nothing,Phone (4a) Pro,Unknown,12.0,256.0,,13390000.0,14690000.0,15990000.0,6,2,FPT|TGDĐ,477.0,5.0,2,competitive
+425287948a0b13c0,smartphone,Nothing,Phone (4b),Unknown,8.0,128.0,,10990000.0,10990000.0,10990000.0,3,1,FPT,0.0,,1,exclusive
+f656f73fc7aa85d8,smartphone,Itel,IT8010 4G,Unknown,,,,349000.0,349000.0,349000.0,1,1,FPT,0.0,4.4,1,exclusive
+fe70c5ba34289bfc,smartphone,OPPO,A5i,Unknown,6.0,128.0,,4490000.0,4490000.0,4490000.0,1,1,FPT,0.0,5.0,1,exclusive
+97d10e38677cbf94,smartphone,Tecno,Spark 30,Unknown,8.0,128.0,,3190000.0,3190000.0,3190000.0,1,1,FPT,0.0,4.9,1,exclusive
+63cff8c0111ccc67_s1,smartphone,Samsung,Galaxy Z Flip7 5G,Exynos 2500,12.0,384.0,,26490000.0,28990000.0,29990000.0,4,3,FPT|TGDĐ|Viettel,6217.0,4.995,3,competitive
+63cff8c0111ccc67_s2,smartphone,Samsung,Galaxy Z Flip7 5G,Exynos 2500,12.0,512.0,,34990000.0,34990000.0,34990000.0,2,1,TGDĐ,6156.0,5.0,1,exclusive
+ae52ed0a9f6465ea,smartphone,Samsung,Galaxy Z Flip7 5G,Unknown,12.0,256.0,,22990000.0,22990000.0,22990000.0,2,2,FPT|Viettel,65.0,5.0,2,competitive
+cb4491b11cbd361e,smartphone,OPPO,Reno14 F 5G,Snapdragon 6 Gen 1,8.0,256.0,,9490000.0,9800000.0,9800000.0,3,2,FPT|Hoàng Hà,0.0,5.0,2,competitive
+c6aa0fedcb018de9,smartphone,Nubia,A36,Unknown,4.0,64.0,,2790000.0,2890000.0,2990000.0,4,2,FPT|TGDĐ,22371.0,4.975,2,competitive
+a2a922f14a157461,smartphone,Nubia,REDMAGIC 11S Pro 5G,Unknown,16.0,512.0,,25990000.0,25990000.0,25990000.0,1,1,FPT,0.0,5.0,1,exclusive
+df8c2b246453c769,smartphone,INOI,240 Modern 4G,Unknown,,,,349000.0,349000.0,349000.0,2,1,FPT,0.0,4.5,1,exclusive
+fbfba9deeb1c9b10,smartphone,OPPO,Reno13 F 5G,Unknown,12.0,256.0,,9990000.0,9990000.0,9990000.0,2,1,FPT,0.0,5.0,1,exclusive
+596c72b3edd8689a_s1,smartphone,Samsung,Galaxy S26 5G,Unknown,12.0,256.0,,22990000.0,23790000.0,23790000.0,7,2,FPT|TGDĐ,18784.0,5.0,2,competitive
+596c72b3edd8689a_s2,smartphone,Samsung,Galaxy S26 5G,Unknown,12.0,512.0,,27990000.0,28990000.0,28990000.0,6,2,FPT|TGDĐ,18784.0,5.0,2,competitive
+9d3d920e04e93723,smartphone,Mobell,M139 4G,Unknown,,,,339000.0,339000.0,390000.0,3,2,FPT|Hoàng Hà,0.0,4.6,2,competitive
+87d7dc9fc97a96c9,smartphone,TCL,60R 5G,Unknown,4.0,128.0,,2990000.0,2990000.0,2990000.0,2,1,FPT,0.0,4.9,1,exclusive
+435b60f3d0437181,smartphone,Xiaomi,15T 5G,Unknown,12.0,512.0,,12290000.0,12290000.0,12290000.0,2,1,FPT,0.0,5.0,1,exclusive
+e685be839bf6a4e0_s1,smartphone,Xiaomi,Redmi 15C,Unknown,4.0,128.0,,3690000.0,3690000.0,4290000.0,3,2,TGDĐ|Viettel,154774.0,4.9,2,competitive
+e685be839bf6a4e0_s2,smartphone,Xiaomi,Redmi 15C,Unknown,8.0,256.0,,4990000.0,4990000.0,4990000.0,2,1,FPT,0.0,5.0,1,exclusive
+15e10951aae4ea53,smartphone,Benco,V91 Plus,Unknown,6.0,128.0,,3190000.0,3190000.0,3190000.0,2,1,FPT,0.0,4.4,1,exclusive
+05e71079713a35bf,smartphone,Nubia,A76,Unknown,4.0,128.0,,3090000.0,3090000.0,3090000.0,3,1,FPT,0.0,5.0,1,exclusive
+11d902e2309d86d6,smartphone,OPPO,Find N6 5G,Unknown,16.0,512.0,,64990000.0,64990000.0,64990000.0,4,2,FPT|TGDĐ,310.0,5.0,2,competitive
+26dc6ebbfbe21411,smartphone,OPPO,Reno15 5G,Unknown,12.0,256.0,,16490000.0,16490000.0,16490000.0,2,1,FPT,0.0,5.0,1,exclusive
+cfd15e26e9efbfcf_s1,smartphone,Samsung,Galaxy Z Fold8 5G,Unknown,12.0,256.0,,39490000.0,39490000.0,39490000.0,1,1,FPT,0.0,5.0,1,exclusive
+cfd15e26e9efbfcf_s2,smartphone,Samsung,Galaxy Z Fold8 5G,Unknown,12.0,512.0,,48490000.0,48490000.0,48490000.0,2,1,FPT,0.0,5.0,1,exclusive
+829556d083d20c8a,smartphone,Honor,X6c,Unknown,6.0,128.0,,4290000.0,4490000.0,4690000.0,6,3,FPT|TGDĐ|Viettel,116645.0,4.933333333333334,3,competitive
+419aebad7bb8dbc4,smartphone,Xiaomi,Poco M7 Pro 5G,Unknown,8.0,256.0,,5990000.0,5990000.0,5990000.0,4,1,FPT,0.0,5.0,1,exclusive
+d34bb38fa0538abc,smartphone,INOI,244 Modern Plus 4G,Unknown,,,,449000.0,449000.0,449000.0,2,1,FPT,0.0,4.3,1,exclusive
+cb6ee9fae78334e0,smartphone,Xiaomi,17 Ultra 5G,Unknown,16.0,512.0,,29990000.0,29990000.0,30490000.0,3,2,FPT|TGDĐ,1521.0,4.9,2,competitive
+35f24c3e3ecd752d,smartphone,Honor,X8d,Unknown,8.0,128.0,,7390000.0,7390000.0,7590000.0,9,2,FPT|TGDĐ,28314.0,4.933333333333334,2,competitive
+e3ef1167b1247be8,smartphone,Nokia,110 DS Pro 4G,Unknown,,,,850000.0,850000.0,850000.0,2,1,FPT,0.0,4.6,1,exclusive
+c906593b792d5124_s1,smartphone,Samsung,Galaxy S26 Plus 5G,Unknown,12.0,256.0,,24990000.0,24990000.0,24990000.0,3,1,FPT,0.0,5.0,1,exclusive
+c906593b792d5124_s2,smartphone,Samsung,Galaxy S26 Plus 5G,Unknown,12.0,512.0,,29990000.0,29990000.0,29990000.0,3,1,FPT,0.0,5.0,1,exclusive
+c7b8d72f3463be96,smartphone,Honor,X5c Plus,Unknown,4.0,128.0,,3490000.0,3790000.0,3990000.0,11,4,FPT|Hoàng Hà|TGDĐ|Viettel,48072.0,4.95,4,competitive
+1a8eb9080406e331,smartphone,Nubia,V70 Max,Unknown,6.0,128.0,,3490000.0,3490000.0,3490000.0,2,1,FPT,0.0,5.0,1,exclusive
+5a48978e4c9d016a,smartphone,Xiaomi,15T Pro 5G,Unknown,12.0,512.0,,13890000.0,15990000.0,15990000.0,3,2,FPT|TGDĐ,7808.0,4.966666666666667,2,competitive
+9c3a4f605d0e6f85,smartphone,Viettel,Sumo T2 4G,Unknown,,,,550000.0,550000.0,550000.0,2,1,FPT,0.0,4.7,1,exclusive
+6f6375a08c91ac2a,smartphone,Xiaomi,Redmi 15C,Helio G81 Ultra,4.0,128.0,,3890000.0,4090000.0,4090000.0,5,2,FPT|Hoàng Hà,0.0,5.0,2,competitive
+6668e75ec6bf7698,smartphone,Masstel,Izi 16 4G,Unknown,,,,390000.0,390000.0,450000.0,3,2,FPT|Hoàng Hà,0.0,4.4,2,competitive
+c0d07f041138d771,smartphone,Benco,V90 Plus,Unknown,4.0,64.0,,2490000.0,2490000.0,2490000.0,2,1,FPT,0.0,5.0,1,exclusive
+3b0230698894c8b3_s1,smartphone,Tecno,Pova Curve 2 5G,Unknown,8.0,128.0,,7990000.0,8090000.0,8390000.0,7,3,FPT|Hoàng Hà|TGDĐ,114.0,4.95,3,competitive
+3b0230698894c8b3_s2,smartphone,Tecno,Pova Curve 2 5G,Unknown,8.0,128.0,,10990000.0,10990000.0,10990000.0,3,1,TGDĐ,114.0,5.0,1,exclusive
+828fa0ce9f70faa7,smartphone,Masstel,Fami 60S 4G,Unknown,,,,750000.0,750000.0,750000.0,2,1,FPT,0.0,5.0,1,exclusive
+8db126362d184910,smartphone,Nubia,V80 Design,Unknown,8.0,256.0,,4590000.0,4590000.0,4590000.0,4,1,FPT,0.0,5.0,1,exclusive
+80e4b066d241dfa2,smartphone,Nokia,105 DS Pro 4G,Unknown,,,,780000.0,780000.0,780000.0,2,1,FPT,0.0,5.0,1,exclusive
+37143c65bfd812e1,smartphone,Xiaomi,Poco M8 Pro 5G,Unknown,10.0,384.0,,8490000.0,9240000.0,9990000.0,6,1,FPT,0.0,5.0,1,exclusive
+b93c705e99b756f8,smartphone,Samsung,Galaxy A08,Unknown,4.0,64.0,,4790000.0,4790000.0,4790000.0,3,1,FPT,0.0,5.0,1,exclusive
+7161d49e92c08229,smartphone,OPPO,A7 Pro 5G,Unknown,6.0,256.0,,12990000.0,12990000.0,12990000.0,3,2,FPT|Viettel,0.0,5.0,2,competitive
+2574affe27845a14,smartphone,OPPO,Find N3 5G,Unknown,16.0,512.0,,26990000.0,26990000.0,26990000.0,1,1,FPT,0.0,5.0,1,exclusive
+fbe426b60d4cdca0,smartphone,Nubia,Neo 5 Max,Unknown,8.0,384.0,,8790000.0,9290000.0,9790000.0,4,1,FPT,0.0,5.0,1,exclusive
+2dc13570d8b4e54e,smartphone,Masstel,Fami 25 4G,Unknown,,,,680000.0,680000.0,680000.0,3,1,FPT,0.0,5.0,1,exclusive
+516527ce25b81d63,smartphone,Xiaomi,POCO C81 Pro,Unknown,4.0,128.0,,3890000.0,3890000.0,3890000.0,3,1,FPT,0.0,5.0,1,exclusive
+99648c2365bab05e,smartphone,Tecno,Spark 50,Unknown,4.0,128.0,,4590000.0,4590000.0,4590000.0,2,1,FPT,0.0,5.0,1,exclusive
+745263d3a9cf5fd9,smartphone,Benco,S1 Pro,Unknown,8.0,256.0,,3790000.0,3790000.0,3790000.0,2,1,FPT,0.0,5.0,1,exclusive
+ec5ce941792eefd3,smartphone,Tecno,Spark Go 3,Unknown,4.0,64.0,,3290000.0,3290000.0,3290000.0,3,1,FPT,0.0,4.6,1,exclusive
+bb2e0b183786bb96,smartphone,Xiaomi,POCO C95 Pro,Unknown,6.0,128.0,,6090000.0,6090000.0,6090000.0,3,1,FPT,0.0,5.0,1,exclusive
+52eb48515d092e99,smartphone,Samsung,Galaxy A07,Unknown,4.0,128.0,,3940000.0,4190000.0,4190000.0,4,2,FPT|Viettel,66.0,5.0,2,competitive
+d98300b2b80fae55,smartphone,Samsung,Galaxy A17,Unknown,8.0,128.0,,5490000.0,5490000.0,5490000.0,3,1,FPT,0.0,5.0,1,exclusive
+fa99e4b36d6e1bd0,smartphone,Samsung,Galaxy S25 Ultra 5G,Snapdragon 8 Elite,12.0,384.0,,26990000.0,28540000.0,28810000.0,16,2,FPT|TGDĐ,327272.0,4.95,2,competitive
+b4e9705b3ffcb638_s1,smartphone,Samsung,Galaxy Z Fold7 5G,Unknown,12.0,256.0,,35990000.0,36740000.0,37490000.0,2,2,FPT|Viettel,62.0,5.0,2,competitive
+b4e9705b3ffcb638_s2,smartphone,Samsung,Galaxy Z Fold7 5G,Unknown,12.0,512.0,,52990000.0,52990000.0,52990000.0,1,1,TGDĐ,5836.0,5.0,1,exclusive
+5a7bdea72c15caff,smartphone,OPPO,Find X9s 5G,Unknown,12.0,256.0,,24990000.0,24990000.0,24990000.0,3,1,FPT,0.0,4.9,1,exclusive
+4591d6f0497bb6bf,smartphone,OPPO,Find X9 Ultra 5G,Unknown,12.0,512.0,,45990000.0,45990000.0,45990000.0,2,1,FPT,0.0,5.0,1,exclusive
+6142ff8d06cd4f80_s1,smartphone,Samsung,Galaxy S26 Ultra 5G,Unknown,12.0,256.0,,30490000.0,30640000.0,30790000.0,8,2,FPT|TGDĐ,103804.0,4.95,2,competitive
+6142ff8d06cd4f80_s2,smartphone,Samsung,Galaxy S26 Ultra 5G,Unknown,12.0,512.0,,37490000.0,37790000.0,44790000.0,9,2,FPT|TGDĐ,155706.0,4.933333333333334,2,competitive
+19e9c15a55b4206d,smartphone,OPPO,Reno16 F 5G,MediaTek Dimensity 7300 Energy,8.0,256.0,,14990000.0,14990000.0,14990000.0,4,2,FPT|Hoàng Hà,0.0,5.0,2,competitive
+d0b5765c82271135,smartphone,OPPO,Find X9s,Unknown,12.0,256.0,,21090000.0,21090000.0,21090000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c0fe30da6a42c0da_s1,smartphone,Nubia,RedMagic 11 Pro,Unknown,12.0,256.0,,19290000.0,19290000.0,19290000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c0fe30da6a42c0da_s2,smartphone,Nubia,REDMAGIC 11 Pro,Unknown,16.0,512.0,,23290000.0,23290000.0,23290000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+bfe7796290124f11,smartphone,TCL,503,Unknown,3.0,64.0,,1850000.0,1850000.0,1850000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0e9b10a5cf54f037,smartphone,Masstel,Fami 60 4G,Unknown,,,,740000.0,740000.0,740000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+042a50bf6671fee2,smartphone,Samsung,Galaxy A18,Unknown,6.0,128.0,,6750000.0,6750000.0,6750000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+7e6a4324bfb220ab,smartphone,TCL,40 SE,Unknown,5.0,192.0,,2390000.0,2590000.0,2790000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+dbbb14d3d303ec09,smartphone,HTC,Wildfire E5 Plus,Unisoc T606,6.0,128.0,,2990000.0,2990000.0,2990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+61347fc4fbab4919,smartphone,INOI,240,Unknown,,,,350000.0,350000.0,350000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0cc2bfdf1eb4cbb1,smartphone,INOI,244,Unknown,,,,410000.0,410000.0,410000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+84021a0a36d23690,smartphone,Vivo,Y16,Unknown,4.0,128.0,,170000.0,170000.0,170000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+a2ba0f1cd83219ac,smartphone,TCL,30,Unknown,,,,2790000.0,2790000.0,2790000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+13661b632fcdb714,smartphone,TCL,305,Unknown,,,,1590000.0,1590000.0,1590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+52ef0eb3b8db5696,smartphone,TCL,30 SE,Unknown,4.0,128.0,,2490000.0,2490000.0,2490000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c4b816b0f441f8ea,smartphone,Masstel,Izi 10 4G,Unknown,,,,500000.0,500000.0,500000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+3fa9932690a26360,smartphone,Masstel,Fami 12 4G,Unknown,,,,650000.0,650000.0,650000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+30f682d3b6d0cf1b,smartphone,Masstel,izi 12 4G,Unknown,,,,450000.0,450000.0,450000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+42c2929f1147c00f,smartphone,XOR,Titanium X2,Unknown,,,,196000000.0,196000000.0,196000000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0b04f7e2585554c3,smartphone,XOR,X2 Prime,Unknown,,,,485000000.0,485000000.0,485000000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+479316453bc97716,smartphone,Philips,Xenium E527 4G,Unknown,,,,850000.0,850000.0,850000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c9717ec1b66621fa,smartphone,Nokia,HMD 105 4G,Unknown,,,,640000.0,640000.0,640000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+fdb4891caca3e048,smartphone,INOI,A54,Unknown,4.0,256.0,,2990000.0,2990000.0,2990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+ace1ec9be0c9af36,smartphone,TCL,40 NXTPAPER,Unknown,8.0,256.0,,3590000.0,3590000.0,3590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+74e7954121be8aab,smartphone,HTC,Wildfire E3 lite,Unknown,4.0,64.0,,2190000.0,2190000.0,2190000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+ee93a44064a5280a,smartphone,TCL,408,Unknown,4.0,96.0,,2190000.0,2340000.0,2490000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+675b4bbf0c9afd66,smartphone,Masstel,izi 30,Unknown,,,,600000.0,600000.0,600000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+dfea12a29f5d5a2e,smartphone,Masstel,izi 15,Unknown,,,,450000.0,450000.0,450000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+7669d0fc3eb863a9,smartphone,Mobell,F309 4G,Unknown,,,,650000.0,650000.0,650000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+2faae918699f4252,smartphone,Mobell,F209 4G,Unknown,,,,590000.0,590000.0,590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+4548f26acf9cff1e,smartphone,Mobell,M539 4G,Unknown,,,,640000.0,640000.0,640000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0c61bcd9fed804a2,smartphone,Mobell,M331 4G,Unknown,,,,490000.0,490000.0,490000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+55eb5bde941e0b74,smartphone,Masstel,Fami 12S 4G,Unknown,,,,650000.0,650000.0,650000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+34ec1f7fa713fb6b,smartphone,OPPO,Reno10 5G,Unknown,8.0,256.0,,170000.0,170000.0,170000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+3fce03fb81e47a13,smartphone,Nokia,110 4G Pro,Unknown,,,,740000.0,740000.0,740000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c26fad1d01874313,smartphone,Nokia,105 4G Pro,Unknown,,,,670000.0,670000.0,670000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0226394aafafe6f3,smartphone,INOI,288S,Unknown,,,,1190000.0,1190000.0,1190000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+5c1aea3478690e14,smartphone,INOI,Note 13s,Unknown,8.0,256.0,,2890000.0,2890000.0,2890000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+89979a20e224227d,smartphone,INOI,A83,Unisoc T606,6.0,128.0,,1990000.0,1990000.0,1990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0ba31aaef7015159,smartphone,INOI,A72,Unknown,4.0,128.0,,1990000.0,1990000.0,1990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+bf5f2149ded020d6,smartphone,TCL,406S,Unknown,4.0,64.0,,1690000.0,1690000.0,1690000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+89469990579950cf,smartphone,TCL,505,Unknown,4.0,128.0,,2690000.0,2690000.0,2690000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+6bb7b0f8d6206f4c,smartphone,OSCAL,TIGER 12,MediaTek Helio G99,12.0,256.0,,4990000.0,4990000.0,4990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+bd1dd43f6e436952,smartphone,Apple,iPhone 14,Unknown,,128.0,,14790000.0,14790000.0,14790000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+5a919b95444fb1eb,smartphone,Nokia,220 4G,Unknown,,,,980000.0,980000.0,980000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+aacf77105ba69603,smartphone,Samsung,Galaxy A17 LTE,MediaTek Helio G99,8.0,128.0,,5490000.0,5665000.0,5840000.0,2,2,Hoàng Hà|Viettel,96.0,5.0,2,competitive
+418ba3fdaaf2bdde_s1,smartphone,Xphone,Hera V9,Unknown,,,,320000.0,320000.0,320000.0,1,1,Viettel,0.0,,1,exclusive
+418ba3fdaaf2bdde_s2,smartphone,Xphone,Hera V9,Unknown,,,,390000.0,390000.0,390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+9437fb6146b9a5ac,smartphone,Xphone,Hera S9,Unknown,,,,590000.0,590000.0,590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+a9011ab2efd49296,smartphone,Itel,it9211,Unknown,,,,439000.0,439000.0,439000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+e388384502ca8906,smartphone,Viettel,T2,Unknown,,,,550000.0,550000.0,550000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+af00506ac6ab308e,smartphone,Itel,it8010,Unknown,,,,339000.0,339000.0,339000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+bc66540fb4c9e4b2,smartphone,Samsung,Galaxy A07 5G,MediaTek Dimensity 6300,4.0,128.0,,5090000.0,5090000.0,5090000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+9aaed6261fd92f27,smartphone,Tecno,Spark 50,MediaTek Helio G81,4.0,128.0,,4790000.0,4790000.0,4790000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+669e56fd41df9147,smartphone,Apple,iPhone 16e,Unknown,,512.0,,19990000.0,19990000.0,19990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+ca8e8f4715a2e8c7,smartphone,Xiaomi,Redmi Note 14 Pro+ 5G,Snapdragon 7s Gen 3,8.0,256.0,,7790000.0,7790000.0,7790000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+cda00a009c37cc15_s1,smartphone,Nubia,RedMagic 10 Pro,Snapdragon 8 Elite,12.0,256.0,,17990000.0,17990000.0,17990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+cda00a009c37cc15_s2,smartphone,Nubia,RedMagic 10 Pro,Snapdragon 8 Elite,16.0,512.0,,21990000.0,21990000.0,21990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+9193d1c741a9201d,smartphone,Xiaomi,POCO M7 Pro 5G,MediaTek Dimensity 7025-Ultra,12.0,512.0,,7590000.0,7590000.0,7590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+79514c6b054f32c8_s1,smartphone,Nubia,RedMagic 10S Pro,Snapdragon 8 Elite,12.0,256.0,,18490000.0,18490000.0,18490000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+79514c6b054f32c8_s2,smartphone,Nubia,RedMagic 10S Pro,Snapdragon 8 Elite,16.0,512.0,,22990000.0,22990000.0,22990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+8b36306a17d742c9,smartphone,Honor,400 Lite 5G,MediaTek Dimensity 7025,12.0,256.0,,7390000.0,7390000.0,7390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+0b6634c34ae714eb,smartphone,Honor,400,Snapdragon 7 Gen 3,12.0,256.0,,11190000.0,11190000.0,11190000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+cee44038a518b22b,smartphone,Itel,it9310,Unknown,,,,490000.0,490000.0,490000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+5088226dedc93cbf,smartphone,Xiaomi,Poco M7,Snapdragon 685,6.0,128.0,,4490000.0,4590000.0,4690000.0,2,2,Hoàng Hà|Viettel,0.0,,2,competitive
+b223a2dad5c5526f,smartphone,Xiaomi,Redmi 17 4G,MediaTek Helio G91 Ultra,6.0,256.0,,6490000.0,6590000.0,6590000.0,4,2,Hoàng Hà|TGDĐ,114795.0,4.9,2,competitive
+7c8f712fc0620b4c,smartphone,Xiaomi,POCO C95 Pro,MediaTek Helio G91 Ultra,6.0,128.0,,6090000.0,6090000.0,6090000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+2c76554f201f06ec,smartphone,Xiaomi,POCO M7,Unknown,8.0,256.0,,5490000.0,5490000.0,5490000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+cb12f4f375957412,smartphone,Nubia,REDMAGIC 11S Pro,Snapdragon 8 Elite Gen 5,14.0,384.0,,22990000.0,24490000.0,25990000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+770057d7a269ba75,smartphone,OPPO,Find N6,Unknown,16.0,512.0,,57890000.0,57890000.0,57890000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+b8948656a7a8ffb4,smartphone,Nubia,REDMAGIC 11 Air,Unknown,16.0,512.0,,16990000.0,16990000.0,16990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+a9263cf7bb695349,smartphone,Nubia,REDMAGIC 11 Air,Snapdragon 8 Elite,12.0,256.0,,13990000.0,13990000.0,13990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+d2f3b9b26a874a4d,smartphone,Samsung,Galaxy A37 5G,Unknown,8.0,128.0,,70000.0,70000.0,70000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c4c9cffd9abc6ef1,smartphone,OSCAL,MODERN 8,Unisoc T616,8.0,256.0,,3990000.0,3990000.0,3990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+68535e1f8db93e9b,smartphone,OSCAL,TIGER 10,Unknown,8.0,256.0,,3590000.0,3590000.0,3590000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+a714378141db78e0,smartphone,OSCAL,TIGER 12,Helio G99,8.0,128.0,,4390000.0,4390000.0,4390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+d676e71ae821414d,smartphone,Honor,600,Snapdragon 7 Gen 4,8.0,256.0,,14490000.0,14490000.0,14490000.0,3,2,Hoàng Hà|TGDĐ,914.0,4.9,2,competitive
+80619bf02a10faf3,smartphone,Honor,X7d 4G,Unknown,8.0,128.0,,5690000.0,5690000.0,5690000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+c695826e84437d2f,smartphone,Honor,X7d 4G,Snapdragon 685,8.0,256.0,,6290000.0,6290000.0,6290000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+1292ccab000943bf,smartphone,Xiaomi,Redmi Note 17,Snapdragon 6s 4G Gen 2,4.0,128.0,,5790000.0,5790000.0,5790000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+12c48cec9365fe36,smartphone,Honor,X8d,Snapdragon 6s Gen 2,8.0,128.0,,7390000.0,7390000.0,7390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+33d648c5d84766b2,smartphone,Honor,X9d,Snapdragon 6 Gen 4,12.0,256.0,,10490000.0,10790000.0,12290000.0,3,1,Hoàng Hà,0.0,,1,exclusive
+65f64e95584c383a,smartphone,OPPO,A6t Pro,Unknown,8.0,128.0,,8690000.0,9290000.0,9890000.0,2,2,Hoàng Hà|Viettel,0.0,,2,competitive
+25a0e79d2c8550d5,smartphone,Xiaomi,17 Ultra,Snapdragon 8 Elite Gen 5,16.0,512.0,,29490000.0,29490000.0,29490000.0,2,2,Hoàng Hà|Viettel,0.0,,2,competitive
+dae50932b3c7162d,smartphone,Samsung,Galaxy Z Flip8 5G,Unknown,12.0,256.0,,390000.0,390000.0,390000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+677503a3873a1e79,smartphone,Samsung,Galaxy Z Fold8 Ultra 5G,Unknown,12.0,384.0,,390000.0,390000.0,390000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+e6c425d3a73d55f5,smartphone,Samsung,Galaxy Z Fold8 5G,Snapdragon 8 Elite Gen 5 for Galaxy,12.0,384.0,,390000.0,390000.0,390000.0,2,1,Hoàng Hà,0.0,,1,exclusive
+a98278f94c2e9fa6,smartphone,Samsung,Galaxy Z Fold7,Snapdragon 8 Elite,12.0,256.0,,37990000.0,37990000.0,37990000.0,1,1,Hoàng Hà,0.0,,1,exclusive
+4ade292f75ad2e07,smartphone,OPPO,Reno16 5G,Unknown,8.0,256.0,,18790000.0,18790000.0,18790000.0,3,1,TGDĐ,22827.0,5.0,1,exclusive
+2d5aebc20ea7fa9d,smartphone,Xiaomi,Xiaomi 17 5G,Snapdragon 8 Elite Gen 5,12.0,384.0,,19290000.0,19790000.0,20290000.0,6,1,TGDĐ,30738.0,4.9,1,exclusive
+c79dbaed83b44614,smartphone,Xiaomi,Redmi Note 15 Pro,Unknown,8.0,256.0,,6690000.0,6690000.0,6690000.0,3,1,TGDĐ,117714.0,4.9,1,exclusive
+cedc3a0155745f08,smartphone,Xiaomi,Redmi Note 17 Pro Max,Unknown,8.0,256.0,,13990000.0,14990000.0,15990000.0,9,1,TGDĐ,80757.0,4.9,1,exclusive
+68bb32917ea3ae8f_s1,smartphone,Vivo,Y05,Unknown,4.0,64.0,,4490000.0,4490000.0,4490000.0,2,1,TGDĐ,161330.0,4.9,1,exclusive
+68bb32917ea3ae8f_s2,smartphone,Vivo,Y05,Unknown,4.0,128.0,,5390000.0,5390000.0,5390000.0,2,1,TGDĐ,161330.0,4.9,1,exclusive
+6522f808164c77d5,smartphone,Realme,15T 5G,Unknown,12.0,256.0,,8390000.0,8790000.0,8790000.0,3,1,TGDĐ,82242.0,4.9,1,exclusive
+dfe9aa19a1cc3a9a,smartphone,Mobell,M179,Unknown,,,,410000.0,410000.0,410000.0,4,1,TGDĐ,85936.0,4.9,1,exclusive
+d6a0cd0e634ad7ea,smartphone,Realme,realme 15 Pro 5G,Unknown,12.0,256.0,,12190000.0,12190000.0,12190000.0,1,1,TGDĐ,1926.0,4.9,1,exclusive
+4dc6d44b88b67769,smartphone,Nokia,Nokia 220 4G,Unknown,,,,1100000.0,1100000.0,1100000.0,2,1,TGDĐ,203778.0,4.9,1,exclusive
+f7fa31fc688f4687,smartphone,Masstel,Masstel IZI 10 4G,Unknown,,,,430000.0,430000.0,430000.0,2,1,TGDĐ,456000.0,4.9,1,exclusive
+1e2167340bffa24d,smartphone,Mobell,Mobell M539,Unknown,,,,690000.0,690000.0,690000.0,3,1,TGDĐ,185544.0,4.9,1,exclusive
+abbd767cae09753f,smartphone,Mobell,Mobell F209,Unknown,,,,610000.0,610000.0,610000.0,2,1,TGDĐ,107464.0,4.9,1,exclusive
+17c7249f3de3c453,smartphone,Mobell,Mobell F309 4G,Unknown,,,,750000.0,750000.0,750000.0,2,1,TGDĐ,72584.0,4.9,1,exclusive
+f06a6bbd5ba06ee6,smartphone,Nokia,Nokia 105 4G Pro,Unknown,,,,780000.0,780000.0,780000.0,2,1,TGDĐ,810722.0,4.9,1,exclusive
+39537f12a7933a3c,smartphone,Nokia,Nokia 110 4G Pro,Unknown,,,,850000.0,850000.0,850000.0,2,1,TGDĐ,161096.0,4.9,1,exclusive
+9cab2c337ba79458,smartphone,Mobell,Mobell M331 4G,Unknown,,,,540000.0,540000.0,540000.0,3,1,TGDĐ,208041.0,4.9,1,exclusive
+11ebe90fb9a37187,smartphone,Masstel,Masstel Fami 60S 4G,Unknown,,,,750000.0,750000.0,750000.0,1,1,TGDĐ,44732.0,4.9,1,exclusive
+5f7fd080c858118b,smartphone,Masstel,Masstel IZI T6 4G,Unknown,,,,550000.0,550000.0,550000.0,2,1,TGDĐ,295434.0,4.9,1,exclusive
+216e28e79c7b845f,smartphone,Masstel,Masstel Fami 50 4G,Unknown,,,,650000.0,650000.0,650000.0,3,1,TGDĐ,297246.0,4.9,1,exclusive
+dce4dcc5f84e0d9a,smartphone,Nokia,Nokia 3210 4G,Unknown,,,,1490000.0,1490000.0,1490000.0,1,1,TGDĐ,24499.0,4.9,1,exclusive
+3cd6668c9d35bf3b,smartphone,Nokia,Nokia HMD 105 4G,Unknown,,,,750000.0,750000.0,750000.0,3,1,TGDĐ,287013.0,4.9,1,exclusive
+b65185542c3f5b59,smartphone,Mobell,Mobell Rock 7,Unknown,,,,890000.0,890000.0,890000.0,2,1,TGDĐ,4534.0,5.0,1,exclusive
+23182f8290cfd6ed,smartphone,Masstel,Masstel IZI 10 4G Type-C,Unisoc UMS9117,,,,430000.0,430000.0,430000.0,3,1,TGDĐ,177252.0,4.9,1,exclusive
+24e72695598879ba,smartphone,Xiaomi,Xiaomi 15T 5G,Unknown,12.0,512.0,,10190000.0,11090000.0,11090000.0,3,1,TGDĐ,56959.0,4.9,1,exclusive
+276a953a9f4932cd,smartphone,Realme,realme 16 Pro 5G,Unknown,12.0,256.0,,13790000.0,13790000.0,13790000.0,2,1,TGDĐ,6116.0,4.9,1,exclusive
+a9568de99d4726cd,smartphone,Xiaomi,POCO F8 Pro,Unknown,12.0,512.0,,16790000.0,16790000.0,16790000.0,1,1,TGDĐ,254.0,5.0,1,exclusive
+25a466261f26230f,smartphone,Realme,realme Note 80,Unknown,4.0,64.0,,3990000.0,3990000.0,3990000.0,2,1,TGDĐ,66034.0,4.9,1,exclusive
+fa5b39306482a7be_s1,smartphone,Xiaomi,Poco C71,Unknown,4.0,64.0,,3090000.0,3090000.0,3090000.0,3,1,TGDĐ,92121.0,4.9,1,exclusive
+fa5b39306482a7be_s2,smartphone,Xiaomi,Poco C71,Unknown,4.0,128.0,,3990000.0,3990000.0,3990000.0,1,1,Viettel,0.0,,1,exclusive
+70a29fa717a8d679,smartphone,OPPO,Find N3 Flip 5G,Unknown,12.0,256.0,,16580000.0,16580000.0,16580000.0,3,1,TGDĐ,11727.0,4.9,1,exclusive
+2fc05ddf734c42e1,smartphone,OPPO,Reno13 5G,Unknown,12.0,256.0,,11000000.0,11000000.0,11000000.0,2,1,TGDĐ,57866.0,4.9,1,exclusive
+784d3dfffebce774,smartphone,Samsung,Galaxy S25 Edge 5G,Snapdragon 8 Elite,12.0,512.0,,17990000.0,17990000.0,17990000.0,5,1,TGDĐ,19370.0,4.9,1,exclusive
+ee60544042622d94,smartphone,Vivo,V50 Lite 5G,Unknown,8.0,256.0,,7110000.0,7110000.0,7110000.0,1,1,TGDĐ,17670.0,4.9,1,exclusive
+ad97ec78b7b15de5_s1,smartphone,Samsung,Galaxy Z Flip7 FE 5G,Exynos 2400,8.0,128.0,,16290000.0,16290000.0,16290000.0,2,1,TGDĐ,7610.0,4.9,1,exclusive
+ad97ec78b7b15de5_s2,smartphone,Samsung,Galaxy Z Flip7 FE 5G,Exynos 2400,8.0,256.0,,25990000.0,25990000.0,25990000.0,1,1,TGDĐ,3805.0,4.9,1,exclusive
+37d2ce972d7b5796,smartphone,OPPO,Reno14 F 5G,Unknown,12.0,512.0,,11260000.0,11260000.0,11260000.0,1,1,TGDĐ,128614.0,4.9,1,exclusive
+cbb4e5614d0e5082,smartphone,Xiaomi,Redmi 15,Snapdragon 685,6.0,128.0,,3890000.0,3890000.0,3890000.0,1,1,TGDĐ,139461.0,4.9,1,exclusive
+0ae6a1e31395e119,smartphone,OPPO,A5,Snapdragon 6s Gen 1,8.0,128.0,,6090000.0,6090000.0,6090000.0,1,1,TGDĐ,94937.0,4.9,1,exclusive
+b255b52e70cc635d_s1,smartphone,Samsung,Galaxy A17,Exynos 1330,6.0,128.0,,4890000.0,5340000.0,5790000.0,6,1,TGDĐ,1227114.0,4.9,1,exclusive
+b255b52e70cc635d_s2,smartphone,Samsung,Galaxy A17,Exynos 1330,8.0,256.0,,6490000.0,6490000.0,6490000.0,3,1,TGDĐ,613557.0,4.9,1,exclusive
+c73f709b744f12bf,smartphone,Samsung,Galaxy A07,Exynos 1330,4.0,128.0,,3490000.0,3790000.0,4090000.0,8,1,TGDĐ,2339272.0,4.9,1,exclusive
+e0f1604f1f6fdc6a,smartphone,Realme,15 5G,Unknown,12.0,256.0,,9690000.0,9690000.0,9690000.0,2,1,TGDĐ,23702.0,4.9,1,exclusive
+05b9f1c1567c111b,smartphone,Realme,realme 15 5G,Unknown,8.0,256.0,,8690000.0,8690000.0,8690000.0,1,1,TGDĐ,11851.0,4.9,1,exclusive
+e8a1768fd0bedcbb,smartphone,Realme,C85 5G,Unknown,8.0,192.0,,7690000.0,7890000.0,8090000.0,4,1,TGDĐ,63392.0,4.9,1,exclusive
+22f47bdc6c7dff7d,smartphone,Realme,C85 Pro,Unknown,8.0,256.0,,7290000.0,7290000.0,7290000.0,1,1,TGDĐ,35310.0,4.9,1,exclusive
+84a359394a9a1957,smartphone,Xiaomi,Redmi 15 5G,Unknown,4.0,128.0,,4490000.0,4490000.0,4490000.0,3,1,TGDĐ,51960.0,4.9,1,exclusive
+c2bc8bb536b06558,smartphone,OPPO,Reno15 Pro 5G,Unknown,12.0,384.0,,16290000.0,16790000.0,17290000.0,4,1,TGDĐ,77420.0,4.9,1,exclusive
+84678e4b23bd9096,smartphone,Xiaomi,Redmi Note 15,Unknown,8.0,128.0,,4690000.0,4690000.0,4690000.0,1,1,TGDĐ,123864.0,4.9,1,exclusive
+c344792890d29927,smartphone,Vivo,V70 5G,Unknown,8.0,256.0,,15990000.0,15990000.0,17990000.0,5,1,TGDĐ,23875.0,5.0,1,exclusive
+d43b901010a09849,smartphone,Xiaomi,POCO M8 5G,Unknown,8.0,512.0,,6990000.0,6990000.0,6990000.0,3,1,TGDĐ,12744.0,4.9,1,exclusive
+19670b8b2f0574f3,smartphone,Xiaomi,POCO X8 Pro 5G,Unknown,8.0,512.0,,12790000.0,13290000.0,14790000.0,8,1,TGDĐ,47624.0,4.9,1,exclusive
+87b8f4e6649cadd9,smartphone,Vivo,Y11d,Unknown,5.0,128.0,,6290000.0,6690000.0,7090000.0,4,1,TGDĐ,88172.0,5.0,1,exclusive
+f778f74602b7d829,smartphone,Samsung,Galaxy A07 5G,Unknown,6.0,128.0,,4790000.0,4790000.0,4890000.0,4,2,TGDĐ|Viettel,127754.0,4.925000000000001,2,competitive
+fb5cccac7dad1e99,smartphone,Masstel,IZI T6 T127,Unknown,,,,550000.0,550000.0,550000.0,2,1,TGDĐ,40446.0,5.0,1,exclusive
+1faf998d51bd78c3,smartphone,Honor,600 Pro,Unknown,12.0,256.0,,22090000.0,22090000.0,22090000.0,3,1,TGDĐ,771.0,4.9,1,exclusive
+29e28e7e7b12f378,smartphone,Honor,600 Pro Molly,Unknown,12.0,512.0,,24090000.0,24090000.0,24090000.0,1,1,TGDĐ,32.0,5.0,1,exclusive
+de307673d9dc69fa,smartphone,Motorola,Razr Fold 5G,Unknown,12.0,256.0,,37990000.0,37990000.0,37990000.0,2,1,TGDĐ,58.0,5.0,1,exclusive
+c60b4645fa82d2a8_s1,smartphone,Vivo,Y31d,Unknown,5.0,128.0,,6990000.0,7440000.0,7890000.0,4,1,TGDĐ,279032.0,4.9,1,exclusive
+c60b4645fa82d2a8_s2,smartphone,Vivo,Y31d,Unknown,8.0,128.0,,8790000.0,8790000.0,8790000.0,2,1,TGDĐ,139516.0,4.9,1,exclusive
+d9ec1bbaec5a86d0,smartphone,Motorola,Moto G06 Power,Unknown,4.0,96.0,,3590000.0,3640000.0,3690000.0,4,1,TGDĐ,170260.0,4.9,1,exclusive
+2ca1a640d45f7ec4,smartphone,Xiaomi,Redmi Note 17 5G,Unknown,8.0,256.0,,9390000.0,9390000.0,9390000.0,3,1,TGDĐ,28806.0,4.9,1,exclusive
+f9d558d92b3a38b8,smartphone,Xiaomi,Redmi Note 17 Pro 5G,Unknown,10.0,256.0,,10990000.0,11440000.0,11890000.0,6,1,TGDĐ,98040.0,4.9,1,exclusive
+cc390ea69fda5e64,smartphone,Xiaomi,Redmi 17 4G,Unknown,4.0,128.0,,5190000.0,5190000.0,5290000.0,7,1,TGDĐ,267855.0,4.9,1,exclusive
+d55cbb55c59cc340_s1,smartphone,Samsung,Galaxy Z Fold8 Ultra,Unknown,12.0,256.0,,48790000.0,48790000.0,48790000.0,3,1,TGDĐ,7623.0,5.0,1,exclusive
+d55cbb55c59cc340_s2,smartphone,Samsung,Galaxy Z Fold8 Ultra,Unknown,16.0,1024.0,,60990000.0,63890000.0,66790000.0,2,2,TGDĐ|Viettel,2541.0,5.0,2,competitive
+af5952bc417fca62,smartphone,Samsung,Galaxy Z Fold8 Ultra,Snapdragon 8 Elite Gen 5,12.0,512.0,,52490000.0,54790000.0,54790000.0,4,2,TGDĐ|Viettel,7624.0,5.0,2,competitive
+bc432a35e7ce3913,smartphone,Samsung,Galaxy Z Fold8,Snapdragon 8 Elite Gen 5 for Galaxy,12.0,256.0,,39790000.0,39790000.0,39790000.0,1,1,TGDĐ,4528.0,5.0,1,exclusive
+440f3c8536656ae3,smartphone,Samsung,Galaxy Z Flip8,Unknown,12.0,256.0,,25990000.0,27790000.0,30990000.0,7,2,TGDĐ|Viettel,6018.0,5.0,2,competitive
+2f90b1b804bf1aea,smartphone,Vivo,Y05e,Unknown,4.0,64.0,,4290000.0,4290000.0,4290000.0,2,1,TGDĐ,9386.0,5.0,1,exclusive
+1e752a9e8752c13e,smartphone,Xphone,Hera S9,Unisoc T107,,,,530000.0,530000.0,530000.0,2,1,TGDĐ,708.0,5.0,1,exclusive
+81fdc98338f456ce,smartphone,OPPO,A6,Unknown,6.0,128.0,,9990000.0,9990000.0,9990000.0,3,1,TGDĐ,119904.0,4.9,1,exclusive
+1dd230377466d6a1,smartphone,Samsung,Galaxy S26 FE 5G,Unknown,8.0,256.0,,19790000.0,19790000.0,19790000.0,3,1,TGDĐ,17814.0,4.9,1,exclusive
+ea86b81661c6e5b0,smartphone,Masstel,IZI 10S,Unisoc T107,,,,490000.0,490000.0,490000.0,3,1,TGDĐ,26052.0,4.9,1,exclusive
+093c9191cb73f886,smartphone,Tecno,Spark 50 Pro,Unknown,4.0,128.0,,5990000.0,5990000.0,5990000.0,2,1,TGDĐ,14.0,5.0,1,exclusive
+c5581ce2979d1e50,smartphone,Vivo,V80 Lite 5G,MediaTek Dimensity 7300e,6.0,128.0,,11990000.0,11990000.0,11990000.0,1,1,TGDĐ,6516.0,5.0,1,exclusive
+a70cfd85bea07d78,smartphone,Nothing,Phone (4b) 5G,Unknown,8.0,128.0,,8790000.0,8790000.0,8790000.0,3,1,TGDĐ,9.0,5.0,1,exclusive
+df7862024ab81b3f,smartphone,Honor,Play 10,Unknown,3.0,64.0,,3090000.0,3090000.0,3090000.0,2,1,TGDĐ,32398.0,4.9,1,exclusive
+8acbfdd029c82b58,smartphone,Realme,C01,Unknown,4.0,64.0,,5990000.0,5990000.0,5990000.0,1,1,TGDĐ,0.0,,1,exclusive
+a8fc987ac4ebce2d,smartphone,Samsung,Galaxy A07s,Helio G99+,4.0,64.0,,3990000.0,3990000.0,3990000.0,1,1,TGDĐ,3942.0,4.9,1,exclusive
+188ed8bad3600252,smartphone,Samsung,Galaxy A18,Helio G99+,4.0,128.0,,6390000.0,6390000.0,6390000.0,1,1,TGDĐ,668.0,5.0,1,exclusive
+c9a07540b77aa26a,smartphone,Xiaomi,POCO C95 Pro,Helio G91 Ultra,6.0,128.0,,5890000.0,5990000.0,6090000.0,2,2,TGDĐ|Viettel,9.0,5.0,2,competitive
+3b7d78df3b3fe581,smartphone,Motorola,Razr 60 5G,Unknown,8.0,256.0,,17490000.0,17490000.0,17490000.0,2,1,TGDĐ,2052.0,5.0,1,exclusive
+2d69cfc0712cda01,smartphone,OPPO,A6 Pro 5G,Unknown,10.0,256.0,,10490000.0,10990000.0,11490000.0,4,1,TGDĐ,165948.0,4.9,1,exclusive
+13f85023aa57e2a6,smartphone,Motorola,Edge 60 Fusion 5G,Unknown,8.0,256.0,,7190000.0,7190000.0,7190000.0,2,1,TGDĐ,12518.0,4.9,1,exclusive
+52616112696042f8,smartphone,Vivo,V60 5G,Unknown,12.0,384.0,,13990000.0,14490000.0,14990000.0,4,1,TGDĐ,27312.0,4.9,1,exclusive
+48abfdddc69ffc57,smartphone,Samsung,Galaxy Z Fold7 5G,Snapdragon 8 Elite for Galaxy,12.0,256.0,,38990000.0,38990000.0,41490000.0,4,2,TGDĐ|Viettel,17574.0,5.0,2,competitive
+0e87bbaf99c1761f,smartphone,Motorola,G86 Power 5G,Unknown,8.0,128.0,,6390000.0,6390000.0,6390000.0,2,1,TGDĐ,21316.0,4.9,1,exclusive
+3d46099c0c10756d,smartphone,Samsung,Galaxy S25 FE 5G,Exynos 2400,8.0,128.0,,13490000.0,13490000.0,13490000.0,4,1,TGDĐ,193532.0,4.9,1,exclusive
+93f29d2719bc9ffe,smartphone,Samsung,Galaxy S25 FE 5G,Unknown,8.0,256.0,,17490000.0,17490000.0,20090000.0,5,1,TGDĐ,241915.0,4.9,1,exclusive
+ef8b3a01d7b053b4,smartphone,Motorola,G35 5G,Unknown,4.0,128.0,,4390000.0,4390000.0,4390000.0,2,1,TGDĐ,19672.0,4.9,1,exclusive
+c9d4e24701b97a22,smartphone,Vivo,Y21d,Unisoc T7225,6.0,256.0,,6090000.0,6740000.0,6790000.0,4,2,TGDĐ|Viettel,169812.0,4.9,2,competitive
+b41d6ec2b9536d56,smartphone,Xiaomi,Redmi Note 15 Pro 5G,Unknown,8.0,256.0,,7890000.0,8890000.0,8990000.0,9,1,TGDĐ,609003.0,4.9,1,exclusive
+61c2cb16d624cde3,smartphone,Samsung,Galaxy A17 5G,Unknown,8.0,128.0,,7990000.0,7990000.0,7990000.0,3,1,TGDĐ,512013.0,4.9,1,exclusive
+c577679a973484ef,smartphone,Motorola,Signature,Unknown,12.0,256.0,,20290000.0,20290000.0,20290000.0,2,1,TGDĐ,1718.0,4.9,1,exclusive
+5c010f1b42f6bd31,smartphone,Realme,C85,Unknown,8.0,128.0,,5390000.0,5640000.0,5890000.0,4,1,TGDĐ,203016.0,4.9,1,exclusive
+e7902b196bdb0e30,smartphone,Vivo,Y39 5G,Unknown,8.0,128.0,,6460000.0,6860000.0,7240000.0,5,2,TGDĐ|Viettel,145840.0,4.9,2,competitive
+d0108191acebdbc0,smartphone,Samsung,Galaxy S25 5G,Unknown,12.0,256.0,,19290000.0,19290000.0,19290000.0,4,1,TGDĐ,70324.0,4.9,1,exclusive
+6448bef91d7c9caf,smartphone,Motorola,Edge 70,Unknown,8.0,256.0,,12690000.0,12690000.0,12690000.0,3,1,TGDĐ,6345.0,4.9,1,exclusive
+242c08fc98b506b9,smartphone,Realme,P4 Power 5G,Unknown,12.0,256.0,,14490000.0,14490000.0,14490000.0,2,1,TGDĐ,9330.0,4.9,1,exclusive
+a3add551a5b8b3a7,smartphone,Realme,realme 16 5G,Unknown,10.0,256.0,,10790000.0,11140000.0,11490000.0,4,1,TGDĐ,58032.0,4.9,1,exclusive
+e8082e8af360d678,smartphone,Vivo,vivo X300 Pro 5G,Unknown,16.0,512.0,,28990000.0,28990000.0,28990000.0,2,1,TGDĐ,2876.0,4.9,1,exclusive
+eeafad275b8269d4_s1,smartphone,OPPO,OPPO A6x,Unknown,4.0,64.0,,4790000.0,4790000.0,4790000.0,3,1,TGDĐ,539985.0,4.9,1,exclusive
+eeafad275b8269d4_s2,smartphone,OPPO,OPPO A6x,Unknown,4.0,128.0,,6180000.0,6180000.0,6180000.0,2,1,TGDĐ,359990.0,4.9,1,exclusive
+eeafad275b8269d4_s3,smartphone,OPPO,OPPO A6x,Unknown,6.0,256.0,,8590000.0,8590000.0,8590000.0,2,1,TGDĐ,359990.0,4.9,1,exclusive
+fc3c97926dc0cfd5,smartphone,Motorola,Moto G57 Power 5G,Unknown,8.0,128.0,,6090000.0,6090000.0,6090000.0,3,1,TGDĐ,7485.0,4.9,1,exclusive
+a5685cb8269ed811,smartphone,Tecno,Tecno Spark Go 3,Unknown,4.0,96.0,,3290000.0,3340000.0,3390000.0,6,1,TGDĐ,39486.0,5.0,1,exclusive
+7aec509155db6235,smartphone,Nubia,Nubia V80 Max,Unknown,4.0,128.0,,3390000.0,3390000.0,3390000.0,5,1,TGDĐ,15470.0,5.0,1,exclusive
+1edf264d05f45b5b,smartphone,Honor,Honor X7d 5G,Unknown,8.0,256.0,,6890000.0,6890000.0,6890000.0,3,1,TGDĐ,24561.0,4.9,1,exclusive
+b160cb66aecc5ff5,smartphone,Realme,realme C100 4G,Unknown,8.0,128.0,,7240000.0,7740000.0,8340000.0,8,1,TGDĐ,211160.0,4.9,1,exclusive
+29cd4b3cda33cac0,smartphone,Realme,C100 4G,Unknown,6.0,128.0,,7740000.0,7740000.0,7740000.0,1,1,TGDĐ,26395.0,4.9,1,exclusive
+71eb7f1a5e5e864e_s1,smartphone,Vivo,Vivo V60 Lite 5G,Unknown,8.0,256.0,,9190000.0,9190000.0,9190000.0,3,1,TGDĐ,129165.0,4.9,1,exclusive
+71eb7f1a5e5e864e_s2,smartphone,Vivo,Vivo V60 Lite 5G,Unknown,12.0,512.0,,11690000.0,11690000.0,11690000.0,3,1,TGDĐ,129165.0,4.9,1,exclusive
+b2971eaa541114ac,smartphone,OPPO,OPPO Reno15 F 5G,Unknown,12.0,256.0,,10490000.0,11490000.0,11490000.0,4,1,TGDĐ,511560.0,4.9,1,exclusive
+c6b4c0586b1fd47c,smartphone,OPPO,OPPO Find X9s,Unknown,12.0,256.0,,24090000.0,24990000.0,24990000.0,5,1,TGDĐ,46255.0,4.9,1,exclusive
+1e412cb611cec8eb_s1,smartphone,Samsung,Samsung Galaxy S26 5G,Unknown,12.0,256.0,,22090000.0,22090000.0,22090000.0,4,1,TGDĐ,17292.0,4.9,1,exclusive
+1e412cb611cec8eb_s2,smartphone,Samsung,Samsung Galaxy S26 5G,Unknown,12.0,512.0,,26990000.0,26990000.0,26990000.0,4,1,TGDĐ,17292.0,4.9,1,exclusive
+9162de509b239870,smartphone,Apple,iPhone Air,Unknown,,256.0,,22990000.0,22990000.0,22990000.0,4,1,TGDĐ,52712.0,4.9,1,exclusive
+189e4ac75a73bfd6,smartphone,Motorola,Motorola Edge 70 Fusion,Unknown,8.0,192.0,,10690000.0,11190000.0,11690000.0,6,1,TGDĐ,4488.0,4.9,1,exclusive
+c03008c3e05fab3d,smartphone,Nubia,Nubia Air 5G,Unknown,8.0,256.0,,5490000.0,5490000.0,5490000.0,2,1,TGDĐ,684.0,5.0,1,exclusive
+968b8f2c1efea923,smartphone,Tecno,Tecno Spark 50,Unknown,4.0,128.0,,4590000.0,4590000.0,4590000.0,2,1,TGDĐ,1660.0,5.0,1,exclusive
+f634a7ba488683e7,smartphone,Honor,HONOR X9d 5G,Unknown,12.0,256.0,,11190000.0,12190000.0,12190000.0,5,1,TGDĐ,72570.0,4.9,1,exclusive
+ee5ae067281fc120_s1,smartphone,Realme,realme C100i,Unknown,4.0,64.0,,4890000.0,4890000.0,4890000.0,2,1,TGDĐ,70048.0,5.0,1,exclusive
+ee5ae067281fc120_s2,smartphone,Realme,realme C100i,Unknown,4.0,128.0,,5990000.0,5990000.0,5990000.0,1,1,TGDĐ,35024.0,5.0,1,exclusive
+bca97634156dcb54,smartphone,Realme,C100i,Unknown,4.0,128.0,,5990000.0,5990000.0,5990000.0,1,1,TGDĐ,35024.0,5.0,1,exclusive
+157fa6311f638395,smartphone,Vivo,V70 FE 5G,Unknown,8.0,256.0,,13690000.0,13690000.0,15490000.0,5,1,TGDĐ,83230.0,4.9,1,exclusive
+26a02af6505eff19,smartphone,Samsung,Galaxy A37,Unknown,8.0,256.0,,10690000.0,10690000.0,10690000.0,4,1,TGDĐ,186208.0,4.9,1,exclusive
+7bd6f32c2834cd01,smartphone,Honor,600 Lite,Unknown,8.0,256.0,,8990000.0,8990000.0,8990000.0,3,1,TGDĐ,17097.0,4.9,1,exclusive
+b3513cc7ba1245d3,smartphone,Realme,16T 5G,Unknown,8.0,192.0,,9590000.0,10040000.0,10490000.0,4,1,TGDĐ,59588.0,5.0,1,exclusive
+34c1d19d6ec4308d,smartphone,Vivo,X300 Ultra,Unknown,16.0,512.0,,35990000.0,35990000.0,35990000.0,2,1,TGDĐ,654.0,5.0,1,exclusive
+8ac89354aa793745,smartphone,OPPO,Reno16 Pro 5G,Unknown,12.0,256.0,,23190000.0,23190000.0,23190000.0,2,1,TGDĐ,2686.0,4.9,1,exclusive
+69bc311dfb1d16b4,smartphone,Samsung,Galaxy A57 5G,Unknown,8.0,256.0,,11690000.0,12690000.0,13790000.0,10,1,TGDĐ,833420.0,4.9,1,exclusive
+757a62bb57c0f314,smartphone,Realme,C100x,Unknown,5.0,128.0,,6090000.0,6440000.0,6790000.0,4,1,TGDĐ,92204.0,4.9,1,exclusive
+6a70685d80696efc,smartphone,Motorola,Moto G37 5G,Unknown,4.0,96.0,,3990000.0,4340000.0,4690000.0,6,1,TGDĐ,12402.0,5.0,1,exclusive
+33c2ea9b14fc0542,smartphone,OPPO,Reno16F 5G,Unknown,8.0,128.0,,13290000.0,13290000.0,13290000.0,3,1,TGDĐ,167004.0,4.9,1,exclusive
+3ea3fd56a090ad36,smartphone,OPPO,Reno16F 5G,Dimensity 7300-Energy,8.0,256.0,,14990000.0,15190000.0,15190000.0,4,2,TGDĐ|Viettel,167023.0,4.925000000000001,2,competitive
+dbf22a85d67c01a2,smartphone,Samsung,Galaxy A27,Unknown,7.0,128.0,,7990000.0,8390000.0,8790000.0,6,1,TGDĐ,155052.0,4.9,1,exclusive
+c12f8e544cbe71ef_s1,smartphone,Xiaomi,Redmi Note 17 4G,Unknown,5.0,128.0,,6290000.0,6640000.0,6990000.0,6,1,TGDĐ,146376.0,4.9,1,exclusive
+c12f8e544cbe71ef_s2,smartphone,Xiaomi,Redmi Note 17 4G,Unknown,6.0,256.0,,7590000.0,7590000.0,7590000.0,3,1,TGDĐ,73188.0,4.9,1,exclusive
+3966ecdf877e7c94,smartphone,Mobell,M239 4G,Unknown,,,,430000.0,430000.0,430000.0,3,1,TGDĐ,389865.0,4.9,1,exclusive
+1c9c7ad44f34864d,smartphone,Honor,Unknown,Snapdragon 6 Gen 4,8.0,256.0,,12990000.0,12990000.0,12990000.0,1,1,Viettel,0.0,,1,exclusive
+895b7d3dee1604e4,smartphone,ZTE,Unknown,Unknown,6.0,256.0,,12990000.0,12990000.0,12990000.0,1,1,Viettel,0.0,,1,exclusive
+d3bcfd4d647ecdc4,smartphone,Xiaomi,Unknown,Unknown,12.0,256.0,,12990000.0,12990000.0,12990000.0,1,1,Viettel,0.0,,1,exclusive
+09f21598d98a489f,smartphone,Masstel,Unknown,Unisoc T107,,,,12990000.0,12990000.0,12990000.0,3,1,Viettel,14.0,4.36,1,exclusive
+82e599b83d6319b3_s1,smartphone,Nokia,Unknown,Unisoc T107,,,,11990000.0,12990000.0,12990000.0,3,1,Viettel,17.0,4.333333333333333,1,exclusive
+82e599b83d6319b3_s2,smartphone,Nokia,Unknown,Unisoc T107,,,,15990000.0,15990000.0,15990000.0,1,1,Viettel,0.0,,1,exclusive
+ab28c68c1a34c038,smartphone,Xiaomi,15T,Unknown,12.0,512.0,,12990000.0,12990000.0,12990000.0,1,1,Viettel,2.0,3.0,1,exclusive
+418e9da3c3630307,smartphone,Masstel,Fami8 4G,Unisoc T107,,,,600000.0,600000.0,600000.0,1,1,Viettel,0.0,,1,exclusive
+308ec580595cb564,smartphone,Vivo,Y19S Pro,Unisoc Tiger T612,8.0,128.0,,5400000.0,5400000.0,5400000.0,1,1,Viettel,0.0,,1,exclusive
+0d0cfeb0629a00db,smartphone,Honor,X5c Plus,Helio G81,4.0,64.0,,3690000.0,3690000.0,3690000.0,1,1,Viettel,0.0,,1,exclusive
+d819ec83961a117c,smartphone,Masstel,Alfa 5,Unknown,,,,990000.0,990000.0,990000.0,1,1,Viettel,3.0,5.0,1,exclusive
+8bed08578fc5eb54,smartphone,Vivo,Y29,Unknown,8.0,128.0,,6380000.0,6380000.0,6380000.0,1,1,Viettel,0.0,,1,exclusive
+8e577c836774a06a,smartphone,Tecno,Spark Go 3,Unisoc UMS9230E,4.0,64.0,,3290000.0,3290000.0,3290000.0,1,1,Viettel,0.0,,1,exclusive
+81d8d17adabc5c9a,smartphone,Samsung,Galaxy Z Fold8,Unknown,16.0,1024.0,,55990000.0,55990000.0,55990000.0,1,1,Viettel,0.0,,1,exclusive
+0fe5377359003c06,smartphone,Itel,IT2600 4G,Unknown,,,,330000.0,330000.0,330000.0,1,1,Viettel,0.0,,1,exclusive
+8fc12f50a549c1fe,smartphone,Honor,X8d,Snapdragon 6s 4G Gen 2,8.0,128.0,,7590000.0,7590000.0,7590000.0,1,1,Viettel,0.0,,1,exclusive
+07a55d421cf17b92,smartphone,Samsung,Galaxy S26 FE,Exynos 2500,8.0,128.0,,15990000.0,15990000.0,15990000.0,1,1,Viettel,0.0,,1,exclusive
+7b750b3e6ea08b9e,smartphone,Vivo,Y21d,Unknown,6.0,128.0,,7690000.0,7690000.0,7690000.0,1,1,Viettel,0.0,,1,exclusive
+a071e6618ecb648d,smartphone,Apple,iPhone Air,Apple A19,,256.0,,23490000.0,23490000.0,23490000.0,1,1,Viettel,398.0,5.0,1,exclusive
+22e2d1098a0954e8,smartphone,Xiaomi,17T,Dimensity 8500-Ultra,12.0,512.0,,17290000.0,17290000.0,17290000.0,1,1,Viettel,0.0,,1,exclusive
+bd1162258ca26878,smartphone,Apple,iPhone 16 Plus,Apple A18 Bionic,8.0,192.0,,25990000.0,26790000.0,27590000.0,2,1,Viettel,15.0,4.545,1,exclusive
+6cf16d219669b767,smartphone,Apple,iPhone 16,Apple A18 Bionic,8.0,128.0,,21990000.0,21990000.0,21990000.0,1,1,Viettel,2.0,5.0,1,exclusive
+1ca67fa723dea93e,smartphone,Samsung,Galaxy Z Fold8 Ultra,Snapdragon 8 Elite Gen 5 for Galaxy,12.0,256.0,,45490000.0,45490000.0,45490000.0,1,1,Viettel,15.0,5.0,1,exclusive
+21ec2e523b2b71f3,smartphone,Samsung,Galaxy A08 LTE,MediaTek G99+,4.0,64.0,,4640000.0,4640000.0,4640000.0,1,1,Viettel,0.0,,1,exclusive
+cfee91b8bfe832f9,smartphone,Samsung,Galaxy A18 LTE,Unknown,6.0,128.0,,6790000.0,6790000.0,6790000.0,1,1,Viettel,0.0,,1,exclusive
