@@ -1,0 +1,15 @@
+Feature Name,"Universe Mean (N=7,051)",Universe Median,"Active Mean (N=1,897)",Active Std,Active Min,Active Median,Active Max
+review_count_usable,2.1088,0.0,7.8382,12.0939,1.0,3.0,171.0
+review_count_last_90d,0.0732,0.0,0.272,1.1109,0.0,0.0,19.0
+avg_rating,4.7222,5.0,4.7222,0.6057,1.0,5.0,5.0
+rating_std,0.0632,0.0,0.2351,0.4031,0.0,0.0,2.8284
+avg_sentiment_score,0.2283,0.0,0.8484,0.3232,-0.9479,0.9685,0.9735
+sentiment_positive_ratio,0.2461,0.0,0.9147,0.2253,0.0,1.0,1.0
+sentiment_negative_ratio,0.0104,0.0,0.0386,0.149,0.0,0.0,1.0
+sentiment_net_score,0.2357,0.0,0.8761,0.3509,-1.0,1.0,1.0
+aspect_sentiment_score_battery_power,0.0749,0.0,0.2783,0.5007,-1.0,0.0,1.0
+aspect_sentiment_score_performance_thermal,0.0867,0.0,0.3223,0.5765,-1.0,0.0,1.0
+aspect_sentiment_score_display_design,0.1202,0.0,0.4466,0.5228,-1.0,0.0,1.0
+aspect_sentiment_score_camera_audio,0.0474,0.0,0.1763,0.4326,-1.0,0.0,1.0
+aspect_sentiment_score_service_logistics,0.13,0.0,0.4831,0.5295,-1.0,0.6667,1.0
+review_span_days,59.0727,0.0,219.5686,316.8586,0.0,68.8,2434.9

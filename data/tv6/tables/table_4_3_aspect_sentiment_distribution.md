@@ -1,0 +1,7 @@
+| aspect_key          | aspect_name                                   |   total_mentions |   mention_rate_pct |   positive_pct |   neutral_pct |   negative_pct |
+|:--------------------|:----------------------------------------------|-----------------:|-------------------:|---------------:|--------------:|---------------:|
+| battery_power       | Pin & Sạc (Battery & Power)                   |             1987 |              13.36 |          77.5  |          7.5  |          15    |
+| performance_thermal | Hiệu năng & Tản nhiệt (Performance & Thermal) |             3051 |              20.52 |          75.09 |          3.21 |          21.7  |
+| display_design      | Màn hình & Thiết kế (Display & Design)        |             2811 |              18.91 |          87.26 |          4.02 |           8.72 |
+| camera_audio        | Camera & Âm thanh (Camera & Audio)            |             1067 |               7.18 |          75.16 |          6.94 |          17.9  |
+| service_logistics   | Dịch vụ & Giao vận (Service & Logistics)      |             3806 |              25.6  |          90.96 |          2.84 |           6.2  |

@@ -1,0 +1,82 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "executed_at_utc": "2026-11-14T19:56:31.471676+00:00",
+  "step": "step3_2_phobert_sentiment",
+  "pretrained_model": "vinai/phobert-base-v2",
+  "device": "cuda",
+  "gpu_name": "NVIDIA GeForce RTX 2060 SUPER",
+  "dataset_split": {
+    "train_size": 11895,
+    "test_size": 2974,
+    "test_ratio": 0.2,
+    "random_state": 42
+  },
+  "training_hyperparameters": {
+    "epochs": 3,
+    "batch_size": 32,
+    "learning_rate": 2e-05,
+    "max_length": 128,
+    "fp16_enabled": true
+  },
+  "training_history": {
+    "train_loss": [
+      0.8072622121582108,
+      0.5686204448562636,
+      0.4482177279048389
+    ],
+    "val_loss": [
+      0.634594922370099,
+      0.704609344931359,
+      0.8765942010473697
+    ],
+    "val_macro_f1": [
+      0.6315427425816261,
+      0.6472814332095392,
+      0.649119769708509
+    ],
+    "val_weighted_f1": [
+      0.9171671174659073,
+      0.9239783846898284,
+      0.9302092384874909
+    ],
+    "val_accuracy": [
+      0.9028244788164089,
+      0.9105581708137189,
+      0.9223268325487559
+    ],
+    "epoch_time_seconds": [
+      73.47,
+      71.91,
+      72.48
+    ]
+  },
+  "test_metrics": {
+    "test_accuracy": 0.9223268325487559,
+    "test_macro_f1": 0.649119769708509,
+    "test_weighted_f1": 0.9302092384874909,
+    "test_macro_precision": 0.6302640808566932,
+    "test_macro_recall": 0.6854327001254471,
+    "test_f1_negative": 0.631578947368421,
+    "test_f1_neutral": 0.3472222222222222,
+    "test_f1_positive": 0.9685581395348837,
+    "inference_time_seconds": 4.852,
+    "confusion_matrix": [
+      [
+        90,
+        38,
+        15
+      ],
+      [
+        24,
+        50,
+        32
+      ],
+      [
+        28,
+        94,
+        2603
+      ]
+    ]
+  },
+  "total_runtime_seconds": 261.3
+}

@@ -1,0 +1,7 @@
+| aspect_key          | aspect_name                                   |   smartphone_count |   smartphone_rate_pct |   laptop_count |   laptop_rate_pct |
+|:--------------------|:----------------------------------------------|-------------------:|----------------------:|---------------:|------------------:|
+| battery_power       | Pin & Sạc (Battery & Power)                   |               1705 |                 13.88 |            282 |             10.92 |
+| performance_thermal | Hiệu năng & Tản nhiệt (Performance & Thermal) |               2291 |                 18.65 |            760 |             29.42 |
+| display_design      | Màn hình & Thiết kế (Display & Design)        |               2096 |                 17.06 |            715 |             27.68 |
+| camera_audio        | Camera & Âm thanh (Camera & Audio)            |                940 |                  7.65 |            127 |              4.92 |
+| service_logistics   | Dịch vụ & Giao vận (Service & Logistics)      |               3103 |                 25.26 |            703 |             27.22 |
