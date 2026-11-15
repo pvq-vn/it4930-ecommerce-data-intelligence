@@ -1,7 +1,7 @@
 """Automatic release gates for the TV2 pipeline."""
 from pathlib import Path
 import json, sys
-ROOT=Path(__file__).resolve().parents[1]; REPORT=ROOT/"reports"; SILVER=ROOT/"data"/"silver_v2"; GOLD=ROOT/"data"/"gold_v2"
+ROOT=Path(__file__).resolve().parents[2]; REPORT=ROOT/"reports"; SILVER=ROOT/"data"/"silver_v2"; GOLD=ROOT/"data"/"gold_v2"
 def read(path):
  with path.open(encoding='utf8') as f: return [json.loads(x) for x in f if x.strip()]
 def gate(name, passed, detail): return {"gate":name,"passed":bool(passed),"detail":detail}

@@ -14,7 +14,7 @@ import hashlib
 import json
 import re
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "data" / "staging"
 REPORTS = ROOT / "reports"
@@ -183,6 +183,21 @@ def write_jsonl(path, rows):
             handle.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
 
 
+def discover_raw_files(raw_dir: Path):
+    """Discover raw product and review JSONL files across both source-first and legacy folder layouts."""
+    all_jsonl = sorted(raw_dir.rglob("*.jsonl"))
+    product_files, review_files = [], []
+    for path in all_jsonl:
+        rel_parts = [part.lower() for part in path.relative_to(raw_dir).parts]
+        if path.name.lower().endswith("_reviews.jsonl") or any(
+            part == "reviews" or part.endswith("_reviews") for part in rel_parts[:-1]
+        ):
+            review_files.append(path)
+        else:
+            product_files.append(path)
+    return product_files, review_files
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     REPORTS.mkdir(parents=True, exist_ok=True)
@@ -190,7 +205,8 @@ def main():
     source_counts = Counter()
     flag_counts = Counter()
     input_files = []
-    for path in sorted((RAW / "products").glob("*.jsonl")):
+    product_files, review_files = discover_raw_files(RAW)
+    for path in product_files:
         input_files.append(path.relative_to(ROOT).as_posix())
         for rel, line, raw_line, row in read_jsonl(path):
             staged = product_staging(rel, line, raw_line, row)
@@ -199,7 +215,7 @@ def main():
             for key, value in staged.items():
                 if key.startswith("is_") and value is True:
                     flag_counts[key] += 1
-    for path in sorted((RAW / "reviews").glob("*.jsonl")):
+    for path in review_files:
         input_files.append(path.relative_to(ROOT).as_posix())
         for rel, line, raw_line, row in read_jsonl(path):
             staged = review_staging(rel, line, raw_line, row)

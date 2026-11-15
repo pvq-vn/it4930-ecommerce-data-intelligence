@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import defaultdict
 import hashlib,json
 import re
-ROOT=Path(__file__).resolve().parents[1]; IN=ROOT/'data'/'silver_v2'; OUT=ROOT/'data'/'gold_v2'; PROCESSED=ROOT/'data'/'processed'; REPORT=ROOT/'reports'
+ROOT=Path(__file__).resolve().parents[2]; IN=ROOT/'data'/'silver_v2'; OUT=ROOT/'data'/'gold_v2'; PROCESSED=ROOT/'data'/'processed'; REPORT=ROOT/'reports'
 FEATURE_FIELDS=["listing_record_id","source_parent_id","source","category","brand_raw","brand_norm","seller_raw","price_vnd","original_price_vnd","discount_rate","is_price_missing","availability_status","rating_norm","has_rating","review_count_normalized","total_sold_raw","total_sold_normalized","installed_ram_gb","max_ram_gb","battery_mah","battery_wh","charger_watt","cpu_norm","gpu_norm","storage_gb","color_norm","screen_size_inch","operating_system_norm","camera_mp","display_type_norm","network_type_norm"]
 def read(n):
  with (IN/n).open(encoding='utf8') as f:return [json.loads(x) for x in f if x.strip()]

@@ -1,0 +1,20 @@
+{
+  "pipeline_stage": "silver_v2",
+  "rows": {
+    "products": 10316,
+    "reviews": 15805,
+    "replies": 108
+  },
+  "rows_dropped": 0,
+  "values_imputed": 0,
+  "raw_fields_preserved": true,
+  "price_normalized_missing": 16,
+  "discount_valid": 7737,
+  "rating_valid": 4863,
+  "non_laptop_desktop_flagged": 167,
+  "review_text_usable": 14869,
+  "notes": [
+    "Normalized fields are derived; raw fields remain.",
+    "No missing value was imputed and no row was removed."
+  ]
+}

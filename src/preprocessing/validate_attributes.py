@@ -2,7 +2,7 @@
 from pathlib import Path
 from collections import Counter
 import json
-ROOT=Path(__file__).resolve().parents[1]; SILVER=ROOT/"data"/"silver_v2"; REPORT=ROOT/"reports"
+ROOT=Path(__file__).resolve().parents[2]; SILVER=ROOT/"data"/"silver_v2"; REPORT=ROOT/"reports"
 def main():
  rows=[]
  with (SILVER/"products_silver_v2.jsonl").open(encoding='utf8') as f:

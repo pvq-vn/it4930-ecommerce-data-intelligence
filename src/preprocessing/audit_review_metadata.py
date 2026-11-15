@@ -2,7 +2,7 @@
 from pathlib import Path
 from collections import Counter
 import json, re
-ROOT=Path(__file__).resolve().parents[1]; ST=ROOT/"data"/"staging"; RAW=ROOT/"data"/"raw"; REPORT=ROOT/"reports"
+ROOT=Path(__file__).resolve().parents[2]; ST=ROOT/"data"/"staging"; RAW=ROOT/"data"/"raw"; REPORT=ROOT/"reports"
 def rows(p):
  with p.open(encoding='utf8') as f:
   return [json.loads(x) for x in f if x.strip()]

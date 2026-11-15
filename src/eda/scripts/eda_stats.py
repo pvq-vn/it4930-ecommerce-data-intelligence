@@ -195,7 +195,7 @@ def compute_discount_stats_by_source(df: pd.DataFrame) -> pd.DataFrame:
 
 def compute_overall_missingness(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Tính bảng tổng hợp tỷ lệ thiếu cho toàn bộ 30 cột trong tập dữ liệu.
+    Tính bảng tổng hợp tỷ lệ thiếu cho toàn bộ 32 cột trong tập dữ liệu.
     Phân loại theo mức độ:
     - Rất thấp: < 5%
     - Thấp: 5% - 20%
@@ -734,16 +734,16 @@ def compute_head_to_head_comparison(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.
         {
             "Ngành hàng": "Laptop",
             "Nhân tố cốt lõi (Driver)": "Dung lượng RAM (installed_ram_gb)",
-            "Chỉ số thống kê chính": "Spearman ρ = +0.803 | ANOVA F = 565.4",
-            "Mức sàn (Min Tier)": "8 GB (Trung vị 18.64 Triệu)",
-            "Mức trần (Max Tier)": ">= 64 GB (Trung vị 96.24 Triệu)",
-            "Hệ số đòn bẩy (Multiplier)": "5.16x",
+            "Chỉ số thống kê chính": "Spearman ρ = +0.744 | ANOVA F = 1577.9",
+            "Mức sàn (Min Tier)": "8 GB (Trung vị 18.99 Triệu)",
+            "Mức trần (Max Tier)": ">= 64 GB (Trung vị 97.14 Triệu)",
+            "Hệ số đòn bẩy (Multiplier)": "5.12x",
             "Bản chất chi phối": "Tài nguyên tính toán bắt buộc cho tác vụ nặng (Workstation, Render, AI)"
         },
         {
             "Ngành hàng": "Laptop",
             "Nhân tố cốt lõi (Driver)": "Phân tầng CPU (cpu_tier)",
-            "Chỉ số thống kê chính": "ANOVA F = 757.2 | Kruskal-Wallis H = 1748.8",
+            "Chỉ số thống kê chính": "ANOVA F = 764.3 | Kruskal-Wallis H = 2099.5",
             "Mức sàn (Min Tier)": "Core i3 (Trung vị 11.95 Triệu)",
             "Mức trần (Max Tier)": "Core i9 / Ryzen 9 (Trung vị 54.99 Triệu)",
             "Hệ số đòn bẩy (Multiplier)": "4.60x",
@@ -752,16 +752,16 @@ def compute_head_to_head_comparison(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.
         {
             "Ngành hàng": "Laptop",
             "Nhân tố cốt lõi (Driver)": "Card đồ họa (gpu_type)",
-            "Chỉ số thống kê chính": "ANOVA F = 502.1 | Kruskal-Wallis H = 1007.4",
+            "Chỉ số thống kê chính": "ANOVA F = 439.1 | Kruskal-Wallis H = 1068.7",
             "Mức sàn (Min Tier)": "Onboard (Trung vị 19.99 Triệu)",
-            "Mức trần (Max Tier)": "Apple GPU (40.99M) / Discrete (28.99M)",
+            "Mức trần (Max Tier)": "Apple GPU (40.89M) / Discrete (28.99M)",
             "Hệ số đòn bẩy (Multiplier)": "2.05x",
             "Bản chất chi phối": "Phân định ranh giới giữa máy văn phòng phổ thông và Gaming/Workstation"
         },
         {
             "Ngành hàng": "Laptop",
             "Nhân tố cốt lõi (Driver)": "Nguồn sạc & Pin (charger_watt / battery_wh)",
-            "Chỉ số thống kê chính": "Charger ρ = +0.722 | Battery ρ = +0.658",
+            "Chỉ số thống kê chính": "Charger ρ = +0.623 | Battery Wh ρ = +0.665",
             "Mức sàn (Min Tier)": "Sạc 45W-65W / Pin < 45Wh (Trung vị ~17.5M)",
             "Mức trần (Max Tier)": "Sạc 230W-330W / Pin > 75Wh (Trung vị ~49.9M)",
             "Hệ số đòn bẩy (Multiplier)": "2.85x",
@@ -770,7 +770,7 @@ def compute_head_to_head_comparison(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.
         {
             "Ngành hàng": "Smartphone",
             "Nhân tố cốt lõi (Driver)": "Bộ nhớ trong ROM (storage_gb)",
-            "Chỉ số thống kê chính": "Spearman ρ = +0.702 | ANOVA F = 569.8",
+            "Chỉ số thống kê chính": "Spearman ρ = +0.703 | ANOVA F = 780.7",
             "Mức sàn (Min Tier)": "<= 64 GB (Trung vị 3.49 Triệu)",
             "Mức trần (Max Tier)": ">= 1 TB (Trung vị 41.79 Triệu)",
             "Hệ số đòn bẩy (Multiplier)": "11.97x",
@@ -779,28 +779,28 @@ def compute_head_to_head_comparison(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.
         {
             "Ngành hàng": "Smartphone",
             "Nhân tố cốt lõi (Driver)": "Thương hiệu định vị (brand_norm)",
-            "Chỉ số thống kê chính": "ANOVA F = 562.9 | Kruskal-Wallis H = 1380.2",
+            "Chỉ số thống kê chính": "ANOVA F = 210.2 | Kruskal-Wallis H = 2335.6",
             "Mức sàn (Min Tier)": "Nokia (1.57M) / Phổ thông (3.5M)",
-            "Mức trần (Max Tier)": "Apple (Trung vị 25.49M, Q3 33.49M)",
+            "Mức trần (Max Tier)": "Apple (Trung vị 25.49M, Q3 33.99M)",
             "Hệ số đòn bẩy (Multiplier)": "16.24x (hoặc 7.28x vs Android entry)",
             "Bản chất chi phối": "Biểu tượng giá trị thương hiệu (Brand Equity & Ecosystem Lock-in)"
         },
         {
             "Ngành hàng": "Smartphone",
             "Nhân tố cốt lõi (Driver)": "Công nghệ Màn hình (display_group)",
-            "Chỉ số thống kê chính": "ANOVA F = 2954.2 | Kruskal-Wallis H = 1826.5",
-            "Mức sàn (Min Tier)": "IPS / LCD (Trung vị 3.89 Triệu)",
+            "Chỉ số thống kê chính": "ANOVA F = 2903.0 | Kruskal-Wallis H = 1831.9",
+            "Mức sàn (Min Tier)": "IPS / LCD (Trung vị 3.80 Triệu)",
             "Mức trần (Max Tier)": "OLED / AMOLED (Trung vị 15.99 Triệu)",
-            "Hệ số đòn bẩy (Multiplier)": "4.11x",
+            "Hệ số đòn bẩy (Multiplier)": "4.21x",
             "Bản chất chi phối": "Ranh giới công nghệ dứt khoát giữa máy giá rẻ và máy cận cao cấp / cao cấp"
         },
         {
             "Ngành hàng": "Smartphone",
             "Nhân tố cốt lõi (Driver)": "Dung lượng RAM (installed_ram_gb)",
-            "Chỉ số thống kê chính": "Spearman ρ = +0.589 | ANOVA F = 377.9",
-            "Mức sàn (Min Tier)": "<= 4 GB (Trung vị 3.29 Triệu)",
-            "Mức trần (Max Tier)": ">= 16 GB (Trung vị 23.99 Triệu)",
-            "Hệ số đòn bẩy (Multiplier)": "7.29x",
+            "Chỉ số thống kê chính": "Spearman ρ = +0.646 | ANOVA F = 651.4",
+            "Mức sàn (Min Tier)": "<= 4 GB (Trung vị 3.79 Triệu)",
+            "Mức trần (Max Tier)": ">= 16 GB (Trung vị 28.99 Triệu)",
+            "Hệ số đòn bẩy (Multiplier)": "7.65x",
             "Bản chất chi phối": "Chỉ số nhận diện năng lực đa nhiệm và phân cấp cấu hình trong thế giới Android"
         }
     ]
@@ -823,32 +823,32 @@ def build_pricing_structure_matrix() -> pd.DataFrame:
         },
         {
             "Khía cạnh so sánh": "2. Đòn bẩy phân hóa hàng đầu (Top Pricing Driver)",
-            "Ngành hàng Laptop": "Dung lượng RAM (ρ = +0.803) & Phân tầng CPU Tier (F = 757.2). Bước nhảy từ 8GB/16GB lên 32GB/64GB tạo đà tăng giá cấp số nhân.",
-            "Ngành hàng Smartphone": "Dung lượng ROM / Storage (ρ = +0.702) & Thương hiệu định vị (F = 562.9). Biên độ giá giãn từ 3.49M lên tới 41.79M (gấp 11.97 lần).",
+            "Ngành hàng Laptop": "Dung lượng RAM (ρ = +0.744) & Phân tầng CPU Tier (F = 764.3). Bước nhảy từ 8GB/16GB lên 32GB/64GB tạo đà tăng giá cấp số nhân.",
+            "Ngành hàng Smartphone": "Dung lượng ROM / Storage (ρ = +0.703) & Thương hiệu định vị (H = 2335.6, F = 210.2). Biên độ giá giãn từ 3.49M lên tới 41.79M (gấp 11.97 lần).",
             "Khác biệt căn bản": "Laptop dùng RAM và CPU để lọc người dùng chuyên nghiệp; Smartphone dùng ROM để thực hiện chiến lược Upsell bậc thang."
         },
         {
             "Khía cạnh so sánh": "3. Ranh giới phần cứng tách đôi thị trường (Bifurcation Threshold)",
             "Ngành hàng Laptop": "Sự hiện diện của GPU rời (Dedicated GPU vs. Onboard): Chia tách hoàn toàn giữa Laptop văn phòng mỏng nhẹ và Laptop Gaming/Workstation.",
-            "Ngành hàng Smartphone": "Công nghệ Màn hình (OLED/AMOLED vs. IPS/LCD, F = 2954.2): Chia tách dứt khoát máy giá rẻ (dưới 5 triệu) và cận cao cấp/cao cấp (trên 10 triệu).",
+            "Ngành hàng Smartphone": "Công nghệ Màn hình (OLED/AMOLED vs. IPS/LCD, F = 2903.0): Chia tách dứt khoát máy giá rẻ (dưới 5 triệu) và cận cao cấp/cao cấp (trên 10 triệu).",
             "Khác biệt căn bản": "Laptop phân hóa ở năng lực đồ họa; Smartphone phân hóa ở chất lượng hiển thị thị giác trực tiếp của người dùng."
         },
         {
             "Khía cạnh so sánh": "4. Vai trò của Pin & Nguồn điện (Battery & Power)",
-            "Ngành hàng Laptop": "Tương quan đồng biến rất mạnh (Sạc ρ = +0.722, Pin Wh ρ = +0.658). Máy trạm/Gaming cấu hình khủng bắt buộc phải trang bị pin lớn và sạc công suất lớn (135W-330W).",
-            "Ngành hàng Smartphone": "Nghịch lý bão hòa vật lý (Pin mAh ρ = +0.038, không phân hóa). Flagship 35 triệu và máy cỏ 2 triệu đều dùng pin ~5.000 mAh do ranh giới kích thước bàn tay.",
+            "Ngành hàng Laptop": "Tương quan đồng biến rất mạnh (Pin Wh ρ = +0.665, Sạc ρ = +0.623). Máy trạm/Gaming cấu hình khủng bắt buộc phải trang bị pin lớn và sạc công suất lớn (135W-330W).",
+            "Ngành hàng Smartphone": "Nghịch lý bão hòa vật lý (Pin mAh ρ = +0.036, không phân hóa). Flagship 35 triệu và máy cỏ 2 triệu đều dùng pin ~5.000 mAh do ranh giới kích thước bàn tay.",
             "Khác biệt căn bản": "Pin ở Laptop là biến hiệu năng cao cấp; Pin ở Smartphone là tiêu chuẩn cơ bản tối thiểu (Commodity feature)."
         },
         {
             "Khía cạnh so sánh": "5. Vai trò của Camera & Kích thước màn hình",
-            "Ngành hàng Laptop": "Kích thước màn hình (ρ = +0.089) hầu như không ảnh hưởng đến giá. Laptop 13.3 - 14 inch mỏng nhẹ cao cấp có giá tương đương hoặc đắt hơn máy 15.6 inch phổ thông.",
-            "Ngành hàng Smartphone": "Độ phân giải Camera MP (ρ = +0.027, p = 0.493) không tương quan với giá. Máy giá rẻ quảng cáo 50-108MP cảm biến nhỏ, còn Flagship cạnh tranh bằng chip xử lý ảnh và ống kính cao cấp.",
+            "Ngành hàng Laptop": "Kích thước màn hình (ρ = +0.143) hầu như không ảnh hưởng mạnh đến giá. Laptop 13.3 - 14 inch mỏng nhẹ cao cấp có giá tương đương hoặc đắt hơn máy 15.6 inch phổ thông.",
+            "Ngành hàng Smartphone": "Độ phân giải Camera MP (ρ = +0.179) chỉ tương quan yếu với giá. Máy giá rẻ quảng cáo 50-108MP cảm biến nhỏ, còn Flagship cạnh tranh bằng chip xử lý ảnh và ống kính cao cấp.",
             "Khác biệt căn bản": "Cả hai đều có chỉ số phần cứng mang tính 'Marketing deceptive' cần được giải thích rõ cho kỹ sư mô hình."
         },
         {
             "Khía cạnh so sánh": "6. Mức độ bất đối xứng giá (Price Asymmetry & Skewness)",
-            "Ngành hàng Laptop": "Skewness = +2.47, Kurtosis = +11.39. Đỉnh phân phối tập trung quanh 15-25 triệu, đuôi kéo dài tới 130 triệu (Mobile Workstations, Flagship Gaming).",
-            "Ngành hàng Smartphone": "Skewness = +2.42, Kurtosis = +8.30. Đỉnh phân phối lệch hẳn về phân khúc giá rẻ 3-7 triệu, đuôi kéo dài về iPhone Pro Max và Galaxy Ultra/Fold (35-45 triệu).",
+            "Ngành hàng Laptop": "Skewness = +2.89, Kurtosis = +13.54. Đỉnh phân phối tập trung quanh 15-25 triệu, đuôi kéo dài tới 269.99 triệu (Mobile Workstations, Flagship Gaming).",
+            "Ngành hàng Smartphone": "Skewness = +7.38, Kurtosis = +170.71. Đỉnh phân phối lệch hẳn về phân khúc giá rẻ 3-7 triệu, đuôi kéo dài về iPhone Pro Max và Galaxy Ultra/Fold (35-45+ triệu).",
             "Khác biệt căn bản": "Laptop có phân khúc trung cấp dày dặn hơn; Smartphone có lượng sản phẩm tập trung áp đảo ở phân khúc bình dân giá rẻ."
         },
         {
@@ -1008,6 +1008,11 @@ def compute_multicollinearity_and_vif(df: pd.DataFrame) -> Tuple[pd.DataFrame, p
     ph_vif_records = []
     if len(ph_sub) > len(ph_cols):
         inv_corr = inv(ph_sub.corr().values)
+        ram_rom_r = float(ph_sub.corr().loc["installed_ram_gb", "storage_gb"])
+        ph_advice = (
+            f"RAM & ROM tương quan r = {ram_rom_r:.2f}; "
+            "Cần Ridge L2 Regularization nếu dùng tuyến tính hoặc ưu tiên GBDT"
+        )
         for i, col in enumerate(ph_cols):
             vif_val = np.diag(inv_corr)[i]
             ph_vif_records.append({
@@ -1016,7 +1021,7 @@ def compute_multicollinearity_and_vif(df: pd.DataFrame) -> Tuple[pd.DataFrame, p
                 "VIF Score": round(vif_val, 2),
                 "Mức độ Đa cộng tuyến": "Thấp (An toàn)" if vif_val < 2.5 else ("Trung bình" if vif_val < 5.0 else "Cao (Cảnh báo)"),
                 "Mô hình ảnh hưởng nặng": "OLS Linear Regression",
-                "Giải pháp khuyến nghị": "RAM và ROM tương quan r = 0.83; Cần Ridge L2 Regularization hoặc PCA/GBDT"
+                "Giải pháp khuyến nghị": ph_advice
             })
     ph_vif_df = pd.DataFrame(ph_vif_records)
 
@@ -1028,7 +1033,7 @@ def compute_multicollinearity_and_vif(df: pd.DataFrame) -> Tuple[pd.DataFrame, p
 def audit_data_leakage_risks() -> pd.DataFrame:
     """
     Nhiệm vụ 3.3: Phòng chống Rò rỉ dữ liệu (Data Leakage Risks Audit).
-    Đối chiếu toàn diện 30 trường canonical và phân loại thành:
+    Đối chiếu toàn diện 32 trường canonical và phân loại thành:
     - BLACKLIST: Tuyệt đối cấm đưa vào huấn luyện.
     - TARGET: Biến mục tiêu.
     - WHITELIST: Candidate features an toàn được phê duyệt.

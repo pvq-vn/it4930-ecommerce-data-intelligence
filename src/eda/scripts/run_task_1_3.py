@@ -46,8 +46,8 @@ def main():
     tables_dir = "src/eda/outputs/tables"
     figures_dir = "src/eda/outputs/figures"
 
-    # 2. Bảng tổng hợp mức độ thiếu của 30 thuộc tính
-    print("\n--- 1. Bảng Tổng hợp Tỷ lệ Thiếu của 30 Thuộc tính (Missingness Profile) ---")
+    # 2. Bảng tổng hợp mức độ thiếu của 32 thuộc tính
+    print("\n--- 1. Bảng Tổng hợp Tỷ lệ Thiếu của 32 Thuộc tính (Missingness Profile) ---")
     overall_miss_df = compute_overall_missingness(df)
     print(overall_miss_df.head(15))
 
@@ -55,7 +55,7 @@ def main():
         overall_miss_df,
         tables_dir,
         "table_1_3_overall_missingness",
-        "Bảng 1.10: Tổng hợp Mức độ Thiếu Dữ liệu của 30 Thuộc tính và Phân loại Nghiêm trọng"
+        f"Bảng 1.10: Tổng hợp Mức độ Thiếu Dữ liệu của {len(df.columns)} Thuộc tính và Phân loại Nghiêm trọng"
     )
 
     # 3. So sánh tỷ lệ thiếu giữa Laptop và Smartphone

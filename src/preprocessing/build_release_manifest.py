@@ -4,7 +4,7 @@ from pathlib import Path
 from collections import Counter
 import hashlib, json
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw"
 STAGING = ROOT / "data" / "staging"
 GOLD = ROOT / "data" / "gold_v2"

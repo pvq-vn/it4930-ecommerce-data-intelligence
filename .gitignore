@@ -43,6 +43,9 @@ scratch_test_out.txt
 # Large local datasets / generated market-graph artifacts
 data/TV2_Data_Handoff/
 data/laptopmedia/
+data/staging/
+data/silver_v2/
+data/gold_v2/*.jsonl
 
 # PyVis local assets generated at runtime
 lib/

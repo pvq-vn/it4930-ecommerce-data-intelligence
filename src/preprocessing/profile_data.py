@@ -4,7 +4,7 @@ from collections import Counter
 import json
 import hashlib
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 def is_empty(value):
     return value is None or value == '' or value == [] or value == {}
@@ -15,9 +15,9 @@ def main():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
     else:
         manifest = []
-        for folder in ('products', 'reviews'):
-            for path in sorted((ROOT / 'data' / 'raw' / folder).glob('*.jsonl')):
-                manifest.append({'path': str(path.relative_to(ROOT)).replace('\\','/'), 'records': None, 'sha256': None})
+        raw_dir = ROOT / 'data' / 'raw'
+        for path in sorted(raw_dir.rglob('*.jsonl')):
+            manifest.append({'path': str(path.relative_to(ROOT)).replace('\\','/'), 'records': None, 'sha256': None})
     results = []
     for item in manifest:
         path = ROOT / item['path']

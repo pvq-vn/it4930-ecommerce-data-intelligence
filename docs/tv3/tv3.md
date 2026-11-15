@@ -10,7 +10,7 @@ Mọi yêu cầu nghiệp vụ, định dạng dữ liệu và quy tắc ràng b
 
 | STT | Tài liệu tham chiếu | Phạm vi & Quy chuẩn trích xuất cho TV3 |
 |---|---|---|
-| 1 | [README.md (Mục TV1 & TV2)](../../README.md#L3-L210) | • Phạm vi 2 danh mục mục tiêu: `laptop` và `smartphone`.<br>• Danh sách 5 nguồn dữ liệu thực tế: `cellphones`, `tgdd`, `fptshop`, `hoanghamobile`, `viettelstore`.<br>• Bàn giao dữ liệu sạch: `data/processed/products_processed.jsonl` (10.316 listings, 30 trường).<br>• Quy ước rating: `rating_raw = 0` $\rightarrow$ `rating_norm = null`, `has_rating = false`. |
+| 1 | [README.md (Mục TV1 & TV2)](../../README.md#L3-L210) | • Phạm vi 2 danh mục mục tiêu: `laptop` và `smartphone`.<br>• Danh sách 5 nguồn dữ liệu thực tế: `cellphones`, `tgdd`, `fptshop`, `hoanghamobile`, `viettelstore`.<br>• Bàn giao dữ liệu sạch: `data/processed/products_processed.jsonl` (10.316 listings, 32 trường).<br>• Quy ước rating: `rating_raw = 0` $\rightarrow$ `rating_norm = null`, `has_rating = false`. |
 | 2 | [docs/feature_contracts_tv3_tv8.md](../feature_contracts_tv3_tv8.md) | • **Mục 1**: Quy ước tên trường canonical chuẩn (dùng `price_vnd`, không dùng alias cũ `price_value`,...).<br>• **Mục 2**: Phân loại nhóm trường dùng chung, feature số và cờ chất lượng.<br>• **Mục 3 (TV3 – EDA)**: Tập trường tối thiểu bắt buộc; yêu cầu báo cáo missing theo từng source; cấm coi `has_rating = false` là rating 0.<br>• **Mục 3 (TV5 – Price prediction)**: Danh sách candidate features, target mặc định `price_vnd` tại snapshot; quy tắc chống leakage (không dùng id, crawl time). |
 | 3 | [docs/gold_handoff.md](../gold_handoff.md) | • **Mục 1 & 2**: Bảng dữ liệu dành cho TV3 (`dim_source_parents`, `fact_listings`), phạm vi khóa `source_parent_id`.<br>• **Mục 3**: Quy tắc diễn giải: 10.316 dòng là listing quan sát được, không phải số model độc lập; không có entity resolution toàn cục xuyên sàn; cờ bất thường là bằng chứng quan sát, không phải nhãn lỗi cuối cùng. |
 | 4 | [docs/data_contract_tv2_v1.md](../data_contract_tv2_v1.md) | • **Mục Phạm vi & Bảng Gold**: Quy định grain dòng và tính bất biến của raw.<br>• **Mục Cờ chất lượng & Trường chuẩn hóa Silver v2**: Định nghĩa các cờ `is_price_missing`, `is_price_zero`, `availability_status` (`in_stock`, `out_of_stock`, `unknown`). |
@@ -24,26 +24,28 @@ Mọi yêu cầu nghiệp vụ, định dạng dữ liệu và quy tắc ràng b
 
 * **Vị trí**: TV3 – Chuyên viên Phân tích Khám phá Dữ liệu (Exploratory Data Analyst)
 * **Thư mục làm việc**: `src/eda/`
-* **Dữ liệu đầu vào chính**: [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 30 trường)
+* **Dữ liệu đầu vào chính**: [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 32 trường)
 * **Đối tác tiếp nhận chính (Downstream)**: 
   * **TV5** (Xây dựng mô hình hồi quy dự đoán giá bán - Price Prediction) theo contract tại [docs/feature_contracts_tv3_tv8.md#L51-L56](../feature_contracts_tv3_tv8.md#L51-L56).
   * **Báo cáo tổng kết dự án**: Chịu trách nhiệm hoàn thành toàn bộ **Phần 5: Phân tích Khám phá Dữ liệu (EDA)**.
 
 ---
 
-## 3. Quy ước Schema & Danh mục 30 Thuộc tính (Data Schema & Canonical Fields)
+## 3. Quy ước Schema & Danh mục 32 Thuộc tính (Data Schema & Canonical Fields)
 
 Theo Data Contract quy định tại [docs/feature_contracts_tv3_tv8.md#L7-L16](../feature_contracts_tv3_tv8.md#L7-L16) và số liệu thống kê thực tế từ [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl):
 
 | Nhóm thuộc tính | Tên trường canonical | Kiểu dữ liệu | Non-Null | Tỷ lệ đầy đủ | Ý nghĩa, quy tắc & nguồn tham chiếu |
 |---|---|---|---:|---:|---|
-| **Định danh & Phân nhóm**<br>*(7 trường)* | `listing_record_id` | `str` | 10.316 | 100.0% | Khóa hash định danh từng dòng quan sát ([gold_handoff.md#L19](../gold_handoff.md#L19)). |
+| **Định danh & Phân nhóm**<br>*(9 trường)* | `listing_record_id` | `str` | 10.316 | 100.0% | Khóa hash định danh từng dòng quan sát ([gold_handoff.md#L19](../gold_handoff.md#L19)). |
 | | `source_parent_id` | `str` | 10.316 | 100.0% | Khóa sản phẩm cha theo từng nguồn ([gold_handoff.md#L18](../gold_handoff.md#L18)). |
 | | `product_name` | `str` | 10.316 | 100.0% | Tên hiển thị của sản phẩm đã loại bỏ hậu tố marketing cơ bản. |
 | | `source` | `str` | 10.316 | 100.0% | Nguồn sàn: `cellphones` (7.847), `tgdd` (1.197), `fptshop` (820), `hoanghamobile` (285), `viettelstore` (167). |
 | | `category` | `str` | 10.316 | 100.0% | Ngành hàng: `smartphone` (5.442) và `laptop` (4.874) ([README.md#L7-L9](../../README.md#L7-L9)). |
 | | `brand_norm` | `str` | 10.288 | 99.7% | Thương hiệu đã chuẩn hóa theo từ điển ([feature_contracts_tv3_tv8.md#L41](../feature_contracts_tv3_tv8.md#L41)). |
 | | `seller_raw` | `str` | 10.316 | 100.0% | Tên cửa hàng/đơn vị bán lẻ. |
+| | `variant_name_raw` | `str` | 8.179 | 79.3% | Tên biến thể thô theo cấu hình/màu sắc phục vụ provenance và bóc tách dự phòng. |
+| | `variant_sku_raw` | `str` | 8.294 | 80.4% | Mã SKU biến thể theo nguồn cào phục vụ provenance và đối chiếu biến thể. |
 | **Giá & Tồn kho**<br>*(5 trường)* | `price_vnd` | `float` | 10.300 | 99.8% | **Target chính**: Giá bán quan sát (VNĐ), thay thế cho `price_value` cũ. |
 | | `original_price_vnd` | `float` | 9.503 | 92.1% | Giá niêm yết ban đầu trước chiết khấu (VNĐ). |
 | | `discount_rate` | `float` | 7.737 | 75.0% | Tỷ lệ giảm giá (%) ([data_quality_report_tv2_v1.md#L62](../data_quality_report_tv2_v1.md#L62)). |
@@ -53,20 +55,20 @@ Theo Data Contract quy định tại [docs/feature_contracts_tv3_tv8.md#L7-L16](
 | | `rating_norm` | `float` | 4.863 | 47.1% | Điểm rating chuẩn hóa (thang 1.0–5.0). **Không điền 0 khi missing**. |
 | | `review_count_normalized`| `float` | 9.207 | 89.2% | Tổng số lượt đánh giá khách hàng. |
 | | `total_sold_normalized` | `float` | 1.904 | 18.5% | Lượng sản phẩm đã bán (chỉ một số sàn cung cấp). |
-| **Cấu hình phần cứng**<br>*(7 trường)* | `installed_ram_gb` | `float` | 6.847 | 66.4% | Dung lượng RAM đang lắp đặt (GB). |
-| | `storage_gb` | `float` | 7.670 | 74.3% | Dung lượng bộ nhớ trong/ổ cứng (GB). |
-| | `cpu_norm` | `str` | 4.773 | 46.3% | Vi xử lý đã chuẩn hóa ([data_quality_report_tv2_v1.md#L197](../data_quality_report_tv2_v1.md#L197)). |
-| | `gpu_norm` | `str` | 5.761 | 55.8% | Card màn hình đồ họa (chủ yếu trên Laptop). |
+| **Cấu hình phần cứng**<br>*(7 trường)* | `installed_ram_gb` | `float` | 8.507 | 82.5% | Dung lượng RAM đang lắp đặt (GB). |
+| | `storage_gb` | `float` | 8.760 | 84.9% | Dung lượng bộ nhớ trong/ổ cứng (GB). |
+| | `cpu_norm` | `str` | 9.459 | 91.7% | Vi xử lý đã chuẩn hóa ([data_quality_report_tv2_v1.md#L197](../data_quality_report_tv2_v1.md#L197)). |
+| | `gpu_norm` | `str` | 6.275 | 60.8% | Card màn hình đồ họa (chủ yếu trên Laptop). |
 | | `battery_mah` | `float` | 4.159 | 40.3% | Dung lượng pin theo mAh (chủ yếu trên Smartphone). |
-| | `battery_wh` | `float` | 1.994 | 19.3% | Dung lượng pin theo Wh (chủ yếu trên Laptop). |
+| | `battery_wh` | `float` | 1.999 | 19.4% | Dung lượng pin theo Wh (chủ yếu trên Laptop). |
 | | `max_ram_gb` | `float` | 353 | 3.4% | Giới hạn RAM nâng cấp tối đa (GB). |
-| **Cấu hình bổ sung**<br>*(7 trường)* | `operating_system_norm` | `str` | 8.698 | 84.3% | Hệ điều hành (Windows 11, iOS, Android, macOS,...). |
-| | `color_norm` | `str` | 8.204 | 79.5% | Màu sắc sản phẩm. |
-| | `display_type_norm` | `str` | 5.691 | 55.2% | Công nghệ tấm nền (OLED, AMOLED, IPS, Retina,...). |
-| | `screen_size_inch` | `float` | 1.570 | 15.2% | Kích thước màn hình (inch). |
-| | `network_type_norm` | `str` | 1.720 | 16.7% | Chuẩn kết nối mạng (5G, 4G, Wifi 6,...). |
-| | `charger_watt` | `float` | 880 | 8.5% | Công suất củ sạc nhanh kèm theo (Watt). |
-| | `camera_mp` | `float` | 814 | 7.9% | Độ phân giải camera chính (MP, chủ yếu Smartphone). |
+| **Cấu hình bổ sung**<br>*(7 trường)* | `operating_system_norm` | `str` | 8.673 | 84.1% | Hệ điều hành (Windows 11, iOS, Android, macOS,...). |
+| | `color_norm` | `str` | 8.205 | 79.5% | Màu sắc sản phẩm. |
+| | `display_type_norm` | `str` | 5.757 | 55.8% | Công nghệ tấm nền (OLED, AMOLED, IPS, Retina,...). |
+| | `screen_size_inch` | `float` | 9.794 | 94.9% | Kích thước màn hình (inch). |
+| | `network_type_norm` | `str` | 1.718 | 16.7% | Chuẩn kết nối mạng (5G, 4G, Wifi 6,...). |
+| | `charger_watt` | `float` | 989 | 9.6% | Công suất củ sạc nhanh kèm theo (Watt). |
+| | `camera_mp` | `float` | 4.733 | 45.9% | Độ phân giải camera chính (MP, chủ yếu Smartphone). |
 
 > [!WARNING]
 > **Các quy tắc nghiêm ngặt bắt buộc tuân thủ của TV3**:
@@ -80,7 +82,7 @@ Theo Data Contract quy định tại [docs/feature_contracts_tv3_tv8.md#L7-L16](
 
 ```mermaid
 flowchart TD
-    A["products_processed.jsonl<br>(10.316 dòng, 30 cột)"] --> B["Nhiệm vụ 1: Thống kê mô tả & Phân phối cơ bản"]
+    A["products_processed.jsonl<br>(10.316 dòng, 32 cột)"] --> B["Nhiệm vụ 1: Thống kê mô tả & Phân phối cơ bản"]
     A --> C["Nhiệm vụ 2: Tương quan & So sánh Cấu hình - Giá"]
     A --> D["Nhiệm vụ 3: Đánh giá Chất lượng Dữ liệu cho Hồi quy"]
     B --> E["Gói bàn giao cho TV5 (Price Prediction)"]
@@ -104,7 +106,7 @@ flowchart TD
    * Khám phá phân phối đuôi dài lệch phải (right-skewed / heavy-tail); trực quan hóa phép biến đổi log: $\log(1 + \text{price\_vnd})$.
    * Phân tích phân bố tỷ lệ chiết khấu (`discount_rate`) theo từng nguồn bán.
 3. **Phân tích mức độ thiếu dữ liệu (Missingness Profile)**:
-   * Tính tỷ lệ missing (%) của toàn bộ 30 cột.
+   * Tính tỷ lệ missing (%) của toàn bộ 32 cột.
    * **Bắt buộc**: Phân rã ma trận missing rate theo ma trận 2 chiều: `source` $\times$ `category`. Làm rõ tại sao một số thuộc tính chỉ xuất hiện ở nguồn/ngành hàng cụ thể (ví dụ: `battery_wh` tập trung ở Laptop, `battery_mah` và `camera_mp` tập trung ở Smartphone, `total_sold_normalized` chỉ có ở một số sàn).
 
 ### Nhiệm vụ 2: Phân tích tương quan & So sánh Cấu hình - Giá bán (Bivariate & Hardware Analysis)
@@ -148,15 +150,15 @@ flowchart TD
 | Tên đặc trưng | Kiểu dữ liệu | Tỷ lệ thiếu tổng | Thiếu ở Laptop | Thiếu ở Phone | Mức ưu tiên TV5 | Ghi chú & Đề xuất tiền xử lý cho TV5 |
 |---|---|---:|---:|---:|---|---|
 | `category` | Categorical | 0.0% | 0.0% | 0.0% | **Bắt buộc** | **Khuyến nghị TV5 huấn luyện 2 mô hình riêng biệt**: 1 cho Laptop, 1 cho Smartphone. |
-| `brand_norm` | Categorical | 0.3% | 0.4% | 0.2% | **Bắt buộc** | One-Hot Encoding cho top 10 brand lớn, còn lại gom vào nhóm `'Other'`. |
-| `installed_ram_gb` | Numeric | 33.6% | 20.1% | 45.7% | **Rất cao** | Biến số liên tục; điền median theo `(category, brand_norm)`. |
-| `storage_gb` | Numeric | 25.7% | 24.5% | 26.8% | **Rất cao** | Biến số liên tục; điền median theo `(category, brand_norm)`. |
-| `cpu_norm` | Categorical | 53.7% | 31.2% | 73.8% | **Cao** | Trích xuất dòng CPU (Core i5, Ryzen 7, Apple M,...) hoặc gán `'Unknown'`. |
-| `gpu_norm` | Categorical | 44.2% | 15.6% | 69.8% | **Cao (Laptop)** | Chỉ dùng cho bài toán Laptop. Tạo biến nhị phân: Có/Không có GPU rời. |
-| `display_type_norm`| Categorical | 44.8% | 42.1% | 47.3% | **Trung bình** | Phân nhóm tấm nền: OLED/AMOLED vs IPS/LCD vs Unknown. |
-| `screen_size_inch` | Numeric | 84.8% | 72.3% | 96.0% | **Xem xét** | Tỷ lệ thiếu cao; nếu dùng cần tạo thêm cờ `is_screen_size_missing`. |
-| `battery_mah` | Numeric | 59.7% | 98.2% | 25.1% | **Cao (Phone)** | Chỉ dùng làm feature cho mô hình Smartphone. |
-| `battery_wh` | Numeric | 80.7% | 59.2% | 100.0% | **Cao (Laptop)** | Chỉ dùng làm feature cho mô hình Laptop. |
+| `brand_norm` | Categorical | 0.27% | 0.08% | 0.44% | **Bắt buộc** | One-Hot Encoding cho top 10 brand lớn, còn lại gom vào nhóm `'Other'`. |
+| `installed_ram_gb` | Numeric | 17.54% | 13.21% | 21.41% | **Rất cao** | Biến số liên tục; điền median theo `(category, brand_norm)`. |
+| `storage_gb` | Numeric | 15.08% | 10.61% | 19.09% | **Rất cao** | Biến số liên tục; điền median theo `(category, brand_norm)`. |
+| `cpu_norm` | Categorical | 8.31% | 0.94% | 14.90% | **Cao** | Trích xuất dòng CPU (Core i5, Ryzen 7, Apple M,...) hoặc gán `'Unknown'`. |
+| `gpu_norm` | Categorical | 39.17% | 4.80% | 69.96% | **Cao (Laptop)** | Chỉ dùng cho bài toán Laptop. Tạo biến nhị phân: Có/Không có GPU rời. |
+| `display_type_norm`| Categorical | 44.19% | 69.10% | 21.89% | **Trung bình** | Phân nhóm tấm nền: OLED/AMOLED vs IPS/LCD vs Unknown. |
+| `screen_size_inch` | Numeric | 5.06% | 1.54% | 8.21% | **Trung bình (Phone)** | Độ phủ ~95% sau Silver v2; nên giữ cho Phone và cân nhắc cờ `is_screen_size_missing`. |
+| `battery_mah` | Numeric | 59.68% | 99.45% | 24.07% | **Cao (Phone)** | Chỉ dùng làm feature cho mô hình Smartphone. |
+| `battery_wh` | Numeric | 80.62% | 59.05% | 99.94% | **Cao (Laptop)** | Chỉ dùng làm feature cho mô hình Laptop. |
 | `seller_raw` | Categorical | 0.0% | 0.0% | 0.0% | **Trung bình** | Dùng Frequency Encoding hoặc Target Encoding có smoothing. |
 
 ### 5.2. Đề xuất chiến lược tiền xử lý cho TV5
@@ -239,4 +241,4 @@ src/eda/
    - `src/eda/notebooks/03_missingness_mechanisms_and_quality.ipynb`
    - `src/eda/notebooks/04_hardware_price_relationships.ipynb`
    - `src/eda/notebooks/05_regression_readiness_audit.ipynb`
-4. Dữ liệu chuẩn hóa đầu vào: [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 30 trường).
+4. Dữ liệu chuẩn hóa đầu vào: [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 32 trường).

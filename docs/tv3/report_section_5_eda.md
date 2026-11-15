@@ -2,7 +2,7 @@
 
 **Tác giả phụ trách**: Thành viên 3 (TV3 - Phân tích Khám phá Dữ liệu)  
 **Mã học phần**: IT4930 - Khoa học Dữ liệu & Trí tuệ Kinh doanh  
-**Tập dữ liệu chuẩn hóa**: `data/processed/products_processed.jsonl` ($N = 10.316$ listings, 30 thuộc tính chuẩn hóa)  
+**Tập dữ liệu chuẩn hóa**: `data/processed/products_processed.jsonl` ($N = 10.316$ listings, 32 thuộc tính chuẩn hóa; đồng thời lớp Silver v2/Gold bổ sung cờ `is_non_laptop_desktop` nhận diện 167 máy bàn Apple iMac/Mac Desktop)  
 **Căn cứ tài liệu quy chuẩn**: [tv3.md](tv3.md) & [docs/feature_contracts_tv3_tv8.md](../feature_contracts_tv3_tv8.md)
 
 ---
@@ -68,21 +68,21 @@ Bộ dữ liệu nghiên cứu bao gồm **10.316 bản ghi sản phẩm** đư�
 
 ## 5.3. Bức tranh Mức độ Thiếu Dữ liệu (Missingness Profile)
 
-![Fig 1.3A: Xếp hạng Tỷ lệ Thiếu Dữ liệu của 30 Thuộc tính Toàn thị trường](../../src/eda/outputs/figures/fig_1_3_overall_missingness_ranking.png)
+![Fig 1.3A: Xếp hạng Tỷ lệ Thiếu Dữ liệu của 32 Thuộc tính Toàn thị trường](../../src/eda/outputs/figures/fig_1_3_overall_missingness_ranking.png)
 ![Fig 1.3B: Bản đồ Nhiệt Tỷ lệ Thiếu theo Nguồn bán và Ngành hàng](../../src/eda/outputs/figures/fig_1_3_missingness_heatmap_by_source_category.png)
 ![Fig 1.3C: So sánh Tỷ lệ Thiếu Thuộc tính Phần cứng giữa Laptop và Smartphone](../../src/eda/outputs/figures/fig_1_3_hardware_missingness_laptop_vs_phone.png)
 
 Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu theo lý thuyết thống kê (Rubin, 1976):
 1. **Missing Completely at Random (MCAR)**:
    - Các trường định danh và phân loại nền tảng (`category`, `seller_raw`, `product_name`) đạt tỷ lệ đầy đủ tuyệt đối (**$100\%$**).
-   - Trường thương hiệu `brand_norm` chỉ thiếu $0.3\%$ (chủ yếu ở các sản phẩm phụ kiện gán nhầm).
+   - Trường thương hiệu `brand_norm` chỉ thiếu $0.27\%$ (28 bản ghi không rõ thương hiệu).
 2. **Missing at Random (MAR) do Đặc thù Ngành hàng (Category-specific missingness)**:
-   - `battery_wh` hoàn toàn không xuất hiện ở Smartphone (thiếu $100\%$), nhưng xuất hiện ở $40.8\%$ Laptop.
-   - `battery_mah` xuất hiện ở $74.9\%$ Smartphone, nhưng gần như vắng mặt ở Laptop (thiếu $98.2\%$).
-   - `gpu_norm` chỉ thiếu $15.6\%$ ở Laptop, nhưng thiếu tới $69.8\%$ ở Smartphone.
+   - `battery_wh` gần như vắng mặt hoàn toàn ở Smartphone (thiếu $99.94\%$), trong khi xuất hiện ở $40.95\%$ Laptop (thiếu $59.05\%$).
+   - `battery_mah` xuất hiện ở $75.93\%$ Smartphone (thiếu $24.07\%$), nhưng gần như vắng mặt ở Laptop (thiếu $99.45\%$).
+   - `gpu_norm` chỉ thiếu $4.80\%$ ở Laptop, nhưng thiếu tới $69.96\%$ ở Smartphone.
    - *Kết luận*: Hiện tượng thiếu này hoàn toàn có thể dự đoán được dựa trên biến danh mục `category`, do đó việc tách riêng hai pipeline mô hình hóa cho Laptop và Smartphone là hoàn toàn khoa học.
 3. **Missing Not at Random (MNAR) do Giới hạn Bóc tách từ Crawler**:
-   - `charger_watt` (thiếu $91.5\%$) và `screen_size_inch` (thiếu $84.8\%$) có tỷ lệ thiếu rất cao do nhiều sàn không cung cấp trường thông số riêng mà nhúng vào đoạn văn bản mô tả HTML tự do.
+   - `charger_watt` (thiếu $90.41\%$) và `max_ram_gb` (thiếu $96.58\%$) có tỷ lệ thiếu rất cao do nhiều sàn không cung cấp trường thông số riêng; trong khi đó nhờ nâng cấp trích xuất tại Silver v2, tỷ lệ thiếu `screen_size_inch` đã giảm mạnh xuống còn **$5.06\%$** (Laptop $1.54\%$, Smartphone $8.21\%$).
 
 ---
 
@@ -93,46 +93,46 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ### 5.4.1. Cấu trúc Quyết định Giá Ngành hàng Laptop (Workstation & Productivity Asset)
 *Căn cứ Bảng 2.1A, 2.1C, 2.1D, 2.1E, 2.1F:*
-- **Dung lượng RAM (`installed_ram_gb`)** là yếu tố có tương quan thứ hạng mạnh nhất với giá bán ($\rho = \mathbf{+0.803}$, Log-Pearson $r = +0.729$). Bước nhảy giá giữa các bậc RAM diễn ra cực kỳ dứt khoát:
-  * 8 GB: Trung vị 18.64 Triệu VNĐ.
-  * 16 GB: Trung vị 28.99 Triệu VNĐ (+55.5%).
-  * 32 GB: Trung vị 51.49 Triệu VNĐ (+77.6%).
-  * $\ge 64$ GB: Trung vị 96.24 Triệu VNĐ (+86.9%).
-  * Biên độ giãn giá đạt **5.16 lần** giữa bậc $\ge 64$GB và 8GB.
-- **Phân tầng Vi xử lý CPU (`cpu_tier`)** có năng lực phân tách phân phối giá cực đại (One-Way ANOVA $F = \mathbf{757.2}$, Kruskal-Wallis $H = \mathbf{1748.8}$, $p < 10^{-300}$):
+- **Dung lượng RAM (`installed_ram_gb`)** là yếu tố có tương quan thứ hạng mạnh nhất với giá bán ($\rho = \mathbf{+0.744}$, Log-Pearson $r = +0.704$). Bước nhảy giá giữa các bậc RAM diễn ra cực kỳ dứt khoát:
+  * 8 GB: Trung vị 18.99 Triệu VNĐ.
+  * 16 GB: Trung vị 29.99 Triệu VNĐ (+57.9%).
+  * 32 GB: Trung vị 52.89 Triệu VNĐ (+76.4%).
+  * $\ge 64$ GB: Trung vị 97.14 Triệu VNĐ (+83.7%).
+  * Biên độ giãn giá đạt **5.12 lần** giữa bậc $\ge 64$GB và 8GB.
+- **Phân tầng Vi xử lý CPU (`cpu_tier`)** có năng lực phân tách phân phối giá cực đại (One-Way ANOVA $F = \mathbf{764.31}$, Kruskal-Wallis $H = \mathbf{2099.48}$, $p < 10^{-300}$):
   * Core i3 / Entry-level: Trung vị 11.95 Triệu.
-  * Core i5 / Ryzen 5 (Mainstream): Trung vị 19.24 Triệu.
-  * Core i7 / Ryzen 7 (High-end): Trung vị 27.49 Triệu.
-  * Apple Silicon (M-series): Trung vị 43.99 Triệu.
+  * Core i5 / Ryzen 5 (Mainstream): Trung vị 19.29 Triệu.
+  * Core i7 / Ryzen 7 (High-end): Trung vị 27.29 Triệu.
+  * Apple Silicon (M-series): Trung vị 44.79 Triệu.
   * Core i9 / Ryzen 9 (Flagship/Enthusiast): Trung vị 54.99 Triệu (**gấp 4.60 lần** so với Core i3).
-- **Phân loại GPU Đồ họa (`gpu_type`)** (ANOVA $F = \mathbf{399.8}$, Kruskal-Wallis $H = \mathbf{927.5}$, $p < 10^{-200}$):
+- **Phân loại GPU Đồ họa (`gpu_type`)** (ANOVA $F = \mathbf{439.05}$, Kruskal-Wallis $H = \mathbf{1068.65}$, $p < 10^{-230}$):
   * Onboard: Trung vị 19.99 Triệu VNĐ.
   * Card rời (Dedicated GPU - RTX/GTX/Radeon): Trung vị 28.99 Triệu VNĐ (Mean: 35.61 Triệu).
-  * Apple GPU: Trung vị 40.99 Triệu VNĐ.
-- **Công suất Sạc và Dung lượng Pin Wh**: Đồng biến rất mạnh với giá bán (Sạc $\rho = +0.722$, Pin Wh $\rho = +0.658$). Do các cỗ máy hiệu năng cao bắt buộc phải đi kèm khối nguồn công suất lớn (135W–330W) và pin dung tích lớn ($>75$Wh).
-- **Nghịch lý Màn hình Laptop**: Kích thước màn hình ($\rho = +0.093$) hầu như không có ý nghĩa phân hóa giá. Các dòng Ultrabook 13–14 inch mỏng nhẹ cao cấp có giá ngang bằng hoặc cao hơn đáng kể so với laptop 15.6 inch phổ thông.
+  * Apple GPU: Trung vị 40.89 Triệu VNĐ.
+- **Công suất Sạc và Dung lượng Pin Wh**: Đồng biến rất mạnh với giá bán (Pin Wh $\rho = +0.665$, Sạc $\rho = +0.623$). Do các cỗ máy hiệu năng cao bắt buộc phải đi kèm khối nguồn công suất lớn (135W–330W) và pin dung tích lớn ($>75$Wh).
+- **Nghịch lý Màn hình Laptop**: Kích thước màn hình ($\rho = +0.143$) có mức tương quan yếu với giá. Các dòng Ultrabook 13–14 inch mỏng nhẹ cao cấp có giá ngang bằng hoặc cao hơn đáng kể so với laptop 15.6 inch phổ thông.
 
 ### 5.4.2. Cấu trúc Quyết định Giá Ngành hàng Smartphone (Consumer Experience & Brand Equity)
 *Căn cứ Bảng 2.1B, 2.1G, 2.1H, 2.1I, 2.1J:*
-- **Bộ nhớ trong ROM (`storage_gb`)** là đòn bẩy giãn giá mạnh nhất toàn bộ thị trường ($\rho = \mathbf{+0.704}$, ANOVA $F = \mathbf{777.7}$, Kruskal-Wallis $H = \mathbf{1736.6}$):
+- **Bộ nhớ trong ROM (`storage_gb`)** là đòn bẩy giãn giá mạnh nhất toàn bộ thị trường ($\rho = \mathbf{+0.703}$, ANOVA $F = \mathbf{780.70}$, Kruskal-Wallis $H = \mathbf{1747.72}$):
   * $\le 64$ GB: Trung vị 3.49 Triệu VNĐ.
-  * 128 GB: Trung vị 6.55 Triệu VNĐ.
-  * 256 GB: Trung vị 16.49 Triệu VNĐ.
+  * 128 GB: Trung vị 6.59 Triệu VNĐ.
+  * 256 GB: Trung vị 16.59 Triệu VNĐ.
   * 512 GB: Trung vị 25.59 Triệu VNĐ.
   * $\ge 1$ TB: Trung vị 41.79 Triệu VNĐ.
   * Biên độ chênh lệch giá giữa 1TB và $\le 64$GB lên tới **11.97 lần**! Đây là công cụ phân tầng biên lợi nhuận bậc thang (Tiered Upsell) triệt để của các nhà sản xuất flagship.
-- **Công nghệ Màn hình (`display_group`)** thể hiện năng lực phân hóa giá khủng khiếp nhất toàn thị trường (ANOVA $F = \mathbf{2954.2}$, Kruskal-Wallis $H = \mathbf{1826.5}$, $p < 10^{-300}$):
-  * IPS / LCD: Trung vị 3.89 Triệu VNĐ (đại diện phân khúc giá rẻ).
-  * OLED / AMOLED: Trung vị 15.99 Triệu VNĐ (đắt gấp **4.11 lần** so với màn LCD).
-- **Thương hiệu định vị (`brand_norm`)** (ANOVA $F = \mathbf{210.2}$, Kruskal-Wallis $H = \mathbf{2335.6}$, $p < 10^{-300}$):
-  * Apple đứng đầu với Trung vị 25.49 Triệu VNĐ (Q3: 33.49 Triệu).
+- **Công nghệ Màn hình (`display_group`)** thể hiện năng lực phân hóa giá khủng khiếp nhất toàn thị trường (ANOVA $F = \mathbf{2902.99}$, Kruskal-Wallis $H = \mathbf{1831.92}$, $p < 10^{-300}$):
+  * IPS / LCD: Trung vị 3.80 Triệu VNĐ (đại diện phân khúc giá rẻ).
+  * OLED / AMOLED: Trung vị 15.99 Triệu VNĐ (đắt gấp **4.21 lần** so với màn LCD).
+- **Thương hiệu định vị (`brand_norm`)** (ANOVA $F = \mathbf{210.20}$, Kruskal-Wallis $H = \mathbf{2335.59}$, $p < 10^{-300}$):
+  * Apple đứng đầu với Trung vị 25.49 Triệu VNĐ (Q3: 33.99 Triệu).
   * Samsung đứng thứ hai với Trung vị 15.84 Triệu VNĐ.
-  * Xiaomi, OPPO, Vivo, Realme tập trung ở phân khúc 4.0 – 6.5 Triệu VNĐ.
+  * Xiaomi, OPPO, Vivo, Realme tập trung ở phân khúc 4.5 – 9.0 Triệu VNĐ.
   * Nokia ở phân khúc phổ thông với Trung vị 1.57 Triệu VNĐ.
   * Biên độ thương hiệu tạo mức chênh lệch giá lên tới **7.28x – 16.24x**.
 - **Hai Nghịch lý Phần cứng Smartphone**:
-  1. **Nghịch lý Pin mAh ($\rho = +0.036$)**: Không phân hóa giá do giới hạn vật lý về kích thước bàn tay người dùng. Cả điện thoại giá rẻ 2 triệu lẫn flagship 35 triệu đều trang bị viên pin quanh mốc 5.000 mAh.
-  2. **Nghịch lý Camera MP ($\rho = +0.028$, $p = 0.493$ không có ý nghĩa thống kê)**: Cuộc đua thông số MP thuần túy mang tính marketing ở phân khúc giá rẻ (trang bị camera 50–108MP cảm biến nhỏ), trong khi các flagship đầu bảng cạnh tranh bằng kích thước cảm biến vật lý lớn, ống kính tiềm vọng và thuật toán xử lý ảnh tính toán (Computational Photography).
+  1. **Nghịch lý Pin mAh ($\rho = +0.036$, $p = 0.039$)**: Gần như không phân hóa giá do giới hạn vật lý về kích thước bàn tay người dùng. Cả điện thoại giá rẻ 2 triệu lẫn flagship 35 triệu đều trang bị viên pin quanh mốc 5.000 mAh.
+  2. **Nghịch lý Camera MP ($\rho = +0.179$, $p = 1.51 \times 10^{-28}$)**: Chỉ tương quan yếu/phi tuyến với giá bán. Cuộc đua thông số MP thuần túy thường mang tính marketing ở phân khúc phổ thông (50–108MP cảm biến nhỏ), trong khi các flagship cạnh tranh bằng kích thước cảm biến vật lý lớn, ống kính tiềm vọng và thuật toán xử lý ảnh tính toán (Computational Photography).
 
 ### 5.4.3. Bảng Ma trận Đối chiếu Cấu trúc Quyết định Giá Tổng hợp
 *Trích xuất từ Bảng 2.2C:*
@@ -140,10 +140,10 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 | Khía cạnh đối chiếu | Ngành hàng Laptop | Ngành hàng Smartphone | Khác biệt căn bản |
 | :--- | :--- | :--- | :--- |
 | **Triết lý Định giá** | Thiết bị sản xuất / Tài sản làm việc (*Productivity Asset*). | Thiết bị trải nghiệm cá nhân & phong cách sống (*Consumer Lifestyle*). | Laptop định giá từ chi phí linh kiện lên; Smartphone định giá từ giá trị thương hiệu xuống. |
-| **Đòn bẩy Giá Hàng đầu** | Dung lượng RAM ($\rho = +0.80$) & Phân tầng CPU ($F = 757.2$). | Bộ nhớ trong ROM ($\rho = +0.70$) & Thương hiệu ($H = 2335.6, F = 210.2$). | Laptop dùng RAM để lọc người dùng chuyên nghiệp; Smartphone dùng ROM để Upsell bậc thang. |
-| **Ranh giới Phân tách Thị trường** | Card đồ họa rời (Dedicated GPU vs Onboard). | Công nghệ Màn hình (OLED/AMOLED vs IPS/LCD, $F = 2954.2$). | Laptop phân hóa ở năng lực đồ họa; Smartphone phân hóa ở chất lượng thị giác. |
-| **Vai trò Pin & Nguồn điện** | Tương quan đồng biến rất mạnh (Sạc $\rho = +0.72$, Pin Wh $\rho = +0.66$). | Nghịch lý bão hòa vật lý (Pin mAh $\rho = +0.04$, bão hòa 5000 mAh). | Pin Laptop là biến hiệu năng cao cấp; Pin Smartphone là thuộc tính cơ bản tối thiểu. |
-| **Chỉ số Bão hòa / Non-driver** | Kích thước màn hình ($\rho = +0.09$, Ultrabook nhỏ nhưng đắt). | Độ phân giải Camera MP ($\rho = +0.03$, không có ý nghĩa thống kê). | Cả hai ngành hàng đều có những chỉ số phần cứng không mang tính quyết định giá. |
+| **Đòn bẩy Giá Hàng đầu** | Dung lượng RAM ($\rho = +0.744$) & Phân tầng CPU ($F = 764.3$). | Bộ nhớ trong ROM ($\rho = +0.703$) & Thương hiệu ($H = 2335.6, F = 210.2$). | Laptop dùng RAM để lọc người dùng chuyên nghiệp; Smartphone dùng ROM để Upsell bậc thang. |
+| **Ranh giới Phân tách Thị trường** | Card đồ họa rời (Dedicated GPU vs Onboard, $F = 439.1$). | Công nghệ Màn hình (OLED/AMOLED vs IPS/LCD, $F = 2903.0$). | Laptop phân hóa ở năng lực đồ họa; Smartphone phân hóa ở chất lượng thị giác. |
+| **Vai trò Pin & Nguồn điện** | Tương quan đồng biến rất mạnh (Pin Wh $\rho = +0.665$, Sạc $\rho = +0.623$). | Nghịch lý bão hòa vật lý (Pin mAh $\rho = +0.036$, bão hòa 5000 mAh). | Pin Laptop là biến hiệu năng cao cấp; Pin Smartphone là thuộc tính cơ bản tối thiểu. |
+| **Chỉ số Bão hòa / Non-driver** | Kích thước màn hình ($\rho = +0.143$, Ultrabook nhỏ nhưng đắt). | Độ phân giải Camera MP ($\rho = +0.179$, tương quan yếu). | Cả hai ngành hàng đều có những chỉ số phần cứng không mang tính quyết định giá. |
 
 ---
 
@@ -161,8 +161,8 @@ Phân tích mức độ thiếu dữ liệu giúp xác định cơ chế thiếu
 
 ### 5.5.2. Đo lường Hiện tượng Đa cộng tuyến & Cảnh báo VIF (Task 3.2)
 *Căn cứ Bảng 3.2A, 3.2B, 3.2C:*
-- Tại ngành hàng Smartphone, **Dung lượng RAM** và **Bộ nhớ ROM** có tương quan chéo Pearson rất cao ($r = \mathbf{+0.833}$), đẩy chỉ số $VIF$ của RAM lên mức **$5.44$** (vượt ngưỡng cảnh báo an toàn $VIF > 5.0$).
-- *Khuyến nghị TV5*: Hiện tượng đa cộng tuyến này sẽ làm phình to phương sai ước lượng trọng số trong mô hình OLS tuyến tính. TV5 cần áp dụng **Ridge Regression ($L_2$ Regularization)** hoặc ưu tiên sử dụng **GBDT (LightGBM/XGBoost/CatBoost)**.
+- Tại ngành hàng Smartphone, **Dung lượng RAM** và **Bộ nhớ ROM** có tương quan chéo Pearson ở mức trung bình khá ($r = \mathbf{+0.558}$), chỉ số $VIF$ của `installed_ram_gb` đạt **$2.68$** và `charger_watt` đạt **$2.98$** (mức Trung bình, dưới ngưỡng cảnh báo cao $VIF > 5.0$); trong khi ở Laptop mọi biến đều an toàn với $VIF \le 1.58$.
+- *Khuyến nghị TV5*: TV5 vẫn nên áp dụng **Ridge Regression ($L_2$ Regularization)** khi thử nghiệm mô hình tuyến tính hoặc ưu tiên sử dụng **GBDT (LightGBM/XGBoost/CatBoost)** để miễn nhiễm đa cộng tuyến.
 
 ### 5.5.3. Phòng chống Rò rỉ Dữ liệu (Task 3.3)
 *Căn cứ Bảng 3.3:*

@@ -4,7 +4,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 import json
 
-ROOT=Path(__file__).resolve().parents[1]; STAGING=ROOT/"data"/"staging"; REPORTS=ROOT/"reports"
+ROOT=Path(__file__).resolve().parents[2]; STAGING=ROOT/"data"/"staging"; REPORTS=ROOT/"reports"
 PRODUCT_FIELDS=["product_id_raw","parent_product_id_raw","product_name_raw","parent_product_name_raw","variant_name_raw","variant_color_raw","variant_sku_raw","availability_raw","price_raw","original_price_raw","seller_raw","rating_raw","review_count_raw","attributes_raw","brand_raw","total_sold_raw","raw_payload"]
 REVIEW_FIELDS=["parent_product_id_raw","review_id_raw","rating_raw","review_text_raw","author_raw","review_time_raw","like_count_raw","review_product_code_raw","variant_code_raw","variant_sku_raw","buy_date_raw","reply_raw","attached_files_raw","raw_payload"]
 

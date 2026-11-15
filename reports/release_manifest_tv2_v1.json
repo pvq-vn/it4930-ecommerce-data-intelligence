@@ -1,0 +1,181 @@
+{
+  "release": "tv2-data-v1",
+  "pipeline_version": "tv2-gold-2.0",
+  "raw_immutable": true,
+  "raw_files": [
+    {
+      "file": "data/raw/cellphoneS/laptop.jsonl",
+      "records": 3912,
+      "sha256": "9949539eff9d8524b03f018b62e16cdf37ae61fbc554fb4248095de41ac2a474"
+    },
+    {
+      "file": "data/raw/cellphoneS/laptop_reviews.jsonl",
+      "records": 1898,
+      "sha256": "5c1e13995322e822e175c7e992ccb0a3f27b6780a4526684c687eea6ff8b5ccb"
+    },
+    {
+      "file": "data/raw/cellphoneS/smartphone.jsonl",
+      "records": 3935,
+      "sha256": "d1944a9a6a848ea125b699ae5c8ef87df1aae7e861f63de4e86a33563a940487"
+    },
+    {
+      "file": "data/raw/cellphoneS/smartphone_reviews.jsonl",
+      "records": 9296,
+      "sha256": "a5659d17b9d1463d29cc38d708b1ca162b738d6f7963fc12bab578c0bf2f009c"
+    },
+    {
+      "file": "data/raw/fptshop/laptop.jsonl",
+      "records": 356,
+      "sha256": "5e09f62c96133729b6fc287ceacdc5cb823519aa28bc189870ee7d65c4c7e3a1"
+    },
+    {
+      "file": "data/raw/fptshop/laptop_reviews.jsonl",
+      "records": 602,
+      "sha256": "35d915031c5e91e0d05c8257c285c0bc65d7a0ce988f64ae5da0d535c7298441"
+    },
+    {
+      "file": "data/raw/fptshop/smartphone.jsonl",
+      "records": 464,
+      "sha256": "b2256116e6c3e0a4dda6aeb83c0777b31dfa8f620a4a9fd365b4d2d2558c8179"
+    },
+    {
+      "file": "data/raw/fptshop/smartphone_reviews.jsonl",
+      "records": 1092,
+      "sha256": "33ea3645762b8599ff35f73e28655a43f207a1cd9f460188893aafe07fdca46f"
+    },
+    {
+      "file": "data/raw/hoanghamobile/laptop.jsonl",
+      "records": 93,
+      "sha256": "44b80296f936a9327b6c83a017b3eab354af8a1cb0d04028c4691fb2f4095d78"
+    },
+    {
+      "file": "data/raw/hoanghamobile/laptop_reviews.jsonl",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "data/raw/hoanghamobile/smartphone.jsonl",
+      "records": 192,
+      "sha256": "bb928a5c9e43b7e0e7d4e4048cf9d4eb136f8b9cec7fe360421fc2625931e471"
+    },
+    {
+      "file": "data/raw/hoanghamobile/smartphone_reviews.jsonl",
+      "records": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "data/raw/tgdd/laptop.jsonl",
+      "records": 490,
+      "sha256": "ec5938ab2c1a8873f1e3f1bf19a4ae7e55ae0663e939c69be81fa6ffffb154fc"
+    },
+    {
+      "file": "data/raw/tgdd/laptop_reviews.jsonl",
+      "records": 99,
+      "sha256": "5c1d357f598a1ddcf56de785a531bccc138cf04898046a6d34298badde2b54c1"
+    },
+    {
+      "file": "data/raw/tgdd/smartphone.jsonl",
+      "records": 707,
+      "sha256": "7fa9a3dd5993d692d648974288912fde6b69dc106ed5f430f5556ec676eb9cd1"
+    },
+    {
+      "file": "data/raw/tgdd/smartphone_reviews.jsonl",
+      "records": 2329,
+      "sha256": "6af4b63f9ed4cdd231b4616ad10ace0e399057905440ff68de0bc8566c3d01fd"
+    },
+    {
+      "file": "data/raw/viettelStore/laptop.jsonl",
+      "records": 23,
+      "sha256": "fa596b10753955fb7aa7b17a7f7251e4288697528ee15e76adf6b1e9c5441c61"
+    },
+    {
+      "file": "data/raw/viettelStore/laptop_reviews.jsonl",
+      "records": 63,
+      "sha256": "b5e4deec8336fbb3930ae1d1496f8b33dc38d49219b6038f082a4929e43ee00a"
+    },
+    {
+      "file": "data/raw/viettelStore/smartphone.jsonl",
+      "records": 144,
+      "sha256": "bce84fd1b93bcbc3f12f127ad6a4f6ef3605580cc8e81d809fc68fec5e823d53"
+    },
+    {
+      "file": "data/raw/viettelStore/smartphone_reviews.jsonl",
+      "records": 426,
+      "sha256": "9a0af8c617d9ca43553c91991169b86f4080c86e974298211c6486b70ec8d2d9"
+    }
+  ],
+  "staging_files": [
+    {
+      "file": "data/staging/products_staging.jsonl",
+      "records": 10316,
+      "sha256": "ab62fdfbefcecf963e123c40d4962e9729819c90237e29175f8b27ea3ac77d57"
+    },
+    {
+      "file": "data/staging/review_replies_staging.jsonl",
+      "records": 108,
+      "sha256": "15c3ff93a70031f651c9711f6460d7c2523eaeb0770088522de022ee614ec34e"
+    },
+    {
+      "file": "data/staging/reviews_staging.jsonl",
+      "records": 15805,
+      "sha256": "c94a1ce074f0c672f8bf77c967a119aa24c7c2ef1b4acb0db361e86d98cb08df"
+    }
+  ],
+  "gold_files": [
+    {
+      "file": "data/gold_v2/dim_source_parents.jsonl",
+      "records": 7051,
+      "sha256": "ac6bdca25d535c9c4a5c943ff1e56d57a7df326bcca9b96efd67d3d7d0d2b7fa"
+    },
+    {
+      "file": "data/gold_v2/fact_listings.jsonl",
+      "records": 10316,
+      "sha256": "89ce40a98f995faf077361daf1f675be8988cc935bb92970821e107471618a26"
+    },
+    {
+      "file": "data/gold_v2/fact_listings_features.jsonl",
+      "records": 10316,
+      "sha256": "b9b9e031b0f2592aed91fba3f2204349c34f25495c3e67dc67c635d51c865082"
+    },
+    {
+      "file": "data/gold_v2/fact_review_replies.jsonl",
+      "records": 108,
+      "sha256": "7d2f2745c029d6858351b4607e62bb6e985a070262777c73e976dc75e6996353"
+    },
+    {
+      "file": "data/gold_v2/fact_reviews.jsonl",
+      "records": 15805,
+      "sha256": "4ac1432a874e10335f9f7f5a051cf9596bd0164b30615a45484892dfb999488c"
+    }
+  ],
+  "provenance_checks": {
+    "fact_listings.jsonl": {
+      "records": 10316,
+      "missing_raw_record_id": 0,
+      "missing_raw_file": 0,
+      "missing_raw_line_number": 0
+    },
+    "fact_reviews.jsonl": {
+      "records": 15805,
+      "missing_raw_record_id": 0,
+      "missing_raw_file": 0,
+      "missing_raw_line_number": 0
+    },
+    "fact_review_replies.jsonl": {
+      "records": 108,
+      "missing_parent_review_record_id": 0
+    }
+  },
+  "quality_reports": [
+    "reports/staging_quality_report.json",
+    "reports/key_audit.json",
+    "reports/gold_v2_quality_report.json",
+    "reports/gold_v2_validation_report.json",
+    "reports/quality_gate_report.json"
+  ],
+  "notes": [
+    "Gold is source-scoped and does not resolve cross-store identity.",
+    "No raw or staging records were deleted or overwritten.",
+    "Quality flags describe observations; they are not automatic deletion decisions."
+  ]
+}

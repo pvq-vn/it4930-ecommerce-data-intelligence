@@ -1,0 +1,98 @@
+{
+  "pipeline": "tv2",
+  "run_id": "20261115T203546",
+  "status": "PASSED",
+  "stages": [
+    {
+      "stage": "S0_profile_raw",
+      "script": "src/preprocessing/profile_data.py",
+      "returncode": 0,
+      "duration_seconds": 6.649,
+      "stdout_tail": "laptop.jsonl: 3912 records, 0 errors\nlaptop_reviews.jsonl: 1898 records, 0 errors\nsmartphone.jsonl: 3935 records, 0 errors\nsmartphone_reviews.jsonl: 9296 records, 0 errors\nlaptop.jsonl: 356 records, 0 errors\nlaptop_reviews.jsonl: 602 records, 0 errors\nsmartphone.jsonl: 464 records, 0 errors\nsmartphone_reviews.jsonl: 1092 records, 0 errors\nlaptop.jsonl: 93 records, 0 errors\nlaptop_reviews.jsonl: 0 records, 0 errors\nsmartphone.jsonl: 192 records, 0 errors\nsmartphone_reviews.jsonl: 0 records, 0 errors\nlaptop.jsonl: 490 records, 0 errors\nlaptop_reviews.jsonl: 99 records, 0 errors\nsmartphone.jsonl: 707 records, 0 errors\nsmartphone_reviews.jsonl: 2329 records, 0 errors\nlaptop.jsonl: 23 records, 0 errors\nlaptop_reviews.jsonl: 63 records, 0 errors\nsmartphone.jsonl: 144 records, 0 errors\nsmartphone_reviews.jsonl: 426 records, 0 errors\nDone. See reports/data_profile.md and reports/data_profile.json\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S1_build_staging",
+      "script": "src/preprocessing/build_staging.py",
+      "returncode": 0,
+      "duration_seconds": 6.213,
+      "stdout_tail": "{\n  \"pipeline_version\": \"staging-v1\",\n  \"generated_at_utc\": \"2026-11-15T13:35:58.664320+00:00\",\n  \"input_files\": [\n    \"data/raw/cellphoneS/laptop.jsonl\",\n    \"data/raw/cellphoneS/smartphone.jsonl\",\n    \"data/raw/fptshop/laptop.jsonl\",\n    \"data/raw/fptshop/smartphone.jsonl\",\n    \"data/raw/hoanghamobile/laptop.jsonl\",\n    \"data/raw/hoanghamobile/smartphone.jsonl\",\n    \"data/raw/tgdd/laptop.jsonl\",\n    \"data/raw/tgdd/smartphone.jsonl\",\n    \"data/raw/viettelStore/laptop.jsonl\",\n    \"data/raw/viettelStore/smartphone.jsonl\",\n    \"data/raw/cellphoneS/laptop_reviews.jsonl\",\n    \"data/raw/cellphoneS/smartphone_reviews.jsonl\",\n    \"data/raw/fptshop/laptop_reviews.jsonl\",\n    \"data/raw/fptshop/smartphone_reviews.jsonl\",\n    \"data/raw/hoanghamobile/laptop_reviews.jsonl\",\n    \"data/raw/hoanghamobile/smartphone_reviews.jsonl\",\n    \"data/raw/tgdd/laptop_reviews.jsonl\",\n    \"data/raw/tgdd/smartphone_reviews.jsonl\",\n    \"data/raw/viettelStore/laptop_reviews.jsonl\",\n    \"data/raw/viettelStore/smartphone_reviews.jsonl\"\n  ],\n  \"products\": 10316,\n  \"reviews\": 15805,\n  \"replies\": 108,\n  \"flag_counts\": {\n    \"is_attachment_present\": 402,\n    \"is_attributes_empty\": 45,\n    \"is_original_price_missing\": 813,\n    \"is_payload_present\": 10316,\n    \"is_price_missing\": 13,\n    \"is_price_relation_issue\": 14,\n    \"is_price_zero\": 1752,\n    \"is_rating_out_of_declared_range\": 104,\n    \"is_reply_present\": 83,\n    \"is_review_count_missing\": 1109,\n    \"is_review_text_missing\": 782,\n    \"is_review_text_unusable\": 936,\n    \"is_review_text_whitespace\": 17,\n    \"is_review_time_missing\": 489,\n    \"is_total_sold_missing\": 8412,\n    \"is_variant_identity_missing\": 2022,\n    \"is_variant_reference_missing\": 12360\n  },\n  \"review_metadata_suspect_candidates\": 489,\n  \"raw_fields_preserved\": true,\n  \"records_dropped\": 0,\n  \"raw_modified\": false\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S2_audit_keys",
+      "script": "src/preprocessing/audit_keys.py",
+      "returncode": 0,
+      "duration_seconds": 3.829,
+      "stdout_tail": "{\n  \"products\": 10316,\n  \"reviews\": 15805,\n  \"replies\": 108,\n  \"parent_keys\": 7051,\n  \"variant_identity_status\": {\n    \"UNKNOWN\": 2022,\n    \"SKU_PRESENT\": 8294\n  },\n  \"review_variant_status\": {\n    \"PARENT_ONLY\": 12849,\n    \"VARIANT_MATCHED\": 2405,\n    \"VARIANT_UNRESOLVED\": 551\n  },\n  \"parent_orphans\": 0,\n  \"duplicate_sku_groups\": 0,\n  \"duplicate_sku_across_parents\": 1,\n  \"gold_tables_created\": false\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S3_profile_missing",
+      "script": "src/preprocessing/profile_missing.py",
+      "returncode": 0,
+      "duration_seconds": 2.776,
+      "stdout_tail": "{\n  \"product_scopes\": 10,\n  \"review_scopes\": 8,\n  \"report\": \"reports/missing_profile.md\"\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S4_build_silver_v2",
+      "script": "src/preprocessing/build_silver_v2.py",
+      "returncode": 0,
+      "duration_seconds": 10.86,
+      "stdout_tail": "{\n  \"pipeline_stage\": \"silver_v2\",\n  \"rows\": {\n    \"products\": 10316,\n    \"reviews\": 15805,\n    \"replies\": 108\n  },\n  \"rows_dropped\": 0,\n  \"values_imputed\": 0,\n  \"raw_fields_preserved\": true,\n  \"price_normalized_missing\": 16,\n  \"discount_valid\": 7737,\n  \"rating_valid\": 4863,\n  \"non_laptop_desktop_flagged\": 167,\n  \"review_text_usable\": 14869,\n  \"notes\": [\n    \"Normalized fields are derived; raw fields remain.\",\n    \"No missing value was imputed and no row was removed.\"\n  ]\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S5_audit_review_metadata",
+      "script": "src/preprocessing/audit_review_metadata.py",
+      "returncode": 0,
+      "duration_seconds": 3.378,
+      "stdout_tail": "{\n  \"reviews\": 489,\n  \"text_missing_or_empty\": 489,\n  \"time_missing\": 489,\n  \"ratings\": {\n    \"5\": 489\n  },\n  \"payload_present\": 489,\n  \"metadata_candidate_flagged\": 489\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S6_build_gold_v2",
+      "script": "src/preprocessing/build_gold_v2.py",
+      "returncode": 0,
+      "duration_seconds": 8.368,
+      "stdout_tail": "{\n  \"pipeline_stage\": \"gold_v2\",\n  \"source\": \"silver_v2\",\n  \"outputs\": {\n    \"dim_source_parents\": 7051,\n    \"fact_listings\": 10316,\n    \"fact_listings_features\": 10316,\n    \"fact_reviews\": 15805,\n    \"fact_review_replies\": 108,\n    \"products_processed\": 10316,\n    \"reviews_processed\": 15805\n  },\n  \"feature_fields\": [\n    \"listing_record_id\",\n    \"source_parent_id\",\n    \"source\",\n    \"category\",\n    \"brand_raw\",\n    \"brand_norm\",\n    \"seller_raw\",\n    \"price_vnd\",\n    \"original_price_vnd\",\n    \"discount_rate\",\n    \"is_price_missing\",\n    \"availability_status\",\n    \"rating_norm\",\n    \"has_rating\",\n    \"review_count_normalized\",\n    \"total_sold_raw\",\n    \"total_sold_normalized\",\n    \"installed_ram_gb\",\n    \"max_ram_gb\",\n    \"battery_mah\",\n    \"battery_wh\",\n    \"charger_watt\",\n    \"cpu_norm\",\n    \"gpu_norm\",\n    \"storage_gb\",\n    \"color_norm\",\n    \"screen_size_inch\",\n    \"operating_system_norm\",\n    \"camera_mp\",\n    \"display_type_norm\",\n    \"network_type_norm\"\n  ],\n  \"processed_review_fields\": [\n    \"review_record_id\",\n    \"source_parent_id\",\n    \"product_name\",\n    \"source\",\n    \"category\",\n    \"rating_raw\",\n    \"rating_norm\",\n    \"review_text_normalized\",\n    \"author_raw\",\n    \"review_time_raw\",\n    \"review_usable\",\n    \"is_reply_present\",\n    \"is_attachment_present\",\n    \"review_metadata_suspect_candidate\"\n  ],\n  \"normalized_fields_in_listings\": true,\n  \"raw_provenance_preserved\": true,\n  \"cross_store_identity_resolved\": false\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S7_validate_gold",
+      "script": "src/preprocessing/validate_gold.py",
+      "returncode": 0,
+      "duration_seconds": 3.963,
+      "stdout_tail": "{\n  \"pipeline_stage\": \"gold_validation\",\n  \"counts\": {\n    \"dim_source_parents\": 7051,\n    \"fact_listings\": 10316,\n    \"fact_reviews\": 15805,\n    \"fact_review_replies\": 108\n  },\n  \"unique_keys\": {\n    \"source_parent_id\": true,\n    \"listing_record_id\": true,\n    \"review_record_id\": true,\n    \"reply_record_id\": true\n  },\n  \"parent_keys\": {\n    \"listing_parent_keys\": 7051,\n    \"dim_parent_keys\": 7051,\n    \"reviews_with_parent\": 15805,\n    \"reviews_without_parent\": 0\n  },\n  \"review_parent_join_size_distribution\": {\n    \"1\": 3874,\n    \"2\": 3114,\n    \"3\": 4728,\n    \"4\": 2201,\n    \"5\": 671,\n    \"6\": 605,\n    \"7\": 96,\n    \"8\": 168,\n    \"9\": 188,\n    \"10\": 67,\n    \"12\": 69,\n    \"14\": 7,\n    \"16\": 17\n  },\n  \"hypothetical_parent_join_rows\": 45651,\n  \"join_warning\": \"Joining reviews to all listing rows by source/category/parent is one-to-many; use variant_link_status before variant-level joins.\",\n  \"cross_store_identity_resolved\": false\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S8_validate_attributes",
+      "script": "src/preprocessing/validate_attributes.py",
+      "returncode": 0,
+      "duration_seconds": 2.67,
+      "stdout_tail": "{\n  \"status\": \"PASSED\",\n  \"confidence_counts\": {\n    \"HIGH\": 3231,\n    \"AMBIGUOUS\": 6843,\n    \"FAILED\": 242\n  },\n  \"ram_conflicts\": 0\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S9_quality_gates",
+      "script": "src/preprocessing/quality_gates.py",
+      "returncode": 0,
+      "duration_seconds": 7.657,
+      "stdout_tail": "{\n  \"pipeline_stage\": \"quality_gates\",\n  \"status\": \"PASSED\",\n  \"gates\": [\n    {\n      \"gate\": \"raw_unchanged\",\n      \"passed\": true,\n      \"detail\": false\n    },\n    {\n      \"gate\": \"no_rows_dropped_staging\",\n      \"passed\": true,\n      \"detail\": 0\n    },\n    {\n      \"gate\": \"silver_row_counts\",\n      \"passed\": true,\n      \"detail\": {\n        \"products\": 10316,\n        \"reviews\": 15805\n      }\n    },\n    {\n      \"gate\": \"silver_no_imputation\",\n      \"passed\": true,\n      \"detail\": 0\n    },\n    {\n      \"gate\": \"listing_record_id_unique\",\n      \"passed\": true,\n      \"detail\": 10316\n    },\n    {\n      \"gate\": \"review_record_id_unique\",\n      \"passed\": true,\n      \"detail\": 15805\n    },\n    {\n      \"gate\": \"silver_provenance\",\n      \"passed\": true,\n      \"detail\": \"raw_file/raw_line_number/raw_record_id\"\n    },\n    {\n      \"gate\": \"rating_domain\",\n      \"passed\": true,\n      \"detail\": 0\n    },\n    {\n      \"gate\": \"discount_domain\",\n      \"passed\": true,\n      \"detail\": 0\n    },\n    {\n      \"gate\": \"availability_domain\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"gate\": \"review_usable_present\",\n      \"passed\": true,\n      \"detail\": 15805\n    },\n    {\n      \"gate\": \"attribute_validation\",\n      \"passed\": true,\n      \"detail\": \"PASSED\"\n    },\n    {\n      \"gate\": \"feature_view_schema\",\n      \"passed\": true,\n      \"detail\": {\n        \"records\": 10316,\n        \"fields\": 31\n      }\n    },\n    {\n      \"gate\": \"gold_counts_match_silver\",\n      \"passed\": true,\n      \"detail\": {\n        \"gold_listings\": 10316,\n        \"gold_reviews\": 15805\n      }\n    }\n  ],\n  \"final_release_ready\": true\n}\n",
+      "stderr_tail": ""
+    },
+    {
+      "stage": "S10_release_manifest",
+      "script": "src/preprocessing/build_release_manifest.py",
+      "returncode": 0,
+      "duration_seconds": 6.004,
+      "stdout_tail": "{\n  \"release\": \"tv2-data-v1\",\n  \"raw_files\": 20,\n  \"staging_files\": 3,\n  \"gold_files\": 5,\n  \"provenance_checks\": {\n    \"fact_listings.jsonl\": {\n      \"records\": 10316,\n      \"missing_raw_record_id\": 0,\n      \"missing_raw_file\": 0,\n      \"missing_raw_line_number\": 0\n    },\n    \"fact_reviews.jsonl\": {\n      \"records\": 15805,\n      \"missing_raw_record_id\": 0,\n      \"missing_raw_file\": 0,\n      \"missing_raw_line_number\": 0\n    },\n    \"fact_review_replies.jsonl\": {\n      \"records\": 108,\n      \"missing_parent_review_record_id\": 0\n    }\n  }\n}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "raw_immutable": true,
+  "final_release_ready": true,
+  "note": "final_release_ready is read from quality_gate_report.json after all stages pass."
+}

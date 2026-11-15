@@ -1,0 +1,3410 @@
+[
+  {
+    "file": "data/raw/cellphoneS/laptop.jsonl",
+    "records": 3912,
+    "errors": [],
+    "sha256": "9949539eff9d8524b03f018b62e16cdf37ae61fbc554fb4248095de41ac2a474",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 3912
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "availability_raw": {
+        "types": {
+          "int": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "brand_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "int": 662,
+          "float": 3250
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "int": 650,
+          "float": 3262
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 3790,
+          "float": 122
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "seller_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 3912
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 3912
+        },
+        "absent": 0,
+        "empty": 3912
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 481,
+          "str": 3431
+        },
+        "absent": 0,
+        "empty": 481
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 481,
+          "str": 3431
+        },
+        "absent": 0,
+        "empty": 481
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 481,
+          "str": 3431
+        },
+        "absent": 0,
+        "empty": 481
+      },
+      "variant_url_raw": {
+        "types": {
+          "NoneType": 481,
+          "str": 3431
+        },
+        "absent": 0,
+        "empty": 481
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 3912,
+        "distinct": 3444
+      },
+      "parent_product_id_raw": {
+        "nonempty": 3912,
+        "distinct": 3444
+      },
+      "variant_sku_raw": {
+        "nonempty": 3431,
+        "distinct": 3430
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/cellphoneS/laptop_reviews.jsonl",
+    "records": 1898,
+    "errors": [],
+    "sha256": "5c1e13995322e822e175c7e992ccb0a3f27b6780a4526684c687eea6ff8b5ccb",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 1898
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 287
+      },
+      "author_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 1898
+        },
+        "absent": 0,
+        "empty": 1898
+      },
+      "category": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "NoneType": 1898
+        },
+        "absent": 0,
+        "empty": 1898
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "list": 1898
+        },
+        "absent": 0,
+        "empty": 1893
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "NoneType": 1898
+        },
+        "absent": 0,
+        "empty": 1898
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 11
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 1898
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "NoneType": 1898
+        },
+        "absent": 0,
+        "empty": 1898
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 1898
+        },
+        "absent": 0,
+        "empty": 1898
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 1898,
+        "distinct": 667
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      },
+      "review_id_raw": {
+        "nonempty": 1898,
+        "distinct": 1898
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/cellphoneS/smartphone.jsonl",
+    "records": 3935,
+    "errors": [],
+    "sha256": "d1944a9a6a848ea125b699ae5c8ef87df1aae7e861f63de4e86a33563a940487",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 3935
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "availability_raw": {
+        "types": {
+          "int": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "brand_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 20
+      },
+      "category": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "float": 2725,
+          "int": 1210
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "float": 2726,
+          "int": 1209
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 2959,
+          "float": 976
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "seller_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 3935
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 3935
+        },
+        "absent": 0,
+        "empty": 3935
+      },
+      "variant_color_raw": {
+        "types": {
+          "str": 3184,
+          "NoneType": 751
+        },
+        "absent": 0,
+        "empty": 751
+      },
+      "variant_name_raw": {
+        "types": {
+          "str": 3184,
+          "NoneType": 751
+        },
+        "absent": 0,
+        "empty": 751
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 3184,
+          "NoneType": 751
+        },
+        "absent": 0,
+        "empty": 751
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 3184,
+          "NoneType": 751
+        },
+        "absent": 0,
+        "empty": 751
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 3935,
+        "distinct": 2071
+      },
+      "parent_product_id_raw": {
+        "nonempty": 3935,
+        "distinct": 2071
+      },
+      "variant_sku_raw": {
+        "nonempty": 3184,
+        "distinct": 3184
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/cellphoneS/smartphone_reviews.jsonl",
+    "records": 9296,
+    "errors": [],
+    "sha256": "a5659d17b9d1463d29cc38d708b1ca162b738d6f7963fc12bab578c0bf2f009c",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 9296
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 1812
+      },
+      "author_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 12
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 9296
+        },
+        "absent": 0,
+        "empty": 9296
+      },
+      "category": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "NoneType": 9296
+        },
+        "absent": 0,
+        "empty": 9296
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "list": 9296
+        },
+        "absent": 0,
+        "empty": 9272
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "NoneType": 9296
+        },
+        "absent": 0,
+        "empty": 9296
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 126
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 9296
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "NoneType": 9296
+        },
+        "absent": 0,
+        "empty": 9296
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 9296
+        },
+        "absent": 0,
+        "empty": 9296
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 9296,
+        "distinct": 821
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      },
+      "review_id_raw": {
+        "nonempty": 9296,
+        "distinct": 9296
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/fptshop/laptop.jsonl",
+    "records": 356,
+    "errors": [],
+    "sha256": "5e09f62c96133729b6fc287ceacdc5cb823519aa28bc189870ee7d65c4c7e3a1",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 356
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "availability_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "brand_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "int": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "int": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 245,
+          "float": 111
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "NoneType": 356
+        },
+        "absent": 0,
+        "empty": 356
+      },
+      "seller_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "str": 332,
+          "NoneType": 24
+        },
+        "absent": 0,
+        "empty": 24
+      },
+      "variant_color_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_name_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 356
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 356,
+        "distinct": 317
+      },
+      "parent_product_id_raw": {
+        "nonempty": 356,
+        "distinct": 317
+      },
+      "variant_sku_raw": {
+        "nonempty": 356,
+        "distinct": 356
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/fptshop/laptop_reviews.jsonl",
+    "records": 602,
+    "errors": [],
+    "sha256": "35d915031c5e91e0d05c8257c285c0bc65d7a0ce988f64ae5da0d535c7298441",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 602
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "dict": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "author_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 602
+        },
+        "absent": 0,
+        "empty": 602
+      },
+      "category": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "int": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "list": 602
+        },
+        "absent": 0,
+        "empty": 593
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "str": 99,
+          "NoneType": 503
+        },
+        "absent": 0,
+        "empty": 503
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 602
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "str": 99,
+          "NoneType": 503
+        },
+        "absent": 0,
+        "empty": 503
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 99,
+          "NoneType": 503
+        },
+        "absent": 0,
+        "empty": 503
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 602,
+        "distinct": 128
+      },
+      "variant_sku_raw": {
+        "nonempty": 99,
+        "distinct": 64
+      },
+      "review_id_raw": {
+        "nonempty": 602,
+        "distinct": 602
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/fptshop/smartphone.jsonl",
+    "records": 464,
+    "errors": [],
+    "sha256": "b2256116e6c3e0a4dda6aeb83c0777b31dfa8f620a4a9fd365b4d2d2558c8179",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 464
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "availability_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "brand_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "int": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "int": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 378,
+          "float": 86
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "NoneType": 464
+        },
+        "absent": 0,
+        "empty": 464
+      },
+      "seller_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "str": 435,
+          "NoneType": 29
+        },
+        "absent": 0,
+        "empty": 29
+      },
+      "variant_color_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_name_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 464
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 464,
+        "distinct": 141
+      },
+      "parent_product_id_raw": {
+        "nonempty": 464,
+        "distinct": 141
+      },
+      "variant_sku_raw": {
+        "nonempty": 464,
+        "distinct": 464
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/fptshop/smartphone_reviews.jsonl",
+    "records": 1092,
+    "errors": [],
+    "sha256": "33ea3645762b8599ff35f73e28655a43f207a1cd9f460188893aafe07fdca46f",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 1092
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "dict": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "author_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 1092
+        },
+        "absent": 0,
+        "empty": 1092
+      },
+      "category": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "int": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "list": 1092
+        },
+        "absent": 0,
+        "empty": 1047
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "NoneType": 663,
+          "str": 429
+        },
+        "absent": 0,
+        "empty": 663
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 1092
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "NoneType": 663,
+          "str": 429
+        },
+        "absent": 0,
+        "empty": 663
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 687,
+          "str": 405
+        },
+        "absent": 0,
+        "empty": 687
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 1092,
+        "distinct": 119
+      },
+      "variant_sku_raw": {
+        "nonempty": 405,
+        "distinct": 165
+      },
+      "review_id_raw": {
+        "nonempty": 1092,
+        "distinct": 1092
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/hoanghamobile/laptop.jsonl",
+    "records": 93,
+    "errors": [],
+    "sha256": "44b80296f936a9327b6c83a017b3eab354af8a1cb0d04028c4691fb2f4095d78",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 93
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "availability_raw": {
+        "types": {
+          "str": 91,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "brand_raw": {
+        "types": {
+          "str": 91,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "category": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "str": 87,
+          "NoneType": 6
+        },
+        "absent": 0,
+        "empty": 6
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "NoneType": 93
+        },
+        "absent": 0,
+        "empty": 93
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "NoneType": 93
+        },
+        "absent": 0,
+        "empty": 93
+      },
+      "seller_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 93
+        },
+        "absent": 0,
+        "empty": 93
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 93
+        },
+        "absent": 0,
+        "empty": 93
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 93
+        },
+        "absent": 0,
+        "empty": 93
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 93
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 93,
+        "distinct": 93
+      },
+      "parent_product_id_raw": {
+        "nonempty": 93,
+        "distinct": 93
+      },
+      "variant_sku_raw": {
+        "nonempty": 93,
+        "distinct": 93
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/hoanghamobile/laptop_reviews.jsonl",
+    "records": 0,
+    "errors": [],
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {},
+    "fields": {},
+    "keys": {},
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/hoanghamobile/smartphone.jsonl",
+    "records": 192,
+    "errors": [],
+    "sha256": "bb928a5c9e43b7e0e7d4e4048cf9d4eb136f8b9cec7fe360421fc2625931e471",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 192
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 192
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "availability_raw": {
+        "types": {
+          "str": 190,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "brand_raw": {
+        "types": {
+          "str": 190,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "category": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "NoneType": 21,
+          "str": 171
+        },
+        "absent": 0,
+        "empty": 21
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "seller_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "source": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 192
+        },
+        "absent": 0,
+        "empty": 192
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 192
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 192,
+        "distinct": 192
+      },
+      "parent_product_id_raw": {
+        "nonempty": 192,
+        "distinct": 192
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/hoanghamobile/smartphone_reviews.jsonl",
+    "records": 0,
+    "errors": [],
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {},
+    "fields": {},
+    "keys": {},
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/tgdd/laptop.jsonl",
+    "records": 490,
+    "errors": [],
+    "sha256": "ec5938ab2c1a8873f1e3f1bf19a4ae7e55ae0663e939c69be81fa6ffffb154fc",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 490
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 490
+        },
+        "absent": 0,
+        "empty": 1
+      },
+      "availability_raw": {
+        "types": {
+          "NoneType": 431,
+          "str": 59
+        },
+        "absent": 0,
+        "empty": 431
+      },
+      "brand_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "int": 429,
+          "NoneType": 61
+        },
+        "absent": 0,
+        "empty": 61
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "int": 488,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "float": 37,
+          "int": 453
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "seller_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "str": 490
+        },
+        "absent": 0,
+        "empty": 50
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 445,
+          "str": 45
+        },
+        "absent": 0,
+        "empty": 445
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 431,
+          "str": 59
+        },
+        "absent": 0,
+        "empty": 431
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 431,
+          "str": 59
+        },
+        "absent": 0,
+        "empty": 431
+      },
+      "variant_url_raw": {
+        "types": {
+          "NoneType": 431,
+          "str": 59
+        },
+        "absent": 0,
+        "empty": 431
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 490,
+        "distinct": 446
+      },
+      "parent_product_id_raw": {
+        "nonempty": 490,
+        "distinct": 446
+      },
+      "variant_sku_raw": {
+        "nonempty": 59,
+        "distinct": 59
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/tgdd/laptop_reviews.jsonl",
+    "records": 99,
+    "errors": [],
+    "sha256": "5c1d357f598a1ddcf56de785a531bccc138cf04898046a6d34298badde2b54c1",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 99
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "list": 99
+        },
+        "absent": 0,
+        "empty": 88
+      },
+      "author_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "buy_date_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "int": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 99
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 94,
+          "NoneType": 5
+        },
+        "absent": 0,
+        "empty": 5
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "str": 99
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 96,
+          "str": 3
+        },
+        "absent": 0,
+        "empty": 96
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 99,
+        "distinct": 44
+      },
+      "variant_sku_raw": {
+        "nonempty": 3,
+        "distinct": 2
+      },
+      "review_id_raw": {
+        "nonempty": 99,
+        "distinct": 99
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/tgdd/smartphone.jsonl",
+    "records": 707,
+    "errors": [],
+    "sha256": "7fa9a3dd5993d692d648974288912fde6b69dc106ed5f430f5556ec676eb9cd1",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 707
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 707
+        },
+        "absent": 0,
+        "empty": 29
+      },
+      "availability_raw": {
+        "types": {
+          "str": 685,
+          "NoneType": 22
+        },
+        "absent": 0,
+        "empty": 22
+      },
+      "brand_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "NoneType": 693,
+          "int": 13,
+          "float": 1
+        },
+        "absent": 0,
+        "empty": 693
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "int": 698,
+          "float": 1,
+          "NoneType": 8
+        },
+        "absent": 0,
+        "empty": 8
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 141,
+          "float": 566
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "seller_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "str": 707
+        },
+        "absent": 0,
+        "empty": 10
+      },
+      "variant_color_raw": {
+        "types": {
+          "str": 561,
+          "NoneType": 146
+        },
+        "absent": 0,
+        "empty": 146
+      },
+      "variant_name_raw": {
+        "types": {
+          "str": 685,
+          "NoneType": 22
+        },
+        "absent": 0,
+        "empty": 22
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 685,
+          "NoneType": 22
+        },
+        "absent": 0,
+        "empty": 22
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 685,
+          "NoneType": 22
+        },
+        "absent": 0,
+        "empty": 22
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 707,
+        "distinct": 180
+      },
+      "parent_product_id_raw": {
+        "nonempty": 707,
+        "distinct": 180
+      },
+      "variant_sku_raw": {
+        "nonempty": 685,
+        "distinct": 685
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/tgdd/smartphone_reviews.jsonl",
+    "records": 2329,
+    "errors": [],
+    "sha256": "6af4b63f9ed4cdd231b4616ad10ace0e399057905440ff68de0bc8566c3d01fd",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 2329
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "list": 2329
+        },
+        "absent": 0,
+        "empty": 2110
+      },
+      "author_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "buy_date_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "category": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "int": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 2329
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_text_raw": {
+        "types": {
+          "str": 2041,
+          "NoneType": 288
+        },
+        "absent": 0,
+        "empty": 288
+      },
+      "review_time_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "source": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "str": 2329
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 1898,
+          "NoneType": 431
+        },
+        "absent": 0,
+        "empty": 431
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 2329,
+        "distinct": 126
+      },
+      "variant_sku_raw": {
+        "nonempty": 1898,
+        "distinct": 317
+      },
+      "review_id_raw": {
+        "nonempty": 2329,
+        "distinct": 2329
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/viettelStore/laptop.jsonl",
+    "records": 23,
+    "errors": [],
+    "sha256": "fa596b10753955fb7aa7b17a7f7251e4288697528ee15e76adf6b1e9c5441c61",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 23
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 23
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "availability_raw": {
+        "types": {
+          "str": 21,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "brand_raw": {
+        "types": {
+          "str": 21,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "category": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 20,
+          "NoneType": 2,
+          "float": 1
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 21,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "seller_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "str": 22,
+          "NoneType": 1
+        },
+        "absent": 0,
+        "empty": 1
+      },
+      "source": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 23
+        },
+        "absent": 0,
+        "empty": 23
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 23
+        },
+        "absent": 0,
+        "empty": 23
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 23
+        },
+        "absent": 0,
+        "empty": 23
+      },
+      "variant_sku_raw": {
+        "types": {
+          "str": 22,
+          "NoneType": 1
+        },
+        "absent": 0,
+        "empty": 1
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 23
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 23,
+        "distinct": 23
+      },
+      "parent_product_id_raw": {
+        "nonempty": 23,
+        "distinct": 23
+      },
+      "variant_sku_raw": {
+        "nonempty": 22,
+        "distinct": 22
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/viettelStore/laptop_reviews.jsonl",
+    "records": 63,
+    "errors": [],
+    "sha256": "b5e4deec8336fbb3930ae1d1496f8b33dc38d49219b6038f082a4929e43ee00a",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 63
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "author_raw": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "category": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_text_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "review_time_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "source": {
+        "types": {
+          "str": 63
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 63
+        },
+        "absent": 0,
+        "empty": 63
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 63,
+        "distinct": 21
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      },
+      "review_id_raw": {
+        "nonempty": 63,
+        "distinct": 63
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/viettelStore/smartphone.jsonl",
+    "records": 144,
+    "errors": [],
+    "sha256": "bce84fd1b93bcbc3f12f127ad6a4f6ef3605580cc8e81d809fc68fec5e823d53",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "25": 144
+    },
+    "fields": {
+      "attributes_raw": {
+        "types": {
+          "dict": 144
+        },
+        "absent": 0,
+        "empty": 11
+      },
+      "availability_raw": {
+        "types": {
+          "str": 142,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "brand_raw": {
+        "types": {
+          "str": 142,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "category": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "original_price_raw": {
+        "types": {
+          "str": 112,
+          "NoneType": 32
+        },
+        "absent": 0,
+        "empty": 32
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_name_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_url_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "price_raw": {
+        "types": {
+          "str": 141,
+          "NoneType": 3
+        },
+        "absent": 0,
+        "empty": 3
+      },
+      "product_id_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_name_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "product_url_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 76,
+          "float": 66,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_count_raw": {
+        "types": {
+          "int": 142,
+          "NoneType": 2
+        },
+        "absent": 0,
+        "empty": 2
+      },
+      "seller_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "sku_raw": {
+        "types": {
+          "NoneType": 144
+        },
+        "absent": 0,
+        "empty": 144
+      },
+      "source": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "total_sold_raw": {
+        "types": {
+          "NoneType": 144
+        },
+        "absent": 0,
+        "empty": 144
+      },
+      "variant_color_raw": {
+        "types": {
+          "NoneType": 144
+        },
+        "absent": 0,
+        "empty": 144
+      },
+      "variant_name_raw": {
+        "types": {
+          "NoneType": 144
+        },
+        "absent": 0,
+        "empty": 144
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 144
+        },
+        "absent": 0,
+        "empty": 144
+      },
+      "variant_url_raw": {
+        "types": {
+          "str": 144
+        },
+        "absent": 0,
+        "empty": 0
+      }
+    },
+    "keys": {
+      "product_id_raw": {
+        "nonempty": 144,
+        "distinct": 144
+      },
+      "parent_product_id_raw": {
+        "nonempty": 144,
+        "distinct": 144
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      }
+    },
+    "exact_duplicate_excess": 0
+  },
+  {
+    "file": "data/raw/viettelStore/smartphone_reviews.jsonl",
+    "records": 426,
+    "errors": [],
+    "sha256": "9a0af8c617d9ca43553c91991169b86f4080c86e974298211c6486b70ec8d2d9",
+    "matches_packaged_sha256": true,
+    "matches_packaged_record_count": true,
+    "field_count_distribution": {
+      "19": 426
+    },
+    "fields": {
+      "attached_files_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "author_raw": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 181
+      },
+      "buy_date_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "category": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_batch": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "crawl_time": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "like_count_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "parent_product_id_raw": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "parent_product_url_raw": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "rating_raw": {
+        "types": {
+          "int": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "raw_payload": {
+        "types": {
+          "dict": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "reply_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "review_id_raw": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_product_code_raw": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "review_text_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "review_time_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "source": {
+        "types": {
+          "str": 426
+        },
+        "absent": 0,
+        "empty": 0
+      },
+      "variant_code_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      },
+      "variant_sku_raw": {
+        "types": {
+          "NoneType": 426
+        },
+        "absent": 0,
+        "empty": 426
+      }
+    },
+    "keys": {
+      "parent_product_id_raw": {
+        "nonempty": 426,
+        "distinct": 142
+      },
+      "variant_sku_raw": {
+        "nonempty": 0,
+        "distinct": 0
+      },
+      "review_id_raw": {
+        "nonempty": 426,
+        "distinct": 426
+      }
+    },
+    "exact_duplicate_excess": 0
+  }
+]

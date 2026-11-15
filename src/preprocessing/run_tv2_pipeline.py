@@ -7,20 +7,20 @@ from __future__ import annotations
 from pathlib import Path
 import json, subprocess, sys, time
 
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 REPORTS=ROOT/"reports"
 STAGES=[
-    ("S0_profile_raw", "src/profile_data.py"),
-    ("S1_build_staging", "src/build_staging.py"),
-    ("S2_audit_keys", "src/audit_keys.py"),
-    ("S3_profile_missing", "src/profile_missing.py"),
-    ("S4_build_silver_v2", "src/build_silver_v2.py"),
-    ("S5_audit_review_metadata", "src/audit_review_metadata.py"),
-    ("S6_build_gold_v2", "src/build_gold_v2.py"),
-    ("S7_validate_gold", "src/validate_gold.py"),
-    ("S8_validate_attributes", "src/validate_attributes.py"),
-    ("S9_quality_gates", "src/quality_gates.py"),
-    ("S10_release_manifest", "src/build_release_manifest.py"),
+    ("S0_profile_raw", "src/preprocessing/profile_data.py"),
+    ("S1_build_staging", "src/preprocessing/build_staging.py"),
+    ("S2_audit_keys", "src/preprocessing/audit_keys.py"),
+    ("S3_profile_missing", "src/preprocessing/profile_missing.py"),
+    ("S4_build_silver_v2", "src/preprocessing/build_silver_v2.py"),
+    ("S5_audit_review_metadata", "src/preprocessing/audit_review_metadata.py"),
+    ("S6_build_gold_v2", "src/preprocessing/build_gold_v2.py"),
+    ("S7_validate_gold", "src/preprocessing/validate_gold.py"),
+    ("S8_validate_attributes", "src/preprocessing/validate_attributes.py"),
+    ("S9_quality_gates", "src/preprocessing/quality_gates.py"),
+    ("S10_release_manifest", "src/preprocessing/build_release_manifest.py"),
 ]
 
 def main():

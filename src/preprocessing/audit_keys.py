@@ -11,7 +11,7 @@ import hashlib
 import json
 import re
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 STAGING = ROOT / "data" / "staging"
 REPORTS = ROOT / "reports"
 

@@ -5,7 +5,7 @@ Raw fields remain alongside derived fields. No rows are dropped or imputed.
 from pathlib import Path
 import json, re
 
-ROOT=Path(__file__).resolve().parents[1]; IN=ROOT/"data"/"staging"; OUT=ROOT/"data"/"silver_v2"; REPORT=ROOT/"reports"
+ROOT=Path(__file__).resolve().parents[2]; IN=ROOT/"data"/"staging"; OUT=ROOT/"data"/"silver_v2"; REPORT=ROOT/"reports"
 
 def read(name):
     with (IN/name).open(encoding="utf8") as f: return [json.loads(x) for x in f if x.strip()]
@@ -87,7 +87,15 @@ def attr_extract(attrs, *fallback_texts):
             for term in ['AMOLED','OLED','LTPO','IPS','LCD','TFT','Mini LED','LED']:
                 if term.lower() in val.lower(): terms.append(term)
             if terms: text_found['display_type_norm'].append('|'.join(terms))
-        if any(t in key for t in ['mạng di động','hỗ trợ mạng','network','5g','4g']) and val.strip().lower() not in {'no_selection','none','n/a'}: text_found['network_type_norm'].append(val.strip())
+        val_stripped = val.strip()
+        val_low = val_stripped.lower()
+        is_price_text = bool(
+            re.search(r'(?:₫|vnđ|vnd|\bđồng\b|\d\s*đ\b)', val_low)
+            or re.search(r'\d+[.,]\d{3}[.,]\d{3}', val_low)
+        )
+        net_key_match = any(t in key for t in ['mạng di động', 'hỗ trợ mạng', 'network']) or bool(re.search(r'\b(?:5g|4g)\b', key))
+        if net_key_match and not is_price_text and val_low not in {'no_selection', 'none', 'n/a'}:
+            text_found['network_type_norm'].append(val_stripped)
         nums=re.findall(r"(?<!\d)(\d+(?:[.,]\d+)?)\s*(gb|mah|wh|w)\b",val.lower())
         for n,u in nums:
             x=float(n.replace('.','').replace(',','')) if u=='mah' else float(n.replace(',','.'))
@@ -96,11 +104,11 @@ def attr_extract(attrs, *fallback_texts):
             elif u=='mah' and any(t in key for t in ['pin','battery']): found['battery_mah'].append(x)
             elif u=='wh' and any(t in key for t in ['pin','battery']): found['battery_wh'].append(x)
             elif u=='w' and any(t in key for t in ['sạc','sac','charger','công suất']): found['charger_watt'].append(x)
-        for n,u in re.findall(r"(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb|inch|in|mp|\")",val.lower()):
+        for n,u in re.findall(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb|inches|inch|in|mp|")(?![a-z])',val.lower()):
             x=float(n.replace(',','.'))
             if u=='tb' and any(t in key for t in ['ổ cứng','lưu trữ','bộ nhớ','storage','memory']): found['storage_gb'].append(x*1024)
             elif u=='gb' and any(t in key for t in ['ổ cứng','lưu trữ','bộ nhớ trong','storage','memory']): found['storage_gb'].append(x)
-            elif u in {'inch','in','"'} and any(t in key for t in ['màn hình','screen','display','kích thước']): found['screen_size_inch'].append(x)
+            elif u in {'inches','inch','in','"'} and any(t in key for t in ['màn hình','screen','display','kích thước']): found['screen_size_inch'].append(x)
             elif u=='mp' and any(t in key for t in ['camera','cam']): found['camera_mp'].append(x)
     # Keep a representative numeric value when several observations exist;
     # ambiguity is still exposed through hardware_extraction_confidence.
@@ -121,7 +129,7 @@ def attr_extract(attrs, *fallback_texts):
     fallback=' '.join(str(x) for x in fallback_texts if isinstance(x,str) and x.strip())
     if fallback:
         if out['screen_size_inch'] is None:
-            m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(?:inch|in|\")',fallback.lower())
+            m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(?:inches|inch|in(?![a-z])|")',fallback.lower())
             if m: out['screen_size_inch']=float(m.group(1).replace(',','.'))
         if out['installed_ram_gb'] is None:
             m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(?:gb|g)\s*(?:ram|ddr)',fallback.lower())
@@ -130,8 +138,9 @@ def attr_extract(attrs, *fallback_texts):
             m=re.search(r'(?<!\d)(\d+(?:[.,]\d+)?)\s*(tb|gb)\s*(?:ssd|hdd|storage|rom)',fallback.lower())
             if m: out['storage_gb']=float(m.group(1).replace(',','.')) * (1024 if m.group(2)=='tb' else 1)
     # Guard against numeric tokens from unrelated attributes (for example a
-    # price being interpreted as RAM). Such values are marked missing rather
-    # than silently passed downstream as hardware specifications.
+    # price being interpreted as RAM, or "300 inits" brightness as screen size).
+    if out.get('screen_size_inch') is not None and not 1.0 <= out['screen_size_inch'] <= 35.0:
+        out['screen_size_inch']=None
     if out.get('installed_ram_gb') is not None and not 1 <= out['installed_ram_gb'] <= 256:
         out['installed_ram_gb']=None
     if out.get('max_ram_gb') is not None and not 1 <= out['max_ram_gb'] <= 1024:
@@ -173,7 +182,11 @@ def main():
         review_count_norm=None if r.get("source") in {"fptshop","hoanghamobile"} else parse_num(r.get("review_count_raw"))
         sold,sold_status=parse_total_sold(r.get("total_sold_raw")); attrs=attr_extract(r.get("attributes_raw"),r.get("product_name_raw"),r.get("variant_name_raw"));
         if attrs.get("color_norm") is None and isinstance(r.get("variant_color_raw"),str) and r.get("variant_color_raw").strip(): attrs["color_norm"]=r.get("variant_color_raw").strip()
-        x.update({"brand_norm":normalize_brand(r.get("brand_raw")),"price_vnd":p,"price_parse_status":p_status,"original_price_vnd":op,"original_price_parse_status":op_status,"price_normalized":p,"original_price_normalized":op,"price_missing_reason":None if p_status=="OK" else "FAILED","is_price_missing":p==0,"original_price_missing_reason":None if op_status=="OK" else "FAILED","availability_status":availability(r.get("availability_raw"),r.get("source")),"rating_norm":rating_norm,"rating_normalized":rating_norm,"rating_normalized_status":("MISSING" if rating_norm is None else "VALID_0_5"),"has_rating":False if r.get("source")=="hoanghamobile" or rating_norm is None or rating_norm==0 else True,"review_count_normalized":review_count_norm,"total_sold_normalized":sold,"total_sold_parse_status":sold_status,"discount_rate":((op-p)/op if p is not None and op is not None and op>0 and p>=0 and p<=op else None),"discount_status":("VALID" if p is not None and op is not None and op>0 and 0<=p<=op else "NOT_COMPUTED"),"silver_version":"tv2-silver-2.0",**attrs})
+        is_desktop = bool(
+            r.get("category") == "laptop"
+            and re.search(r"\b(?:imac|mac\s+mini|mac\s+studio|mac\s+pro)\b", (r.get("product_name_raw") or "").lower())
+        )
+        x.update({"brand_norm":normalize_brand(r.get("brand_raw")),"price_vnd":p,"price_parse_status":p_status,"original_price_vnd":op,"original_price_parse_status":op_status,"price_normalized":p,"original_price_normalized":op,"price_missing_reason":None if p_status=="OK" else "FAILED","is_price_missing":p==0,"original_price_missing_reason":None if op_status=="OK" else "FAILED","availability_status":availability(r.get("availability_raw"),r.get("source")),"rating_norm":rating_norm,"rating_normalized":rating_norm,"rating_normalized_status":("MISSING" if rating_norm is None else "VALID_0_5"),"has_rating":False if r.get("source")=="hoanghamobile" or rating_norm is None or rating_norm==0 else True,"review_count_normalized":review_count_norm,"total_sold_normalized":sold,"total_sold_parse_status":sold_status,"discount_rate":((op-p)/op if p is not None and op is not None and op>0 and p>=0 and p<=op else None),"discount_status":("VALID" if p is not None and op is not None and op>0 and 0<=p<=op else "NOT_COMPUTED"),"is_non_laptop_desktop":is_desktop,"silver_version":"tv2-silver-2.0",**attrs})
         products.append(x)
     reviews=[]
     for r in rs:
@@ -181,6 +194,6 @@ def main():
         x=dict(r); x.update({"review_text_normalized":None if missing(text_value) else str(text_value).strip(),"review_text_status":text_status(text_value),"review_time_status":"MISSING" if missing(r.get("review_time_raw")) else "PRESENT","review_usable":usable,"silver_version":"tv2-silver-2.0"}); reviews.append(x)
     replies_out=[dict(r, silver_version="tv2-silver-2.0") for r in replies]
     OUT.mkdir(parents=True,exist_ok=True); REPORT.mkdir(exist_ok=True); write("products_silver_v2.jsonl",products); write("reviews_silver_v2.jsonl",reviews); write("review_replies_silver_v2.jsonl",replies_out)
-    report={"pipeline_stage":"silver_v2","rows":{"products":len(products),"reviews":len(reviews),"replies":len(replies_out)},"rows_dropped":0,"values_imputed":0,"raw_fields_preserved":True,"price_normalized_missing":sum(x["price_normalized"] is None for x in products),"discount_valid":sum(x["discount_status"]=="VALID" for x in products),"rating_valid":sum(x["rating_normalized_status"]=="VALID_0_5" for x in products),"review_text_usable":sum(x["review_text_status"]=="PRESENT" for x in reviews),"notes":["Normalized fields are derived; raw fields remain.","No missing value was imputed and no row was removed."]}
+    report={"pipeline_stage":"silver_v2","rows":{"products":len(products),"reviews":len(reviews),"replies":len(replies_out)},"rows_dropped":0,"values_imputed":0,"raw_fields_preserved":True,"price_normalized_missing":sum(x["price_normalized"] is None for x in products),"discount_valid":sum(x["discount_status"]=="VALID" for x in products),"rating_valid":sum(x["rating_normalized_status"]=="VALID_0_5" for x in products),"non_laptop_desktop_flagged":sum(bool(x.get("is_non_laptop_desktop")) for x in products),"review_text_usable":sum(x["review_text_status"]=="PRESENT" for x in reviews),"notes":["Normalized fields are derived; raw fields remain.","No missing value was imputed and no row was removed."]}
     (REPORT/"silver_v2_quality_report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf8"); print(json.dumps(report,ensure_ascii=False,indent=2))
 if __name__=="__main__": main()

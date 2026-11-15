@@ -17,14 +17,15 @@ Hệ thống crawler thực tế thu thập dữ liệu gốc (Raw Data) cho bà
 
 Hệ thống crawler thiết kế theo mô hình Registry mở rộng (`SOURCE_REGISTRY` trong `crawler/run_crawler.py`), phân định rõ ràng giữa nguồn đã triển khai và nguồn dự kiến tương lai:
 
-- **Nguồn hiện hành (Implemented)**:
-    - `tgdd`: Thế Giới Di Động (`crawler/tgdd/`)
-    - `fptshop`: FPT Shop (`crawler/fptshop/`)
-    - `cellphones`: CellphoneS (`crawler/cellphoneS/`)
-- **Nguồn kế hoạch/tương lai (Planned / Future)**:
-    - `viettelstore`: Viettel Store (`implemented=False`)
-    - `hoanghamobile`: Hoàng Hà Mobile (`implemented=False`)
-      _(Khi gọi CLI tới các nguồn chưa triển khai, runner sẽ báo lỗi rõ ràng và từ chối chạy, tuyệt đối không âm thầm fallback sang nguồn khác)._
+- **Nguồn hiện hành (Implemented — đủ 5/5 sàn)**:
+    - `tgdd`: Thế Giới Di Động (`crawler/tgdd/`, `implemented=True`)
+    - `fptshop`: FPT Shop (`crawler/fptshop/`, `implemented=True`)
+    - `cellphones`: CellphoneS (`crawler/cellphoneS/`, `implemented=True`)
+    - `viettelstore`: Viettel Store (`crawler/viettelStore/`, `implemented=True`)
+    - `hoanghamobile`: Hoàng Hà Mobile (`crawler/hoanghamobile/`, `implemented=True`)
+
+> **Lưu trữ Dữ liệu Thô (Google Drive — TV1)**:
+> [TV1 Raw Data trên Google Drive](https://drive.google.com/drive/folders/1wQbWDOmYZFz2Ut3AShMu2o1wkMTJESuJ?usp=drive_link) (`data/raw/<source>/<category>.jsonl` & `<category>_reviews.jsonl`)
 
 ---
 
@@ -33,8 +34,10 @@ Hệ thống crawler thiết kế theo mô hình Registry mở rộng (`SOURCE_R
 - `crawler/tgdd/`: Spiders và items cho Thế Giới Di Động.
 - `crawler/fptshop/`: Spiders và items cho FPT Shop.
 - `crawler/cellphoneS/`: Spiders và items cho CellphoneS (GraphQL + SSR detail/review).
+- `crawler/viettelStore/`: Spiders và items cho Viettel Store.
+- `crawler/hoanghamobile/`: Spiders và items cho Hoàng Hà Mobile.
 - `crawler/run_crawler.py`: CLI Runner tập trung điều phối các nguồn với `RunnerLock` đảm bảo chống chạy đồng thời và kiểm soát an toàn snapshot bất biến.
-- `data/raw/<source>/<category>/`: Thư mục lưu trữ raw snapshots (sản phẩm: `*.jsonl`, đánh giá: `*_reviews.jsonl`).
+- `data/raw/<source>/`: Thư mục lưu trữ raw data / raw snapshots (sản phẩm: `*.jsonl`, đánh giá: `*_reviews.jsonl`).
 - `tests/`: Bộ kiểm thử toàn diện (contract, crawler, runner lock, source routing, an toàn raw data).
 
 ---
@@ -97,7 +100,7 @@ python crawler/run_crawler.py --source fptshop --category smartphone --limit 50
 #### B. Chạy toàn bộ các nguồn đã triển khai:
 
 ```bash
-# Chạy tuần tự tất cả các nguồn đã triển khai (tgdd, fptshop, cellphones):
+# Chạy tuần tự tất cả các nguồn đã triển khai (tgdd, fptshop, cellphones, viettelstore, hoanghamobile):
 python crawler/run_crawler.py --source all --category all --limit 50
 ```
 
@@ -149,7 +152,7 @@ data/processed/
 Chạy pipeline:
 
 ```bash
-py src/run_tv2_pipeline.py
+py src/preprocessing/run_tv2_pipeline.py
 ```
 
 Kết quả thành công:
@@ -187,7 +190,7 @@ has_rating = false
 
 Bộ dữ liệu Gold v2 và hai file processed được lưu tại:
 
-[TV2 Data Handoff trên Google Drive](https://drive.google.com/drive/folders/1NtfrhPY44LnNFrI5_mLcyw2r-tcK0dlc?usp=drive_link)
+[TV2 Data Handoff trên Google Drive](https://drive.google.com/drive/folders/1QiIvoEL_Lo2MWF3qoRpHypQvxLDvvELE?usp=drive_link)
 
 Bộ bàn giao gồm:
 

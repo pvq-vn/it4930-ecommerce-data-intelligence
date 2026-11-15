@@ -171,8 +171,8 @@ def verify_artifacts(repo_root: Path) -> dict:
 
             with open(tables_dir / "table_3_2_multicollinearity_vif.md", "r", encoding="utf-8") as f:
                 c3_2 = f.read()
-            if "5.44" not in c3_2:
-                sanity_errors.append("Bảng 3.2C không khớp chỉ số VIF = 5.44 của Smartphone RAM.")
+            if "2.68" not in c3_2:
+                sanity_errors.append("Bảng 3.2C không khớp chỉ số VIF = 2.68 của Smartphone RAM.")
         except Exception as e:
             sanity_errors.append(f"Lỗi kiểm toán nội dung bảng: {e}")
 
