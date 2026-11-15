@@ -28,7 +28,17 @@ Thumbs.db
 # Temporary & Scratch
 scratch/
 
+# Environment variables & secrets
+.env
+
 # raw data
 data/raw
 
 scratch_test_out.txt
+
+# Large local datasets / generated market-graph artifacts
+data/TV2_Data_Handoff/
+data/laptopmedia/
+
+# PyVis local assets generated at runtime
+lib/

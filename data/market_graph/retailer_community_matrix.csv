@@ -1,0 +1,64 @@
+﻿segment_label,CellphoneS,FPT,Hoàng Hà,TGDĐ,Viettel
+"Laptop 14-19M (HP, Dell)",9,0,0,0,0
+"Laptop 14-21M (ASUS, HP)",166,8,4,6,0
+"Laptop 14-43M (ASUS, Lenovo)",212,2,0,3,0
+"Laptop 15-29M (Dell, ASUS)",22,0,0,0,0
+"Laptop 15-45M (ASUS, MSI)",186,13,7,9,0
+"Laptop 16-22M (ASUS, Lenovo)",145,23,10,21,5
+"Laptop 17-146M (ASUS, Lenovo)",408,69,6,30,0
+"Laptop 17-19M (ASUS, Acer)",5,0,0,0,0
+Laptop 172-177M (MSI),3,0,0,0,0
+"Laptop 19-26M (HP, Lenovo)",80,11,2,30,5
+"Laptop 19-27M (Dell, HP)",55,9,1,8,1
+"Laptop 19-29M (ASUS, Lenovo)",108,26,12,36,2
+"Laptop 2-2M (HP, Dell)",0,0,3,0,0
+"Laptop 23-198M (Apple, MSI)",78,31,32,19,0
+"Laptop 25-32M (ASUS, HP)",100,46,4,67,7
+"Laptop 25-34M (Lenovo, HP)",53,10,2,33,1
+"Laptop 28-46M (Lenovo, ASUS)",119,31,1,86,0
+"Laptop 38-42M (Dell, ASUS)",5,0,0,0,0
+"Laptop 39-62M (Microsoft, HP)",9,0,0,0,0
+"Laptop 46-110M (Apple, Lenovo)",94,12,0,42,0
+"Laptop 6-10M (ASUS, HP)",15,0,0,0,0
+"Laptop 6-17M (ASUS, HP)",105,0,0,0,0
+"Laptop 7-33M (ASUS, HP)",170,4,1,6,0
+"Laptop 8-16M (ASUS, Lenovo)",166,2,5,1,0
+Laptop Niche 10-15M,5,0,0,0,0
+Laptop Niche 15-20M,6,0,0,0,0
+Laptop Niche 20-30M,5,0,0,0,0
+Laptop Niche <10M,7,0,1,0,0
+Laptop Niche >30M,14,1,0,0,0
+Smartphone 0-0M (Samsung),0,0,5,0,0
+"Smartphone 0-1M (Masstel, Nokia)",27,4,1,3,3
+"Smartphone 1-3M (Nokia, Realme)",52,1,7,0,0
+"Smartphone 1-5M (Samsung, Xiaomi)",25,0,0,0,0
+Smartphone 11-12M (Nothing),0,3,0,2,0
+Smartphone 11-13M (Motorola),0,0,0,3,0
+"Smartphone 11-20M (Apple, Samsung)",37,5,5,7,3
+"Smartphone 11-20M (OPPO, Samsung)",23,1,1,6,5
+"Smartphone 14-65M (Samsung, Xiaomi)",86,36,30,49,35
+"Smartphone 17-37M (Apple, Samsung)",42,0,0,0,0
+"Smartphone 2-2M (Xiaomi, TCL)",4,0,1,0,0
+"Smartphone 2-4M (Xiaomi, Tecno)",60,8,5,7,2
+"Smartphone 2-5M (OPPO, Nokia)",96,0,0,3,0
+"Smartphone 21-36M (Apple, Samsung)",68,11,11,9,5
+"Smartphone 3-5M (Xiaomi, Realme)",67,14,9,12,9
+"Smartphone 3-5M (Xiaomi, Samsung)",78,9,10,12,6
+Smartphone 39-48M (Apple),4,4,4,4,4
+Smartphone 4-5M (Motorola),0,0,0,5,0
+Smartphone 4-5M (Nubia),2,4,0,0,0
+"Smartphone 4-8M (OPPO, Vivo)",63,6,5,15,10
+Smartphone 5-6M (Xiaomi),3,1,1,2,0
+"Smartphone 5-8M (Xiaomi, Realme)",48,6,5,18,7
+Smartphone 58-84M (Apple),7,7,5,5,7
+"Smartphone 6-12M (OPPO, Realme)",112,17,14,34,14
+"Smartphone 6-12M (Xiaomi, Samsung)",65,13,9,14,6
+Smartphone 6-7M (Motorola),0,0,0,3,0
+Smartphone 7-8M (Vivo),0,0,0,3,1
+"Smartphone 8-22M (Xiaomi, OPPO)",78,12,8,26,11
+Smartphone 9-14M (Realme),0,0,0,6,0
+Smartphone Niche 10-15M,0,2,1,3,1
+Smartphone Niche 15-20M,0,0,2,1,0
+Smartphone Niche 20-30M,0,1,1,4,0
+Smartphone Niche <10M,40,13,38,19,3
+Smartphone Niche >30M,3,2,3,3,2
