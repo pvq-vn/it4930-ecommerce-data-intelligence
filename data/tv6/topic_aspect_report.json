@@ -1,0 +1,166 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "executed_at_utc": "2026-11-14T20:19:13.765979+00:00",
+  "step": "step4_topic_aspect_mining",
+  "total_reviews_analyzed": 14869,
+  "lda_topics": [
+    {
+      "topic_id": 0,
+      "topic_name": "Hiệu năng & Tốc độ máy",
+      "top_keywords": "không, được, máy, có, mua, mới, pin, bị, dùng, nhưng",
+      "dominant_doc_count": 4402,
+      "corpus_share_pct": 29.61
+    },
+    {
+      "topic_id": 1,
+      "topic_name": "Dịch vụ shop & Giao hàng",
+      "top_keywords": "rất, trong, đẹp, màn_hình, chụp, máy, tầm, camera, sử_dụng, dùng",
+      "dominant_doc_count": 2447,
+      "corpus_share_pct": 16.46
+    },
+    {
+      "topic_id": 2,
+      "topic_name": "Thiết kế & Màn hình hiển thị",
+      "top_keywords": "mình, mua, nên, không, có, điện_thoại, máy, con, em, còn",
+      "dominant_doc_count": 2395,
+      "corpus_share_pct": 16.11
+    },
+    {
+      "topic_id": 3,
+      "topic_name": "Thời lượng pin & Phụ kiện sạc",
+      "top_keywords": "nhân_viên, hàng, nhiệt_tình, tư_vấn, shop, rất, sản_phẩm, nhân_viên tư_vấn, có, giao",
+      "dominant_doc_count": 2838,
+      "corpus_share_pct": 19.09
+    },
+    {
+      "topic_id": 4,
+      "topic_name": "Trải nghiệm sử dụng & Sự cố",
+      "top_keywords": "tốt, ok, sản_phẩm, máy, đẹp, rất_tốt, dùng, giá, quá, chất_lượng",
+      "dominant_doc_count": 2787,
+      "corpus_share_pct": 18.74
+    }
+  ],
+  "nmf_topics": [
+    {
+      "topic_id": 0,
+      "top_keywords": "tốt, sản_phẩm tốt, sản_phẩm, dùng tốt, dịch_vụ tốt, dịch_vụ, giá, phục_vụ tốt, tốt nhân_viên, chất_lượng",
+      "dominant_doc_count": 1628,
+      "corpus_share_pct": 10.95
+    },
+    {
+      "topic_id": 1,
+      "top_keywords": "ok, rất ok, rất, sản_phẩm ok, quá ok, dùng ok, dùng, sản_phẩm, máy ok, ok tốt",
+      "dominant_doc_count": 944,
+      "corpus_share_pct": 6.35
+    },
+    {
+      "topic_id": 2,
+      "top_keywords": "không, có, máy, mua, được, mình, dùng, hàng, giá, sao",
+      "dominant_doc_count": 9224,
+      "corpus_share_pct": 62.04
+    },
+    {
+      "topic_id": 3,
+      "top_keywords": "nhiệt_tình, nhân_viên, nhân_viên nhiệt_tình, tư_vấn, tư_vấn nhiệt_tình, nhân_viên tư_vấn, tốt nhân_viên, hỗ_trợ, rất nhiệt_tình, hỗ_trợ nhiệt_tình",
+      "dominant_doc_count": 1587,
+      "corpus_share_pct": 10.67
+    },
+    {
+      "topic_id": 4,
+      "top_keywords": "rất_tốt, sản_phẩm, hài_lòng, sản_phẩm rất_tốt, rất, rất hài_lòng, sản_phẩm tốt, tuyệt_vời, sản_phẩm dùng, dùng rất_tốt",
+      "dominant_doc_count": 1486,
+      "corpus_share_pct": 9.99
+    }
+  ],
+  "aspect_distribution": [
+    {
+      "aspect_key": "battery_power",
+      "aspect_name": "Pin & Sạc (Battery & Power)",
+      "total_mentions": 1987,
+      "mention_rate_pct": 13.36,
+      "positive_pct": 77.5,
+      "neutral_pct": 7.5,
+      "negative_pct": 15.0
+    },
+    {
+      "aspect_key": "performance_thermal",
+      "aspect_name": "Hiệu năng & Tản nhiệt (Performance & Thermal)",
+      "total_mentions": 3051,
+      "mention_rate_pct": 20.52,
+      "positive_pct": 75.09,
+      "neutral_pct": 3.21,
+      "negative_pct": 21.7
+    },
+    {
+      "aspect_key": "display_design",
+      "aspect_name": "Màn hình & Thiết kế (Display & Design)",
+      "total_mentions": 2811,
+      "mention_rate_pct": 18.91,
+      "positive_pct": 87.26,
+      "neutral_pct": 4.02,
+      "negative_pct": 8.72
+    },
+    {
+      "aspect_key": "camera_audio",
+      "aspect_name": "Camera & Âm thanh (Camera & Audio)",
+      "total_mentions": 1067,
+      "mention_rate_pct": 7.18,
+      "positive_pct": 75.16,
+      "neutral_pct": 6.94,
+      "negative_pct": 17.9
+    },
+    {
+      "aspect_key": "service_logistics",
+      "aspect_name": "Dịch vụ & Giao vận (Service & Logistics)",
+      "total_mentions": 3806,
+      "mention_rate_pct": 25.6,
+      "positive_pct": 90.96,
+      "neutral_pct": 2.84,
+      "negative_pct": 6.2
+    }
+  ],
+  "category_comparison": [
+    {
+      "aspect_key": "battery_power",
+      "aspect_name": "Pin & Sạc (Battery & Power)",
+      "smartphone_count": 1705,
+      "smartphone_rate_pct": 13.88,
+      "laptop_count": 282,
+      "laptop_rate_pct": 10.92
+    },
+    {
+      "aspect_key": "performance_thermal",
+      "aspect_name": "Hiệu năng & Tản nhiệt (Performance & Thermal)",
+      "smartphone_count": 2291,
+      "smartphone_rate_pct": 18.65,
+      "laptop_count": 760,
+      "laptop_rate_pct": 29.42
+    },
+    {
+      "aspect_key": "display_design",
+      "aspect_name": "Màn hình & Thiết kế (Display & Design)",
+      "smartphone_count": 2096,
+      "smartphone_rate_pct": 17.06,
+      "laptop_count": 715,
+      "laptop_rate_pct": 27.68
+    },
+    {
+      "aspect_key": "camera_audio",
+      "aspect_name": "Camera & Âm thanh (Camera & Audio)",
+      "smartphone_count": 940,
+      "smartphone_rate_pct": 7.65,
+      "laptop_count": 127,
+      "laptop_rate_pct": 4.92
+    },
+    {
+      "aspect_key": "service_logistics",
+      "aspect_name": "Dịch vụ & Giao vận (Service & Logistics)",
+      "smartphone_count": 3103,
+      "smartphone_rate_pct": 25.26,
+      "laptop_count": 703,
+      "laptop_rate_pct": 27.22
+    }
+  ],
+  "aspect_coverage_rate": 55.9,
+  "avg_aspects_per_review": 0.86
+}

@@ -1,0 +1,7 @@
+| source          |   total_reviews |   usable_reviews |   unusable_reviews |   retention_rate_pct |   null_text_count |   empty_text_count |   suspect_metadata_count |
+|:----------------|----------------:|-----------------:|-------------------:|---------------------:|------------------:|-------------------:|-------------------------:|
+| cellphones      |           11194 |            11046 |                148 |                98.68 |                 0 |                148 |                        0 |
+| fptshop         |            1694 |             1688 |                  6 |                99.65 |                 0 |                  6 |                        0 |
+| tgdd            |            2428 |             2135 |                293 |                87.93 |               293 |                  0 |                        0 |
+| viettelstore    |             489 |                0 |                489 |                 0    |               489 |                  0 |                      489 |
+| Total / Overall |           15805 |            14869 |                936 |                94.08 |               782 |                154 |                      489 |

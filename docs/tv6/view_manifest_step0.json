@@ -1,0 +1,231 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "generated_at_utc": "2026-11-14T16:31:41.417687+00:00",
+  "summary": {
+    "total_input_reviews": 15805,
+    "usable_nlp_reviews": 14869,
+    "usable_nlp_pct": 94.08,
+    "unusable_reviews": 936,
+    "unusable_pct": 5.92,
+    "unique_usable_texts": 12447,
+    "unique_text_ratio_pct": 83.71,
+    "suspect_metadata_candidates": 489
+  },
+  "breakdown_by_source": {
+    "cellphones": {
+      "total": 11194,
+      "usable": 11046,
+      "retention_rate_pct": 98.68
+    },
+    "fptshop": {
+      "total": 1694,
+      "usable": 1688,
+      "retention_rate_pct": 99.65
+    },
+    "tgdd": {
+      "total": 2428,
+      "usable": 2135,
+      "retention_rate_pct": 87.93
+    },
+    "viettelstore": {
+      "total": 489,
+      "usable": 0,
+      "retention_rate_pct": 0.0
+    }
+  },
+  "breakdown_by_category": {
+    "laptop": {
+      "total": 2662,
+      "usable": 2583,
+      "retention_rate_pct": 97.03
+    },
+    "smartphone": {
+      "total": 13143,
+      "usable": 12286,
+      "retention_rate_pct": 93.48
+    }
+  },
+  "breakdown_by_rating": {
+    "total_records": {
+      "1": 418,
+      "2": 306,
+      "3": 562,
+      "4": 1824,
+      "5": 12695
+    },
+    "usable_records": {
+      "1": 411,
+      "2": 303,
+      "3": 528,
+      "4": 1720,
+      "5": 11907
+    }
+  },
+  "sentiment_baseline_distribution": {
+    "positive": {
+      "count": 13627,
+      "share_pct": 91.65
+    },
+    "neutral": {
+      "count": 528,
+      "share_pct": 3.55
+    },
+    "negative": {
+      "count": 714,
+      "share_pct": 4.8
+    }
+  },
+  "text_length_distribution": {
+    "characters": {
+      "min": 1.0,
+      "max": 6652.0,
+      "mean": 80.88,
+      "p25": 22.0,
+      "p50": 44.0,
+      "p75": 91.0,
+      "p90": 171.0,
+      "p95": 256.0,
+      "p99": 587.0
+    },
+    "words": {
+      "min": 1.0,
+      "max": 1417.0,
+      "mean": 18.35,
+      "p25": 5.0,
+      "p50": 10.0,
+      "p75": 21.0,
+      "p90": 39.0,
+      "p95": 57.0,
+      "p99": 127.0
+    }
+  },
+  "unusable_breakdown": {
+    "status_reasons": {
+      "EMPTY_OR_WHITESPACE": 154,
+      "NULL": 782
+    },
+    "by_source": {
+      "cellphones": 148,
+      "fptshop": 6,
+      "tgdd": 293,
+      "viettelstore": 489
+    }
+  },
+  "field_missingness": {
+    "review_record_id": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "source_parent_id": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "product_name": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "source": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "category": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "rating_raw": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "rating_norm": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "review_text_normalized": {
+      "missing_count": 936,
+      "missing_rate_pct": 5.92
+    },
+    "review_time_raw": {
+      "missing_count": 489,
+      "missing_rate_pct": 3.09
+    },
+    "author_raw": {
+      "missing_count": 256,
+      "missing_rate_pct": 1.62
+    },
+    "review_usable": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "review_text_status": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "review_time_status": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "is_reply_present": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "is_attachment_present": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "review_metadata_suspect_candidate": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "crawl_batch": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "crawl_time": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "raw_record_id": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "raw_file": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "raw_line_number": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "gold_version": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    },
+    "tv6_pipeline_version": {
+      "missing_count": 0,
+      "missing_rate_pct": 0.0
+    }
+  },
+  "inputs": {
+    "fact_reviews_file": "data\\gold_v2\\fact_reviews.jsonl",
+    "fact_reviews_sha256": "e48e5647929c051e16bafb6bf49f276b656eea89a23a43553b09e5cef9c2a0a7",
+    "dim_parents_file": "data\\gold_v2\\dim_source_parents.jsonl",
+    "dim_parents_sha256": "5f4dbd6822987547df5bbcc69a5c5b70eb8ddebf94ab9a0ae1743d20c5ac4de1"
+  },
+  "outputs": {
+    "reviews_tv6_all": {
+      "path": "data\\tv6\\reviews_tv6_all.jsonl",
+      "record_count": 15805,
+      "sha256": "00eafe7e68793d661a7781bb85fe14614dc845b441725860d6ad90f08b60f30e"
+    },
+    "reviews_tv6_usable": {
+      "path": "data\\tv6\\reviews_tv6_usable.jsonl",
+      "record_count": 14869,
+      "sha256": "67fa58c7ba6de12f73cafa36c9c347c1e91aa5d1605da7d0db0edf75398e2059"
+    },
+    "reviews_tv6_unusable": {
+      "path": "data\\tv6\\reviews_tv6_unusable.jsonl",
+      "record_count": 936,
+      "sha256": "c596d5a728217c10c61961c5b4658c6ed776591df138b27c050521126203ae78"
+    }
+  }
+}

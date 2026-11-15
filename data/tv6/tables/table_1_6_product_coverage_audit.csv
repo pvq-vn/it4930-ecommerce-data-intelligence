@@ -1,0 +1,7 @@
+﻿source,total_parents,parents_with_reviews,parents_zero_reviews,coverage_rate_pct,cold_start_rate_pct,total_reviews,avg_reviews_per_parent,max_reviews_per_parent
+cellphones,5515,1485,4030,26.93,73.07,11046,2.0,50
+fptshop,458,246,212,53.71,46.29,1688,3.69,68
+hoanghamobile,285,0,285,0.0,100.0,0,0.0,0
+tgdd,626,166,460,26.52,73.48,2135,3.41,171
+viettelstore,167,0,167,0.0,100.0,0,0.0,0
+Total / Overall,7051,1897,5154,26.9,73.1,14869,2.11,171

@@ -34,6 +34,10 @@ scratch/
 # raw data
 data/raw
 
+# TV6 Large models (weights exceed 100MB GitHub limit)
+data/tv6/models/
+data/tv6/*.jsonl
+
 scratch_test_out.txt
 
 # Large local datasets / generated market-graph artifacts

@@ -1,0 +1,81 @@
+{
+  "pipeline_step": "Step 5: Feature Engineering & TV5 Handoff",
+  "pipeline_version": "tv6-v1.0.0",
+  "execution_timestamp": "2026-11-14T20:33:35.461447+00:00",
+  "elapsed_seconds": 2.27,
+  "anti_leakage_audit": {
+    "status": "PASS",
+    "total_reviews_audited": 15805,
+    "valid_time_pairs": 15316,
+    "missing_time_records": 489,
+    "leakage_violations": 0,
+    "snapshot_boundary_max_crawl_time": "2026-10-17T17:41:01+07:00",
+    "max_review_time_observed": "2026-10-16T12:05:01+00:00"
+  },
+  "universe_statistics": {
+    "total_parent_products": 7051,
+    "active_products_with_reviews": 1897,
+    "cold_start_products_without_reviews": 5154,
+    "coverage_percentage": 26.9,
+    "cold_start_percentage": 73.1,
+    "total_reviews_aggregated": 14869,
+    "avg_reviews_per_active_product": 7.84,
+    "max_reviews_single_product": 171
+  },
+  "feature_schema": {
+    "total_features": 35,
+    "columns": [
+      "source_parent_id",
+      "source",
+      "category",
+      "product_name_rep",
+      "has_review_data",
+      "review_count_usable",
+      "review_count_last_90d",
+      "avg_rating",
+      "rating_std",
+      "rating_min",
+      "rating_max",
+      "avg_sentiment_score",
+      "sentiment_positive_ratio",
+      "sentiment_negative_ratio",
+      "sentiment_neutral_ratio",
+      "sentiment_net_score",
+      "aspect_mention_rate_battery_power",
+      "aspect_sentiment_score_battery_power",
+      "aspect_mention_rate_performance_thermal",
+      "aspect_sentiment_score_performance_thermal",
+      "aspect_mention_rate_display_design",
+      "aspect_sentiment_score_display_design",
+      "aspect_mention_rate_camera_audio",
+      "aspect_sentiment_score_camera_audio",
+      "aspect_mention_rate_service_logistics",
+      "aspect_sentiment_score_service_logistics",
+      "topic_share_performance_setup",
+      "topic_share_service_delivery",
+      "topic_share_screen_camera",
+      "topic_share_battery_charging",
+      "topic_share_usage_experience",
+      "earliest_review_time",
+      "latest_review_time",
+      "review_span_days",
+      "tv6_pipeline_version"
+    ]
+  },
+  "artifacts_generated": {
+    "parquet_full": "tv5_review_features.parquet",
+    "csv_full": "tv5_review_features.csv",
+    "parquet_active": "tv5_review_features_active_only.parquet",
+    "csv_active": "tv5_review_features_active_only.csv",
+    "tables": [
+      "table_5_1_feature_dictionary",
+      "table_5_2_handoff_summary_metrics",
+      "table_5_3_top_reviewed_products_features"
+    ],
+    "figures": [
+      "fig_5_1_feature_correlation_matrix.png",
+      "fig_5_2_sentiment_vs_rating_scatter.png",
+      "fig_5_3_aspect_scores_distribution.png"
+    ]
+  }
+}
