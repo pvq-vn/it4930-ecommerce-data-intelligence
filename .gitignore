@@ -42,3 +42,6 @@ data/laptopmedia/
 
 # PyVis local assets generated at runtime
 lib/
+
+test.*
+catboost_info/
