@@ -1,0 +1,11 @@
+﻿category_group,price_status,anomaly_severity,records
+laptop,missing_or_unparseable,none,2
+laptop,non_positive,none,650
+laptop,valid,extreme,11
+laptop,valid,none,4067
+laptop,valid,review,144
+smartphone,missing_or_unparseable,none,14
+smartphone,non_positive,none,1102
+smartphone,valid,extreme,84
+smartphone,valid,none,4013
+smartphone,valid,review,229
