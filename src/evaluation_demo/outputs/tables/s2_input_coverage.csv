@@ -1,0 +1,5 @@
+﻿category,partition,n_rows,out_of_stock,in_stock,stock_unknown,charger_observed,charger_missing_pct,screen_300_replaced
+laptop,train,3227,2154,434,639,88,97.27300898667492,1
+laptop,test,819,541,99,179,26,96.82539682539682,1
+smartphone,train,3300,1946,999,355,669,79.72727272727272,0
+smartphone,test,797,476,238,83,155,80.55207026348809,0
