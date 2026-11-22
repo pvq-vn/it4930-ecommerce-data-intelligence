@@ -66,9 +66,9 @@ ASPECT_KEYS = [
 
 TOPIC_ID_TO_FEATURE_NAME = {
     0: "topic_share_performance_setup",
-    1: "topic_share_service_delivery",
-    2: "topic_share_screen_camera",
-    3: "topic_share_battery_charging",
+    1: "topic_share_screen_camera",
+    2: "topic_share_battery_charging",
+    3: "topic_share_service_delivery",
     4: "topic_share_usage_experience",
 }
 
@@ -365,9 +365,9 @@ def generate_feature_dictionary_table() -> Tuple[pd.DataFrame, str]:
         {"feature_name": "aspect_sentiment_score_service_logistics", "data_type": "float32", "value_range": "[-1.0, +1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Điểm đánh giá chất lượng phục vụ của kênh bán lẻ."},
         # Topics
         {"feature_name": "topic_share_performance_setup", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 0 (Cấu hình, thông số, bảo hành kỹ thuật)."},
-        {"feature_name": "topic_share_service_delivery", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Giao hàng, đóng gói, chăm sóc khách hàng)."},
-        {"feature_name": "topic_share_screen_camera", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Màn hình hiển thị, quay chụp camera)."},
-        {"feature_name": "topic_share_battery_charging", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Pin sạc, phụ kiện đi kèm)."},
+        {"feature_name": "topic_share_screen_camera", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Màn hình hiển thị, quay chụp camera)."},
+        {"feature_name": "topic_share_battery_charging", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Pin sạc, phụ kiện đi kèm)."},
+        {"feature_name": "topic_share_service_delivery", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Giao hàng, đóng gói, chăm sóc khách hàng)."},
         {"feature_name": "topic_share_usage_experience", "data_type": "float32", "value_range": "[0.0, 1.0]", "null_policy_cold_start": "0.0", "description_and_usage_tv5": "Tỷ trọng đánh giá thuộc chủ đề LDA 4 (Trải nghiệm thực tế, mượt mà, sự cố phát sinh)."},
         # Temporal
         {"feature_name": "earliest_review_time", "data_type": "string (ISO)", "value_range": "2019 to 2026", "null_policy_cold_start": "null", "description_and_usage_tv5": "Thời điểm nhận review đầu tiên của model sản phẩm."},

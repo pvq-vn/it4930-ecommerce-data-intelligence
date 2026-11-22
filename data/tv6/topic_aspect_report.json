@@ -1,6 +1,6 @@
 {
   "pipeline_version": "tv6-v1.0.0",
-  "executed_at_utc": "2026-11-14T20:19:13.765979+00:00",
+  "executed_at_utc": "2026-11-22T10:34:10.003291+00:00",
   "step": "step4_topic_aspect_mining",
   "total_reviews_analyzed": 14869,
   "lda_topics": [
@@ -13,21 +13,21 @@
     },
     {
       "topic_id": 1,
-      "topic_name": "Dịch vụ shop & Giao hàng",
+      "topic_name": "Màn hình & Camera",
       "top_keywords": "rất, trong, đẹp, màn_hình, chụp, máy, tầm, camera, sử_dụng, dùng",
       "dominant_doc_count": 2447,
       "corpus_share_pct": 16.46
     },
     {
       "topic_id": 2,
-      "topic_name": "Thiết kế & Màn hình hiển thị",
+      "topic_name": "Thời lượng pin & Phụ kiện sạc",
       "top_keywords": "mình, mua, nên, không, có, điện_thoại, máy, con, em, còn",
       "dominant_doc_count": 2395,
       "corpus_share_pct": 16.11
     },
     {
       "topic_id": 3,
-      "topic_name": "Thời lượng pin & Phụ kiện sạc",
+      "topic_name": "Dịch vụ shop & Giao hàng",
       "top_keywords": "nhân_viên, hàng, nhiệt_tình, tư_vấn, shop, rất, sản_phẩm, nhân_viên tư_vấn, có, giao",
       "dominant_doc_count": 2838,
       "corpus_share_pct": 19.09
