@@ -10,10 +10,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import matplotlib
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest
 from sklearn.impute import SimpleImputer
+
+matplotlib.use("Agg")
+from matplotlib import pyplot as plt
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -25,6 +29,13 @@ EXTREME_IQR_MULTIPLIER = 3.0
 ISOLATION_CONTAMINATION = 0.02
 ISOLATION_RANDOM_STATE = 42
 ISOLATION_N_ESTIMATORS = 300
+ANOMALY_ACTIONS = {
+    "none": "none",
+    "low_price_or_category_noise": "filter_before_modeling",
+    "hardware_spec_error": "verify_or_correct_specs",
+    "rare_valid_flagship": "keep_with_log_transform",
+    "spec_price_mismatch_review": "sensitivity_check",
+}
 
 NUMERIC_FEATURES = {
     "laptop": [
@@ -113,7 +124,6 @@ def detect(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     df["price_status"] = "valid"
     df.loc[df["price_vnd"].isna(), "price_status"] = "missing_or_unparseable"
     df.loc[df["price_vnd"].le(0), "price_status"] = "non_positive"
-    df["rule_flag"] = False
     df["iqr_flag"] = False
     df["iqr_extreme_flag"] = False
     df["anomaly_severity"] = "none"
@@ -126,6 +136,7 @@ def detect(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     df.loc[valid, "_log_price"] = np.log(df.loc[valid, "price_vnd"])
     brands = df.get("brand_norm", pd.Series("unknown", index=df.index)).fillna("unknown").astype(str)
     df["_brand"] = brands
+    high_iqr = pd.Series(False, index=df.index)
     # Use category + brand only when there are enough observations; otherwise
     # fall back to category to avoid unstable quartiles in tiny groups.
     for cat in ("laptop", "smartphone"):
@@ -148,17 +159,43 @@ def detect(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
                     reasons.append("giá thấp hơn ngưỡng IQR của nhóm")
                 if val > high:
                     reasons.append("giá cao hơn ngưỡng IQR của nhóm")
+                    high_iqr.at[ix] = True
                 if reasons:
                     df.at[ix, "iqr_flag"] = True
                     df.at[ix, "iqr_extreme_flag"] = val < extreme_low or val > extreme_high
                     _append_reason(df, ix, "; ".join(reasons))
-    # Absolute plausibility flags are review prompts, not automatic exclusions.
     floors = df["category_group"].map({"laptop": 3_000_000, "smartphone": 1_000_000})
     low_mask = valid & df["price_vnd"].lt(floors)
-    for ix in df.index[low_mask]:
-        reason = "giá dưới ngưỡng kiểm tra tối thiểu theo EDA (cần xác minh sản phẩm/giá)"
-        df.at[ix, "rule_flag"] = True
-        _append_reason(df, ix, reason)
+    laptop = df["category_group"].eq("laptop")
+    smartphone = df["category_group"].eq("smartphone")
+    screen = pd.to_numeric(df.get("screen_size_inch", np.nan), errors="coerce")
+    storage = pd.to_numeric(df.get("storage_gb", np.nan), errors="coerce")
+    ram = pd.to_numeric(df.get("installed_ram_gb", np.nan), errors="coerce")
+    names = df.get("product_name", pd.Series("", index=df.index)).astype("string")
+    network = df.get("network_type_norm", pd.Series("", index=df.index)).astype("string")
+    gpu = df.get("gpu_norm", pd.Series("", index=df.index)).astype("string")
+    desktop = laptop & names.str.contains(
+        r"\bimac\b|\bmac\s*(?:studio|mini|pro)\b", case=False, na=False
+    )
+    bad_laptop_screen = laptop & ((screen > 20) | (screen < 10))
+    bad_phone_screen = smartphone & ((screen > 11) | (screen < 3))
+    bad_storage = laptop & (storage < 32)
+    bad_network = network.str.contains(
+        r"₫|vnđ|vnd|\d{1,3}(?:[.,\s]\d{3}){2,}", case=False, na=False
+    )
+    category_noise = low_mask | desktop
+    hardware_error = bad_laptop_screen | bad_phone_screen | bad_storage | bad_network
+    df["rule_flag"] = category_noise | hardware_error
+    for mask, reason in (
+        (low_mask, "giá dưới ngưỡng kiểm tra tối thiểu theo EDA (cần xác minh sản phẩm/giá)"),
+        (desktop, "máy tính để bàn nằm trong danh mục laptop"),
+        (bad_laptop_screen, "màn hình laptop ngoài khoảng 10–20 inch"),
+        (bad_phone_screen, "màn hình smartphone ngoài khoảng 3–11 inch"),
+        (bad_storage, "dung lượng lưu trữ laptop dưới 32 GB"),
+        (bad_network, "giá tiền xuất hiện trong network_type_norm"),
+    ):
+        for ix in df.index[mask]:
+            _append_reason(df, ix, reason)
 
     _apply_isolation_forest(df, valid)
     for ix in df.index[df["isolation_forest_flag"]]:
@@ -170,10 +207,46 @@ def detect(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     df.loc[df["anomaly_flag"], "anomaly_severity"] = "review"
     df.loc[df["iqr_extreme_flag"] | df["methods_agree"].ge(2), "anomaly_severity"] = "extreme"
     df["combined_flag"] = df["anomaly_flag"]
+    premium_specs = (ram >= 32) | (storage >= 1024) | gpu.str.contains(
+        r"\brtx\s*[-_]?\s*40(?:80|90)\b", case=False, na=False
+    )
+    flagship = high_iqr & premium_specs & ~df["rule_flag"]
+    df["anomaly_type"] = "none"
+    df.loc[df["combined_flag"], "anomaly_type"] = "spec_price_mismatch_review"
+    df.loc[flagship, "anomaly_type"] = "rare_valid_flagship"
+    df.loc[hardware_error, "anomaly_type"] = "hardware_spec_error"
+    df.loc[category_noise, "anomaly_type"] = "low_price_or_category_noise"
+    df["recommended_action"] = df["anomaly_type"].map(ANOMALY_ACTIONS)
 
     summary = (df.groupby(["category_group", "price_status", "anomaly_severity"], dropna=False)
                  .size().rename("records").reset_index())
     return df, summary
+
+
+def _plot_anomalies(result: pd.DataFrame) -> None:
+    figure, axes = plt.subplots(1, 2, figsize=(11, 4.5), layout="constrained")
+    styles = {
+        "none": ("#94a3b8", 0.35, 12),
+        "review": ("#006f9e", 0.75, 26),
+        "extreme": ("#c04427", 0.85, 32),
+    }
+    ram = pd.to_numeric(
+        result.get("installed_ram_gb", pd.Series(np.nan, index=result.index)), errors="coerce"
+    )
+    usable = result["_log_price"].notna() & (ram > 0)
+    for category, axis in zip(("laptop", "smartphone"), axes):
+        subset = result[usable & result["category_group"].eq(category)]
+        for severity, (color, alpha, size) in styles.items():
+            group = subset[subset["anomaly_severity"].eq(severity)]
+            axis.scatter(ram.loc[group.index], group["_log_price"],
+                         label=severity, color=color, alpha=alpha, s=size)
+        axis.set(title=f"{category.capitalize()} (n = {len(subset):,})",
+                 xlabel="RAM lắp đặt (GB)", ylabel="ln(giá bán / VNĐ)")
+        axis.set_xscale("log", base=2)
+        axis.grid(axis="y", alpha=0.25)
+        axis.legend(title="Mức độ")
+    figure.savefig(OUT / "anomaly_price_vs_ram.png", dpi=180)
+    plt.close(figure)
 
 
 def main() -> None:
@@ -183,27 +256,43 @@ def main() -> None:
     export_cols = [c for c in ["listing_record_id", "source_parent_id", "product_name", "source", "category_group",
         "brand_norm", "price_vnd", "price_status", "comparison_group", "rule_flag", "iqr_flag",
         "iqr_extreme_flag", "isolation_forest_flag", "isolation_score", "isolation_feature_count",
-        "methods_agree", "combined_flag", "anomaly_flag", "anomaly_severity", "anomaly_reasons"] if c in result]
+        "methods_agree", "combined_flag", "anomaly_flag", "anomaly_severity", "anomaly_reasons",
+        "anomaly_type", "recommended_action"] if c in result]
     result[export_cols].to_csv(OUT / "anomaly_flags.csv", index=False, encoding="utf-8-sig")
     summary.to_csv(OUT / "anomaly_summary.csv", index=False, encoding="utf-8-sig")
     flagged = result[result["anomaly_flag"]]
     method_summary = pd.DataFrame([
-        {"method": "EDA rule", "flagged": int(result["rule_flag"].sum())},
+        {"method": "EDA and data quality rules", "flagged": int(result["rule_flag"].sum())},
         {"method": "IQR", "flagged": int(result["iqr_flag"].sum())},
         {"method": "Isolation Forest", "flagged": int(result["isolation_forest_flag"].sum())},
         {"method": "Combined union", "flagged": int(result["combined_flag"].sum())},
         {"method": "At least 2 methods", "flagged": int(result["methods_agree"].ge(2).sum())},
     ])
     method_summary.to_csv(OUT / "anomaly_method_summary.csv", index=False, encoding="utf-8-sig")
-    report = ["# Phát hiện bất thường giá sản phẩm", "",
+    type_summary = (flagged.groupby(["category_group", "anomaly_type", "recommended_action"])
+                    .size().rename("records").reset_index())
+    sensitivity = pd.read_csv(OUT / "tv5_sensitivity.csv", dtype={"r2": str})
+    _plot_anomalies(result)
+    report = ["# Phát hiện bất thường trong dữ liệu và giá sản phẩm", "",
         f"- Đầu vào: `data/processed/products_processed.jsonl` ({len(result):,} bản ghi).",
         "- Phương pháp: IQR trên log(giá), so sánh laptop/smartphone riêng; dùng nhóm thương hiệu khi có ít nhất 20 bản ghi, nếu không dùng nhóm danh mục.",
         f"- Isolation Forest chạy riêng cho laptop/smartphone với {ISOLATION_N_ESTIMATORS} cây, `contamination={ISOLATION_CONTAMINATION}` và `random_state={ISOLATION_RANDOM_STATE}`; mô hình dùng log giá, cấu hình, cờ thiếu và tần suất của đặc trưng phân loại.",
-        "- Giá thấp hơn ngưỡng tham chiếu EDA (laptop 3 triệu, smartphone 1 triệu) được gắn cờ xem xét.",
+        "- Quy tắc kiểm tra giá dưới sàn EDA (laptop 3 triệu, smartphone 1 triệu), máy bàn Apple bị xếp vào laptop, kích thước màn hình ngoài miền, ổ laptop dưới 32 GB và giá tiền lẫn vào loại mạng. Quy tắc phi giá cũng áp dụng cho listing thiếu giá hoặc giá không dương.",
         "- Các cờ chỉ là tín hiệu rà soát; không xóa bản ghi và không khẳng định mọi giá trị bị gắn cờ là lỗi.",
         f"- Giá hợp lệ: {(result.price_status == 'valid').sum():,}; cờ tổng hợp: {len(flagged):,}; mức extreme: {(flagged.anomaly_severity == 'extreme').sum():,}.", "",
         "## Tổng hợp theo phương pháp", "", method_summary.to_markdown(index=False), "",
         "## Tổng hợp theo danh mục", "", summary.to_markdown(index=False), "",
+        "## Phân loại và hướng xử lý", "", type_summary.to_markdown(index=False), "",
+        "Ưu tiên lỗi giá thấp/sai danh mục, sau đó đến lỗi thông số. Listing trên biên IQR, có RAM từ 32 GB, storage từ 1.024 GB hoặc RTX 4080/4090 và không vi phạm quy tắc được đề xuất giữ lại. Các cờ thống kê còn lại cần kiểm tra độ nhạy. Nhãn flagship là nhận định sơ bộ dựa trên cấu hình.", "",
+        "## Phân bố giá theo RAM", "",
+        "![Biểu đồ log giá bán theo RAM và mức độ bất thường](anomaly_price_vs_ram.png)", "",
+        "Biểu đồ chỉ gồm listing có giá và RAM dương. Trục RAM dùng thang log cơ số 2.", "",
+        "## Độ nhạy mô hình dự đoán giá TV5", "",
+        "Số liệu từ Bảng 1 và Bảng 2, mục TV5.B của [báo cáo kiểm toán](../../../BAO_CAO_KIEM_TOAN_CUOI_CUNG_TV1_TV7_VA_CHI_DAN_TV8.md). Đây là kết quả dùng bộ cờ trước khi bổ sung quy tắc phần cứng. S4 là mốc so sánh; S5a lọc `extreme` và S5b lọc `combined_flag` trên tập train. Mỗi danh mục giữ cùng tập test.", "",
+        sensitivity.to_markdown(index=False, disable_numparse=True), "",
+        "S5a giảm MAE laptop 10.603 VNĐ nhưng làm RMSE tăng và R² giảm nhẹ. Trên smartphone, cả MAE và RMSE đều tăng. S5b làm R² giảm trên cả hai danh mục, phù hợp với rủi ro mất dữ liệu về phân khúc cao cấp khi lọc mọi cờ.", "",
+        "## Bàn giao cho TV5 và TV8", "",
+        "Ghép theo `listing_record_id`. Các cờ và điểm số, kể cả `anomaly_type` và `recommended_action`, có thể phụ thuộc vào giá thực tế. Giữ chúng ngoài tập đặc trưng X của mô hình dự đoán giá. TV5 dùng cờ để lọc hoặc kiểm tra độ nhạy trên tập train. TV8 dùng cờ để giải thích các sai số lớn sau khi dự đoán trên tập test.", "",
         "## Cách đọc kết quả", "",
         "`rule_flag`, `iqr_flag` và `isolation_forest_flag` cho biết phương pháp nào đã gắn cờ. `isolation_score` càng lớn thì tổ hợp đặc trưng càng khác thường trong danh mục. `methods_agree >= 2` được ưu tiên kiểm tra và xếp mức `extreme`; cờ IQR vượt 3 IQR cũng là `extreme`. `combined_flag` là hợp của ba phương pháp.", "",
         "## Hạn chế", "", "Isolation Forest là mô hình không giám sát và `contamination=0.02` buộc mô hình chọn khoảng 2% bản ghi giá hợp lệ trong mỗi danh mục. Cờ này không phải xác suất lỗi hoặc gian lận. IQR và Isolation Forest đều có thể đánh dấu flagship hay sản phẩm hiếm hợp lệ. Cần đối chiếu raw data/trang nguồn và rà soát thủ công trước khi lọc. Nhóm dự đoán có thể dùng các cờ để so sánh độ nhạy giữa giữ nguyên dữ liệu, chỉ bỏ lỗi đã xác minh và bỏ toàn bộ anomaly.", ""]

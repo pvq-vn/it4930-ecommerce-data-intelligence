@@ -1,0 +1,7 @@
+category,stage,train_filter,mae_vnd,rmse_vnd,mape_pct,r2
+laptop,S4,baseline,3985608,7104989,12.43,0.8805
+laptop,S5a,exclude_extreme,3975005,7143663,12.42,0.8792
+laptop,S5b,exclude_combined_flag,4329085,8314281,12.88,0.8364
+smartphone,S4,baseline,2522719,6189160,19.98,0.8588
+smartphone,S5a,exclude_extreme,2705635,7455352,20.25,0.7952
+smartphone,S5b,exclude_combined_flag,2908920,8956429,20.88,0.7044
