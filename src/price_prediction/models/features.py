@@ -36,7 +36,7 @@ def _extract_screen_size_from_text(text, category):
     if not isinstance(text, str):
         return np.nan
 
-    match_explicit = re.search(r'\b(\d{1,2}(?:\.\d{1,2})?)\s*(?:inch|\'\'|")\b', text, flags=re.IGNORECASE)
+    match_explicit = re.search(r'\b(\d{1,2}(?:\.\d{1,2})?)\s*(?:inch\b|\'\'|")', text, flags=re.IGNORECASE)
     if match_explicit:
         val = float(match_explicit.group(1))
         if ((category == 'laptop' and 11 <= val <= 19) or (category == 'smartphone' and 4 <= val <= 8.5)):
@@ -47,7 +47,7 @@ def _extract_screen_size_from_text(text, category):
             return 18.0
         if re.search(r'\b(?:hp|dell|vivobook|ideapad|thinkpad|inspiron|latitude|vostro)\s*15\b', text, flags=re.IGNORECASE):
             return 15.6
-        if re.search(r'\b(?:thinkpad\s*e|ideapad|vivobook|zenbook|dell|hp)\s*14\b', text, flags=re.IGNORECASE):
+        if re.search(r'\b(?:thinkpad|ideapad|vivobook|zenbook|dell|hp)\s*14\b', text, flags=re.IGNORECASE):
             return 14.0
 
     return np.nan
@@ -108,7 +108,7 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
     df_clean = pd.read_json(cleaned_filepath, lines=True)
     df_proc = pd.read_json(processed_filepath, lines=True)
 
-    cols_to_extract = ['listing_record_id', GROUP_COL, 'battery_wh', 'battery_mah', 'camera_mp', 'display_type_norm', 'network_type_norm']
+    cols_to_extract = ['listing_record_id', GROUP_COL, 'battery_wh', 'battery_mah', 'charger_watt', 'camera_mp', 'display_type_norm', 'network_type_norm', 'availability_status']
     available_cols = [c for c in cols_to_extract if c in df_proc.columns]
     df_proc = df_proc[available_cols].drop_duplicates(subset=['listing_record_id'])
 
@@ -125,6 +125,8 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
         df_valid.loc[bad_storage_mask, 'storage_gb'] = df_valid.loc[bad_storage_mask, 'product_name'].apply(_extract_storage_from_text)
 
     screen_num = pd.to_numeric(df_valid['screen_size_inch'], errors='coerce')
+    invalid_screen = (((df_valid['category_clean'] == 'laptop') & ((screen_num < 11) | (screen_num > 19))) | ((df_valid['category_clean'] == 'smartphone') & ((screen_num < 4) | (screen_num > 8.5))))
+    screen_num.loc[invalid_screen] = np.nan
     missing_screen = screen_num.isna()
     if missing_screen.any():
         screen_num.loc[missing_screen] = df_valid.loc[missing_screen].apply(
@@ -136,6 +138,8 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
     phone_mask = df_valid['category_clean'] == 'smartphone'
     if phone_mask.any() and 'network_type_norm' in df_valid.columns:
         df_valid.loc[phone_mask, 'network_type_norm'] = _normalize_smartphone_network(df_valid.loc[phone_mask])
+
+    df_valid['is_out_of_stock'] = (df_valid['availability_status'].astype(str).str.lower().str.strip() == 'out_of_stock').astype(int)
 
     df_valid.drop(columns=[c for c in LEAKAGE_COLS if c in df_valid.columns], inplace=True)
     df_laptop = df_valid[df_valid['category_clean'] == 'laptop']
@@ -150,7 +154,7 @@ class HardwareFeatureEngineer(BaseEstimator, TransformerMixin):
 
     def _prepare_stateless(self, df: pd.DataFrame) -> pd.DataFrame:
         if self.category == 'laptop':
-            raw_num = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh']
+            raw_num = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh', 'charger_watt']
             cat_cols = LAPTOP_CAT_FEATURES
         else:
             raw_num = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp']
@@ -174,6 +178,7 @@ class HardwareFeatureEngineer(BaseEstimator, TransformerMixin):
         df_out['is_battery_missing'] = df_out[bat_col].isnull().astype(int)
 
         if self.category == 'laptop':
+            df_out['is_charger_missing'] = df_out['charger_watt'].isnull().astype(int)
             df_out['is_dedicated_gpu'] = df_out['gpu_model'].apply(
                 lambda x: 1 if pd.notnull(x) and any(
                     kw in str(x).lower() for kw in ['rtx', 'gtx', 'radeon', 'rx', 'arc']
@@ -211,7 +216,7 @@ class HardwareFeatureEngineer(BaseEstimator, TransformerMixin):
     def fit(self, X: pd.DataFrame, y=None):
         df_prep = self._prepare_stateless(X)
         self.num_to_impute_ = (
-            ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh']
+            ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh', 'charger_watt']
             if self.category == 'laptop'
             else ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp']
         )

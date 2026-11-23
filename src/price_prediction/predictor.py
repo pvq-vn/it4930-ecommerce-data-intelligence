@@ -21,7 +21,6 @@ class PricePredictor:
         path_map = {
             'rf': RESULTS_DIR / 'random_forest' / f"rf_{category}.pkl",
             'lgbm': RESULTS_DIR / 'lightgbm' / f"lgbm_{category}.pkl",
-            'catboost': RESULTS_DIR / 'catboost' / f"cb_{category}.pkl"
         }
         return joblib.load(path_map[model])
 

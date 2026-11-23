@@ -16,10 +16,10 @@ RANDOM_STATE = 42
 TARGET_COL = 'price_vnd'
 GROUP_COL = 'source_parent_id'
 
-LEAKAGE_COLS = ['discount_rate', 'original_price_vnd', 'listing_record_id', 'crawl_time', 'crawl_batch', 'is_price_missing', 'product_name', 'raw_specs']
+LEAKAGE_COLS = ['discount_rate', 'original_price_vnd', 'listing_record_id', 'crawl_time', 'crawl_batch', 'is_price_missing', 'product_name', 'raw_specs', 'availability_status']
 
-LAPTOP_NUM_FEATURES = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh', 'ram_x_storage', 'is_dedicated_gpu', 'cpu_tier_score', 'is_ram_missing', 'is_battery_missing']
+LAPTOP_NUM_FEATURES = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_wh', 'charger_watt', 'ram_x_storage', 'is_dedicated_gpu', 'cpu_tier_score', 'is_ram_missing', 'is_battery_missing', 'is_charger_missing', 'is_out_of_stock']
 LAPTOP_CAT_FEATURES = ['brand', 'model_clean', 'seller_name', 'cpu_model', 'gpu_model']
 
-SMARTPHONE_NUM_FEATURES = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp', 'is_rom_high', 'is_oled', 'is_ram_missing', 'is_battery_missing']
+SMARTPHONE_NUM_FEATURES = ['ram_gb', 'storage_gb', 'screen_size_inch', 'battery_mah', 'camera_mp', 'is_rom_high', 'is_oled', 'is_ram_missing', 'is_battery_missing', 'is_out_of_stock']
 SMARTPHONE_CAT_FEATURES = ['brand', 'model_clean', 'seller_name', 'display_type_norm', 'network_type_norm', 'cpu_model']
