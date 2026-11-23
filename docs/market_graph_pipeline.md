@@ -459,7 +459,7 @@ Toàn bộ kết quả chạy được lưu trữ tại `data/market_graph/`:
 | **`benchmarks/match_report.csv`** | CSV | Step 1.5 | Danh sách các giá trị CPU/GPU chưa match được, kèm số lượng và lý do. |
 | **`benchmarks/smartphone_match_report.csv`** | CSV | Step 1.5 | Danh sách CPU smartphone chưa match được, kèm số lượng và lý do. |
 
-> **Nguồn benchmark & tái tạo**: các bảng CSV trong `benchmarks/` là *artifact of record* đã commit. 6 snapshot HTML/JS nguồn dưới đây **không còn được track trong Git** (xem `.gitignore`) vì tổng ~8,5 MiB; chúng chỉ cần khi muốn parse lại từ đầu. `step1_5` dùng snapshot nếu có trong `benchmarks/`, còn không thì giữ nguyên CSV đã commit — fresh clone vẫn chạy được `step1_5 → step4`.
+> **Nguồn benchmark & tái tạo (cập nhật 23/11/2026)**: các bảng CSV trong `benchmarks/` là *artifact of record* đã commit. Ba snapshot Notebookcheck (`notebookcheck_cpu.html`, `notebookcheck_gpu.html`, `notebookcheck_cpu_phone.html`) được khôi phục vào Git để test parser chạy được trên fresh clone và `step1_5` có thể tái tạo CSV trong `--work-dir` mới. Ba snapshot Antutu/JS còn lại trong bảng dưới đây vẫn chỉ giữ ở local (xem `.gitignore`). `step1_5` ưu tiên snapshot trong `--work-dir/benchmarks/`, sau đó dùng snapshot Notebookcheck mặc định trong repository; nếu không có HTML thì giữ nguyên CSV hiện có trong work-dir.
 >
 > | Snapshot | Trang nguồn | Dung lượng | sha256 (16 ký tự đầu) | Ngày |
 > |---|---|---|---|---|
