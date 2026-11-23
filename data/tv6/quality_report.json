@@ -1,0 +1,65 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "executed_at_utc": "2026-11-14T16:51:30.948971+00:00",
+  "step": "step1_quality_eda",
+  "metrics": {
+    "ratings_and_usability": {
+      "overall_retention_rate_pct": 94.08,
+      "total_reviews": 15805,
+      "usable_reviews": 14869,
+      "unusable_reviews": 936
+    },
+    "text_lengths": {
+      "char_median": 44,
+      "char_mean": 80.88,
+      "word_median": 10,
+      "word_mean": 18.35,
+      "max_words": 1417
+    },
+    "duplicate_texts": {
+      "unique_texts": 12447,
+      "unique_ratio_pct": 83.71,
+      "top_frequent_text": "Tốt",
+      "top_frequent_count": 210
+    },
+    "rating_text_mismatches": {
+      "high_rating_negative_count": 111,
+      "low_rating_positive_count": 7,
+      "total_mismatch_detected": 118
+    },
+    "temporal_trends": {
+      "min_timestamp": "2019-11-09 12:30:21+00:00",
+      "max_timestamp": "2026-10-16 12:05:01+00:00",
+      "peak_year": 2025,
+      "peak_year_count": 3327
+    },
+    "tv5_product_coverage": {
+      "total_parent_products": 7051,
+      "parents_with_reviews": 1897,
+      "parents_zero_reviews": 5154,
+      "coverage_rate_pct": 26.9,
+      "cold_start_rate_pct": 73.1,
+      "avg_reviews_among_covered": 7.84,
+      "median_reviews_among_covered": 3,
+      "max_reviews_on_single_product": 171
+    }
+  },
+  "artifacts_generated": {
+    "tables": [
+      "table_1_1_rating_source_distribution.csv",
+      "table_1_2_usable_retention_by_source.csv",
+      "table_1_3_text_length_percentiles.csv",
+      "table_1_4_top_duplicate_texts.csv",
+      "table_1_5_rating_text_mismatch_audit.csv",
+      "table_1_6_product_coverage_audit.csv",
+      "table_1_7_temporal_distribution.csv"
+    ],
+    "figures": [
+      "fig_1_1_rating_distribution_by_source.png",
+      "fig_1_2_usable_vs_unusable_breakdown.png",
+      "fig_1_3_text_length_distribution.png",
+      "fig_1_4_temporal_trend_reviews.png",
+      "fig_1_5_product_review_coverage.png"
+    ]
+  }
+}

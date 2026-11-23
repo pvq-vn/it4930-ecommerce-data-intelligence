@@ -1,0 +1,68 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "executed_at_utc": "2026-11-14T17:36:10.314798+00:00",
+  "step": "step2_text_preprocessing",
+  "inputs": {
+    "usable_reviews_file": "data\\tv6\\reviews_tv6_usable.jsonl",
+    "record_count": 14869
+  },
+  "outputs": {
+    "preprocessed_file": "data\\tv6\\reviews_tv6_preprocessed.jsonl",
+    "record_count": 14869,
+    "file_size_bytes": 23060952
+  },
+  "vocabulary_statistics": {
+    "total_tokens_in_corpus": 196819,
+    "unique_vocabulary_size": 11627,
+    "singleton_tokens_count": 6618,
+    "singleton_ratio_pct": 56.92,
+    "avg_tokens_per_review": 13.24,
+    "median_tokens_per_review": 7,
+    "max_tokens_in_review": 928
+  },
+  "top_tokens": [
+    {
+      "token": "không",
+      "frequency": 5129
+    },
+    {
+      "token": "máy",
+      "frequency": 4588
+    },
+    {
+      "token": "có",
+      "frequency": 3250
+    },
+    {
+      "token": "mua",
+      "frequency": 3219
+    },
+    {
+      "token": "rất",
+      "frequency": 2950
+    },
+    {
+      "token": "mình",
+      "frequency": 2807
+    },
+    {
+      "token": "tốt",
+      "frequency": 2764
+    },
+    {
+      "token": "được",
+      "frequency": 2605
+    },
+    {
+      "token": "dùng",
+      "frequency": 2215
+    },
+    {
+      "token": "nhân_viên",
+      "frequency": 1912
+    }
+  ],
+  "teencode_dictionary_size": 58,
+  "safe_stopwords_count": 46,
+  "sentiment_whitelist_count": 105
+}

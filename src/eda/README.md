@@ -31,7 +31,7 @@ src/eda/
 
 ## Dữ liệu đầu vào
 
-* [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 30 thuộc tính chuẩn hóa)
+* [data/processed/products_processed.jsonl](../../data/processed/products_processed.jsonl) (10.316 bản ghi, 32 thuộc tính chuẩn hóa)
 
 ## Quy chuẩn & Hướng dẫn chi tiết
 

@@ -1,0 +1,57 @@
+﻿field,value,count,reason
+cpu,Unknown,1165,generic_or_non_cpu
+cpu,Helio A22,13,not_in_benchmark
+cpu,Unisoc UMS9117,11,not_in_benchmark
+cpu,Unisoc SC9863A1,10,not_in_benchmark
+cpu,Helio G91 Ultra,6,not_in_benchmark
+cpu,MediaTek Helio A22,4,not_in_benchmark
+cpu,Kirin 710F,4,not_in_benchmark
+cpu,MediaTek Helio G91 Ultra,4,not_in_benchmark
+cpu,Unisoc 9863A1,4,not_in_benchmark
+cpu,Helio G91-Ultra,4,not_in_benchmark
+cpu,Dimensity 7100,4,not_in_benchmark
+cpu,Helio P95,3,not_in_benchmark
+cpu,MediaTek MT6260A,3,not_in_benchmark
+cpu,Exynos 7 Quad 7570,3,not_in_benchmark
+cpu,Exynos 7 Octa 7870,3,not_in_benchmark
+cpu,MediaTek Helio P95,3,not_in_benchmark
+cpu,MediaTek MT6765,3,not_in_benchmark
+cpu,MediaTek Helio G91,3,not_in_benchmark
+cpu,Exynos 7884,3,not_in_benchmark
+cpu,MediaTek G100,3,not_in_benchmark
+cpu,MediaTek G99 Ultimate,3,not_in_benchmark
+cpu,Helio G91,3,not_in_benchmark
+cpu,Dimensity 7200 Pro,3,not_in_benchmark
+cpu,Unisoc 8910,3,not_in_benchmark
+cpu,MediaTek D7100,3,not_in_benchmark
+cpu,MediaTek G99,3,not_in_benchmark
+cpu,MediaTek Dimensity 7100,3,not_in_benchmark
+cpu,Dimensity 6360 MAX,3,not_in_benchmark
+cpu,Apple A18 Bionic,3,not_in_benchmark
+cpu,Helio P23,2,not_in_benchmark
+cpu,Spreadtrum SC6531E,2,not_in_benchmark
+cpu,MT6261M,2,not_in_benchmark
+cpu,Spreadtrum SC7731E,2,not_in_benchmark
+cpu,MTK MT6762,2,not_in_benchmark
+cpu,SPRD 6531E,2,not_in_benchmark
+cpu,MediaTek MT6762,2,not_in_benchmark
+cpu,Snapdragon 712AIE,2,not_in_benchmark
+cpu,MT6260A,2,not_in_benchmark
+cpu,Dimensity 1200 Max,2,not_in_benchmark
+cpu,ASR Platform,2,not_in_benchmark
+cpu,ASR3603S,2,not_in_benchmark
+cpu,Dimensity 8100-MAX,2,not_in_benchmark
+cpu,ASR,2,not_in_benchmark
+cpu,Exynos,1,generic_or_non_cpu
+cpu,SC6531E,1,not_in_benchmark
+cpu,Snapdragon 732,1,not_in_benchmark
+cpu,MediaTek Helio,1,generic_or_non_cpu
+cpu,Spreadtrum SC9820E,1,not_in_benchmark
+cpu,MTK6261D,1,not_in_benchmark
+cpu,Unisoc T117,1,not_in_benchmark
+cpu,MediaTek Dimensity 7200 Pro,1,not_in_benchmark
+cpu,MediaTek D7400,1,not_in_benchmark
+cpu,Dimensity 6360 Max,1,not_in_benchmark
+cpu,MediaTek Dimensity 7300e,1,not_in_benchmark
+cpu,Unisoc UMS9230E,1,not_in_benchmark
+cpu,MediaTek G99+,1,not_in_benchmark

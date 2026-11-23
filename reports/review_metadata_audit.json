@@ -1,0 +1,78 @@
+{
+  "pipeline_stage": "review_metadata_audit",
+  "scopes": {
+    "cellphones/laptop": {
+      "records": 1898,
+      "text_missing_or_empty": 11,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "cellphones/smartphone": {
+      "records": 9296,
+      "text_missing_or_empty": 137,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "fptshop/laptop": {
+      "records": 602,
+      "text_missing_or_empty": 0,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "fptshop/smartphone": {
+      "records": 1092,
+      "text_missing_or_empty": 6,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "tgdd/laptop": {
+      "records": 99,
+      "text_missing_or_empty": 5,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "tgdd/smartphone": {
+      "records": 2329,
+      "text_missing_or_empty": 288,
+      "time_missing": 0,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0
+    },
+    "viettelstore/laptop": {
+      "records": 63,
+      "text_missing_or_empty": 63,
+      "time_missing": 63,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0,
+      "all_rating_five_candidate": 63
+    },
+    "viettelstore/smartphone": {
+      "records": 426,
+      "text_missing_or_empty": 426,
+      "time_missing": 426,
+      "rating_missing": 0,
+      "rating_out_of_1_5": 0,
+      "all_rating_five_candidate": 426
+    }
+  },
+  "viettel_checks": {
+    "reviews": 489,
+    "text_missing_or_empty": 489,
+    "time_missing": 489,
+    "ratings": {
+      "5": 489
+    },
+    "payload_present": 489,
+    "metadata_candidate_flagged": 489
+  },
+  "product_payload_review_metadata_records": 107,
+  "notes": [
+    "Metadata candidates are evidence for review quality, not proof of fabricated reviews.",
+    "No review was removed or relabeled."
+  ]
+}

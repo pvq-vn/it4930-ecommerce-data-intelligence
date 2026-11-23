@@ -1,0 +1,86 @@
+{
+  "pipeline_stage": "quality_gates",
+  "status": "PASSED",
+  "gates": [
+    {
+      "gate": "raw_unchanged",
+      "passed": true,
+      "detail": false
+    },
+    {
+      "gate": "no_rows_dropped_staging",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "gate": "silver_row_counts",
+      "passed": true,
+      "detail": {
+        "products": 10316,
+        "reviews": 15805
+      }
+    },
+    {
+      "gate": "silver_no_imputation",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "gate": "listing_record_id_unique",
+      "passed": true,
+      "detail": 10316
+    },
+    {
+      "gate": "review_record_id_unique",
+      "passed": true,
+      "detail": 15805
+    },
+    {
+      "gate": "silver_provenance",
+      "passed": true,
+      "detail": "raw_file/raw_line_number/raw_record_id"
+    },
+    {
+      "gate": "rating_domain",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "gate": "discount_domain",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "gate": "availability_domain",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "gate": "review_usable_present",
+      "passed": true,
+      "detail": 15805
+    },
+    {
+      "gate": "attribute_validation",
+      "passed": true,
+      "detail": "PASSED"
+    },
+    {
+      "gate": "feature_view_schema",
+      "passed": true,
+      "detail": {
+        "records": 10316,
+        "fields": 31
+      }
+    },
+    {
+      "gate": "gold_counts_match_silver",
+      "passed": true,
+      "detail": {
+        "gold_listings": 10316,
+        "gold_reviews": 15805
+      }
+    }
+  ],
+  "final_release_ready": true
+}

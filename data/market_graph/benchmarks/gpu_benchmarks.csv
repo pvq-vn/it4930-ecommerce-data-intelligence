@@ -1,0 +1,252 @@
+﻿model,architecture,pos,pos_note,pixel_shaders,vertex_shaders,core_speed_mhz,boost_mhz,memory_speed,memory_bus,memory_type,perf_rating,perf_rating_is_approx,perf_rating_coverage_pct,3dmark_cloud_gate,3dmark_cloud_gate_samples,3dmark11_p,3dmark11_p_samples,3dmark_fire_strike,3dmark_fire_strike_samples,3dmark_time_spy,3dmark_time_spy_samples,match_key
+NVIDIA GeForce RTX 5090 Laptop,Blackwell,9,False,10496.0,990.0,1515.0,,28000.0,256.0,GDDR7,53.4,False,,148173.0,11.0,69089.0,25.0,51545.0,31.0,24483.0,29.0,rtx 5090
+NVIDIA RTX PRO 5000 Blackwell Generation Laptop,Blackwell,11,False,10496.0,990.0,1515.0,,28000.0,256.0,GDDR7,50.7,False,,129500.0,3.0,68846.0,3.0,48162.0,3.0,23742.0,3.0,rtx pro 5000 blackwell generation
+NVIDIA GeForce RTX 5080 Laptop,Blackwell,17,False,8192.0,975.0,2287.0,,28000.0,256.0,GDDR7,48.7,False,,136904.0,7.0,63968.0,19.0,47592.0,20.0,21453.0,18.0,rtx 5080
+NVIDIA RTX PRO 4000 Blackwell Generation Laptop,Blackwell,20,True,7680.0,975.0,1500.0,,28000.0,256.0,GDDR7,,False,,,,,,,,,,rtx pro 4000 blackwell generation
+NVIDIA GeForce RTX 4090 Laptop GPU,Ada Lovelace,23,False,9728.0,1335.0,2040.0,,20000.0,256.0,GDDR6,48.7,False,,143162.0,14.0,64746.0,42.0,46191.0,41.0,21251.0,43.0,rtx 4090
+NVIDIA RTX 5000 Ada Generation Laptop,Ada Lovelace,24,False,9728.0,930.0,1680.0,,20000.0,256.0,GDDR6,31.7,True,75.0,,,51771.0,3.0,30422.0,3.0,14861.0,3.0,rtx 5000 ada generation
+AMD Radeon RX 7900M,RDNA 3,31,False,4608.0,1825.0,2090.0,,18000.0,256.0,GDDR6,42.4,True,75.0,,,59943.0,,50241.0,,19434.0,,radeon rx 7900m
+NVIDIA GeForce RTX 4080 Laptop GPU,Ada Lovelace,33,False,7424.0,1860.0,2280.0,,20000.0,192.0,GDDR6X,43.4,False,,130026.0,11.0,57701.5,24.0,41431.0,23.0,18441.0,23.0,rtx 4080
+NVIDIA GeForce RTX 5070 Ti Laptop,Blackwell,36,False,5888.0,847.0,2220.0,,32000.0,192.0,GDDR7,44.3,False,,150608.0,10.0,55691.0,17.0,43581.0,19.0,17021.0,19.0,rtx 5070 ti
+NVIDIA RTX 4000 Ada Generation Laptop,Ada Lovelace,37,False,7424.0,1530.0,2115.0,,16000.0,192.0,GDDR6,42.7,False,,152418.0,,54921.0,,40179.0,,16308.0,,rtx 4000 ada generation
+NVIDIA RTX PRO 3000 Blackwell Generation Laptop,Blackwell,46,True,5888.0,847.0,1447.0,,28000.0,192.0,GDDR7,37.8,False,,121098.0,,49410.0,,36897.0,,14875.0,,rtx pro 3000 blackwell generation
+Apple M5 Max 40-Core GPU,,47,True,40.0,,,,8533.0,,LPDDR5x-8533,,False,,,,,,,,,,apple m5 max 40-core
+NVIDIA GeForce RTX 3080 Ti Laptop GPU,Ampere,53,False,7424.0,975.0,1590.0,,14000.0,256.0,GDDR6,35.0,False,,152074.0,26.0,42275.0,45.0,31033.0,43.0,12269.0,43.0,rtx 3080 ti
+NVIDIA GeForce RTX 5070 Laptop,Blackwell,54,False,4608.0,907.0,2347.0,,32000.0,128.0,GDDR7,38.3,False,,156796.0,18.0,45246.0,31.0,36124.5,36.0,13562.5,36.0,rtx 5070
+NVIDIA RTX Spark N1X 6144-Core Blackwell GPU,Blackwell,55,False,6144.0,,2531.0,,,,DDR5X,29.6,False,,82115.0,,41357.5,4.0,28512.5,4.0,12545.0,4.0,rtx spark n1x 6144-core blackwell
+Apple M4 Max 40-Core GPU,,56,True,40.0,,,,8533.0,,LPDDR5x-8533,,False,,,,,,,,,,apple m4 max 40-core
+NVIDIA RTX 3500 Ada Generation Laptop,Ada Lovelace,57,False,5120.0,1110.0,1545.0,,16000.0,192.0,GDDR6,28.3,True,75.0,,,41630.0,,29248.0,,12806.0,,rtx 3500 ada generation
+NVIDIA GeForce RTX 4070 Laptop GPU,Ada Lovelace,58,False,4608.0,1605.0,2175.0,,16000.0,128.0,GDDR6,34.7,False,,157542.0,30.0,41302.0,67.0,30051.0,71.0,11959.5,70.0,rtx 4070
+NVIDIA RTX A5500 Laptop GPU,Ampere,59,False,7424.0,,,,16000.0,256.0,GDDR6,27.5,False,,104565.0,,35376.0,3.0,26260.0,3.0,9568.0,3.0,rtx a5500
+NVIDIA GeForce RTX 3080 Laptop GPU,Ampere,66,False,6144.0,780.0,1245.0,,14000.0,256.0,GDDR6,29.2,False,,107695.0,35.0,37933.0,40.0,27194.0,46.0,10752.0,45.0,rtx 3080
+NVIDIA GeForce RTX 5060 Laptop,Blackwell,67,False,3328.0,952.0,1455.0,,24000.0,128.0,GDDR7,34.3,False,,145462.0,14.0,39428.0,21.0,32031.0,22.0,12052.0,23.0,rtx 5060
+AMD Radeon RX 6850M XT,RDNA 2,71,False,2560.0,,2463.0,,18000.0,192.0,GDDR6,37.0,False,,172972.0,2.0,42015.5,2.0,33900.5,2.0,11837.0,2.0,radeon rx 6850m xt
+NVIDIA RTX Spark N1X 5120-Core Blackwell GPU,Blackwell,72,False,5120.0,,,,,,DDR5X,28.5,False,,87380.0,,36154.0,,26833.0,,12791.0,,rtx spark n1x 5120-core blackwell
+NVIDIA GeForce RTX 3070 Ti Laptop GPU,Ampere,73,False,5888.0,915.0,1480.0,,14000.0,256.0,GDDR6,31.3,False,,141689.0,25.0,36969.5,36.0,27776.0,37.0,10462.0,37.0,rtx 3070 ti
+NVIDIA RTX A4500 Laptop GPU,Ampere,74,False,5888.0,930.0,1500.0,,16000.0,256.0,GDDR6,,False,,,,,,,,,,rtx a4500
+NVIDIA RTX A5000 Laptop GPU,Ampere,75,False,6144.0,1215.0,1770.0,,14000.0,256.0,GDDR6,24.9,False,,50153.5,2.0,36163.5,2.0,27271.0,3.0,10307.0,3.0,rtx a5000
+NVIDIA GeForce RTX 4060 Laptop GPU,Ada Lovelace,76,False,3072.0,1545.0,2370.0,,16000.0,128.0,GDDR6,31.5,False,,156428.0,29.0,35770.0,57.0,26530.0,54.0,10338.0,56.0,rtx 4060
+NVIDIA RTX 3000 Ada Generation Laptop,Ada Lovelace,77,False,4608.0,1395.0,1695.0,,16000.0,128.0,GDDR6,21.7,False,,70502.0,2.0,29411.0,3.0,20908.0,3.0,8351.0,3.0,rtx 3000 ada generation
+NVIDIA Quadro RTX 6000 (Laptop),Turing,79,False,4608.0,1275.0,1455.0,,14000.0,384.0,GDDR6,,False,,,,,,,,,,quadro rtx 6000 ()
+AMD Radeon RX 6800M,RDNA 2,80,False,2560.0,2116.0,2300.0,,16000.0,192.0,GDDR6,35.7,False,,160859.0,3.0,40390.5,2.0,34199.0,3.0,11256.5,4.0,radeon rx 6800m
+NVIDIA GeForce RTX 2080 Super Mobile,Turing,84,False,3072.0,1365.0,1560.0,,14000.0,256.0,GDDR6,29.8,False,,141486.0,3.0,34875.5,4.0,24960.0,4.0,10313.0,4.0,rtx 2080 super
+NVIDIA GeForce RTX 3070 Laptop GPU,Ampere,85,False,5120.0,780.0,1290.0,,14000.0,256.0,GDDR6,29.1,False,,136558.0,33.0,33996.0,54.0,25477.5,52.0,9619.0,53.0,rtx 3070
+AMD Radeon 8065S,RDNA 3.5,86,False,40.0,,3000.0,,,,,,False,,,,,,,,,,radeon 8065s
+AMD Radeon 8060S,RDNA 3.5,87,False,40.0,,2900.0,,,,,35.2,False,,167690.0,9.0,43952.0,12.0,29499.0,12.0,11018.0,13.0,radeon 8060s
+NVIDIA RTX PRO 2000 Blackwell Generation Laptop,Blackwell,88,False,3328.0,952.0,1455.0,,28000.0,128.0,GDDR7,27.4,False,,119826.0,2.0,31798.0,5.0,25603.0,5.0,9120.0,5.0,rtx pro 2000 blackwell generation
+NVIDIA GeForce RTX 5050 Laptop,Blackwell,89,False,2560.0,1020.0,2662.0,,14000.0,128.0,GDDR6,27.1,False,,125170.0,8.0,30779.5,8.0,24488.0,11.0,8941.0,10.0,rtx 5050
+NVIDIA RTX A4000 Laptop GPU,Ampere,90,True,5120.0,780.0,1680.0,,12000.0,256.0,GDDR6,,False,,,,,,,,,,rtx a4000
+AMD Radeon RX 7600M XT,RDNA 3,91,False,2048.0,,2300.0,,18000.0,128.0,GDDR6,32.6,False,,154102.0,7.0,39342.0,9.0,28894.5,10.0,9856.0,9.0,radeon rx 7600m xt
+AMD Radeon RX 6800S,RDNA 2,92,False,2048.0,1800.0,1975.0,,16000.0,128.0,GDDR6,31.3,False,,163510.0,2.0,36101.0,2.0,26511.0,2.0,9033.0,2.0,radeon rx 6800s
+AMD Radeon RX 7700S,RDNA 3,95,False,2048.0,,2200.0,,18000.0,128.0,GDDR6,24.5,True,75.0,,,37918.0,,24246.0,,10206.0,,radeon rx 7700s
+Apple M3 Max 40-Core GPU,,98,True,40.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 max 40-core
+Apple M2 Max 38-Core GPU,,99,True,38.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 max 38-core
+NVIDIA GeForce RTX 2080 Mobile,Turing,100,False,2944.0,1380.0,1590.0,,14000.0,256.0,GDDR6,29.6,False,,139346.0,16.0,34897.0,17.0,25436.0,16.0,9854.0,15.0,rtx 2080
+NVIDIA RTX 2000 Ada Generation Laptop,Ada Lovelace,101,False,3072.0,1635.0,2115.0,,16000.0,128.0,GDDR6,24.6,False,,115230.0,2.0,28909.5,4.0,21379.0,4.0,8094.5,4.0,rtx 2000 ada generation
+AMD Radeon RX 6700M,RDNA 2,102,False,2304.0,,2300.0,,16000.0,160.0,GDDR6,26.6,False,,91672.0,,33497.0,,27924.0,2.0,8988.5,2.0,radeon rx 6700m
+Apple M5 Max 32-Core GPU,,109,True,32.0,,,,8533.0,,LPDDR5x-8533,,False,,,,,,,,,,apple m5 max 32-core
+Apple M4 Max 32-Core GPU,,110,True,32.0,,,,8533.0,,LPDDR5x-8533,,False,,,,,,,,,,apple m4 max 32-core
+Apple M3 Max 30-Core GPU,,111,True,30.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 max 30-core
+NVIDIA Quadro RTX 5000 (Laptop),Turing,112,False,3072.0,1035.0,1545.0,,14000.0,256.0,GDDR6,25.1,False,,117274.0,2.0,24620.0,5.0,23034.5,2.0,9332.0,2.0,quadro rtx 5000 ()
+Apple M1 Max 32-Core GPU,,113,True,32.0,1296.0,,,,512.0,LPDDR5-6400,,False,,,,,,,,,,apple m1 max 32-core
+Apple M2 Max 30-Core GPU,,115,True,30.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 max 30-core
+Apple M1 Max 24-Core GPU,,117,True,24.0,1296.0,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m1 max 24-core
+Apple M5 Pro 20-Core GPU,,118,True,20.0,,,,,,,,False,,,,,,,,,,apple m5 pro 20-core
+AMD Radeon RX 7600M,RDNA 3,120,True,1792.0,,2070.0,,16000.0,128.0,GDDR6,28.4,False,,126084.0,,35101.0,,25679.0,,9097.0,,radeon rx 7600m
+NVIDIA GeForce RTX 3060 Laptop GPU,Ampere,122,False,3840.0,817.0,1702.0,,14000.0,192.0,GDDR6,23.4,False,,104826.0,38.0,27419.0,43.0,20609.0,49.0,8222.0,49.0,rtx 3060
+AMD Radeon RX 7600S,RDNA 3,123,False,1792.0,,1865.0,,16000.0,128.0,GDDR6,30.3,False,,155806.0,3.0,34217.5,4.0,25900.0,3.0,9203.0,3.0,radeon rx 7600s
+NVIDIA GeForce RTX 2070 Super Mobile,Turing,124,False,2560.0,1140.0,1380.0,,14002.0,256.0,GDDR6,25.6,False,,126287.0,7.0,29092.5,8.0,22016.0,12.0,8272.0,12.0,rtx 2070 super
+NVIDIA GeForce RTX 2080 Super Max-Q,Turing,126,False,3072.0,975.0,1230.0,,11000.0,256.0,GDDR6,25.8,False,,127741.0,7.0,29636.5,10.0,21902.5,10.0,8331.0,11.0,rtx 2080 super max-q
+NVIDIA RTX A3000 Laptop GPU,Ampere,127,False,4096.0,1080.0,1560.0,,14000.0,192.0,GDDR6,17.5,False,,29996.0,,25990.0,3.0,19710.0,3.0,7320.0,3.0,rtx a3000
+Intel Arc A770M,Xe HPG,130,False,512.0,1650.0,,,16000.0,256.0,GDDR6,29.7,False,,124487.0,,37375.0,,25563.0,2.0,10783.0,,intel arc a770m
+Apple M4 Pro 20-Core GPU,,133,False,20.0,,,,8533.0,,LPDDR5x-8533,,False,,,,,,,,,,apple m4 pro 20-core
+Apple M3 Pro 18-Core GPU,,134,True,18.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 pro 18-core
+Apple M5 Pro 16-Core GPU,,135,True,20.0,,,,,,,,False,,,,,,,,,,apple m5 pro 16-core
+Apple M6 12-Core GPU,,136,True,12.0,,,,,,,,False,,,,,,,,,,apple m6 12-core
+Apple M4 Pro 16-Core GPU,,137,True,16.0,,,,,,LPDDR5x-8533,,False,,,,,,,,,,apple m4 pro 16-core
+Apple M2 Pro 19-Core GPU,,138,True,19.0,444.0,1398.0,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 pro 19-core
+AMD Radeon RX 6650M,RDNA 2,140,False,1792.0,,2222.0,,18000.0,128.0,GDDR6,23.2,True,75.0,,,32846.0,,25739.0,,8700.0,,radeon rx 6650m
+AMD Radeon RX 6600M,RDNA 2,141,False,1792.0,2068.0,2177.0,,14000.0,128.0,GDDR6,27.6,False,,144612.0,6.0,31868.0,6.0,23525.0,7.0,7840.0,7.0,radeon rx 6600m
+AMD Radeon RX 6700S,RDNA 2,142,False,1792.0,1700.0,1890.0,,14000.0,128.0,GDDR6,28.8,False,,153853.0,,32662.0,,24135.0,,8316.0,,radeon rx 6700s
+NVIDIA GeForce RTX 2070 Mobile,Turing,143,False,2304.0,1215.0,1440.0,,14000.0,256.0,GDDR6,24.0,False,,123004.0,18.0,26005.0,21.0,20392.0,19.0,7738.0,18.0,rtx 2070
+AMD Radeon 8050S,,144,False,32.0,,2800.0,,,,,28.4,False,,130145.0,,36323.0,,23521.0,,9502.0,2.0,radeon 8050s
+NVIDIA Quadro RTX 5000 Max-Q,Turing,145,False,3072.0,600.0,1350.0,,14000.0,256.0,GDDR6,19.9,False,,64768.0,7.0,26465.0,9.0,19790.0,10.0,7396.0,10.0,quadro rtx 5000 max-q
+NVIDIA GeForce RTX 2080 Max-Q,Turing,146,False,2944.0,735.0,1095.0,,12000.0,256.0,GDDR6,24.2,False,,117764.0,17.0,27973.0,20.0,20703.0,19.0,7923.0,19.0,rtx 2080 max-q
+AMD Radeon RX 5700M,Navi / RDNA,148,True,2304.0,1465.0,1720.0,,12000.0,256.0,GDDR6,,False,,,,,,,,,,radeon rx 5700m
+NVIDIA Quadro RTX 4000 (Laptop),Turing,150,False,2560.0,1110.0,1560.0,,14000.0,256.0,GDDR6,22.9,False,,119052.0,,25370.5,2.0,18849.0,2.0,7284.0,2.0,quadro rtx 4000 ()
+NVIDIA GeForce GTX 1080 Mobile,Pascal,151,False,2560.0,1566.0,1733.0,,10000.0,256.0,GDDR5X,24.6,False,,126690.0,24.0,28526.5,26.0,21394.0,24.0,6917.0,8.0,gtx 1080
+Apple M3 Pro 14-Core GPU,,153,True,14.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 pro 14-core
+Apple M2 Pro 16-Core GPU,,154,True,16.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 pro 16-core
+Apple M1 Pro 16-Core GPU,,155,True,16.0,1296.0,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m1 pro 16-core
+AMD Radeon PRO W6600M,RDNA 2,156,True,1792.0,,,,14000.0,128.0,GDDR6,,False,,,,,,,,,,radeon pro w6600m
+NVIDIA GeForce RTX 4050 Laptop GPU,Ada Lovelace,157,False,2560.0,,2370.0,,16000.0,96.0,GDDR6,26.2,False,,132349.0,26.0,30309.0,41.0,21949.0,41.0,8125.0,41.0,rtx 4050
+NVIDIA GeForce RTX 2070 Super Max-Q,Turing,158,False,2560.0,930.0,1155.0,,11000.0,256.0,GDDR6,24.5,False,,126747.0,7.0,27724.0,10.0,20872.5,10.0,7373.5,10.0,rtx 2070 super max-q
+Apple M5 10-Core GPU,,159,True,10.0,,,,,,,,False,,,,,,,,,,apple m5 10-core
+Intel Arc B390 12 Xe3 Panther Lake iGPU,,160,False,96.0,,2500.0,,,,,17.6,False,,73662.0,10.0,18614.5,16.0,16951.5,16.0,6627.0,23.0,intel arc b390 12 xe3 panther lake igpu
+AMD Radeon RX 6600S,RDNA 2,161,False,1792.0,,1881.0,,16000.0,128.0,GDDR6,17.0,True,50.0,,,,,20458.0,,7494.0,,radeon rx 6600s
+NVIDIA RTX PRO 1000 Blackwell Generation Laptop,Blackwell,162,True,2560.0,1020.0,1627.0,,,128.0,GDDR7,,False,,,,,,,,,,rtx pro 1000 blackwell generation
+Apple M1 Pro 14-Core GPU,,164,True,14.0,1296.0,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m1 pro 14-core
+NVIDIA Quadro RTX 4000 Max-Q,Turing,165,False,2560.0,780.0,1380.0,,14000.0,256.0,GDDR6,16.2,False,,35167.0,,23574.0,2.0,17049.0,,6764.0,,quadro rtx 4000 max-q
+NVIDIA GeForce RTX 2070 Max-Q,Turing,166,False,2304.0,885.0,1185.0,,12000.0,256.0,GDDR6,20.6,False,,106564.0,28.0,22089.0,31.0,17335.0,31.0,6661.0,28.0,rtx 2070 max-q
+NVIDIA RTX PRO 500 Blackwell Generation Laptop,Blackwell,170,False,1792.0,2235.0,2520.0,,,96.0,GDDR7,18.5,False,,85015.0,,21497.0,,16676.0,,6121.0,,rtx pro 500 blackwell generation
+NVIDIA Quadro RTX 3000 (Laptop),Turing,171,False,1920.0,945.0,1380.0,,14000.0,192.0,GDDR6,17.7,False,,91394.0,3.0,19878.5,4.0,14841.5,2.0,5589.0,3.0,quadro rtx 3000 ()
+NVIDIA GeForce RTX 2060 Mobile,Turing,172,False,1920.0,960.0,1200.0,,14000.0,192.0,GDDR6,19.3,False,,99178.5,36.0,21261.5,40.0,16331.0,43.0,6141.0,41.0,rtx 2060
+NVIDIA GeForce GTX 1080 Max-Q,Pascal,176,False,2560.0,1101.0,1278.0,,10000.0,256.0,GDDR5X,21.2,False,,114542.0,3.0,23540.0,5.0,18191.5,6.0,5868.5,2.0,gtx 1080 max-q
+NVIDIA GeForce GTX 1070 Mobile,Pascal,178,False,2048.0,1443.0,1645.0,,8000.0,256.0,GDDR5,19.6,False,,101041.0,51.0,22575.5,58.0,17236.5,56.0,5485.0,21.0,gtx 1070
+NVIDIA GeForce RTX 2060 Max-Q,Turing,179,False,1920.0,975.0,1185.0,,11000.0,192.0,GDDR6,15.7,False,,58890.0,4.0,19778.5,4.0,14909.5,4.0,5638.5,4.0,rtx 2060 max-q
+NVIDIA Quadro RTX 3000 Max-Q,Turing,180,False,1920.0,600.0,1215.0,,14000.0,192.0,GDDR6,15.0,False,,66284.0,2.0,17523.0,3.0,13617.0,3.0,5048.0,3.0,quadro rtx 3000 max-q
+NVIDIA RTX 1000 Ada Generation Laptop,Ada Lovelace,187,False,2560.0,,,,16000.0,96.0,GDDR6,,False,,,,,,,,,,rtx 1000 ada generation
+NVIDIA RTX A2000 Laptop GPU,Ampere,188,False,2560.0,893.0,1687.0,,14000.0,128.0,GDDR6,14.5,False,,60336.0,7.0,18058.0,9.0,13157.0,9.0,5016.0,9.0,rtx a2000
+Intel Arc A730M,Xe HPG,189,False,384.0,1100.0,,,14000.0,192.0,GDDR6,22.9,False,,83396.0,4.0,29144.0,4.0,21294.0,4.0,8813.0,4.0,intel arc a730m
+AMD Radeon 8040S,RDNA 3.5,190,True,16.0,,2800.0,,,,,15.0,False,,77909.0,,18783.0,,12374.0,,4033.0,,radeon 8040s
+AMD Radeon Pro 5600M,Navi / RDNA,191,False,2560.0,,1265.0,,,2048.0,HBM2,,False,,,,,,,,,,radeon pro 5600m
+AMD Radeon RX 5600M,Navi / RDNA,192,False,2304.0,,1265.0,,12000.0,192.0,GDDR6,18.5,False,,72335.0,,24213.0,2.0,17652.5,2.0,5933.5,2.0,radeon rx 5600m
+NVIDIA GeForce GTX 1660 Ti Mobile,Turing,194,False,1536.0,1455.0,1590.0,,12000.0,192.0,GDDR6,18.2,False,,97517.0,18.0,20118.5,24.0,14818.0,24.0,5659.0,22.0,gtx 1660 ti
+NVIDIA GeForce RTX 3050 Ti Laptop GPU,Ampere,195,False,2560.0,1222.0,1485.0,,12000.0,128.0,GDDR6,15.5,False,,72925.0,23.0,18057.0,27.0,13359.5,26.0,5170.0,27.0,rtx 3050 ti
+NVIDIA GeForce RTX 3050 6GB Laptop GPU,Ampere,196,False,2560.0,1237.0,1492.0,,12000.0,96.0,GDDR6,14.4,False,,72486.0,,16979.5,4.0,11973.0,4.0,4571.0,3.0,rtx 3050 6gb
+Intel Arc A570M,Xe HPG,197,True,256.0,900.0,1300.0,,14000.0,128.0,GDDR6,,False,,,,,,,,,,intel arc a570m
+Intel Arc Pro A60M,Xe HPG,198,True,256.0,900.0,1300.0,,14000.0,128.0,GDDR6,,False,,,,,,,,,,intel arc pro a60m
+NVIDIA RTX A1000 Laptop GPU,Ampere,199,False,2048.0,,,,14000.0,128.0,GDDR6,13.6,False,,70880.0,,15134.5,2.0,11321.0,2.0,4255.5,2.0,rtx a1000
+NVIDIA GeForce GTX 1070 Max-Q,Pascal,202,False,2048.0,1101.0,1265.0,,8000.0,256.0,GDDR5,17.5,False,,99551.5,16.0,18688.0,18.0,14678.5,16.0,4708.0,5.0,gtx 1070 max-q
+Intel Arc A550M,Xe HPG,203,True,256.0,900.0,2005.0,,14000.0,128.0,GDDR6,14.1,True,50.0,,,,,14350.0,,5830.0,,intel arc a550m
+NVIDIA GeForce RTX 3050 A Laptop GPU,Ada Lovelace,210,False,1792.0,,,,,64.0,GDDR6,,False,,,,,,,,,,rtx 3050 a
+NVIDIA GeForce RTX 3050 4GB Laptop GPU,Ampere,211,False,2048.0,1238.0,1500.0,,12000.0,128.0,GDDR6,13.7,False,,65252.0,18.0,15712.0,23.0,11949.0,22.0,4497.0,23.0,rtx 3050 4gb
+Apple M5 8-Core GPU,,213,True,8.0,,,,,,,,False,,,,,,,,,,apple m5 8-core
+Intel Arc A530M,Xe HPG,214,True,192.0,900.0,1300.0,,14000.0,128.0,GDDR6,13.1,True,25.0,,,,,,,5851.0,,intel arc a530m
+NVIDIA GeForce GTX 1660 Ti Max-Q,Turing,215,False,1536.0,1140.0,1335.0,,12000.0,192.0,GDDR6,14.7,False,,63086.0,7.0,17439.0,8.0,13355.0,7.0,5084.5,8.0,gtx 1660 ti max-q
+AMD Radeon RX 6550M,RDNA 2,216,False,1024.0,2000.0,2560.0,,18000.0,64.0,GDDR6,14.8,True,75.0,,,20506.0,,14696.0,,4546.0,,radeon rx 6550m
+AMD Radeon RX 6500M,RDNA 2,217,False,1024.0,,2191.0,,18000.0,64.0,GDDR6,16.2,False,,88600.5,2.0,17889.0,2.0,14017.5,2.0,4372.0,2.0,radeon rx 6500m
+AMD Radeon RX 6550S,RDNA 2,218,False,1024.0,,2170.0,,16000.0,64.0,GDDR6,,False,,,,,,,,,,radeon rx 6550s
+NVIDIA GeForce GTX 1060 Mobile,Pascal,230,False,1280.0,1404.0,1670.0,,8000.0,192.0,GDDR5,13.5,False,,74604.5,68.0,14693.0,77.0,11558.0,77.0,3580.5,20.0,gtx 1060
+NVIDIA RTX A500 Laptop GPU,Ampere,232,False,2048.0,832.0,1537.0,,14000.0,64.0,GDDR6,9.4,False,,48495.5,2.0,10818.0,2.0,7597.5,2.0,2994.5,2.0,rtx a500
+NVIDIA RTX 500 Ada Generation Laptop,Ada Lovelace,233,False,2048.0,1485.0,2025.0,,12000.0,64.0,GDDR6,17.8,False,,92300.0,,20463.5,2.0,14610.0,2.0,5448.5,2.0,rtx 500 ada generation
+Intel Arc B370 10 Xe3 Panther Lake iGPU,Xe3,234,False,80.0,,2400.0,,,,,14.9,True,75.0,,,16289.0,,14832.5,2.0,6050.0,2.0,intel arc b370 10 xe3 panther lake igpu
+Apple M4 10-core GPU,,235,True,10.0,,,,,,LPDDR5X-7500,,False,,,,,,,,,,apple m4 10-core
+Intel Arc A370M,Xe HPG,236,False,128.0,1550.0,,,14000.0,64.0,GDDR6,9.5,False,,35604.0,3.0,12089.5,4.0,8149.0,3.0,3885.0,3.0,intel arc a370m
+NVIDIA GeForce GTX 1650 Ti Mobile,Turing,237,False,1024.0,1350.0,1485.0,,12000.0,128.0,GDDR6,12.1,False,,65163.0,7.0,13266.0,8.0,9930.0,9.0,3618.0,9.0,gtx 1650 ti
+AMD Radeon Pro 5500M,Navi / RDNA,238,False,1536.0,,1300.0,,12000.0,128.0,GDDR6,12.4,False,,65776.0,,14725.0,,10399.0,,3364.0,,radeon pro 5500m
+AMD Radeon RX 5500M,Navi / RDNA,239,False,1408.0,1327.0,1645.0,,14000.0,128.0,GDDR6,12.9,False,,50946.0,5.0,16476.0,8.0,12276.0,6.0,4298.0,5.0,radeon rx 5500m
+AMD Radeon 890M,RDNA 3+,240,False,1024.0,,2900.0,,7500.0,,,11.3,False,,53050.0,23.0,15284.5,34.0,9040.5,34.0,3421.0,35.0,radeon 890m
+Intel Arc Graphics 140T,Xe+,241,False,128.0,,,,,,,10.7,False,,50533.0,11.0,12490.0,20.0,8663.5,20.0,3843.0,20.0,intel arc graphics 140t
+AMD Radeon RX 6450M,RDNA 2,246,True,768.0,2000.0,2220.0,,18000.0,64.0,GDDR6,,False,,,,,,,,,,radeon rx 6450m
+NVIDIA GeForce RTX 2050 Mobile,Ampere,249,False,2048.0,,1477.0,,14000.0,64.0,GDDR6,10.9,False,,58068.0,9.0,12495.0,10.0,8964.5,10.0,3220.5,10.0,rtx 2050
+Intel Arc 8-Core iGPU,Xe LPG,250,False,128.0,,2300.0,,,,,9.8,False,,44101.0,29.0,12155.0,42.0,8436.5,46.0,3271.0,49.0,intel arc 8-core igpu
+Qualcomm Adreno X2-90,,252,True,,,1850.0,,,,,10.0,False,,36410.0,,11702.5,4.0,10043.0,4.0,3666.0,4.0,adreno x2-90
+Qualcomm Adreno X2-85,,253,True,,,1700.0,,,,,8.6,False,,44955.0,,8770.5,2.0,7826.0,2.0,2633.0,2.0,adreno x2-85
+Intel Arc Graphics 140V,Xe2 Battlemage,254,False,128.0,,2050.0,,,,LPDDR5x,11.2,False,,54327.0,21.0,11396.0,39.0,9819.0,39.0,4044.0,42.0,intel arc graphics 140v
+Apple M4 9-Core GPU,,255,True,9.0,,,,,,LPDDR5X-7500,,False,,,,,,,,,,apple m4 9-core
+AMD Radeon RX 6300M,RDNA 2,256,True,768.0,,1512.0,,18000.0,128.0,GDDR6,,False,,,,,,,,,,radeon rx 6300m
+NVIDIA GeForce GTX 1650 Mobile,Turing,258,False,1024.0,1380.0,1560.0,,12000.0,128.0,"GDDR5, GDDR6",11.3,False,,57365.0,21.0,13131.5,30.0,9313.0,32.0,3488.0,31.0,gtx 1650
+AMD Radeon 880M,RDNA 3+,259,False,768.0,,2900.0,,7500.0,,,11.4,False,,55484.0,5.0,14912.0,8.0,9407.5,8.0,3335.0,8.0,radeon 880m
+NVIDIA GeForce MX570,Ampere,260,False,2048.0,,1477.0,,12000.0,64.0,GDDR6,10.0,False,,50683.0,,11286.0,,8469.0,,3127.0,4.0,mx570
+Intel Arc Pro A30M,Xe HPG,261,False,128.0,1550.0,,,14000.0,64.0,GDDR6,,False,,,,,,,,,,intel arc pro a30m
+AMD Radeon Pro 5300M,Navi / RDNA,262,False,1280.0,,1250.0,,12000.0,128.0,GDDR6,,False,,,,,,,,,,radeon pro 5300m
+AMD Radeon RX 5300M,Navi / RDNA,263,False,1408.0,1036.0,1445.0,,14000.0,96.0,GDDR6,11.8,False,,55837.0,,14351.0,4.0,10306.0,3.0,3566.5,2.0,radeon rx 5300m
+NVIDIA GeForce GTX 1060 Max-Q,Pascal,266,False,1280.0,1063.0,1341.0,,8000.0,192.0,GDDR5,12.7,False,,74101.0,10.0,13333.5,10.0,10430.0,10.0,3324.0,2.0,gtx 1060 max-q
+NVIDIA T1200 Laptop GPU,Turing,267,False,1024.0,855.0,1425.0,,10000.0,128.0,GDDR6,11.4,False,,50827.0,2.0,14387.0,3.0,10134.0,3.0,3595.0,3.0,t1200
+NVIDIA GeForce GTX 1650 Ti Max-Q,Turing,269,False,1024.0,1035.0,1200.0,,10000.0,128.0,GDDR6,9.9,False,,47657.0,7.0,11538.0,9.0,8564.0,11.0,3098.0,9.0,gtx 1650 ti max-q
+Qualcomm Adreno 850,,273,True,3.0,,1450.0,,,,LPDDR5x,,False,,,,,,,,,,adreno 850
+Qualcomm Adreno 840,,274,True,,,1200.0,,,,LPDDR5x,,False,,,,,,,,,,adreno 840
+Apple M4 8-Core GPU,,278,True,8.0,,,,,,LPDDR5X-7500,,False,,,,,,,,,,apple m4 8-core
+NVIDIA GeForce GTX 1650 Max-Q,Turing,281,False,1024.0,1020.0,1245.0,,8000.0,128.0,"GDDR5, GDDR6",9.3,False,,45243.5,12.0,11082.5,14.0,7779.0,12.0,3016.0,10.0,gtx 1650 max-q
+NVIDIA T600 Laptop GPU,Turing,297,False,896.0,,1400.0,,10000.0,128.0,GDDR6,9.7,False,,53941.0,,10498.0,,7928.0,,2766.0,,t600
+AMD Radeon Pro Vega 20,Vega,298,False,1280.0,815.0,1283.0,,,,HBM2,10.8,False,,62318.0,,12289.0,2.0,9043.5,2.0,2600.5,2.0,radeon pro vega 20
+Qualcomm Adreno 830,,299,True,1536.0,,1100.0,,,,LPDDR5x,,False,,,,,,,,,,adreno 830
+Qualcomm Adreno 829,,300,True,,,1225.0,,,,LPDDR5x,,False,,,,,,,,,,adreno 829
+Qualcomm Adreno 840 V Series,,301,True,,,1200.0,,,,LPDDR5x,,False,,,,,,,,,,adreno 840 v series
+Apple M3 10-Core GPU,,302,True,10.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 10-core
+Qualcomm SD X Adreno X1-85 4.6 TFLOPS,,304,True,1536.0,,1500.0,,8448.0,,LPDDR5x,8.3,True,75.0,,,7061.0,,6982.0,,1989.0,,sd x adreno x1-85 4.6 tflops
+Intel Arc A310,Xe HPG,305,False,96.0,,2000.0,,15500.0,64.0,GDDR6,10.3,False,,53244.0,,11915.0,,8464.0,,3269.0,,intel arc a310
+AMD Radeon 780M,RDNA 3,306,False,768.0,1500.0,3000.0,,,,,9.8,False,,48139.0,48.0,12785.0,78.0,7985.0,81.0,2808.0,81.0,radeon 780m
+NVIDIA GeForce MX550,Turing,310,False,1024.0,,1320.0,,12000.0,64.0,GDDR6,7.9,False,,40364.0,,10005.0,2.0,6125.5,2.0,2470.0,3.0,mx550
+Intel Arc 7-Core iGPU,Xe LPG,311,False,112.0,,2200.0,,,,,8.9,False,,41030.5,6.0,11102.0,8.0,7612.5,8.0,2940.5,8.0,intel arc 7-core igpu
+Intel Arc A350M,Xe HPG,312,False,96.0,1150.0,,,14000.0,64.0,GDDR6,8.5,False,,36314.5,2.0,10730.0,2.0,7147.0,3.0,3050.0,3.0,intel arc a350m
+Intel Arc Graphics 130V,Xe2 Battlemage,313,False,112.0,,1850.0,,,,LPDDR5x,9.7,False,,48426.5,6.0,10018.0,11.0,8494.0,11.0,3388.0,11.0,intel arc graphics 130v
+NVIDIA GeForce GTX 1050 Ti Mobile,Pascal,314,False,768.0,1493.0,1620.0,,7000.0,128.0,GDDR5,9.0,False,,50514.0,37.0,9615.5,36.0,7740.5,38.0,2326.0,16.0,gtx 1050 ti
+NVIDIA GeForce GTX 1050 Ti Max-Q,Pascal,316,False,768.0,1151.0,1290.0,,7000.0,128.0,GDDR5,8.4,False,,46952.0,5.0,8752.0,7.0,7324.0,7.0,2261.0,3.0,gtx 1050 ti max-q
+AMD Radeon 860M,RDNA 3+,317,False,512.0,,2900.0,,7500.0,,,8.5,False,,39890.0,9.0,11072.0,22.0,7131.0,23.0,2565.0,23.0,radeon 860m
+AMD Radeon 680M,RDNA 2,318,False,768.0,,2400.0,,,,,8.3,False,,42862.0,32.0,10302.0,40.0,6835.5,42.0,2297.5,42.0,radeon 680m
+NVIDIA T550 Laptop GPU,Turing,321,False,1024.0,1065.0,1665.0,,12000.0,64.0,"GDDR5, GDDR6",6.4,False,,33218.5,2.0,8066.5,2.0,4890.0,3.0,1928.0,3.0,t550
+NVIDIA T500 Laptop GPU,Turing,324,False,896.0,1365.0,1695.0,,10000.0,64.0,"GDDR5, GDDR6",5.4,False,,23453.0,3.0,7995.5,4.0,4224.5,4.0,1787.5,4.0,t500
+NVIDIA GeForce MX450,Turing,325,False,896.0,1395.0,1575.0,,10000.0,64.0,"GDDR5, GDDR6",6.0,False,,27570.0,13.0,8250.0,16.0,4725.0,17.0,1900.0,16.0,mx450
+Intel Arc Graphics 130T,Xe+,326,False,112.0,,,,,,,6.9,False,,32272.5,2.0,9183.0,2.0,5299.5,2.0,2378.0,2.0,intel arc graphics 130t
+Apple M3 9-Core GPU,,333,True,9.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 9-core
+AMD Radeon Pro Vega 16,Vega,334,False,1024.0,,,,,,HBM2,9.5,False,,56273.0,,10569.0,,7745.0,,2198.0,,radeon pro vega 16
+NVIDIA GeForce GTX 1050 Mobile,Pascal,342,False,640.0,1354.0,1493.0,,7000.0,128.0,GDDR5,6.8,False,,38041.5,40.0,7678.5,42.0,6066.0,43.0,1610.0,11.0,gtx 1050
+NVIDIA GeForce GTX 1050 Max-Q,Pascal,348,False,640.0,999.0,1139.0,,7000.0,128.0,GDDR5,6.4,False,,35392.0,4.0,7153.5,4.0,5649.5,4.0,1615.0,2.0,gtx 1050 max-q
+Apple M3 8-Core GPU,,349,True,8.0,,,,,,LPDDR5-6400,,False,,,,,,,,,,apple m3 8-core
+Apple M2 10-Core GPU,,350,True,10.0,,1398.0,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 10-core
+Intel Graphics 4 Xe3 Panther Lake iGPU,,355,False,32.0,,2500.0,,,,,8.0,False,,40625.0,16.0,7309.0,24.0,7010.0,24.0,2903.0,24.0,intel graphics 4 xe3 panther lake igpu
+AMD Radeon 760M,RDNA 3,356,False,512.0,1500.0,2800.0,,,,,8.0,False,,40615.0,5.0,9899.0,5.0,6558.0,5.0,2281.0,5.0,radeon 760m
+Qualcomm SD X Adreno X1-85 3.8 TFLOPS,,357,True,1536.0,,1250.0,,8448.0,,LPDDR5x,6.9,False,,40436.0,3.0,6352.0,13.0,6288.5,14.0,1706.0,12.0,sd x adreno x1-85 3.8 tflops
+Qualcomm SD X2 Adreno X2-45,,358,True,,,,,,,,6.8,True,75.0,,,5097.0,3.0,4474.0,3.0,1377.0,3.0,sd x2 adreno x2-45
+AMD Radeon 840M,RDNA 3+,359,False,256.0,,2900.0,,7500.0,,,5.6,False,,29121.0,7.0,7367.0,7.0,4536.0,7.0,1415.0,7.0,radeon 840m
+AMD Radeon Steam Deck 8CU,RDNA 2,360,False,512.0,,1900.0,,,,,7.9,True,75.0,,,8133.0,,5444.0,,1769.0,,radeon steam deck 8cu
+AMD Radeon 740M,RDNA 3,361,False,256.0,1500.0,2500.0,,,,,5.7,False,,30557.0,2.0,6929.0,5.0,4625.0,5.0,1527.0,5.0,radeon 740m
+AMD Radeon 660M,RDNA 2,362,False,384.0,,1900.0,,,,,5.8,False,,32442.5,12.0,6560.0,13.0,4881.0,13.0,1535.0,13.0,radeon 660m
+Intel Iris Xe MAX Graphics,Gen. 12 Xe,388,False,96.0,,1650.0,,4266.0,128.0,LPDDR4x,7.0,False,,36993.0,3.0,8214.0,3.0,6333.0,3.0,1743.0,3.0,intel iris xe max graphics
+AMD Radeon Pro 560X,Polaris,391,False,1024.0,907.0,,,5080.0,128.0,GDDR5,6.3,False,,32449.0,,7590.0,,5699.0,,1614.0,,radeon pro 560x
+AMD Radeon Pro 560,Polaris,392,False,1024.0,907.0,,,5080.0,128.0,GDDR5,4.6,False,,23105.0,,5305.0,,3892.0,,1376.0,,radeon pro 560
+Intel Graphics 4-Core iGPU (Meteor / Arrow Lake),Xe LPG,395,False,64.0,300.0,1950.0,,,,,5.7,False,,27883.0,25.0,6164.0,31.0,4973.0,33.0,1902.0,33.0,intel graphics 4-core igpu (meteor / arrow lake)
+Intel Iris Xe Graphics G7 96EUs,Gen. 11 Ice Lake,396,False,96.0,400.0,1350.0,,,,,5.6,False,,27100.0,187.0,6550.0,209.0,5159.5,222.0,1560.5,218.0,intel iris xe graphics g7 96eus
+NVIDIA GeForce MX350,Pascal,397,False,640.0,1354.0,1468.0,,7000.0,64.0,GDDR5,5.0,False,,24744.0,9.0,6166.0,13.0,4371.0,14.0,1335.5,12.0,mx350
+NVIDIA Quadro P620,Pascal,404,False,512.0,1177.0,1442.0,,6000.0,128.0,GDDR5,5.4,False,,30409.5,2.0,5909.0,3.0,4672.5,2.0,1388.0,2.0,quadro p620
+AMD Radeon RX 550X (Laptop),Polaris,405,False,640.0,1176.0,,,7000.0,128.0,GDDR5,4.1,False,,20039.0,2.0,5344.5,2.0,3688.0,2.0,1050.0,2.0,radeon rx 550x ()
+AMD Radeon RX 640,Polaris,407,False,640.0,1218.0,1218.0,,6000.0,64.0,GDDR5,4.0,False,,19945.5,2.0,5235.0,2.0,3498.5,2.0,1007.5,2.0,radeon rx 640
+AMD Radeon Pro WX 3200,Polaris,408,True,640.0,1082.0,,,6000.0,128.0,GDDR5,3.6,False,,18866.0,2.0,4337.5,2.0,3156.0,2.0,955.5,2.0,radeon pro wx 3200
+AMD Radeon Pro 555X,Polaris,409,False,768.0,855.0,,,5080.0,128.0,GDDR5,,False,,,,,,,,,,radeon pro 555x
+AMD Radeon Pro 555,Polaris,410,False,768.0,855.0,,,5080.0,128.0,GDDR5,4.3,False,,22624.0,,5185.0,,3721.0,,1078.0,,radeon pro 555
+AMD Radeon RX Vega 11,Vega,414,False,704.0,,1240.0,,,,,4.1,False,,20847.5,4.0,5483.0,4.0,3494.0,3.0,935.5,2.0,radeon rx vega 11
+NVIDIA GeForce MX250,Pascal,415,False,384.0,1518.0,1582.0,,7000.0,64.0,GDDR5,4.1,False,,21545.0,25.0,4633.0,29.0,3660.0,29.0,1103.0,22.0,mx250
+NVIDIA GeForce MX330,Pascal,416,False,384.0,1531.0,1594.0,,7000.0,64.0,GDDR5,4.2,False,,20729.0,3.0,4834.0,4.0,3762.0,3.0,1160.0,3.0,mx330
+NVIDIA GeForce MX150,Pascal,417,False,384.0,1468.0,1532.0,,6008.0,64.0,GDDR5,3.8,False,,19132.0,43.0,4494.0,47.0,3488.0,44.0,1046.0,16.0,mx150
+Intel Iris Xe Graphics G7 80EUs,Gen. 11 Ice Lake,418,False,80.0,400.0,1350.0,,,,,4.4,False,,22007.5,96.0,5337.5,112.0,4048.0,114.0,1181.0,111.0,intel iris xe graphics g7 80eus
+Intel Graphics 3-Core iGPU (Arrow Lake),,419,True,48.0,300.0,2000.0,,,,,,False,,,,,,,,,,intel graphics 3-core igpu (arrow lake)
+Intel Graphics 2-Core iGPU (Arrow Lake),,429,True,32.0,300.0,1800.0,,,,,,False,,,,,,,,,,intel graphics 2-core igpu (arrow lake)
+Qualcomm SD X Adreno X1-45 2.1 TFLOPS,,439,True,768.0,,,,8448.0,128.0,LPDDR5x,,False,,,,,,,,,,sd x adreno x1-45 2.1 tflops
+AMD Radeon 630,GCN 1.0,440,False,512.0,,1219.0,,6000.0,64.0,GDDR5,,False,,,,,,,,,,radeon 630
+NVIDIA Quadro P520,Pascal,443,False,384.0,1303.0,1493.0,,6000.0,64.0,GDDR5,3.7,False,,19041.0,4.0,4185.5,6.0,3217.5,6.0,1010.5,6.0,quadro p520
+AMD Radeon 540X,GCN 4.0,449,True,512.0,,1219.0,,6000.0,64.0,GDDR5,3.1,False,,15167.0,,4097.0,,2779.0,,797.0,,radeon 540x
+Intel Graphics 2 Xe3 Wildcat Lake iGPU,Xe3,451,True,16.0,,2600.0,,,,,4.2,False,,22776.0,3.0,3824.5,4.0,3655.0,4.0,1401.0,3.0,intel graphics 2 xe3 wildcat lake igpu
+Intel UHD Graphics 64EUs (Alder Lake 12th Gen),Gen. 12,464,False,64.0,,1400.0,,,,,4.3,False,,21761.0,10.0,5038.5,12.0,3894.5,12.0,1110.0,12.0,intel uhd graphics 64eus (alder lake 12th gen)
+AMD Radeon RX Vega 10,Vega,465,False,640.0,,1300.0,,,,,2.8,False,,14834.5,16.0,3389.0,17.0,2272.0,17.0,737.0,7.0,radeon rx vega 10
+Qualcomm SD X Adreno X1-45 1.7 TFLOPS,,470,True,768.0,,,,8448.0,128.0,LPDDR5x,4.1,False,,24152.0,5.0,4146.5,14.0,3731.0,15.0,932.5,12.0,sd x adreno x1-45 1.7 tflops
+AMD Radeon RX Vega 9,Vega,492,False,576.0,,1300.0,,,,,3.5,False,,19255.0,,4380.0,,2789.0,,872.0,,radeon rx vega 9
+AMD Radeon RX Vega 8 (Ryzen 4000/5000),Vega,495,True,512.0,,2100.0,,,,,4.7,False,,26843.5,50.0,5890.5,58.0,3720.5,58.0,1163.0,58.0,radeon rx vega 8 (ryzen 4000/5000)
+NVIDIA GeForce MX230,Pascal,509,False,256.0,1519.0,1531.0,,7000.0,64.0,GDDR5,2.9,False,,15796.5,6.0,3363.5,6.0,2467.5,6.0,748.0,4.0,mx230
+Apple M2 8-Core GPU,,510,True,8.0,,1398.0,,,,LPDDR5-6400,,False,,,,,,,,,,apple m2 8-core
+Apple M1 8-Core GPU,,511,True,8.0,1278.0,,,,,LPDDR4X-4266,,False,,,,,,,,,,apple m1 8-core
+AMD Radeon 820M,RDNA 3+,512,False,128.0,,2900.0,,7500.0,,,3.8,False,,22769.0,,4306.5,2.0,3141.0,2.0,848.0,2.0,radeon 820m
+Apple M1 7-Core GPU,,520,True,7.0,1278.0,,,,,LPDDR4X-4266,,False,,,,,,,,,,apple m1 7-core
+AMD Radeon RX Vega 7,Vega,521,False,448.0,,1800.0,,,,,4.3,False,,24721.0,47.0,5236.5,62.0,3334.0,66.0,1017.0,61.0,radeon rx vega 7
+Intel UHD Graphics Xe 32EUs (Tiger Lake-H),Gen. 12,522,False,32.0,350.0,1450.0,,,,,2.8,False,,15716.0,3.0,3168.0,5.0,2495.0,5.0,658.0,3.0,intel uhd graphics xe 32eus (tiger lake-h)
+Intel UHD Graphics Xe G4 48EUs,Gen. 11 Ice Lake,523,False,48.0,350.0,1450.0,,,,,3.0,False,,16312.0,15.0,3643.0,16.0,2469.0,16.0,801.0,14.0,intel uhd graphics xe g4 48eus
+NVIDIA GeForce MX130,Maxwell,540,False,384.0,1122.0,1242.0,,,64.0,"DDR3, GDDR5",2.6,False,,13610.0,13.0,2875.0,14.0,2345.0,13.0,644.5,4.0,mx130
+Intel UHD Graphics Xe 750 32EUs (Rocket Lake),Gen. 12,541,False,32.0,350.0,1450.0,,,,,2.3,False,,11315.0,4.0,2811.0,3.0,2174.5,4.0,634.0,3.0,intel uhd graphics xe 750 32eus (rocket lake)
+Apple A18 Pro 5-Core GPU,Apple9,547,True,5.0,,1470.0,,,,LPDDR5X,,False,,,,,,,,,,apple a18 pro 5-core
+AMD Radeon RX Vega 8 (Ryzen 2000/3000),Vega,549,False,512.0,,1200.0,,,,,2.9,False,,15770.0,37.0,3557.0,44.0,2381.0,41.0,693.0,23.0,radeon rx vega 8 (ryzen 2000/3000)
+AMD Radeon RX Vega 6 (Ryzen 4000/5000),Vega,620,True,384.0,400.0,1500.0,,,,,3.6,False,,21856.5,16.0,4210.0,23.0,2793.0,23.0,852.0,22.0,radeon rx vega 6 (ryzen 4000/5000)
+NVIDIA GeForce MX110,Maxwell,622,False,256.0,965.0,993.0,,1800.0,64.0,"DDR3, GDDR5",2.0,False,,11266.0,3.0,2121.0,3.0,1714.0,3.0,450.5,2.0,mx110
+Intel UHD Graphics 24EUs (Alder Lake-N),Gen. 12,634,True,24.0,450.0,750.0,,,,,1.4,False,,8548.0,17.0,1490.0,17.0,1188.0,16.0,321.0,17.0,intel uhd graphics 24eus (alder lake-n)
+AMD Radeon 610M,RDNA 2,689,True,128.0,400.0,2200.0,,,,,2.3,False,,13897.5,8.0,2570.0,9.0,1757.0,9.0,515.0,7.0,radeon 610m
+AMD Radeon RX Vega 6 (Ryzen 2000/3000),Vega,691,True,384.0,,1100.0,,,,,2.7,False,,16787.0,3.0,2991.0,3.0,2245.0,3.0,551.5,2.0,radeon rx vega 6 (ryzen 2000/3000)
+AMD Radeon RX Vega 5,Vega,692,True,320.0,,1400.0,,,,,3.1,False,,18282.0,,3535.0,,2438.0,,733.0,,radeon rx vega 5
+Intel UHD Graphics Xe 16EUs,Gen. 12,693,True,16.0,350.0,1450.0,,,,,1.4,False,,7982.0,3.0,1654.0,3.0,1203.0,3.0,348.0,3.0,intel uhd graphics xe 16eus
+Intel Graphics 1 Xe3 Wildcat Lake iGPU,,694,True,8.0,,2300.0,,,,,5.0,True,75.0,,,2165.0,,1998.0,,753.0,,intel graphics 1 xe3 wildcat lake igpu
+AMD Radeon RX Vega 3,Vega,705,False,192.0,600.0,1200.0,,,,,1.5,False,,8536.0,16.0,1723.5,14.0,1171.5,16.0,393.0,11.0,radeon rx vega 3
+Qualcomm Adreno 690,,709,True,,,,,,,,3.1,False,,16707.5,2.0,2912.0,3.0,2932.5,2.0,811.0,,adreno 690
+Qualcomm Adreno 685,,710,True,,,,,,,,11.2,True,25.0,,,1927.0,,,,,,adreno 685
+Qualcomm Adreno 680,,711,True,,,,,,,,11.2,True,25.0,,,1935.5,2.0,,,,,adreno 680
+AMD Radeon RX Vega 2,Vega,793,True,128.0,,1100.0,,,,,,False,,,,,,,,,,radeon rx vega 2
+Intel UHD Graphics (Jasper Lake 32 EU),Gen. 11,801,False,32.0,350.0,900.0,,,,,1.3,False,,6977.0,5.0,1589.0,5.0,1016.0,6.0,330.0,5.0,intel uhd graphics (jasper lake 32 eu)
+Intel UHD Graphics (Elkhart Lake 32 EU),,802,False,32.0,400.0,850.0,,,,,,False,,,,,,,,,,intel uhd graphics (elkhart lake 32 eu)
+Qualcomm Adreno 630,,832,True,,,,,,,,6.8,True,50.0,6347.0,,,,821.0,,,,adreno 630
+Qualcomm Adreno 629,,833,True,,,,,,,,,False,,,,,,,,,,adreno 629
+Intel UHD Graphics (Jasper Lake 24 EU),Gen. 11,845,False,24.0,350.0,800.0,,,,,1.4,False,,8388.0,,1458.0,,1106.0,,312.0,,intel uhd graphics (jasper lake 24 eu)
+Intel UHD Graphics 617,Gen. 9 Amber Lake,846,False,24.0,300.0,1150.0,,,64.0,DDR3L/LPDDR3,1.3,False,,7231.0,,1540.5,2.0,997.0,2.0,300.0,3.0,intel uhd graphics 617
+Intel UHD Graphics 615,Gen. 9 Amber Lake,847,False,24.0,300.0,1000.0,,,64.0,DDR3L/LPDDR3,1.1,False,,6583.0,10.0,1221.0,10.0,819.0,11.0,242.5,6.0,intel uhd graphics 615
+Intel UHD Graphics 610,Gen. 9 Kaby Lake,891,False,12.0,300.0,950.0,,,64.0,DDR3/DDR4,0.8,False,,5276.5,2.0,922.5,2.0,663.5,2.0,194.0,,intel uhd graphics 610
+Intel UHD Graphics (Elkhart Lake 16 EU),,924,False,16.0,250.0,850.0,,,,,4.1,True,75.0,3762.0,,650.0,,523.0,,,,intel uhd graphics (elkhart lake 16 eu)
+Intel UHD Graphics (Jasper Lake 16 EU),Gen. 11,925,False,24.0,350.0,800.0,,,,,0.8,False,,4910.5,8.0,854.0,8.0,645.0,8.0,178.0,5.0,intel uhd graphics (jasper lake 16 eu)
+Intel UHD Graphics 600,Gen. 9 Gemini Lake,984,False,12.0,300.0,700.0,,,64.0,DDR4 / LPDDR4,0.5,False,,3435.5,20.0,578.0,27.0,433.0,21.0,109.0,12.0,intel uhd graphics 600
+Intel HD Graphics 500,Gen. 9 Apollo Lake,985,False,12.0,300.0,700.0,,,64.0,,4.0,True,75.0,3007.0,8.0,482.0,11.0,362.5,8.0,,,intel hd graphics 500

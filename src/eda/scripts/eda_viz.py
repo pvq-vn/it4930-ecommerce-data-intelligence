@@ -326,7 +326,7 @@ def plot_discount_rate_by_source(df: pd.DataFrame, output_path: str):
 
 def plot_overall_missingness_ranking(df_miss: pd.DataFrame, output_path: str):
     """
-    Vẽ biểu đồ thanh ngang xếp hạng tỷ lệ thiếu (%) của toàn bộ 30 thuộc tính.
+    Vẽ biểu đồ thanh ngang xếp hạng tỷ lệ thiếu (%) của toàn bộ 32 thuộc tính.
     Phân màu theo mức độ nghiêm trọng:
     - Đỏ: > 80% (Cực cao / Đặc thù)
     - Cam: 50 - 80% (Cao)
@@ -360,7 +360,7 @@ def plot_overall_missingness_ranking(df_miss: pd.DataFrame, output_path: str):
     ax.invert_yaxis()  # Trường thiếu nhiều nhất nằm trên cùng
 
     ax.set_xlabel("Tỷ lệ thiếu (%)", labelpad=10)
-    ax.set_title("Xếp hạng Mức độ Thiếu Dữ liệu (%) của 30 Thuộc tính (Missingness Profile)", pad=15)
+    ax.set_title(f"Xếp hạng Mức độ Thiếu Dữ liệu (%) của {len(plot_df)} Thuộc tính (Missingness Profile)", pad=15)
     ax.set_xlim(0, 110)
 
     # Thêm số % trực tiếp bên cạnh mỗi thanh
@@ -840,9 +840,31 @@ def plot_pricing_drivers_comparison(df: pd.DataFrame, output_path: str):
         "Kích thước Màn hình",
         "Camera MP"
     ]
-    # Spearman rho values from empirical data
-    laptop_rhos = [0.803, 0.548, 0.722, 0.658, 0.089, np.nan]
-    phone_rhos = [0.589, 0.702, 0.505, 0.038, 0.178, 0.027]
+    # Spearman rho values computed directly from current processed dataset
+    def _spearman_rho(sub_df, col):
+        tmp = sub_df[[col, "price_vnd"]].dropna()
+        if len(tmp) < 3:
+            return np.nan
+        return float(tmp[col].corr(tmp["price_vnd"], method="spearman"))
+
+    lap_valid = df[(df["category"] == "laptop") & (df["price_vnd"] > 0)]
+    ph_valid = df[(df["category"] == "smartphone") & (df["price_vnd"] > 0)]
+    laptop_rhos = [
+        _spearman_rho(lap_valid, "installed_ram_gb"),
+        _spearman_rho(lap_valid, "storage_gb"),
+        _spearman_rho(lap_valid, "charger_watt"),
+        _spearman_rho(lap_valid, "battery_wh"),
+        _spearman_rho(lap_valid, "screen_size_inch"),
+        np.nan,
+    ]
+    phone_rhos = [
+        _spearman_rho(ph_valid, "installed_ram_gb"),
+        _spearman_rho(ph_valid, "storage_gb"),
+        _spearman_rho(ph_valid, "charger_watt"),
+        _spearman_rho(ph_valid, "battery_mah"),
+        _spearman_rho(ph_valid, "screen_size_inch"),
+        _spearman_rho(ph_valid, "camera_mp"),
+    ]
 
     y_pos = np.arange(len(corr_features))
     bar_height = 0.38
@@ -880,13 +902,13 @@ def plot_pricing_drivers_comparison(df: pd.DataFrame, output_path: str):
     ax2 = axes[1]
     multiplier_data = [
         {"Factor": "ROM Smartphone (1TB vs 64GB)", "Multiplier": 11.97, "Category": "Smartphone"},
+        {"Factor": "RAM Smartphone (>=16GB vs <=4GB)", "Multiplier": 7.65, "Category": "Smartphone"},
         {"Factor": "Thương hiệu Phone (Apple vs Android entry)", "Multiplier": 7.28, "Category": "Smartphone"},
-        {"Factor": "RAM Smartphone (>=16GB vs <=4GB)", "Multiplier": 7.29, "Category": "Smartphone"},
-        {"Factor": "Màn hình Phone (OLED vs IPS)", "Multiplier": 4.11, "Category": "Smartphone"},
-        {"Factor": "Ổ cứng Laptop (>=2TB vs 256GB)", "Multiplier": 5.21, "Category": "Laptop"},
-        {"Factor": "RAM Laptop (>=64GB vs 8GB)", "Multiplier": 5.16, "Category": "Laptop"},
+        {"Factor": "Ổ cứng Laptop (>=2TB vs 256GB)", "Multiplier": 6.38, "Category": "Laptop"},
+        {"Factor": "RAM Laptop (>=64GB vs 8GB)", "Multiplier": 5.12, "Category": "Laptop"},
         {"Factor": "CPU Laptop (i9 vs Core i3)", "Multiplier": 4.60, "Category": "Laptop"},
-        {"Factor": "Pin Laptop (>75Wh vs <45Wh)", "Multiplier": 2.78, "Category": "Laptop"},
+        {"Factor": "Màn hình Phone (OLED vs IPS)", "Multiplier": 4.21, "Category": "Smartphone"},
+        {"Factor": "Pin Laptop (>75Wh vs <45Wh)", "Multiplier": 2.85, "Category": "Laptop"},
         {"Factor": "GPU Laptop (Apple/Discrete vs Onboard)", "Multiplier": 2.05, "Category": "Laptop"},
     ]
     mult_df = pd.DataFrame(multiplier_data).sort_values(by="Multiplier", ascending=True)
@@ -914,14 +936,15 @@ def plot_pricing_drivers_comparison(df: pd.DataFrame, output_path: str):
     # --- PANEL C: ANOVA F-STATISTIC COMPARISON ---
     ax3 = axes[2]
     anova_data = [
-        {"Factor": "Màn hình OLED/IPS (Phone)", "F": 2954.2, "Category": "Smartphone"},
-        {"Factor": "CPU Tier (Laptop)", "F": 757.2, "Category": "Laptop"},
-        {"Factor": "Storage Group (Phone)", "F": 569.8, "Category": "Smartphone"},
-        {"Factor": "RAM Group (Laptop)", "F": 565.4, "Category": "Laptop"},
-        {"Factor": "Brand Segment (Phone)", "F": 562.9, "Category": "Smartphone"},
-        {"Factor": "GPU Type (Laptop)", "F": 502.1, "Category": "Laptop"},
-        {"Factor": "RAM Group (Phone)", "F": 377.9, "Category": "Smartphone"},
-        {"Factor": "Brand Segment (Laptop)", "F": 128.4, "Category": "Laptop"}
+        {"Factor": "Màn hình OLED/IPS (Phone)", "F": 2903.0, "Category": "Smartphone"},
+        {"Factor": "RAM Group (Laptop)", "F": 1577.9, "Category": "Laptop"},
+        {"Factor": "Storage Group (Phone)", "F": 780.7, "Category": "Smartphone"},
+        {"Factor": "CPU Tier (Laptop)", "F": 764.3, "Category": "Laptop"},
+        {"Factor": "Storage Group (Laptop)", "F": 739.4, "Category": "Laptop"},
+        {"Factor": "RAM Group (Phone)", "F": 651.4, "Category": "Smartphone"},
+        {"Factor": "GPU Type (Laptop)", "F": 439.1, "Category": "Laptop"},
+        {"Factor": "Brand Segment (Phone)", "F": 210.2, "Category": "Smartphone"},
+        {"Factor": "Brand Segment (Laptop)", "F": 88.3, "Category": "Laptop"}
     ]
     anova_df = pd.DataFrame(anova_data).sort_values(by="F", ascending=True)
 
@@ -1074,24 +1097,44 @@ def plot_multicollinearity_and_vif(df: pd.DataFrame, output_path: str):
         yticklabels=ph_labels,
         ax=ax1
     )
+    ram_rom_r = float(ph_corr.loc["installed_ram_gb", "storage_gb"])
     plt.setp(ax1.get_yticklabels(), rotation=0, fontsize=9.5)
     plt.setp(ax1.get_xticklabels(), rotation=25, ha="right", fontsize=9.5)
-    ax1.set_title("A. Ma trận Tương quan Chéo giữa các Biến Cấu hình (Smartphone)\n(Cảnh báo tương quan cao giữa RAM & ROM: r = +0.83)", pad=12, fontsize=11, fontweight="bold")
+    ax1.set_title(
+        f"A. Ma trận Tương quan Chéo giữa các Biến Cấu hình (Smartphone)\n(Tương quan giữa RAM & ROM: r = {ram_rom_r:+.2f})",
+        pad=12, fontsize=11, fontweight="bold"
+    )
 
-    # --- PANEL B: VIF BAR CHART ---
+    # --- PANEL B: VIF BAR CHART (computed dynamically from valid_df) ---
     ax2 = axes[1]
-    vif_data = [
-        {"Feature": "RAM Smartphone", "VIF": 5.44, "Category": "Smartphone"},
-        {"Feature": "ROM Smartphone", "VIF": 3.55, "Category": "Smartphone"},
-        {"Feature": "Pin Wh Laptop", "VIF": 2.82, "Category": "Laptop"},
-        {"Feature": "Sạc Watt Phone", "VIF": 2.29, "Category": "Smartphone"},
-        {"Feature": "RAM Laptop", "VIF": 2.05, "Category": "Laptop"},
-        {"Feature": "Màn hình Laptop", "VIF": 1.62, "Category": "Laptop"},
-        {"Feature": "Ổ cứng Laptop", "VIF": 1.51, "Category": "Laptop"},
-        {"Feature": "Sạc Watt Laptop", "VIF": 1.46, "Category": "Laptop"},
-        {"Feature": "Màn hình Phone", "VIF": 1.31, "Category": "Smartphone"},
-        {"Feature": "Pin mAh Phone", "VIF": 1.08, "Category": "Smartphone"}
+    vif_data = []
+    lap_df_v = valid_df[valid_df["category"] == "laptop"]
+    lap_cols_v = [
+        ("installed_ram_gb", "RAM Laptop"),
+        ("storage_gb", "Ổ cứng Laptop"),
+        ("battery_wh", "Pin Wh Laptop"),
+        ("screen_size_inch", "Màn hình Laptop"),
+        ("charger_watt", "Sạc Watt Laptop"),
     ]
+    lap_sub_v = lap_df_v[[c for c, _ in lap_cols_v]].dropna()
+    if len(lap_sub_v) > len(lap_cols_v):
+        inv_lap = np.linalg.inv(lap_sub_v.corr().values)
+        for i, (_, label) in enumerate(lap_cols_v):
+            vif_data.append({"Feature": label, "VIF": float(np.diag(inv_lap)[i]), "Category": "Laptop"})
+
+    ph_cols_v = [
+        ("installed_ram_gb", "RAM Smartphone"),
+        ("storage_gb", "ROM Smartphone"),
+        ("battery_mah", "Pin mAh Phone"),
+        ("charger_watt", "Sạc Watt Phone"),
+        ("screen_size_inch", "Màn hình Phone"),
+    ]
+    ph_sub_v = phone_df[[c for c, _ in ph_cols_v]].dropna()
+    if len(ph_sub_v) > len(ph_cols_v):
+        inv_ph = np.linalg.inv(ph_sub_v.corr().values)
+        for i, (_, label) in enumerate(ph_cols_v):
+            vif_data.append({"Feature": label, "VIF": float(np.diag(inv_ph)[i]), "Category": "Smartphone"})
+
     vif_df = pd.DataFrame(vif_data).sort_values(by="VIF", ascending=True)
 
     colors = ["#d95f02" if cat == "Smartphone" else "#2b5c8f" for cat in vif_df["Category"]]

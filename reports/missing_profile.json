@@ -1,0 +1,1020 @@
+{
+  "pipeline_stage": "missing_profile",
+  "read_only": true,
+  "products": {
+    "records_by_scope": {
+      "cellphones/laptop": 3912,
+      "cellphones/smartphone": 3935,
+      "fptshop/laptop": 356,
+      "fptshop/smartphone": 464,
+      "hoanghamobile/laptop": 93,
+      "hoanghamobile/smartphone": 192,
+      "tgdd/laptop": 490,
+      "tgdd/smartphone": 707,
+      "viettelstore/laptop": 23,
+      "viettelstore/smartphone": 144
+    },
+    "fields": {
+      "cellphones/laptop": {
+        "product_id_raw": {
+          "PRESENT": 3912
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 3912
+        },
+        "product_name_raw": {
+          "PRESENT": 3912
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 3912
+        },
+        "variant_name_raw": {
+          "NULL": 481,
+          "PRESENT": 3431
+        },
+        "variant_color_raw": {
+          "NULL": 481,
+          "PRESENT": 3431
+        },
+        "variant_sku_raw": {
+          "NULL": 481,
+          "PRESENT": 3431
+        },
+        "availability_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 3467,
+          "PRESENT": 445
+        },
+        "price_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 650,
+          "PRESENT": 3262
+        },
+        "original_price_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 662,
+          "PRESENT": 3250
+        },
+        "seller_raw": {
+          "PRESENT": 3912
+        },
+        "rating_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 3097,
+          "PRESENT": 815
+        },
+        "review_count_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 3097,
+          "PRESENT": 815
+        },
+        "attributes_raw": {
+          "PRESENT": 3912
+        },
+        "brand_raw": {
+          "PRESENT": 3912
+        },
+        "total_sold_raw": {
+          "NULL": 3912
+        },
+        "raw_payload": {
+          "PRESENT": 3912
+        }
+      },
+      "cellphones/smartphone": {
+        "product_id_raw": {
+          "PRESENT": 3935
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 3935
+        },
+        "product_name_raw": {
+          "PRESENT": 3935
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 3935
+        },
+        "variant_name_raw": {
+          "PRESENT": 3184,
+          "NULL": 751
+        },
+        "variant_color_raw": {
+          "PRESENT": 3184,
+          "NULL": 751
+        },
+        "variant_sku_raw": {
+          "PRESENT": 3184,
+          "NULL": 751
+        },
+        "availability_raw": {
+          "PRESENT": 420,
+          "ZERO_SENTINEL_CANDIDATE": 3515
+        },
+        "price_raw": {
+          "PRESENT": 2834,
+          "ZERO_SENTINEL_CANDIDATE": 1101
+        },
+        "original_price_raw": {
+          "PRESENT": 2834,
+          "ZERO_SENTINEL_CANDIDATE": 1101
+        },
+        "seller_raw": {
+          "PRESENT": 3935
+        },
+        "rating_raw": {
+          "PRESENT": 2126,
+          "ZERO_SENTINEL_CANDIDATE": 1809
+        },
+        "review_count_raw": {
+          "PRESENT": 2126,
+          "ZERO_SENTINEL_CANDIDATE": 1809
+        },
+        "attributes_raw": {
+          "PRESENT": 3935
+        },
+        "brand_raw": {
+          "PRESENT": 3915,
+          "EMPTY_OR_WHITESPACE": 20
+        },
+        "total_sold_raw": {
+          "NULL": 3935
+        },
+        "raw_payload": {
+          "PRESENT": 3935
+        }
+      },
+      "fptshop/laptop": {
+        "product_id_raw": {
+          "PRESENT": 356
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 356
+        },
+        "product_name_raw": {
+          "PRESENT": 356
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 356
+        },
+        "variant_name_raw": {
+          "PRESENT": 356
+        },
+        "variant_color_raw": {
+          "PRESENT": 356
+        },
+        "variant_sku_raw": {
+          "PRESENT": 356
+        },
+        "availability_raw": {
+          "PRESENT": 356
+        },
+        "price_raw": {
+          "PRESENT": 356
+        },
+        "original_price_raw": {
+          "PRESENT": 356
+        },
+        "seller_raw": {
+          "PRESENT": 356
+        },
+        "rating_raw": {
+          "PRESENT": 356
+        },
+        "review_count_raw": {
+          "NULL": 356
+        },
+        "attributes_raw": {
+          "PRESENT": 356
+        },
+        "brand_raw": {
+          "PRESENT": 356
+        },
+        "total_sold_raw": {
+          "PRESENT": 332,
+          "NULL": 24
+        },
+        "raw_payload": {
+          "PRESENT": 356
+        }
+      },
+      "fptshop/smartphone": {
+        "product_id_raw": {
+          "PRESENT": 464
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 464
+        },
+        "product_name_raw": {
+          "PRESENT": 464
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 464
+        },
+        "variant_name_raw": {
+          "PRESENT": 464
+        },
+        "variant_color_raw": {
+          "PRESENT": 464
+        },
+        "variant_sku_raw": {
+          "PRESENT": 464
+        },
+        "availability_raw": {
+          "PRESENT": 464
+        },
+        "price_raw": {
+          "PRESENT": 463,
+          "ZERO_SENTINEL_CANDIDATE": 1
+        },
+        "original_price_raw": {
+          "PRESENT": 463,
+          "ZERO_SENTINEL_CANDIDATE": 1
+        },
+        "seller_raw": {
+          "PRESENT": 464
+        },
+        "rating_raw": {
+          "PRESENT": 464
+        },
+        "review_count_raw": {
+          "NULL": 464
+        },
+        "attributes_raw": {
+          "PRESENT": 464
+        },
+        "brand_raw": {
+          "PRESENT": 464
+        },
+        "total_sold_raw": {
+          "PRESENT": 435,
+          "NULL": 29
+        },
+        "raw_payload": {
+          "PRESENT": 464
+        }
+      },
+      "hoanghamobile/laptop": {
+        "product_id_raw": {
+          "PRESENT": 93
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 93
+        },
+        "product_name_raw": {
+          "PRESENT": 93
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 93
+        },
+        "variant_name_raw": {
+          "NULL": 93
+        },
+        "variant_color_raw": {
+          "NULL": 93
+        },
+        "variant_sku_raw": {
+          "PRESENT": 93
+        },
+        "availability_raw": {
+          "PRESENT": 91,
+          "NULL": 2
+        },
+        "price_raw": {
+          "PRESENT": 93
+        },
+        "original_price_raw": {
+          "PRESENT": 87,
+          "NULL": 6
+        },
+        "seller_raw": {
+          "PRESENT": 93
+        },
+        "rating_raw": {
+          "NULL": 93
+        },
+        "review_count_raw": {
+          "NULL": 93
+        },
+        "attributes_raw": {
+          "PRESENT": 93
+        },
+        "brand_raw": {
+          "PRESENT": 91,
+          "NULL": 2
+        },
+        "total_sold_raw": {
+          "NULL": 93
+        },
+        "raw_payload": {
+          "PRESENT": 93
+        }
+      },
+      "hoanghamobile/smartphone": {
+        "product_id_raw": {
+          "PRESENT": 192
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 192
+        },
+        "product_name_raw": {
+          "PRESENT": 192
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 192
+        },
+        "variant_name_raw": {
+          "NULL": 192
+        },
+        "variant_color_raw": {
+          "NULL": 192
+        },
+        "variant_sku_raw": {
+          "NULL": 192
+        },
+        "availability_raw": {
+          "PRESENT": 190,
+          "NULL": 2
+        },
+        "price_raw": {
+          "PRESENT": 190,
+          "SPECIAL_STRING_CANDIDATE": 2
+        },
+        "original_price_raw": {
+          "NULL": 21,
+          "PRESENT": 171
+        },
+        "seller_raw": {
+          "PRESENT": 192
+        },
+        "rating_raw": {
+          "NULL": 192
+        },
+        "review_count_raw": {
+          "NULL": 192
+        },
+        "attributes_raw": {
+          "PRESENT": 190,
+          "EMPTY_CONTAINER": 2
+        },
+        "brand_raw": {
+          "PRESENT": 190,
+          "NULL": 2
+        },
+        "total_sold_raw": {
+          "NULL": 192
+        },
+        "raw_payload": {
+          "PRESENT": 192
+        }
+      },
+      "tgdd/laptop": {
+        "product_id_raw": {
+          "PRESENT": 490
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 490
+        },
+        "product_name_raw": {
+          "PRESENT": 490
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 490
+        },
+        "variant_name_raw": {
+          "NULL": 431,
+          "PRESENT": 59
+        },
+        "variant_color_raw": {
+          "NULL": 445,
+          "PRESENT": 45
+        },
+        "variant_sku_raw": {
+          "NULL": 431,
+          "PRESENT": 59
+        },
+        "availability_raw": {
+          "NULL": 431,
+          "PRESENT": 59
+        },
+        "price_raw": {
+          "PRESENT": 488,
+          "NULL": 2
+        },
+        "original_price_raw": {
+          "PRESENT": 429,
+          "NULL": 61
+        },
+        "seller_raw": {
+          "PRESENT": 490
+        },
+        "rating_raw": {
+          "PRESENT": 440,
+          "ZERO_SENTINEL_CANDIDATE": 50
+        },
+        "review_count_raw": {
+          "PRESENT": 440,
+          "ZERO_SENTINEL_CANDIDATE": 50
+        },
+        "attributes_raw": {
+          "PRESENT": 489,
+          "EMPTY_CONTAINER": 1
+        },
+        "brand_raw": {
+          "PRESENT": 490
+        },
+        "total_sold_raw": {
+          "PRESENT": 440,
+          "EMPTY_OR_WHITESPACE": 50
+        },
+        "raw_payload": {
+          "PRESENT": 490
+        }
+      },
+      "tgdd/smartphone": {
+        "product_id_raw": {
+          "PRESENT": 707
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 707
+        },
+        "product_name_raw": {
+          "PRESENT": 707
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 707
+        },
+        "variant_name_raw": {
+          "PRESENT": 685,
+          "NULL": 22
+        },
+        "variant_color_raw": {
+          "PRESENT": 561,
+          "NULL": 146
+        },
+        "variant_sku_raw": {
+          "PRESENT": 685,
+          "NULL": 22
+        },
+        "availability_raw": {
+          "PRESENT": 685,
+          "NULL": 22
+        },
+        "price_raw": {
+          "PRESENT": 699,
+          "NULL": 8
+        },
+        "original_price_raw": {
+          "NULL": 693,
+          "PRESENT": 14
+        },
+        "seller_raw": {
+          "PRESENT": 707
+        },
+        "rating_raw": {
+          "PRESENT": 699,
+          "ZERO_SENTINEL_CANDIDATE": 8
+        },
+        "review_count_raw": {
+          "PRESENT": 699,
+          "ZERO_SENTINEL_CANDIDATE": 8
+        },
+        "attributes_raw": {
+          "PRESENT": 678,
+          "EMPTY_CONTAINER": 29
+        },
+        "brand_raw": {
+          "PRESENT": 707
+        },
+        "total_sold_raw": {
+          "PRESENT": 697,
+          "EMPTY_OR_WHITESPACE": 10
+        },
+        "raw_payload": {
+          "PRESENT": 707
+        }
+      },
+      "viettelstore/laptop": {
+        "product_id_raw": {
+          "PRESENT": 23
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 23
+        },
+        "product_name_raw": {
+          "PRESENT": 23
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 23
+        },
+        "variant_name_raw": {
+          "NULL": 23
+        },
+        "variant_color_raw": {
+          "NULL": 23
+        },
+        "variant_sku_raw": {
+          "PRESENT": 22,
+          "NULL": 1
+        },
+        "availability_raw": {
+          "PRESENT": 21,
+          "NULL": 2
+        },
+        "price_raw": {
+          "PRESENT": 23
+        },
+        "original_price_raw": {
+          "PRESENT": 23
+        },
+        "seller_raw": {
+          "PRESENT": 23
+        },
+        "rating_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 20,
+          "NULL": 2,
+          "PRESENT": 1
+        },
+        "review_count_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 20,
+          "NULL": 2,
+          "PRESENT": 1
+        },
+        "attributes_raw": {
+          "PRESENT": 21,
+          "EMPTY_CONTAINER": 2
+        },
+        "brand_raw": {
+          "PRESENT": 21,
+          "NULL": 2
+        },
+        "total_sold_raw": {
+          "NULL": 23
+        },
+        "raw_payload": {
+          "PRESENT": 23
+        }
+      },
+      "viettelstore/smartphone": {
+        "product_id_raw": {
+          "PRESENT": 144
+        },
+        "parent_product_id_raw": {
+          "PRESENT": 144
+        },
+        "product_name_raw": {
+          "PRESENT": 144
+        },
+        "parent_product_name_raw": {
+          "PRESENT": 144
+        },
+        "variant_name_raw": {
+          "NULL": 144
+        },
+        "variant_color_raw": {
+          "NULL": 144
+        },
+        "variant_sku_raw": {
+          "NULL": 144
+        },
+        "availability_raw": {
+          "PRESENT": 140,
+          "SPECIAL_STRING_CANDIDATE": 2,
+          "NULL": 2
+        },
+        "price_raw": {
+          "PRESENT": 140,
+          "NULL": 3,
+          "SPECIAL_STRING_CANDIDATE": 1
+        },
+        "original_price_raw": {
+          "PRESENT": 112,
+          "NULL": 32
+        },
+        "seller_raw": {
+          "PRESENT": 144
+        },
+        "rating_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 76,
+          "PRESENT": 66,
+          "NULL": 2
+        },
+        "review_count_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 76,
+          "PRESENT": 66,
+          "NULL": 2
+        },
+        "attributes_raw": {
+          "PRESENT": 133,
+          "EMPTY_CONTAINER": 11
+        },
+        "brand_raw": {
+          "PRESENT": 142,
+          "NULL": 2
+        },
+        "total_sold_raw": {
+          "NULL": 144
+        },
+        "raw_payload": {
+          "PRESENT": 144
+        }
+      }
+    }
+  },
+  "reviews": {
+    "records_by_scope": {
+      "cellphones/laptop": 1898,
+      "cellphones/smartphone": 9296,
+      "fptshop/laptop": 602,
+      "fptshop/smartphone": 1092,
+      "tgdd/laptop": 99,
+      "tgdd/smartphone": 2329,
+      "viettelstore/laptop": 63,
+      "viettelstore/smartphone": 426
+    },
+    "fields": {
+      "cellphones/laptop": {
+        "parent_product_id_raw": {
+          "PRESENT": 1898
+        },
+        "review_id_raw": {
+          "PRESENT": 1898
+        },
+        "rating_raw": {
+          "PRESENT": 1898
+        },
+        "review_text_raw": {
+          "PRESENT": 1885,
+          "SPECIAL_STRING_CANDIDATE": 2,
+          "EMPTY_OR_WHITESPACE": 11
+        },
+        "author_raw": {
+          "PRESENT": 1803,
+          "SPECIAL_STRING_CANDIDATE": 95
+        },
+        "review_time_raw": {
+          "PRESENT": 1898
+        },
+        "like_count_raw": {
+          "NULL": 1898
+        },
+        "review_product_code_raw": {
+          "NULL": 1898
+        },
+        "variant_code_raw": {
+          "NULL": 1898
+        },
+        "variant_sku_raw": {
+          "NULL": 1898
+        },
+        "buy_date_raw": {
+          "NULL": 1898
+        },
+        "reply_raw": {
+          "EMPTY_CONTAINER": 1893,
+          "PRESENT": 5
+        },
+        "attached_files_raw": {
+          "PRESENT": 1611,
+          "EMPTY_OR_WHITESPACE": 287
+        },
+        "raw_payload": {
+          "PRESENT": 1898
+        }
+      },
+      "cellphones/smartphone": {
+        "parent_product_id_raw": {
+          "PRESENT": 9296
+        },
+        "review_id_raw": {
+          "PRESENT": 9296
+        },
+        "rating_raw": {
+          "PRESENT": 9296
+        },
+        "review_text_raw": {
+          "PRESENT": 9132,
+          "EMPTY_OR_WHITESPACE": 137,
+          "SPECIAL_STRING_CANDIDATE": 27
+        },
+        "author_raw": {
+          "SPECIAL_STRING_CANDIDATE": 1146,
+          "PRESENT": 8138,
+          "EMPTY_OR_WHITESPACE": 12
+        },
+        "review_time_raw": {
+          "PRESENT": 9296
+        },
+        "like_count_raw": {
+          "NULL": 9296
+        },
+        "review_product_code_raw": {
+          "NULL": 9296
+        },
+        "variant_code_raw": {
+          "NULL": 9296
+        },
+        "variant_sku_raw": {
+          "NULL": 9296
+        },
+        "buy_date_raw": {
+          "NULL": 9296
+        },
+        "reply_raw": {
+          "EMPTY_CONTAINER": 9272,
+          "PRESENT": 24
+        },
+        "attached_files_raw": {
+          "PRESENT": 7484,
+          "EMPTY_OR_WHITESPACE": 1812
+        },
+        "raw_payload": {
+          "PRESENT": 9296
+        }
+      },
+      "fptshop/laptop": {
+        "parent_product_id_raw": {
+          "PRESENT": 602
+        },
+        "review_id_raw": {
+          "PRESENT": 602
+        },
+        "rating_raw": {
+          "PRESENT": 602
+        },
+        "review_text_raw": {
+          "PRESENT": 602
+        },
+        "author_raw": {
+          "PRESENT": 602
+        },
+        "review_time_raw": {
+          "PRESENT": 602
+        },
+        "like_count_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 595,
+          "PRESENT": 7
+        },
+        "review_product_code_raw": {
+          "PRESENT": 99,
+          "NULL": 503
+        },
+        "variant_code_raw": {
+          "PRESENT": 99,
+          "NULL": 503
+        },
+        "variant_sku_raw": {
+          "PRESENT": 99,
+          "NULL": 503
+        },
+        "buy_date_raw": {
+          "NULL": 602
+        },
+        "reply_raw": {
+          "EMPTY_CONTAINER": 593,
+          "PRESENT": 9
+        },
+        "attached_files_raw": {
+          "PRESENT": 602
+        },
+        "raw_payload": {
+          "PRESENT": 602
+        }
+      },
+      "fptshop/smartphone": {
+        "parent_product_id_raw": {
+          "PRESENT": 1092
+        },
+        "review_id_raw": {
+          "PRESENT": 1092
+        },
+        "rating_raw": {
+          "PRESENT": 1092
+        },
+        "review_text_raw": {
+          "PRESENT": 1086,
+          "EMPTY_OR_WHITESPACE": 6
+        },
+        "author_raw": {
+          "PRESENT": 1092
+        },
+        "review_time_raw": {
+          "PRESENT": 1092
+        },
+        "like_count_raw": {
+          "ZERO_SENTINEL_CANDIDATE": 1075,
+          "PRESENT": 17
+        },
+        "review_product_code_raw": {
+          "NULL": 663,
+          "PRESENT": 429
+        },
+        "variant_code_raw": {
+          "NULL": 663,
+          "PRESENT": 429
+        },
+        "variant_sku_raw": {
+          "NULL": 687,
+          "PRESENT": 405
+        },
+        "buy_date_raw": {
+          "NULL": 1092
+        },
+        "reply_raw": {
+          "EMPTY_CONTAINER": 1047,
+          "PRESENT": 45
+        },
+        "attached_files_raw": {
+          "PRESENT": 1092
+        },
+        "raw_payload": {
+          "PRESENT": 1092
+        }
+      },
+      "tgdd/laptop": {
+        "parent_product_id_raw": {
+          "PRESENT": 99
+        },
+        "review_id_raw": {
+          "PRESENT": 99
+        },
+        "rating_raw": {
+          "PRESENT": 99
+        },
+        "review_text_raw": {
+          "PRESENT": 94,
+          "NULL": 5
+        },
+        "author_raw": {
+          "PRESENT": 99
+        },
+        "review_time_raw": {
+          "PRESENT": 99
+        },
+        "like_count_raw": {
+          "PRESENT": 80,
+          "ZERO_SENTINEL_CANDIDATE": 19
+        },
+        "review_product_code_raw": {
+          "PRESENT": 99
+        },
+        "variant_code_raw": {
+          "PRESENT": 99
+        },
+        "variant_sku_raw": {
+          "NULL": 96,
+          "PRESENT": 3
+        },
+        "buy_date_raw": {
+          "PRESENT": 99
+        },
+        "reply_raw": {
+          "EMPTY_OR_WHITESPACE": 99
+        },
+        "attached_files_raw": {
+          "EMPTY_CONTAINER": 88,
+          "PRESENT": 11
+        },
+        "raw_payload": {
+          "PRESENT": 99
+        }
+      },
+      "tgdd/smartphone": {
+        "parent_product_id_raw": {
+          "PRESENT": 2329
+        },
+        "review_id_raw": {
+          "PRESENT": 2329
+        },
+        "rating_raw": {
+          "PRESENT": 2329
+        },
+        "review_text_raw": {
+          "PRESENT": 2041,
+          "NULL": 288
+        },
+        "author_raw": {
+          "PRESENT": 2329
+        },
+        "review_time_raw": {
+          "PRESENT": 2329
+        },
+        "like_count_raw": {
+          "PRESENT": 1735,
+          "ZERO_SENTINEL_CANDIDATE": 594
+        },
+        "review_product_code_raw": {
+          "PRESENT": 2329
+        },
+        "variant_code_raw": {
+          "PRESENT": 2329
+        },
+        "variant_sku_raw": {
+          "PRESENT": 1898,
+          "NULL": 431
+        },
+        "buy_date_raw": {
+          "PRESENT": 2329
+        },
+        "reply_raw": {
+          "EMPTY_OR_WHITESPACE": 2329
+        },
+        "attached_files_raw": {
+          "EMPTY_CONTAINER": 2110,
+          "PRESENT": 219
+        },
+        "raw_payload": {
+          "PRESENT": 2329
+        }
+      },
+      "viettelstore/laptop": {
+        "parent_product_id_raw": {
+          "PRESENT": 63
+        },
+        "review_id_raw": {
+          "PRESENT": 63
+        },
+        "rating_raw": {
+          "PRESENT": 63
+        },
+        "review_text_raw": {
+          "NULL": 63
+        },
+        "author_raw": {
+          "EMPTY_OR_WHITESPACE": 63
+        },
+        "review_time_raw": {
+          "NULL": 63
+        },
+        "like_count_raw": {
+          "NULL": 63
+        },
+        "review_product_code_raw": {
+          "PRESENT": 63
+        },
+        "variant_code_raw": {
+          "NULL": 63
+        },
+        "variant_sku_raw": {
+          "NULL": 63
+        },
+        "buy_date_raw": {
+          "NULL": 63
+        },
+        "reply_raw": {
+          "NULL": 63
+        },
+        "attached_files_raw": {
+          "NULL": 63
+        },
+        "raw_payload": {
+          "PRESENT": 63
+        }
+      },
+      "viettelstore/smartphone": {
+        "parent_product_id_raw": {
+          "PRESENT": 426
+        },
+        "review_id_raw": {
+          "PRESENT": 426
+        },
+        "rating_raw": {
+          "PRESENT": 426
+        },
+        "review_text_raw": {
+          "NULL": 426
+        },
+        "author_raw": {
+          "PRESENT": 245,
+          "EMPTY_OR_WHITESPACE": 181
+        },
+        "review_time_raw": {
+          "NULL": 426
+        },
+        "like_count_raw": {
+          "NULL": 426
+        },
+        "review_product_code_raw": {
+          "PRESENT": 426
+        },
+        "variant_code_raw": {
+          "NULL": 426
+        },
+        "variant_sku_raw": {
+          "NULL": 426
+        },
+        "buy_date_raw": {
+          "NULL": 426
+        },
+        "reply_raw": {
+          "NULL": 426
+        },
+        "attached_files_raw": {
+          "NULL": 426
+        },
+        "raw_payload": {
+          "PRESENT": 426
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "NULL, empty strings, empty containers and zero are reported separately.",
+    "Special strings are candidates for source-specific review, not automatic missing values.",
+    "No values were imputed, dropped or overwritten."
+  ]
+}

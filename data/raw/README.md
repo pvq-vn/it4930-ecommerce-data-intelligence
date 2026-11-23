@@ -79,15 +79,16 @@ Dự án thu thập dữ liệu từ đúng 5 sàn thương mại điện tử p
 
 ## 4. Google Drive
 
-(https://drive.google.com/drive/folders/1wQbWDOmYZFz2Ut3AShMu2o1wkMTJESuJ?usp=sharing)
+[Raw Data Folder trên Google Drive (TV1)](https://drive.google.com/drive/folders/1wQbWDOmYZFz2Ut3AShMu2o1wkMTJESuJ?usp=drive_link)
 
 | Source | Laptop | Smartphone | Reviews |
-|---|---|---|---|
-| TGDĐ | TODO | TODO | TODO |
-| FPT Shop | TODO | TODO | TODO |
-| CellphoneS | TODO | TODO | TODO |
-| Viettel Store | TODO | TODO | TODO |
-| Hoàng Hà Mobile | TODO | TODO | TODO |
+|---|---:|---:|---:|
+| TGDĐ | 490 | 707 | 2.428 *(99 laptop + 2.329 smartphone)* |
+| FPT Shop | 356 | 464 | 1.694 *(602 laptop + 1.092 smartphone)* |
+| CellphoneS | 3.912 | 3.935 | 11.194 *(1.898 laptop + 9.296 smartphone)* |
+| Viettel Store | 23 | 144 | 489 *(63 laptop + 426 smartphone)* |
+| Hoàng Hà Mobile | 93 | 192 | 0 |
+| **Tổng cộng** | **4.874** | **5.442** | **15.805** *(Tổng 10.316 product/variant listings)* |
 
 ---
 

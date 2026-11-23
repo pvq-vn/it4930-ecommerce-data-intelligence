@@ -1,0 +1,39 @@
+{
+  "pipeline_stage": "gold_validation",
+  "counts": {
+    "dim_source_parents": 7051,
+    "fact_listings": 10316,
+    "fact_reviews": 15805,
+    "fact_review_replies": 108
+  },
+  "unique_keys": {
+    "source_parent_id": true,
+    "listing_record_id": true,
+    "review_record_id": true,
+    "reply_record_id": true
+  },
+  "parent_keys": {
+    "listing_parent_keys": 7051,
+    "dim_parent_keys": 7051,
+    "reviews_with_parent": 15805,
+    "reviews_without_parent": 0
+  },
+  "review_parent_join_size_distribution": {
+    "1": 3874,
+    "2": 3114,
+    "3": 4728,
+    "4": 2201,
+    "5": 671,
+    "6": 605,
+    "7": 96,
+    "8": 168,
+    "9": 188,
+    "10": 67,
+    "12": 69,
+    "14": 7,
+    "16": 17
+  },
+  "hypothetical_parent_join_rows": 45651,
+  "join_warning": "Joining reviews to all listing rows by source/category/parent is one-to-many; use variant_link_status before variant-level joins.",
+  "cross_store_identity_resolved": false
+}

@@ -1,0 +1,314 @@
+{
+  "pipeline_version": "tv6-v1.0.0",
+  "executed_at_utc": "2026-11-14T18:27:32.181020+00:00",
+  "step": "step3_1_sentiment_baseline",
+  "inputs": {
+    "preprocessed_file": "C:\\HUST\\Projects\\IT4930._Nhap_mon_KHDL\\it4930-ecommerce-data-intelligence\\data\\tv6\\reviews_tv6_preprocessed.jsonl",
+    "record_count": 14869
+  },
+  "dataset_split": {
+    "train_size": 11895,
+    "test_size": 2974,
+    "test_ratio": 0.2,
+    "random_state": 42
+  },
+  "class_distribution_total": {
+    "POSITIVE": 13627,
+    "NEGATIVE": 714,
+    "NEUTRAL": 528
+  },
+  "best_model_selected": "LogisticRegression_balanced",
+  "model_results": {
+    "LogisticRegression_balanced": {
+      "cv_macro_f1_mean": 0.5961654464668698,
+      "cv_macro_f1_std": 0.012567345324017463,
+      "cv_weighted_f1_mean": 0.9115592598544264,
+      "test_accuracy": 0.8981170141223941,
+      "test_macro_f1": 0.590144707699241,
+      "test_weighted_f1": 0.9115910605749187,
+      "test_macro_precision": 0.5531634389972163,
+      "test_macro_recall": 0.6527958188023967,
+      "test_f1_negative": 0.5623188405797102,
+      "test_f1_neutral": 0.2525597269624573,
+      "test_f1_positive": 0.9555555555555556,
+      "train_time_seconds": 4.898,
+      "confusion_matrix": [
+        [
+          97,
+          27,
+          19
+        ],
+        [
+          40,
+          37,
+          29
+        ],
+        [
+          65,
+          123,
+          2537
+        ]
+      ]
+    },
+    "LinearSVC_balanced": {
+      "cv_macro_f1_mean": 0.6057694763103183,
+      "cv_macro_f1_std": 0.012830940921573972,
+      "cv_weighted_f1_mean": 0.9256313627519465,
+      "test_accuracy": 0.925689307330195,
+      "test_macro_f1": 0.5778086440192615,
+      "test_weighted_f1": 0.9226741678992785,
+      "test_macro_precision": 0.5850477578736274,
+      "test_macro_recall": 0.5730856103679368,
+      "test_f1_negative": 0.5605536332179931,
+      "test_f1_neutral": 0.20320855614973263,
+      "test_f1_positive": 0.9696637426900585,
+      "train_time_seconds": 2.811,
+      "confusion_matrix": [
+        [
+          81,
+          22,
+          40
+        ],
+        [
+          33,
+          19,
+          54
+        ],
+        [
+          32,
+          40,
+          2653
+        ]
+      ]
+    },
+    "ComplementNB": {
+      "cv_macro_f1_mean": 0.5073087158230765,
+      "cv_macro_f1_std": 0.007517917722799825,
+      "cv_weighted_f1_mean": 0.8719172421677015,
+      "test_accuracy": 0.8638197713517148,
+      "test_macro_f1": 0.5226083007241242,
+      "test_weighted_f1": 0.8855824155019283,
+      "test_macro_precision": 0.4886610221002619,
+      "test_macro_recall": 0.63834371732935,
+      "test_f1_negative": 0.44528301886792454,
+      "test_f1_neutral": 0.18666666666666668,
+      "test_f1_positive": 0.9358752166377816,
+      "train_time_seconds": 0.29,
+      "confusion_matrix": [
+        [
+          118,
+          14,
+          11
+        ],
+        [
+          58,
+          21,
+          27
+        ],
+        [
+          211,
+          84,
+          2430
+        ]
+      ]
+    },
+    "MultinomialNB_unweighted": {
+      "cv_macro_f1_mean": 0.3292446930305644,
+      "cv_macro_f1_std": 0.007537555632331708,
+      "cv_weighted_f1_mean": 0.8784980461991667,
+      "test_accuracy": 0.917955615332885,
+      "test_macro_f1": 0.3414766986891944,
+      "test_weighted_f1": 0.8803911974378404,
+      "test_macro_precision": 0.5838200059898173,
+      "test_macro_recall": 0.344988344988345,
+      "test_f1_negative": 0.06711409395973154,
+      "test_f1_neutral": 0.0,
+      "test_f1_positive": 0.9573160021078517,
+      "train_time_seconds": 0.282,
+      "confusion_matrix": [
+        [
+          5,
+          0,
+          138
+        ],
+        [
+          1,
+          0,
+          105
+        ],
+        [
+          0,
+          0,
+          2725
+        ]
+      ]
+    }
+  },
+  "top_polar_features": {
+    "top_negative": [
+      {
+        "feature": "tệ",
+        "weight": 4.3149
+      },
+      {
+        "feature": "quá_tệ",
+        "weight": 3.529
+      },
+      {
+        "feature": "chậm",
+        "weight": 3.3866
+      },
+      {
+        "feature": "thua",
+        "weight": 2.8188
+      },
+      {
+        "feature": "đổi",
+        "weight": 2.6068
+      },
+      {
+        "feature": "gửi",
+        "weight": 2.4818
+      },
+      {
+        "feature": "điện_thoại",
+        "weight": 2.4197
+      },
+      {
+        "feature": "lỗi",
+        "weight": 2.3966
+      },
+      {
+        "feature": "mua",
+        "weight": 2.2333
+      },
+      {
+        "feature": "chán",
+        "weight": 2.2289
+      },
+      {
+        "feature": "loa_nhỏ",
+        "weight": 2.2153
+      },
+      {
+        "feature": "không nên",
+        "weight": 2.1749
+      },
+      {
+        "feature": "lag",
+        "weight": 2.1634
+      },
+      {
+        "feature": "sập_nguồn",
+        "weight": 2.1524
+      },
+      {
+        "feature": "rất tệ",
+        "weight": 2.1424
+      },
+      {
+        "feature": "quảng_cáo",
+        "weight": 2.1303
+      },
+      {
+        "feature": "loa_rè",
+        "weight": 2.1029
+      },
+      {
+        "feature": "máy",
+        "weight": 2.0896
+      },
+      {
+        "feature": "thất_vọng",
+        "weight": 2.0198
+      },
+      {
+        "feature": "gọi",
+        "weight": 2.0122
+      }
+    ],
+    "top_positive": [
+      {
+        "feature": "đẹp",
+        "weight": 3.2972
+      },
+      {
+        "feature": "tốt",
+        "weight": 3.178
+      },
+      {
+        "feature": "mượt",
+        "weight": 2.5787
+      },
+      {
+        "feature": "nhiệt_tình",
+        "weight": 2.483
+      },
+      {
+        "feature": "rất_tốt",
+        "weight": 2.3225
+      },
+      {
+        "feature": "ngon",
+        "weight": 2.3094
+      },
+      {
+        "feature": "shop",
+        "weight": 2.0742
+      },
+      {
+        "feature": "tuyệt_vời",
+        "weight": 2.0686
+      },
+      {
+        "feature": "em",
+        "weight": 1.8902
+      },
+      {
+        "feature": "hài_lòng",
+        "weight": 1.8184
+      },
+      {
+        "feature": "mình",
+        "weight": 1.59
+      },
+      {
+        "feature": "không bị",
+        "weight": 1.5862
+      },
+      {
+        "feature": "cả ngày",
+        "weight": 1.498
+      },
+      {
+        "feature": "cần",
+        "weight": 1.4682
+      },
+      {
+        "feature": "rất ok",
+        "weight": 1.4646
+      },
+      {
+        "feature": "ổn",
+        "weight": 1.3996
+      },
+      {
+        "feature": "trong tầm",
+        "weight": 1.3925
+      },
+      {
+        "feature": "pin_trâu",
+        "weight": 1.3503
+      },
+      {
+        "feature": "rất",
+        "weight": 1.2805
+      },
+      {
+        "feature": "nhân_viên",
+        "weight": 1.2717
+      }
+    ]
+  },
+  "total_runtime_seconds": 11.16
+}
