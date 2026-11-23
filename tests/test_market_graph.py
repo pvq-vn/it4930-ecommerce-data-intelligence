@@ -6,7 +6,9 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
+from src.market_graph import cli
 from src.market_graph.llm_clean import load_valid_price_rows, stratified_sample
 from src.market_graph.bipartite_graph import (
     HANDOFF_COLUMNS,
@@ -18,6 +20,7 @@ from src.market_graph.bipartite_graph import (
     compute_base_hash,
     compute_jaccard_matrix,
     compute_retailer_degree_stats,
+    export_price_free_handoff,
     filter_min_price,
     min_price_for,
     resolve_canonical_products,
@@ -899,3 +902,105 @@ def test_hw_seller_count_counts_distinct_sellers() -> None:
     )
     assert set(handoff["hw_seller_count"]) == {2}
     assert set(handoff["hw_listing_count"]) == {3}
+
+
+@pytest.mark.parametrize("has_stale_default", [False, True])
+def test_handoff_cli_uses_custom_observed_input(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, has_stale_default: bool
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    observed_path = Path("sample_100_cleaned.jsonl")
+    work_dir = tmp_path / "work"
+    rows = [
+        _handoff_listing("a", "CellphoneS"),
+        {**_handoff_listing("b", "FPT"), "ram_gb": None, "cpu_model": "Unknown"},
+    ]
+    observed_path.write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")
+    cli.main(["step2", "--input", str(observed_path), "--work-dir", str(work_dir)])
+    if has_stale_default:
+        stale = [{**row, "ram_gb": 32, "cpu_model": "Stale CPU"} for row in rows]
+        (work_dir / "products_llm_cleaned.jsonl").write_text(
+            "\n".join(json.dumps(row) for row in stale), encoding="utf-8"
+        )
+
+    cli.main(["handoff", "--input", str(observed_path), "--work-dir", str(work_dir)])
+
+    handoff = pd.read_csv(work_dir / "handoff" / "tv5_tv8_price_free_features.csv").set_index("listing_record_id")
+    assert set(handoff.index) == {"a", "b"}
+    assert handoff.loc["a", "ram_gb"] == 8
+    assert handoff.loc["a", "cpu_model"] == "Exynos 1680"
+    assert handoff.loc["a", "hw_seller_count"] == 1
+    assert pd.isna(handoff.loc["b", "ram_gb"])
+    assert pd.isna(handoff.loc["b", "hw_seller_count"])
+    assert handoff.loc["b", "cpu_model"] == "Unknown"
+
+
+def test_handoff_default_observed_input_remains_supported(tmp_path: Path) -> None:
+    listing = _handoff_listing("a", "CellphoneS")
+    (tmp_path / "canonical_listings.jsonl").write_text(json.dumps(listing), encoding="utf-8")
+    (tmp_path / "products_llm_cleaned.jsonl").write_text(
+        json.dumps(_handoff_observed("a", "CellphoneS")), encoding="utf-8"
+    )
+    expected = build_price_free_handoff(work_dir=tmp_path)
+
+    cli.main(["handoff", "--work-dir", str(tmp_path)])
+
+    actual = pd.read_csv(tmp_path / "handoff" / "tv5_tv8_price_free_features.csv")
+    pd.testing.assert_frame_equal(
+        actual.astype(object).where(actual.notna(), None),
+        expected.astype(object).where(expected.notna(), None),
+    )
+
+
+def test_handoff_injected_observed_rows_take_precedence_over_path(tmp_path: Path) -> None:
+    handoff = build_price_free_handoff(
+        listings=[_handoff_listing("a", "CellphoneS")],
+        observed_rows=[_handoff_observed("a", "CellphoneS")],
+        observed_input_path=tmp_path / "missing.jsonl",
+        laptop_benchmarks=[],
+        smartphone_benchmarks=[],
+    )
+    assert handoff.loc[0, "ram_gb"] == 8
+
+
+@pytest.mark.parametrize("explicit_input", [False, True])
+def test_handoff_missing_observed_input_preserves_existing_output(
+    tmp_path: Path, explicit_input: bool
+) -> None:
+    (tmp_path / "canonical_listings.jsonl").write_text(
+        json.dumps(_handoff_listing("a", "CellphoneS")), encoding="utf-8"
+    )
+    missing = tmp_path / ("missing.jsonl" if explicit_input else "products_llm_cleaned.jsonl")
+    if explicit_input:
+        (tmp_path / "products_llm_cleaned.jsonl").write_text(
+            json.dumps(_handoff_observed("a", "CellphoneS")), encoding="utf-8"
+        )
+    output = tmp_path / "handoff" / "tv5_tv8_price_free_features.csv"
+    output.parent.mkdir()
+    output.write_bytes(b"previous handoff\n")
+
+    with pytest.raises(FileNotFoundError) as error:
+        export_price_free_handoff(
+            work_dir=tmp_path, observed_input_path=missing if explicit_input else None
+        )
+
+    assert str(missing) in str(error.value)
+    assert "handoff --input" in str(error.value)
+    assert output.read_bytes() == b"previous handoff\n"
+
+
+def test_run_all_handoff_uses_cleaned_path_returned_by_step1(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    cleaned_path = tmp_path / "custom_cleaned.jsonl"
+    cleaned_path.write_text(json.dumps(_handoff_listing("a", "CellphoneS")), encoding="utf-8")
+    work_dir = tmp_path / "work"
+    monkeypatch.setattr(cli, "run_step1", lambda **kwargs: cleaned_path)
+    for stage in ("run_step1_5", "run_step3", "run_step4"):
+        monkeypatch.setattr(cli, stage, lambda **kwargs: None)
+
+    cli.main(["run-all", "--input", str(tmp_path / "raw.jsonl"), "--work-dir", str(work_dir)])
+
+    handoff = pd.read_csv(work_dir / "handoff" / "tv5_tv8_price_free_features.csv")
+    assert list(handoff["listing_record_id"]) == ["a"]
+    assert handoff.loc[0, "ram_gb"] == 8

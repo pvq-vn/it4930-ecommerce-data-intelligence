@@ -729,17 +729,17 @@ def build_price_free_handoff(
     laptop_benchmarks: list[dict[str, Any]] | None = None,
     smartphone_benchmarks: list[dict[str, Any]] | None = None,
     pipeline_run_id: str | None = None,
+    observed_input_path: Path | None = None,
 ) -> pd.DataFrame:
     """Assemble the price-free TV5/TV8 feature table.
 
     Every argument is injectable so tests can prove that price never enters the output.
-    Specs are taken from ``products_llm_cleaned.jsonl`` (Step 1, *before* imputation)
-    because ``_impute_unknown_specs`` fills values through a +/-10% price window.
+    Specs come from ``observed_rows`` when injected; otherwise from
+    ``observed_input_path`` or ``work_dir/products_llm_cleaned.jsonl`` (Step 1,
+    *before* imputation). ``_impute_unknown_specs`` uses a +/-10% price window.
     """
     if listings is None:
         listings = _read_jsonl_records(work_dir / "canonical_listings.jsonl")
-    if observed_rows is None:
-        observed_rows = _read_jsonl_records(work_dir / "products_llm_cleaned.jsonl")
     if laptop_benchmarks is None:
         laptop_benchmarks = _read_jsonl_records(work_dir / "laptop_benchmarks.jsonl")
     if smartphone_benchmarks is None:
@@ -749,6 +749,15 @@ def build_price_free_handoff(
     listings_df = pd.DataFrame(listings)
     if listings_df.empty:
         return pd.DataFrame(columns=HANDOFF_COLUMNS)
+
+    if observed_rows is None:
+        observed_path = observed_input_path or (work_dir / "products_llm_cleaned.jsonl")
+        if not observed_path.is_file():
+            raise FileNotFoundError(
+                f"Observed spec input not found: {observed_path}. "
+                "Use `handoff --input <path>` with the Step 1 cleaned file before imputation."
+            )
+        observed_rows = _read_jsonl_records(observed_path)
 
     observed_df = pd.DataFrame(observed_rows)
     if observed_df.empty:
@@ -840,11 +849,14 @@ def build_price_free_handoff(
     return handoff
 
 
-def export_price_free_handoff(work_dir: Path = DEFAULT_WORK_DIR) -> Path:
+def export_price_free_handoff(
+    work_dir: Path = DEFAULT_WORK_DIR,
+    observed_input_path: Path | None = None,
+) -> Path:
     """Build and write the price-free handoff CSV (single artifact for TV5/TV8)."""
+    handoff = build_price_free_handoff(work_dir=work_dir, observed_input_path=observed_input_path)
     out_dir = work_dir / "handoff"
     out_dir.mkdir(parents=True, exist_ok=True)
-    handoff = build_price_free_handoff(work_dir=work_dir)
     out_path = out_dir / "tv5_tv8_price_free_features.csv"
     handoff.to_csv(out_path, index=False, encoding="utf-8-sig")
     print(

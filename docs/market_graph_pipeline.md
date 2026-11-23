@@ -417,17 +417,23 @@ python -m src.market_graph.cli step3 --no-benchmarks
 python -m src.market_graph.cli step4
 
 # Bàn giao price-free cho TV5/TV8 (chỉ đọc artifact, không dùng giá)
-python -m src.market_graph.cli handoff
+python -m src.market_graph.cli handoff --input data/market_graph/sample_100_cleaned.jsonl
 
 # Đối chiếu số liệu review (chỉ in ra, không ghi file)
 python -m src.market_graph.cli audit
 ```
+
+**Nguồn spec của handoff (cập nhật 23/11/2026):** Khi chạy từng bước với input tùy chỉnh, truyền cùng file Step 1 cho `step2 --input` và `handoff --input` như ví dụ trên. File này chứa spec quan sát **trước imputation**, không phải raw input hoặc `canonical_listings.jsonl`. Khi bỏ `handoff --input`, lệnh đọc `<work-dir>/products_llm_cleaned.jsonl`; đường dẫn tương đối của `--input` được tính từ thư mục chạy lệnh. Handoff không tự nhớ input của lần chạy Step 2 trước đó.
+
+Nếu có canonical listings nhưng thiếu file spec cần đọc, handoff báo `FileNotFoundError` kèm đường dẫn và hướng dẫn `handoff --input`; CSV handoff hiện có được giữ nguyên. Khi chỉ định một đường dẫn không tồn tại, lệnh không tự chuyển sang file mặc định. Spec còn thiếu trong nguồn quan sát vẫn để `NaN`, không lấy bù từ spec đã impute theo giá.
 
 ### Chạy end-to-end (Đã liên kết trọn vẹn 1 -> 1.5 -> 2 -> 3 -> 4)
 
 ```bash
 python -m src.market_graph.cli run-all --sample-size 100 --perf-tol 0.15
 ```
+
+`run-all` tự truyền đường dẫn output thực tế của Step 1 vào handoff; `run-all --input` vẫn là đầu vào raw/processed của Step 1, không phải file spec cho handoff.
 
 ### Tham số quan trọng
 
@@ -439,6 +445,7 @@ python -m src.market_graph.cli run-all --sample-size 100 --perf-tol 0.15
 | `--resolution` | auto | Louvain resolution: `auto` hoặc số thực (vd: `2.0`) |
 | `--no-benchmarks` | — | Tắt benchmark mode, dùng legacy cpu_tier/RAM logic (Step 3) |
 | `--sample-size` | None | Số lượng sample stratified (Step 1) |
+| `handoff --input` | `<work-dir>/products_llm_cleaned.jsonl` | File spec Step 1 trước imputation; cần truyền lại khi dùng tên/đường dẫn tùy chỉnh |
 
 ---
 
@@ -568,6 +575,9 @@ Chỉ bàn giao đúng file `data/market_graph/handoff/tv5_tv8_price_free_featur
 - `tests/test_market_graph.py::test_price_free_handoff_exposes_only_whitelisted_columns` chặn cột lạ và mọi tên chứa `price/community/segment/band/retailer_count/degree`.
 - `test_price_free_handoff_is_invariant_to_price`: nhân toàn bộ `price_vnd` với 1,37 → bảng bàn giao **giống hệt**.
 - `test_hw_seller_count_uses_observed_specs_not_imputed_cids`: spec bị impute không làm đổi `hw_seller_count`.
+- `test_handoff_cli_uses_custom_observed_input`: Step 2 và handoff cùng dùng file tùy chỉnh; kiểm tra cả khi có file mặc định cũ và spec bị impute ở Step 2.
+- `test_handoff_missing_observed_input_preserves_existing_output`: thiếu file spec phải báo đúng đường dẫn và không ghi đè CSV handoff đã có.
+- `test_run_all_handoff_uses_cleaned_path_returned_by_step1`: handoff nhận đúng output thực tế của Step 1 trong `run-all`.
 - **Không fallback sang spec đã impute**: `ram_gb`, `storage_gb`, `cpu_model` lấy nguyên từ Step 1; thiếu thì để `NaN` (hiện tại 980 dòng thiếu `ram_gb`, 288 dòng thiếu `storage_gb`) — tuyệt đối không điền lại bằng giá trị Step 2 đã suy ra theo cửa sổ giá.
 - Hiện trạng: 8.374 listing, `hw_seller_count` có giá trị ở 7.377 dòng (997 dòng thiếu RAM/storage quan sát), `cpu_perf_rating` có giá trị ở 6.270 dòng, `pipeline_run_id = tv4-20261123`.
 - Bảng giữ **đủ 8.374 listing**, kể cả 116 smartphone < 1M và 4 laptop < 3M. Nếu TV5 muốn áp cùng ngưỡng sàn 1M/3M, lọc trên bảng giá của TV5 theo `listing_record_id` — handoff cố ý không chứa cột giá để không tạo đường rò rỉ mới.

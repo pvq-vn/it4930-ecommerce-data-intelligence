@@ -129,6 +129,10 @@ def build_parser() -> argparse.ArgumentParser:
         help="Export the price-free TV5/TV8 feature table (no price, no segments).",
     )
     ph.add_argument("--work-dir", type=Path, default=DEFAULT_WORK_DIR)
+    ph.add_argument(
+        "--input", type=Path, default=None,
+        help="Step 1 cleaned specs before imputation (default: <work-dir>/products_llm_cleaned.jsonl).",
+    )
 
     pa = sub.add_parser(
         "audit",
@@ -182,7 +186,7 @@ def main(argv: list[str] | None = None) -> None:
     elif args.command == "step4":
         run_step4(work_dir=args.work_dir)
     elif args.command == "handoff":
-        export_price_free_handoff(work_dir=args.work_dir)
+        export_price_free_handoff(work_dir=args.work_dir, observed_input_path=args.input)
     elif args.command == "audit":
         audit_review_claims(work_dir=args.work_dir)
     elif args.command == "run-all":
@@ -206,7 +210,7 @@ def main(argv: list[str] | None = None) -> None:
             use_benchmarks=args.use_benchmarks,
         )
         run_step4(work_dir=args.work_dir)
-        export_price_free_handoff(work_dir=args.work_dir)
+        export_price_free_handoff(work_dir=args.work_dir, observed_input_path=cleaned_path)
 
 
 if __name__ == "__main__":
