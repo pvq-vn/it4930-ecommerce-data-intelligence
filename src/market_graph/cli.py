@@ -12,9 +12,9 @@ from src.market_graph.llm_clean import (
     DEFAULT_OUTPUT,
     run_step1,
 )
-from src.market_graph.bipartite_graph import DEFAULT_WORK_DIR, run_step2
+from src.market_graph.bipartite_graph import DEFAULT_WORK_DIR, export_price_free_handoff, run_step2
 from src.market_graph.louvain_segments import run_step3
-from src.market_graph.gaps_and_reports import run_step4
+from src.market_graph.gaps_and_reports import audit_review_claims, run_step4
 
 
 def _parse_resolution(value: str) -> float | str:
@@ -124,6 +124,18 @@ def build_parser() -> argparse.ArgumentParser:
     p4 = sub.add_parser("step4", help="Detect structural holes & export 3 core visualizations.")
     p4.add_argument("--work-dir", type=Path, default=DEFAULT_WORK_DIR)
 
+    ph = sub.add_parser(
+        "handoff",
+        help="Export the price-free TV5/TV8 feature table (no price, no segments).",
+    )
+    ph.add_argument("--work-dir", type=Path, default=DEFAULT_WORK_DIR)
+
+    pa = sub.add_parser(
+        "audit",
+        help="Print the review-claim reconciliation numbers without writing artifacts.",
+    )
+    pa.add_argument("--work-dir", type=Path, default=DEFAULT_WORK_DIR)
+
     pall = sub.add_parser("run-all", help="Run Steps 1 -> 4 end-to-end.")
     pall.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     pall.add_argument("--work-dir", type=Path, default=DEFAULT_WORK_DIR)
@@ -169,6 +181,10 @@ def main(argv: list[str] | None = None) -> None:
         )
     elif args.command == "step4":
         run_step4(work_dir=args.work_dir)
+    elif args.command == "handoff":
+        export_price_free_handoff(work_dir=args.work_dir)
+    elif args.command == "audit":
+        audit_review_claims(work_dir=args.work_dir)
     elif args.command == "run-all":
         cleaned_path = run_step1(
             input_path=args.input,
@@ -190,6 +206,7 @@ def main(argv: list[str] | None = None) -> None:
             use_benchmarks=args.use_benchmarks,
         )
         run_step4(work_dir=args.work_dir)
+        export_price_free_handoff(work_dir=args.work_dir)
 
 
 if __name__ == "__main__":

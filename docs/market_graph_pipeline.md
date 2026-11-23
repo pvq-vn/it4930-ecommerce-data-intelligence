@@ -141,6 +141,11 @@ Pipeline được thiết kế nhằm chuẩn hóa dữ liệu thương mại đ
 
 - **Cơ chế Chuẩn hóa & Quy đổi Điểm hiệu năng**: Snapshot `notebookcheck_cpu_phone.html` không có cột `Perf. Rating`. Bộ trích xuất ưu tiên dùng **Geekbench 5.5 Multi-Core** (249 models); khi khuyết Geekbench 5, tự động fallback sang **Geekbench 4.4 Multi-Core** quy đổi về thang Geekbench 5 theo hệ số chuẩn hóa tuyến tính $0.2475$ (đạt tương quan $r = 0.966$ với Geekbench 5, thêm 76 models). Điểm PassMark thô (thang đo lệch từ 800 tới 750.000) được loại bỏ khỏi `benchmark_score` để tránh phá vỡ phép đo khoảng cách tương đối trong đồ thị. Tổng cộng bao phủ **325 / 549** vi xử lý điện thoại trên một trục điểm đồng nhất (~500 - 6.000 điểm).
 
+- **Suy ra `cpu_perf_rating` cho Smartphone**: bảng CPU điện thoại của Notebookcheck **không có** cột `Perf. Rating` (0/549 dòng), nên `cpu_perf_rating` được suy ra theo **thang tỉ lệ tuyến tính qua gốc**:
+  $$\text{cpu\_perf\_rating} = 100 \times \frac{\text{cpu\_benchmark\_score}}{\max(\text{benchmark\_score của bảng phone})}$$
+  kèm `cpu_perf_rating_is_approx = True`, `cpu_perf_rating_coverage_pct = 100`, `cpu_perf_rating_source = derived_proportional_cpu_benchmark_score` và `cpu_perf_percentile` (hạng phân vị 0–100) cho mô hình cần thang hạng. Phép nhân với một hằng số **bảo toàn tỉ lệ tương đối** mà Step 3 dùng để nối cạnh, nên bật cột này **không làm đổi** tập cạnh hay trọng số Louvain (đã kiểm chứng trên 24.556 cạnh smartphone).
+- **Không so sánh trị số tuyệt đối giữa hai ngành hàng**: Laptop dùng `cpu_perf_rating` gốc của Notebookcheck (khoảng 5–75), Smartphone dùng thang suy ra (0–100; giá trị lớn nhất trong dữ liệu hiện tại là ~60 vì CPU mạnh nhất bảng phone chưa match được listing nào). Mô hình phải normalize theo `category`.
+
 **Chạy**: `python -m src.market_graph.cli step1_5` (hoặc chạy từng script riêng: `python -m src.market_graph.smartphone_benchmark_match`).
 
 ---
@@ -148,6 +153,7 @@ Pipeline được thiết kế nhằm chuẩn hóa dữ liệu thương mại đ
 ### Step 2: Entity Resolution & Đồ thị Hai phía Bipartite (`bipartite_graph.py`)
 
 - **Mục tiêu**: Định danh một mẫu máy bán trên nhiều sàn thành một thực thể duy nhất (**Canonical Product**) và dựng cấu trúc cạnh tranh đa kênh.
+- **Analysis view**: mọi đồ thị/thống kê/Jaccard của Step 2 được tính trên tập đã áp **giá sàn phân tích** (xem 2.1); `canonical_products.csv` vẫn giữ đủ dòng.
 - **Cơ chế xử lý**:
   1. **Impute Unknown Specs** (`_impute_unknown_specs()`): Điền khuyết `cpu_model`, RAM (`ram_gb`), bộ nhớ trong/ổ cứng (`storage_gb`), GPU (`gpu_model`), và kích thước màn hình (`screen_size_inch`) cho các listing bị thiếu thông tin nếu cùng dòng máy và có mức giá tương đồng ($\le 10\%$) với một cấu hình đã biết duy nhất. **Ràng buộc tương thích nghiêm ngặt**: Chỉ xét các bản ghi ứng viên không xung đột với các trường phần cứng đã có sẵn của listing (ví dụ: máy đã biết RAM 16GB sẽ không bị điền nhầm CPU của bản ghi RAM 8GB; máy có GPU rời không bị điền thông số của bản dùng iGPU).
   2. **Base Hash Identification**: Đưa đầy đủ 7 trường phần cứng vào chuỗi hash:
@@ -166,14 +172,27 @@ Pipeline được thiết kế nhằm chuẩn hóa dữ liệu thương mại đ
   6. **Chỉ số Dẫn dắt Giá & Mức độ Đắt hơn (`retailer_degree_stats_laptop.csv`, `retailer_degree_stats_smartphone.csv`)**:
      - **Tỷ lệ thắng giá đáy (`price_leader_win_rate_pct`)**: Tỷ lệ phần trăm các sản phẩm cạnh tranh mà nhà bán lẻ niêm yết mức giá thấp nhất thị trường:
        $$\text{WinRate}(R) = \frac{\sum_{p \in \text{Comp}(R)} \mathbb{I}[P(R, p) \le P_{\min}(p)]}{|\text{Comp}(R)|} \times 100\%$$
-     - **Mức độ đắt hơn trung bình (`avg_price_premium_pct`)**: Mức độ chênh lệch phần trăm trung bình giữa giá của sàn so với giá sàn thị trường trên các sản phẩm cạnh tranh:
-       $$\text{PricePremium}(R) = \frac{1}{|\text{Comp}(R)|} \sum_{p \in \text{Comp}(R)} \frac{P(R, p) - P_{\min}(p)}{P_{\min}(p)} \times 100\%$$
+     - **Mức độ đắt hơn trung bình (`avg_price_premium_pct`)**: chênh lệch phần trăm của giá sàn so với giá đáy thị trường trên từng sản phẩm cạnh tranh, **có loại cặp bất thường**:
+       $$\text{PricePremium}(R) = \frac{1}{|\mathcal{C}^*(R)|} \sum_{p \in \mathcal{C}^*(R)} \left(\frac{P(R, p)}{P_{\min}(p)} - 1\right) \times 100\%, \qquad \mathcal{C}^*(R) = \left\{ p \in \text{Comp}(R) : \frac{P(R, p)}{P_{\min}(p)} \le 3 \right\}$$
+       - Cặp bị loại được đếm ở `price_premium_pairs_excluded` — dấu hiệu CID gộp nhầm (ví dụ listing phụ kiện 70.000đ nằm chung CID với điện thoại 10,49 triệu). Không xoá CID, chỉ không cho nó kéo lệch chỉ số.
+       - `median_price_premium_pct` là trung vị (kháng outlier) đi kèm; `price_premium_pairs_used` là số cặp thực sự dùng.
+       - Trước khi sửa, 6 CID bất thường đẩy `avg_price_premium_pct` của smartphone lên 220–279%; sau khi sửa còn 2,2–4,6%.
      - Các chỉ số được tính độc lập cho từng ngành hàng; mỗi bảng vẫn giữ đủ 5 nhà bán lẻ (retailer không bán ngành hàng đó sẽ có giá trị 0).
   7. **Độ tương đồng danh mục Jaccard (`jaccard_matrix_laptop.csv`, `jaccard_matrix_smartphone.csv`)**:
      $$J(R_1, R_2) = \frac{|P(R_1) \cap P(R_2)|}{|P(R_1) \cup P(R_2)|}$$
      Với $P(R)$ là tập canonical products thuộc ngành hàng tương ứng mà retailer $R$ kinh doanh.
 
+#### 2.1. Giá sàn phân tích (analysis floor) & bảo toàn bảng canonical
+
+- **Ngưỡng**: `smartphone ≥ 1.000.000đ`, `laptop ≥ 3.000.000đ` — khớp ngưỡng của TV3/TV5/TV7, khai báo tại `MIN_PRICE_BY_CATEGORY` trong `bipartite_graph.py`.
+- **Phạm vi áp dụng**: chỉ **artifact phân tích** — view theo ngành hàng của Step 2 (GEXF, Jaccard, `retailer_degree_stats_*.csv`), Step 3 (`canonical_products_segmented.csv`, `louvain_segments.csv`) và Step 4 (`structural_holes.csv`, báo cáo). Trước khi lọc: **116 smartphone < 1M** và **4 laptop < 3M**.
+- **Không áp dụng** cho `canonical_products.csv` / `canonical_listings.jsonl`: bảng canonical vẫn đủ **4.414 dòng** để TV5/TV7/TV8 truy nguyên. Mỗi bước in số dòng bị loại ở log.
+- **Fail-fast**: `run_step4` raise `ValueError` nếu `canonical_products_segmented.csv` còn dòng dưới sàn (tức ai đó chạy Step 4 trên artifact cũ).
+- **Vì sao cần**: các máy cục gạch 2G/4G giá 110k–990k tạo phân khúc rác `"Smartphone 0-0M"`; 4 laptop dưới 3M là listing phụ kiện. Sau khi lọc, không còn phân khúc nào có `price_max < 1M`.
+
 ---
+
+> ⚠️ **Chỉ dùng cho phân tích cấu trúc thị trường.** Đầu vào đã qua giá sàn phân tích (2.1). `community_id`, `segment_label`, `price_band` và mọi cột giá **bị cấm** trong mô hình dự đoán giá — xem **Mục 7**.
 
 ### Step 3: Đồ thị Tương đồng Sản phẩm & Phân khúc Louvain (`louvain_segments.py` + `perf_scores.py`)
 
@@ -396,6 +415,12 @@ python -m src.market_graph.cli step3 --no-benchmarks
 
 # Step 4: Structural Holes & Reports
 python -m src.market_graph.cli step4
+
+# Bàn giao price-free cho TV5/TV8 (chỉ đọc artifact, không dùng giá)
+python -m src.market_graph.cli handoff
+
+# Đối chiếu số liệu review (chỉ in ra, không ghi file)
+python -m src.market_graph.cli audit
 ```
 
 ### Chạy end-to-end (Đã liên kết trọn vẹn 1 -> 1.5 -> 2 -> 3 -> 4)
@@ -430,15 +455,27 @@ Toàn bộ kết quả chạy được lưu trữ tại `data/market_graph/`:
 | **`benchmarks/gpu_benchmarks.csv`** | CSV | Step 1.5 | Bảng GPU Notebookcheck đã parse: kiến trúc, shaders, xung nhịp, bộ nhớ, điểm 3DMark và `perf_rating` (kèm metadata độ tin cậy). |
 | **`benchmarks/cpu_phone_benchmarks.csv`** | CSV | Step 1.5 | Bảng CPU smartphone Notebookcheck đã parse: codename, kiến trúc, MHz, cores/threads, Geekbench 2/3/4/5, PassMark, Sunspider và `benchmark_score` (Geekbench 5 Multi-Core, fallback Geekbench 4 Multi quy đổi hệ số về thang Geekbench 5). |
 | **`laptop_benchmarks.csv`** / **`.jsonl`** | CSV / JSONL | Step 1.5 | Laptop listing được enrich thêm `cpu_bench_model`, `cpu_perf_rating`, `gpu_bench_model`, `gpu_perf_rating`, phương thức match và độ tin cậy. Không sửa file gốc `products_llm_cleaned`. |
-| **`smartphone_benchmarks.csv`** / **`.jsonl`** | CSV / JSONL | Step 1.5 | Smartphone listing được enrich thêm `cpu_bench_model`, `cpu_benchmark_score`, điểm Geekbench/PassMark và metadata match. |
+| **`smartphone_benchmarks.csv`** / **`.jsonl`** | CSV / JSONL | Step 1.5 | Smartphone listing được enrich thêm `cpu_bench_model`, `cpu_benchmark_score`, `cpu_perf_rating` (**suy ra** từ score, xem 1.5c), `cpu_perf_percentile`, điểm Geekbench/PassMark và metadata match. |
 | **`benchmarks/match_report.csv`** | CSV | Step 1.5 | Danh sách các giá trị CPU/GPU chưa match được, kèm số lượng và lý do. |
 | **`benchmarks/smartphone_match_report.csv`** | CSV | Step 1.5 | Danh sách CPU smartphone chưa match được, kèm số lượng và lý do. |
+
+> **Nguồn benchmark & tái tạo**: các bảng CSV trong `benchmarks/` là *artifact of record* đã commit. 6 snapshot HTML/JS nguồn dưới đây **không còn được track trong Git** (xem `.gitignore`) vì tổng ~8,5 MiB; chúng chỉ cần khi muốn parse lại từ đầu. `step1_5` dùng snapshot nếu có trong `benchmarks/`, còn không thì giữ nguyên CSV đã commit — fresh clone vẫn chạy được `step1_5 → step4`.
+>
+> | Snapshot | Trang nguồn | Dung lượng | sha256 (16 ký tự đầu) | Ngày |
+> |---|---|---|---|---|
+> | `notebookcheck_cpu.html` | Notebookcheck — Mobile Processors Benchmark List | 5,9M | `18950a18195f000e` | 2026-11-14 |
+> | `notebookcheck_gpu.html` | Notebookcheck — Mobile Graphics Cards Benchmark List | 792K | `55ebab722c7aa432` | 2026-11-14 |
+> | `notebookcheck_cpu_phone.html` | Notebookcheck — Smartphone SoC Benchmark List | 1,5M | `0c1827f72ff60be6` | 2026-11-14 |
+> | `antutu_ranking.html` | Antutu — Smartphone ranking | 264K | `3aafdd5185284e13` | 2026-11-14 |
+> | `chunk_2i.js` / `chunk_page.js` | JS bundle kèm trang Antutu | 32K / 16K | `a4590375a64190f5` / `70d406b798d16ec2` | 2026-11-14 |
+>
+> Khi cập nhật snapshot mới, ghi lại sha256 + ngày vào bảng này trong cùng commit.
 | **`canonical_listings.jsonl`** | JSONL | Step 2 | Tập dữ liệu listing ban đầu được bổ sung thêm trường `canonical_product_id`. Cho phép truy vết ngược một listing bất kỳ của một sàn thuộc về mẫu máy chuẩn nào. |
 | **`canonical_products.csv`** | CSV | Step 2 | **Bảng danh mục sản phẩm duy nhất của toàn thị trường**. Mỗi dòng là 1 mẫu máy chuẩn kèm theo: `price_min`, `price_median`, `price_max`, `retailer_count` (số sàn bán), danh sách sàn (`retailers`), tổng đánh giá (`total_reviews`), và `avg_rating`. |
 | **`bipartite_market_graph_laptop.gexf`** / **`bipartite_market_graph_smartphone.gexf`** | XML/GEXF | Step 2 | Đồ thị hai phía riêng cho từng ngành hàng, dùng để mở trong Gephi hoặc NetworkX. Mỗi đồ thị giữ đủ 5 nhà bán lẻ và chỉ chứa canonical products thuộc ngành hàng tương ứng. |
-| **`retailer_degree_stats_laptop.csv`** / **`retailer_degree_stats_smartphone.csv`** | CSV | Step 2 | **Thống kê chiến lược danh mục và giá của 5 nhà bán lẻ theo từng ngành hàng**: Tổng số mẫu máy, số lượng và tỷ lệ hàng độc quyền (`exclusive_pct`), số lượng hàng cạnh tranh, **tỷ lệ thắng giá đáy (`price_leader_win_rate_pct`)** và **mức độ đắt hơn trung bình (`avg_price_premium_pct`)**. |
+| **`retailer_degree_stats_laptop.csv`** / **`retailer_degree_stats_smartphone.csv`** | CSV | Step 2 | **Thống kê chiến lược danh mục và giá của 5 nhà bán lẻ theo từng ngành hàng**: Tổng số mẫu máy, số lượng và tỷ lệ hàng độc quyền (`exclusive_pct`), số lượng hàng cạnh tranh, **tỷ lệ thắng giá đáy (`price_leader_win_rate_pct`)**, **mức độ đắt hơn trung bình có guard (`avg_price_premium_pct`)**, trung vị (`median_price_premium_pct`) và số cặp bị loại (`price_premium_pairs_excluded`). |
 | **`jaccard_matrix_laptop.csv`** / **`jaccard_matrix_smartphone.csv`** | CSV | Step 2 | **Ma trận độ trùng lặp danh mục (0.0 đến 1.0)** giữa từng cặp nhà bán lẻ, tính riêng theo ngành hàng. Thể hiện mức độ "đối đầu trực diện" hay "phân hóa thị trường" trong từng mảng. |
-| **`canonical_products_segmented.csv`** | CSV | Step 3 | Bảng sản phẩm chuẩn được bổ sung nhãn phân khúc Louvain (`community_id`, `segment_label`), dải giá `price_band`, `cpu_tier`, điểm hiệu năng (`cpu_perf_score`, `gpu_perf_score`, `cpu_perf_norm`, `gpu_perf_norm`, `cpu_score_source`, `gpu_score_source`, `gpu_type`). |
+| **`canonical_products_segmented.csv`** | CSV | Step 3 | Bảng sản phẩm chuẩn **đã áp giá sàn phân tích** (2.1) được bổ sung nhãn phân khúc Louvain (`community_id`, `segment_label`), dải giá `price_band`, `cpu_tier`, điểm hiệu năng (`cpu_perf_score`, `gpu_perf_score`, `cpu_perf_norm`, `gpu_perf_norm`, `cpu_score_source`, `gpu_score_source`, `gpu_type`). |
 | **`louvain_segments.csv`** | CSV | Step 3 | **Hồ sơ chi tiết từng phân khúc thị trường**: Khoảng giá min-max, giá trung vị, các thương hiệu áp đảo (`top_brands`), mức độ cạnh tranh trung bình (`avg_retailer_degree`), tổng lượng review, profile hiệu năng (`cpu_perf_median/min/max`, `gpu_perf_median`) và `resolution_used`. |
 | **`retailer_community_matrix.csv`** | CSV | Step 4 | Bảng ma trận chéo (Crosstab) thể hiện: Nhà bán lẻ $X$ đang bán bao nhiêu mẫu máy trong Phân khúc $Y$. |
 | **`structural_holes.csv`** | CSV | Step 4 | **Danh sách các khoảng trống thị trường**: Chỉ ra cụ thể sàn nào đang bỏ ngỏ phân khúc nào (`retailer_blind_spot`), hoặc phân khúc nào đang thiếu cung dù nhu cầu cao (`underserved_high_demand`), kèm theo các cột điểm chuẩn hiệu năng (`cpu_perf_median/min/max`, `gpu_perf_median`) và **khuyến nghị cấu hình cụ thể (`perf_recommendation`)**. |
@@ -446,25 +483,99 @@ Toàn bộ kết quả chạy được lưu trữ tại `data/market_graph/`:
 | **`reports/jaccard_similarity_heatmap.png`** | Hình ảnh PNG | Step 4 | Biểu đồ 2 subplot hiển thị trực quan phần trăm trùng lặp danh mục giữa 5 sàn bán lẻ, tách riêng Laptop và Smartphone với thang màu dùng chung. |
 | **`reports/segment_distribution.png`** | Hình ảnh PNG | Step 3 & 4 | Biểu đồ cột thể hiện phân bố mẫu máy theo dải giá và theo các phân khúc Louvain nổi bật. |
 | **`reports/segment_price_heatmap.png`** | Hình ảnh PNG | Step 4 | Bản đồ nhiệt phân bổ số lượng sản phẩm của từng nhà bán lẻ theo từng dải giá (tách riêng Laptop và Smartphone). |
+| **`handoff/tv5_tv8_price_free_features.csv`** | CSV | `handoff` | **Bảng đặc trưng price-free duy nhất được phép bàn giao cho TV5/TV8** (xem Mục 7): điểm chuẩn phần cứng, số sàn cùng bán một cấu hình (`hw_seller_count`), khoá join/lineage. Không có cột giá, cụm hay phân khúc. |
 | **`reports/bipartite_market_graph_laptop.html`** / **`reports/bipartite_market_graph_smartphone.html`** | Web tương tác | Step 4 | 2 đồ thị mạng PyVis riêng theo ngành hàng, cho phép phóng to, thu nhỏ, kéo thả và click vào từng nhà bán lẻ để xem danh mục kết nối. |
 
 ---
 
 ## 6. Các Phát Hiện Thị Trường Tiêu Biểu Từ Dữ Liệu Đã Chạy
 
-Dựa trên dữ liệu thực tế thu thập từ 5 nhà bán lẻ (CellphoneS, FPT Shop, Hoàng Hà Mobile, TGDĐ, Viettel Store). *Các số liệu dưới đây lấy từ bản chạy tổng hợp trước khi tách ngành hàng; khi chạy lại, xem chi tiết trong `retailer_degree_stats_laptop.csv` / `retailer_degree_stats_smartphone.csv` và `jaccard_matrix_laptop.csv` / `jaccard_matrix_smartphone.csv`.*
+> **Nguồn số liệu (23/11/2026):** sinh trực tiếp từ artifact trong `data/market_graph/` sau khi áp **giá sàn phân tích** (2.1) và **guard premium** (Step 2). Tái sinh bằng `python -m src.market_graph.cli step2 && step3 && step4`, rồi `python -m src.market_graph.cli audit` để in lại đúng các số dưới đây. Không sửa tay file nào.
+
+Dữ liệu thu thập từ 5 nhà bán lẻ (CellphoneS, FPT Shop, Hoàng Hà Mobile, TGDĐ, Viettel Store). Số liệu tính riêng theo ngành hàng trên **analysis view** (smartphone ≥ 1M, laptop ≥ 3M): **4.294 sản phẩm chuẩn** (2.902 laptop + 1.392 smartphone), 63 phân khúc Louvain.
 
 1. **Chiến lược danh mục của các nhà bán lẻ (`retailer_degree_stats_laptop.csv`, `retailer_degree_stats_smartphone.csv`)**:
-   - **CellphoneS** có danh mục áp đảo nhất (3.112 mẫu máy) với **90.3% là hàng độc quyền/ngách** (không bị cạnh tranh bởi 4 sàn còn lại).
-   - **FPT Shop** (434 mẫu) và **TGDĐ** (596 mẫu) tập trung vào các dòng máy phổ thông có tính cạnh tranh cao (tỷ lệ hàng cạnh tranh lần lượt là 56.68% và 41.61%).
-   - **Viettel Store** (142 mẫu) có danh mục hẹp nhất, tập trung phần lớn vào các sản phẩm cạnh tranh (tỷ lệ cạnh tranh 73.24%), gần như chỉ bán các model chủ lực.
+   - **CellphoneS** có danh mục áp đảo nhất: **3.389 mẫu máy** (2.350 laptop + 1.039 smartphone), trong đó **91,3% là hàng độc quyền/ngách** (không bị cạnh tranh bởi 4 sàn còn lại).
+   - **TGDĐ** (657 mẫu, **32,7% cạnh tranh**) và **FPT Shop** (465 mẫu, **51,2% cạnh tranh**) tập trung vào các dòng máy phổ thông có tính cạnh tranh cao.
+   - **Viettel Store** (149 mẫu) là danh mục hẹp nhất nhưng có tỷ lệ cạnh tranh cao nhất (**73,2%**, tức 109/149 mẫu bị ít nhất một sàn khác bán cùng cấu hình); **Hoàng Hà Mobile** có 233 mẫu.
 
 2. **Mức độ trùng lặp danh mục (`jaccard_matrix_laptop.csv`, `jaccard_matrix_smartphone.csv`)**:
-   - Độ trùng lặp giữa các sàn nhìn chung rất thấp (chỉ dao động từ **2.3% đến 16.4%**).
-   - Cặp đôi có sự trùng lặp danh mục cao nhất là **TGDĐ và FPT Shop (16.38%)**, cho thấy đây là hai đối thủ đối đầu trực tiếp mạnh nhất về mặt dòng sản phẩm.
+   - Độ trùng lặp giữa các sàn rất thấp: **0,21%–27,16%**.
+   - Cặp trùng lặp cao nhất là **FPT Shop – Viettel Store (27,16%, smartphone)**; ở mảng laptop là **TGDĐ – FPT Shop (9,62%)**.
+   - Thấp nhất là **CellphoneS – Viettel Store (0,21%, laptop)**, cho thấy hai sàn gần như phân hóa hoàn toàn danh mục laptop.
 
 3. **Khoảng trống thị trường (`structural_holes.csv`)**:
-   - Thuật toán đã phát hiện **125 điểm mù (Retailer Blind Spots)**. Điển hình như:
-     - Viettel Store và Hoàng Hà Mobile bỏ ngỏ hoàn toàn phân khúc *Laptop MSI 9-85M* và *Laptop Lenovo 14-78M*.
-     - TGDĐ, FPT Shop và Viettel Store không có sản phẩm trong phân khúc *Laptop HP giá rẻ 6-17M* (nơi CellphoneS đang nắm giữ 53 model độc quyền).
-   - Phát hiện **24 phân khúc thiếu hụt nguồn cung (Underserved)**: Có lượt quan tâm và đánh giá cao từ người tiêu dùng nhưng chỉ có 1 hoặc 2 nhà bán lẻ niêm yết.
+   - Phát hiện **68 điểm mù (Retailer Blind Spots)**: Viettel 25, Hoàng Hà 16, FPT 14, TGDĐ 11, CellphoneS 2. Điển hình: Viettel Store và Hoàng Hà Mobile bỏ ngỏ *Laptop 17-146M (ASUS, Lenovo)* (460 mẫu) và *Laptop 14-43M (ASUS, Lenovo)* (210 mẫu).
+   - Phát hiện **22 phân khúc thiếu hụt nguồn cung (Underserved)** — 11 laptop, 11 smartphone — nơi lượng tương tác/đánh giá trên mỗi mẫu máy cao nhưng số mẫu hoặc số sàn tham gia thấp, ví dụ *Laptop 28-46M (Lenovo, ASUS)* với 215 mẫu.
+
+4. **Mức độ đắt hơn của từng sàn (sau guard premium)**:
+   - Smartphone: CellphoneS **2,23%** (trung vị 0,51%), FPT **4,56%** (1,56%), Viettel **2,37%** (0%), TGDĐ **2,76%** (1,16%), Hoàng Hà **2,25%**.
+   - Laptop: CellphoneS **1,80%**, FPT **2,64%**, TGDĐ **2,85%**, Viettel **5,20%**, Hoàng Hà **0,55%**.
+   - Các cặp giá bị loại do vượt 3× giá đáy: 6 (CellphoneS), 3 (FPT), 3 (Viettel), 1 (TGDĐ) ở mảng smartphone; 1 ở mảng laptop (CellphoneS). Đây là dấu hiệu CID gộp nhầm cần xử lý ở tầng entity resolution, không phải chiến lược giá.
+   - `python -m src.market_graph.cli audit` in ra **8 CID** có `price_max/price_min > 3×` (claim `er_anomaly`), kèm brand/model/sàn — ví dụ `76a8606af90f18a4` (Samsung Galaxy A57 5G, tỉ lệ 161× do một listing 70.000đ) và `0ab9e51cfa7cdb6f` (Samsung Galaxy J6 Plus, 1.072× do listing 4.000đ).
+
+---
+
+## 7. Cảnh báo Chống Rò rỉ khi Bàn giao cho TV5/TV8
+
+> **Cấm tuyệt đối** đưa `community_id`, `segment_label`, `price_band`, `price_median`, `price_min`, `price_max` — cùng các biến dẫn xuất trực tiếp từ giá như `retailer_count`, `degree`, `avg_price_premium_pct` — vào mô hình dự đoán giá của TV5 hoặc vào evaluation/explainability của TV8.
+
+### 7.1. Vì sao đây là rò rỉ nhãn mục tiêu
+
+| Nguồn rò rỉ | Cơ chế |
+|---|---|
+| Louvain (Step 3) | Chỉ nối cạnh khi $\lvert \Delta \text{price} \rvert / \text{price} \le 20\%$ → nhãn cụm là **hàm của giá** |
+| `segment_label` | In trực tiếp khoảng giá vào tên, ví dụ `"Laptop 16-22M (ASUS, Lenovo)"` |
+| `price_band` | Chính là phân dải giá (`<10M`, `10-15M`, …) |
+| `canonical_product_id` | Khi thiếu spec, CID bị **chia cụm theo giá** (`max_spread = 0.20`) → ID mang thông tin giá |
+| `price_min/median/max` | Biến thể trực tiếp của target |
+| Spec đã impute | `_impute_unknown_specs` điền RAM/CPU theo **cửa sổ giá 10%** → spec impute chứa thông tin giá |
+
+Vì rò rỉ có thể đi **gián tiếp** qua spec impute và qua CID, handoff bên dưới tính từ **spec quan sát** của Step 1 và **không** dùng CID làm khoá đếm.
+
+### 7.2. Danh sách CẤM
+
+| Cột | Nguồn | Lý do cấm |
+|---|---|---|
+| `community_id` | Step 3 | Nhãn cụm Louvain dựng trên cạnh giá |
+| `segment_label` | Step 3 | Chứa khoảng giá dạng text |
+| `price_band` | Step 3 | Phân dải giá |
+| `price_median`, `price_min`, `price_max` | Step 2/3 | Biến thể của target |
+| `retailer_count`, `degree`, `exclusivity` | Step 2 | Suy ra từ cấu trúc giá/CID, tương quan mạnh với target |
+| `avg_price_premium_pct`, `price_leader_win_rate_pct` | Step 2 | Thống kê giá |
+| `total_reviews` (dạng thô tuỳ ý) | Step 2 | Không phải rò rỉ nhãn, nhưng là proxy cầu; chỉ dùng khi TV5/TV8 chủ động khai báo |
+
+### 7.3. Danh sách ĐƯỢC PHÉP (price-free)
+
+Chỉ bàn giao đúng file `data/market_graph/handoff/tv5_tv8_price_free_features.csv` với whitelist đóng sau:
+
+| Cột | Vai trò |
+|---|---|
+| `listing_record_id` | Khoá join với bảng listing của TV5; TV8 giữ để truy nguyên |
+| `canonical_product_id` | **Lineage-only** — được join, **không** đưa vào ma trận feature |
+| `source`, `category`, `brand`, `model_clean` | Nhóm/chuẩn hoá, không dùng giá |
+| `ram_gb`, `storage_gb`, `cpu_model` | Spec **quan sát** từ Step 1 |
+| `cpu_perf_rating`, `gpu_perf_rating` | Điểm chuẩn phần cứng (chủ yếu Laptop) |
+| `cpu_benchmark_score`, `cpu_geekbench_5_multi` | Điểm chuẩn phần cứng (chủ yếu Smartphone) |
+| `cpu_perf_percentile` | Hạng phân vị trong cùng ngành hàng |
+| `hw_seller_count`, `hw_listing_count` | Số sàn/listing cùng bán một **cấu hình phần cứng thuần tuý** `(category, brand, model_clean, ram_gb, storage_gb)` |
+| `hw_key_complete` | `False` khi thiếu RAM/storage → `hw_seller_count = NaN` |
+| `pipeline_run_id` | Phiên bản artifact để TV8 truy nguyên |
+
+### 7.4. Quy tắc kiểm chứng (đã có test)
+
+- Whitelist đóng `HANDOFF_COLUMNS` trong `bipartite_graph.py`; thêm cột phải sửa hằng số + test.
+- `tests/test_market_graph.py::test_price_free_handoff_exposes_only_whitelisted_columns` chặn cột lạ và mọi tên chứa `price/community/segment/band/retailer_count/degree`.
+- `test_price_free_handoff_is_invariant_to_price`: nhân toàn bộ `price_vnd` với 1,37 → bảng bàn giao **giống hệt**.
+- `test_hw_seller_count_uses_observed_specs_not_imputed_cids`: spec bị impute không làm đổi `hw_seller_count`.
+- **Không fallback sang spec đã impute**: `ram_gb`, `storage_gb`, `cpu_model` lấy nguyên từ Step 1; thiếu thì để `NaN` (hiện tại 980 dòng thiếu `ram_gb`, 288 dòng thiếu `storage_gb`) — tuyệt đối không điền lại bằng giá trị Step 2 đã suy ra theo cửa sổ giá.
+- Hiện trạng: 8.374 listing, `hw_seller_count` có giá trị ở 7.377 dòng (997 dòng thiếu RAM/storage quan sát), `cpu_perf_rating` có giá trị ở 6.270 dòng, `pipeline_run_id = tv4-20261123`.
+- Bảng giữ **đủ 8.374 listing**, kể cả 116 smartphone < 1M và 4 laptop < 3M. Nếu TV5 muốn áp cùng ngưỡng sàn 1M/3M, lọc trên bảng giá của TV5 theo `listing_record_id` — handoff cố ý không chứa cột giá để không tạo đường rò rỉ mới.
+
+### 7.5. Trách nhiệm
+
+- **TV4**: sinh handoff, giữ hợp đồng và test; mọi thay đổi cột phải cập nhật mục này.
+- **TV5**: chỉ dùng các cột ở 7.3 làm feature; không join thêm bảng segmented.
+- **TV8**: giữ `listing_record_id` + `pipeline_run_id` trong output để truy nguyên; không dùng `segment_label` làm biến giải thích cho dự đoán giá.
+
+> Kết quả Louvain và các phân khúc ở Phần 6 vẫn hợp lệ cho **phân tích cấu trúc thị trường** — chỉ không được dùng làm đặc trưng dự đoán.

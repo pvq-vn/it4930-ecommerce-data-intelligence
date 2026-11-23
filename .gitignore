@@ -42,3 +42,7 @@ data/laptopmedia/
 
 # PyVis local assets generated at runtime
 lib/
+# Raw benchmark HTML/JS snapshots: source pages kept locally only (the parsed
+# CSVs under data/market_graph/benchmarks are the artifacts of record)
+data/market_graph/benchmarks/*.html
+data/market_graph/benchmarks/*.js

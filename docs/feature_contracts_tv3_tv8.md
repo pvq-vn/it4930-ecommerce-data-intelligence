@@ -54,6 +54,8 @@ Candidate features: `category`, `brand_norm`, `seller_raw`, `rating_norm`, `revi
 
 Target mặc định: `price_vnd` tại snapshot. Đây là ước lượng giá quan sát, không phải dự báo giá tương lai. Không dùng `raw_payload`, `raw_file`, ID hoặc `crawl_time` làm feature nếu chưa có thiết kế chống leakage.
 
+**Bổ sung TV4 (23/11/2026) — chống target leakage từ đồ thị:** đặc trưng lấy từ pipeline market graph **chỉ** được lấy từ `data/market_graph/handoff/tv5_tv8_price_free_features.csv`. Cấm tuyệt đối `community_id`, `segment_label`, `price_band`, `price_median`, `price_min`, `price_max`, `retailer_count`, `degree`, `avg_price_premium_pct`. `canonical_product_id` chỉ dùng để join/truy nguyên, không đưa vào ma trận feature. Chi tiết whitelist và test: [`docs/market_graph_pipeline.md`](market_graph_pipeline.md), Mục 7.
+
 ### TV6 – Review NLP
 
 Dùng `fact_reviews`: `review_text_normalized`, `rating_raw`, `review_time_raw`, `source_parent_id`, `source`, `category`, `review_usable`.
@@ -69,6 +71,8 @@ Các cờ chất lượng được dùng làm evidence/segment, không phải nh
 ### TV8 – Evaluation/Explainability
 
 Mọi prediction/anomaly/review output phải giữ `listing_record_id` hoặc `review_record_id`, `source`, `category`, `crawl_batch` và phiên bản pipeline để truy nguyên mẫu.
+
+Với artifact market graph, giữ thêm `pipeline_run_id` từ bảng handoff. Không dùng `segment_label`/`community_id` làm biến giải thích cho dự đoán giá (xem [`docs/market_graph_pipeline.md`](market_graph_pipeline.md), Mục 7); nhãn phân khúc chỉ dùng để mô tả cấu trúc thị trường.
 
 ## 4. Nguyên tắc tạo view phân tích
 

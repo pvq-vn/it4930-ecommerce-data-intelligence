@@ -1,8 +1,12 @@
 """Match smartphone listings with Notebookcheck phone CPU benchmarks.
 
 The saved ``notebookcheck_cpu_phone.html`` snapshot does not include the
-``Perf. Rating`` column, so the enrichment exposes the available benchmark
-scores and uses ``Geekbench 5.5 Multi-Core`` as the primary score when present.
+``Perf. Rating`` column, so ``cpu_perf_rating`` is *derived* here from
+``cpu_benchmark_score``: ``100 * score / max(score)`` on the phone benchmark table.
+The proportional (through-origin) scale is deliberate: it keeps the relative gaps
+used by Step 3 edges exactly unchanged, so the Louvain graph does not churn when the
+column is populated. ``cpu_perf_percentile`` gives a rank view for models that want
+one, and ``cpu_perf_rating_is_approx`` marks the value as derived.
 
 Outputs (originals are never modified):
   - data/market_graph/smartphone_benchmarks.csv
@@ -18,6 +22,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 
 from src.market_graph.benchmark_extract import (
@@ -180,6 +185,30 @@ def match_phone_cpu(
     return None, "not_in_benchmark"
 
 
+
+def _rating_scale(table: pd.DataFrame) -> tuple[float | None, np.ndarray]:
+    """Return (max benchmark score, sorted scores) used to derive ratings."""
+    if "benchmark_score" not in table.columns:
+        return None, np.array([])
+    scores = pd.to_numeric(table["benchmark_score"], errors="coerce").dropna()
+    if scores.empty:
+        return None, np.array([])
+    return float(scores.max()), np.sort(scores.to_numpy(dtype=float))
+
+
+def derive_cpu_perf_rating(
+    score: float | None,
+    max_score: float | None,
+    sorted_scores: np.ndarray,
+) -> tuple[float | None, float | None]:
+    """Map a raw benchmark score to a 0-100 rating plus a 0-100 percentile."""
+    if score is None or max_score is None or max_score <= 0 or sorted_scores.size == 0:
+        return None, None
+    rating = round(100.0 * float(score) / max_score, 6)
+    percentile = round(100.0 * float(np.searchsorted(sorted_scores, score, side="right")) / sorted_scores.size, 2)
+    return rating, percentile
+
+
 def match_smartphones(
     input_path: Path = DEFAULT_INPUT,
     output_csv: Path = DEFAULT_OUTPUT_CSV,
@@ -205,6 +234,7 @@ def match_smartphones(
         return output_csv
 
     main_index, alias_index = _load_phone_index(phone_cpu_csv)
+    max_score, sorted_scores = _rating_scale(pd.read_csv(phone_cpu_csv, encoding="utf-8-sig"))
 
     enriched: list[dict[str, Any]] = []
     methods: Counter[str] = Counter()
@@ -217,12 +247,17 @@ def match_smartphones(
 
         out = dict(row)
         if matched:
+            rating, percentile = derive_cpu_perf_rating(
+                matched["benchmark_score"], max_score, sorted_scores
+            )
             out.update(
                 {
                     "cpu_bench_model": matched["bench_model"],
-                    "cpu_perf_rating": None,
-                    "cpu_perf_rating_is_approx": None,
-                    "cpu_perf_rating_coverage_pct": None,
+                    "cpu_perf_rating": rating,
+                    "cpu_perf_rating_is_approx": True if rating is not None else None,
+                    "cpu_perf_rating_coverage_pct": 100.0 if rating is not None else None,
+                    "cpu_perf_rating_source": "derived_proportional_cpu_benchmark_score" if rating is not None else None,
+                    "cpu_perf_percentile": percentile,
                     "cpu_benchmark_score": matched["benchmark_score"],
                     "cpu_benchmark_metric": matched["benchmark_metric"],
                     "cpu_geekbench_5_single": matched["geekbench_5_single"],
@@ -242,6 +277,8 @@ def match_smartphones(
                     "cpu_perf_rating": None,
                     "cpu_perf_rating_is_approx": None,
                     "cpu_perf_rating_coverage_pct": None,
+                    "cpu_perf_rating_source": None,
+                    "cpu_perf_percentile": None,
                     "cpu_benchmark_score": None,
                     "cpu_benchmark_metric": None,
                     "cpu_geekbench_5_single": None,
@@ -274,9 +311,11 @@ def match_smartphones(
     )
 
     scored = sum(1 for row in enriched if row.get("cpu_benchmark_score") is not None)
+    rated = sum(1 for row in enriched if row.get("cpu_perf_rating") is not None)
     print(
         f"[Match] Smartphone: {len(enriched)} dòng | có benchmark score: {scored} "
-        f"({scored / len(enriched):.1%}) | perf_rating: 0 (nguồn không có cột này)"
+        f"({scored / len(enriched):.1%}) | cpu_perf_rating suy ra: {rated} "
+        f"({rated / len(enriched):.1%})"
     )
     print(f"[Match] CPU methods: {dict(methods)}")
     print(f"[Match] Outputs: {output_csv} & {output_jsonl}; report: {report_csv}")

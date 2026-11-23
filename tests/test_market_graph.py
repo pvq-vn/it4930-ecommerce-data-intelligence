@@ -9,11 +9,17 @@ import pandas as pd
 
 from src.market_graph.llm_clean import load_valid_price_rows, stratified_sample
 from src.market_graph.bipartite_graph import (
+    HANDOFF_COLUMNS,
+    HANDOFF_FORBIDDEN_TOKENS,
+    HANDOFF_LINEAGE_ONLY,
     build_bipartite_graph,
+    build_price_free_handoff,
     cluster_by_price_spread,
     compute_base_hash,
     compute_jaccard_matrix,
     compute_retailer_degree_stats,
+    filter_min_price,
+    min_price_for,
     resolve_canonical_products,
     run_step2,
 )
@@ -687,3 +693,209 @@ def test_impute_gpu_and_screen_size() -> None:
         assert ret_row["exclusive_count"] == 0
 
 
+# --- Review fixes: analysis price floor ---------------------------------------
+
+
+def test_filter_min_price_drops_low_known_prices_and_keeps_missing() -> None:
+    df = pd.DataFrame(
+        [
+            {"category": "smartphone", "price_median": 999_999.0},
+            {"category": "smartphone", "price_median": 1_000_000.0},
+            {"category": "laptop", "price_median": 2_999_999.0},
+            {"category": "laptop", "price_median": 3_000_000.0},
+            {"category": "smartphone", "price_median": float("nan")},
+            {"category": "tablet", "price_median": 10.0},
+        ]
+    )
+    filtered = filter_min_price(df)
+    assert len(filtered) == 4
+    assert min_price_for("tablet") == 0.0
+    assert min_price_for(None) == 0.0
+
+
+def test_step2_keeps_full_canonical_table_but_floors_category_views(tmp_path: Path) -> None:
+    rows = [
+        {
+            "listing_record_id": "low1",
+            "seller_name": "CellphoneS",
+            "category_clean": "smartphone",
+            "brand": "Masstel",
+            "model_clean": "Izi 20",
+            "cpu_model": "Unisoc T107",
+            "ram_gb": 0.5,
+            "storage_gb": 0.128,
+            "price_vnd": 390_000.0,
+        },
+        {
+            "listing_record_id": "ok1",
+            "seller_name": "CellphoneS",
+            "category_clean": "smartphone",
+            "brand": "Samsung",
+            "model_clean": "Galaxy A57 5G",
+            "cpu_model": "Exynos 1680",
+            "ram_gb": 8,
+            "storage_gb": 128,
+            "price_vnd": 10_490_000.0,
+        },
+    ]
+    input_path = tmp_path / "rows.jsonl"
+    input_path.write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")
+
+    _, products_df, _ = run_step2(input_path=input_path, work_dir=tmp_path)
+    assert len(products_df) == 2
+    canonical = pd.read_csv(tmp_path / "canonical_products.csv")
+    assert len(canonical) == 2
+    stats = pd.read_csv(tmp_path / "retailer_degree_stats_smartphone.csv")
+    assert int(stats.loc[stats["retailer"] == "CellphoneS", "total_canonical_products"].iloc[0]) == 1
+
+
+# --- Review fixes: robust price premium ---------------------------------------
+
+
+def test_price_premium_guard_excludes_implausible_pairs() -> None:
+    enriched = [
+        {"seller_name": "CellphoneS", "canonical_product_id": "p_bad", "price_vnd": 10_490_000.0},
+        {"seller_name": "FPT", "canonical_product_id": "p_bad", "price_vnd": 70_000.0},
+        {"seller_name": "CellphoneS", "canonical_product_id": "p_ok", "price_vnd": 12_000_000.0},
+        {"seller_name": "FPT", "canonical_product_id": "p_ok", "price_vnd": 12_000_000.0},
+    ]
+    products = pd.DataFrame(
+        [
+            {
+                "canonical_product_id": "p_bad",
+                "category": "smartphone",
+                "brand": "Samsung",
+                "model_clean": "Galaxy A57 5G",
+                "cpu_model": "Exynos 1680",
+                "price_median": 5_000_000.0,
+            },
+            {
+                "canonical_product_id": "p_ok",
+                "category": "smartphone",
+                "brand": "Xiaomi",
+                "model_clean": "Redmi Note 17",
+                "cpu_model": "Snapdragon 6s Gen 2",
+                "price_median": 12_000_000.0,
+            },
+        ]
+    )
+    G = build_bipartite_graph(enriched, products)
+    stats = compute_retailer_degree_stats(G, products)
+
+    cellphones = stats[stats["retailer"] == "CellphoneS"].iloc[0]
+    # The 10.49M vs 70k pair is an ER anomaly: excluded, not averaged in.
+    assert cellphones["price_premium_pairs_excluded"] == 1
+    assert cellphones["price_premium_pairs_used"] == 1
+    assert cellphones["avg_price_premium_pct"] == 0.0
+    assert cellphones["median_price_premium_pct"] == 0.0
+
+    fpt = stats[stats["retailer"] == "FPT"].iloc[0]
+    assert fpt["price_premium_pairs_excluded"] == 0
+
+
+# --- Review fixes: price-free TV5/TV8 handoff ---------------------------------
+
+
+def _handoff_listing(lid: str, seller: str, price: float = 12_000_000.0) -> dict:
+    return {
+        "listing_record_id": lid,
+        "seller_name": seller,
+        "source": "cellphones",
+        "category_clean": "smartphone",
+        "canonical_product_id": f"cid_{lid}",
+        "brand": "Samsung",
+        "model_clean": "Galaxy A57 5G",
+        "cpu_model": "Exynos 1680",
+        "ram_gb": 8,
+        "storage_gb": 128,
+        "price_vnd": price,
+    }
+
+
+def _handoff_observed(lid: str, seller: str, ram: float | None = 8) -> dict:
+    return {
+        "listing_record_id": lid,
+        "seller_name": seller,
+        "category_clean": "smartphone",
+        "brand": "Samsung",
+        "model_clean": "Galaxy A57 5G",
+        "cpu_model": "Exynos 1680",
+        "ram_gb": ram,
+        "storage_gb": 128,
+        "price_vnd": 12_000_000.0,
+    }
+
+
+def test_price_free_handoff_exposes_only_whitelisted_columns() -> None:
+    handoff = build_price_free_handoff(
+        listings=[_handoff_listing("a", "CellphoneS")],
+        observed_rows=[_handoff_observed("a", "CellphoneS")],
+        laptop_benchmarks=[],
+        smartphone_benchmarks=[
+            {
+                "listing_record_id": "a",
+                "cpu_perf_rating": 55.0,
+                "cpu_benchmark_score": 3000.0,
+                "cpu_geekbench_5_multi": 2900.0,
+            }
+        ],
+    )
+    assert list(handoff.columns) == HANDOFF_COLUMNS
+    lowered = [column.lower() for column in handoff.columns]
+    for token in HANDOFF_FORBIDDEN_TOKENS:
+        assert not any(token in column for column in lowered), token
+    assert HANDOFF_LINEAGE_ONLY.issubset(set(handoff.columns))
+
+
+def test_price_free_handoff_is_invariant_to_price() -> None:
+    listings = [_handoff_listing("a", "CellphoneS"), _handoff_listing("b", "FPT")]
+    observed = [_handoff_observed("a", "CellphoneS"), _handoff_observed("b", "FPT")]
+    bench = [
+        {"listing_record_id": "a", "cpu_perf_rating": 55.0, "cpu_benchmark_score": 3000.0},
+        {"listing_record_id": "b", "cpu_perf_rating": 55.0, "cpu_benchmark_score": 3000.0},
+    ]
+    base = build_price_free_handoff(
+        listings=listings, observed_rows=observed, laptop_benchmarks=[], smartphone_benchmarks=bench
+    )
+    scaled = build_price_free_handoff(
+        listings=[{**row, "price_vnd": row["price_vnd"] * 1.37} for row in listings],
+        observed_rows=[{**row, "price_vnd": row["price_vnd"] * 1.37} for row in observed],
+        laptop_benchmarks=[],
+        smartphone_benchmarks=bench,
+    )
+    pd.testing.assert_frame_equal(base, scaled)
+
+
+def test_hw_seller_count_uses_observed_specs_not_imputed_cids() -> None:
+    listings = [
+        _handoff_listing("a", "CellphoneS"),
+        _handoff_listing("b", "FPT"),  # RAM 8 here is imputed by Step 2
+    ]
+    observed = [
+        _handoff_observed("a", "CellphoneS"),
+        _handoff_observed("b", "FPT", ram=None),  # observed RAM is actually missing
+    ]
+    handoff = build_price_free_handoff(
+        listings=listings, observed_rows=observed, laptop_benchmarks=[], smartphone_benchmarks=[]
+    )
+    by_id = handoff.set_index("listing_record_id")
+    assert by_id.loc["a", "hw_seller_count"] == 1
+    assert pd.isna(by_id.loc["b", "hw_seller_count"])
+    assert bool(by_id.loc["b", "hw_key_complete"]) is False
+    # The imputed RAM must not appear as a feature either.
+    assert by_id.loc["a", "ram_gb"] == 8
+    assert pd.isna(by_id.loc["b", "ram_gb"])
+
+
+def test_hw_seller_count_counts_distinct_sellers() -> None:
+    observed = [
+        _handoff_observed("a", "CellphoneS"),
+        _handoff_observed("b", "FPT"),
+        _handoff_observed("c", "CellphoneS"),
+    ]
+    listings = [_handoff_listing("a", "CellphoneS"), _handoff_listing("b", "FPT"), _handoff_listing("c", "CellphoneS")]
+    handoff = build_price_free_handoff(
+        listings=listings, observed_rows=observed, laptop_benchmarks=[], smartphone_benchmarks=[]
+    )
+    assert set(handoff["hw_seller_count"]) == {2}
+    assert set(handoff["hw_listing_count"]) == {3}

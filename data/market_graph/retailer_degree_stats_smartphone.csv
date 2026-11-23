@@ -1,6 +1,6 @@
-﻿retailer,total_canonical_products,exclusive_count,competitive_count,exclusive_pct,price_leader_win_rate_pct,avg_price_premium_pct
-CellphoneS,1090,951,139,87.25,47.48,240.06
-FPT,180,55,125,30.56,37.6,219.98
-Hoàng Hà,181,90,91,49.72,64.84,2.22
-TGDĐ,278,195,83,70.14,39.76,20.21
-Viettel,134,35,99,26.12,55.56,278.73
+﻿retailer,total_canonical_products,exclusive_count,competitive_count,exclusive_pct,price_leader_win_rate_pct,avg_price_premium_pct,median_price_premium_pct,price_premium_pairs_used,price_premium_pairs_excluded
+CellphoneS,1039,905,134,87.1,45.52,2.23,0.51,128,6
+FPT,167,46,121,27.54,38.02,4.56,1.56,118,3
+Hoàng Hà,146,56,90,38.36,64.44,2.25,0.0,90,0
+TGDĐ,260,177,83,68.08,39.76,2.76,1.16,82,1
+Viettel,128,31,97,24.22,55.67,2.37,0.0,94,3

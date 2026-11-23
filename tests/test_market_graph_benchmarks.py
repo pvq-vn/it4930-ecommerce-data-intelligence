@@ -31,6 +31,8 @@ from src.market_graph.laptop_benchmark_match import (
 )
 from src.market_graph.smartphone_benchmark_match import (
     _load_phone_index,
+    _rating_scale,
+    derive_cpu_perf_rating,
     match_phone_cpu,
     match_smartphones,
 )
@@ -361,3 +363,30 @@ def test_cpu_match_key_hyphen_normalization() -> None:
     assert cpu_match_key("AMD Ryzen 7 7840HS") == "ryzen 7 7840hs"
     assert cpu_match_key("Ryzen 7-7840HS") == "ryzen 7 7840hs"
 
+
+def test_derive_cpu_perf_rating_is_proportional_and_marks_missing() -> None:
+    table = pd.DataFrame({"benchmark_score": [100.0, 200.0, 400.0]})
+    max_score, sorted_scores = _rating_scale(table)
+    assert max_score == 400.0
+
+    rating, percentile = derive_cpu_perf_rating(200.0, max_score, sorted_scores)
+    assert rating == 50.0
+    assert percentile == pytest.approx(66.67, abs=0.01)
+    assert derive_cpu_perf_rating(None, max_score, sorted_scores) == (None, None)
+    assert derive_cpu_perf_rating(200.0, None, sorted_scores) == (None, None)
+
+
+def test_smartphone_csv_has_no_all_nan_perf_rating_column() -> None:
+    csv_path = Path(__file__).resolve().parents[1] / "data" / "market_graph" / "smartphone_benchmarks.csv"
+    if not csv_path.exists():
+        pytest.skip("smartphone_benchmarks.csv not generated")
+    df = pd.read_csv(csv_path)
+    rated = int(df["cpu_perf_rating"].notna().sum())
+    scored = int(df["cpu_benchmark_score"].notna().sum())
+    assert rated > 0
+    assert rated == scored
+    # Scale is 100 * score / max(score of the phone table), so matched phones can sit
+    # below 100 when the table's strongest chip is unmatched (e.g. Apple M5).
+    assert 0.0 < df["cpu_perf_rating"].max() <= 100.0
+    ordered = df.dropna(subset=["cpu_benchmark_score"]).sort_values("cpu_benchmark_score")
+    assert ordered["cpu_perf_rating"].is_monotonic_increasing
