@@ -11,7 +11,7 @@ from features import *
 
 
 class PricePredictor:
-    def __init__(self, laptop_model='lgbm', smartphone_model='rf'):
+    def __init__(self, laptop_model='lgbm', smartphone_model='lgbm'):
         self.models = {
             'laptop': self._load_model('laptop', laptop_model),
             'smartphone': self._load_model('smartphone', smartphone_model)
