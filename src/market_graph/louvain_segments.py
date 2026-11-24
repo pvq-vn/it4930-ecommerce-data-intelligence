@@ -19,6 +19,7 @@ import networkx as nx
 import numpy as np
 import pandas as pd
 
+from src.market_graph.bipartite_graph import filter_min_price
 from src.market_graph.perf_scores import enrich_perf_scores
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -492,6 +493,7 @@ def run_step3(
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     products_path = work_dir / "canonical_products.csv"
     products_df = pd.read_csv(products_path)
+    products_df = filter_min_price(products_df, log_prefix="[Step 3]")
     df_segmented, segments_df, graphs = detect_louvain_segments(
         products_df,
         price_tol=price_tol,

@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.market_graph.louvain_segments import build_product_similarity_graph
+from src.market_graph.louvain_segments import build_product_similarity_graph, run_step3
 from src.market_graph.perf_scores import (
     enrich_perf_scores,
     is_discrete_gpu,
@@ -177,3 +177,40 @@ def test_scores_from_products_metric_propagation(tmp_path: Path) -> None:
 
     enriched = enrich_perf_scores(df, work_dir=tmp_path)
     assert enriched.iloc[0]["cpu_perf_metric"] == "geekbench_4_converted_gb5"
+
+
+def test_run_step3_applies_analysis_price_floor(tmp_path: Path) -> None:
+    def product(pid, price, model):
+        return {
+            "canonical_product_id": pid,
+            "category": "smartphone",
+            "brand": "Samsung",
+            "model_clean": model,
+            "cpu_model": "Exynos 1680",
+            "ram_gb": 8,
+            "storage_gb": 128,
+            "price_min": price,
+            "price_median": price,
+            "price_max": price,
+            "listing_count": 1,
+            "retailer_count": 1,
+            "retailers": "CellphoneS",
+            "total_reviews": 10.0,
+            "avg_rating": 4.6,
+            "degree": 1,
+            "exclusivity": "exclusive",
+        }
+
+    rows = [product(f"p{i}", 5_000_000.0 + i * 100_000, f"Galaxy A{i}") for i in range(6)]
+    rows += [
+        product("cheap1", 390_000.0, "Masstel Izi 20"),
+        product("cheap2", 550_000.0, "Nokia 105"),
+    ]
+    pd.DataFrame(rows).to_csv(tmp_path / "canonical_products.csv", index=False)
+
+    df_seg, segments_df = run_step3(work_dir=tmp_path, use_benchmarks=False)
+
+    assert (df_seg["price_median"] >= 1_000_000).all()
+    assert len(df_seg) == 6
+    assert not segments_df.empty
+    assert not segments_df["segment_label"].str.contains("0-0M").any()

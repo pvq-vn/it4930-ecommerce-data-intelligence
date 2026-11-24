@@ -50,5 +50,13 @@ data/gold_v2/*.jsonl
 # PyVis local assets generated at runtime
 lib/
 
+# Keep the three Notebookcheck snapshots needed for benchmark extraction/tests.
+# Other raw benchmark HTML/JS snapshots remain local only.
+data/market_graph/benchmarks/*.html
+!data/market_graph/benchmarks/notebookcheck_cpu.html
+!data/market_graph/benchmarks/notebookcheck_gpu.html
+!data/market_graph/benchmarks/notebookcheck_cpu_phone.html
+data/market_graph/benchmarks/*.js
+
 test.*
 catboost_info/

@@ -21,6 +21,7 @@ import pandas as pd
 import seaborn as sns
 from pyvis.network import Network
 
+from src.market_graph.bipartite_graph import min_price_for
 from src.market_graph.louvain_segments import PRICE_BANDS
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -64,6 +65,100 @@ def _format_perf_recommendation(seg: pd.Series | dict[str, Any]) -> str:
             )
         return "Chưa có dữ liệu benchmark cho phân khúc này"
     return "N/A"
+
+
+
+def assert_analysis_floor(df_seg: pd.DataFrame) -> None:
+    """Fail fast when Step 4 is fed segments built without the price floor."""
+    if df_seg.empty or "price_median" not in df_seg.columns:
+        return
+    prices = pd.to_numeric(df_seg["price_median"], errors="coerce")
+    floors = df_seg["category"].map(min_price_for).astype(float)
+    below = df_seg[prices.notna() & (prices < floors)]
+    if below.empty:
+        return
+    sample = below[["canonical_product_id", "category", "price_median"]].head(5).to_dict("records")
+    raise ValueError(
+        "canonical_products_segmented.csv contains rows below the analysis price floor. "
+        "Re-run `python -m src.market_graph.cli step3` after the floor fix. "
+        f"Offending sample: {sample}"
+    )
+
+
+def audit_review_claims(work_dir: Path = DEFAULT_WORK_DIR) -> pd.DataFrame:
+    """Print the numbers needed to reconcile the TV4 review findings.
+
+    Returns a long-form table (claim, metric, value, source) and writes nothing, so it
+    can be run at any time without touching pipeline artifacts.
+    """
+    products = pd.read_csv(work_dir / "canonical_products.csv")
+    holes_path = work_dir / "structural_holes.csv"
+    segments_path = work_dir / "louvain_segments.csv"
+    stats_by_cat = {
+        cat: pd.read_csv(work_dir / f"retailer_degree_stats_{cat}.csv")
+        for cat in ("laptop", "smartphone")
+        if (work_dir / f"retailer_degree_stats_{cat}.csv").exists()
+    }
+
+    rows: list[dict[str, Any]] = []
+
+    def add(claim: str, metric: str, value: Any, source: str) -> None:
+        rows.append({"claim": claim, "metric": metric, "value": value, "source": source})
+
+    add("floor", "smartphone_products_below_1M", int(
+        ((products["category"] == "smartphone") & (products["price_median"] < 1_000_000)).sum()
+    ), "canonical_products.csv")
+    add("floor", "laptop_products_below_3M", int(
+        ((products["category"] == "laptop") & (products["price_median"] < 3_000_000)).sum()
+    ), "canonical_products.csv")
+    add("floor", "canonical_products_total", len(products), "canonical_products.csv")
+
+    for cat, stats in stats_by_cat.items():
+        for record in stats.to_dict("records"):
+            prefix = f"{cat}.{record['retailer']}"
+            add("premium", f"{prefix}.avg_price_premium_pct", record.get("avg_price_premium_pct"), f"retailer_degree_stats_{cat}.csv")
+            add("premium", f"{prefix}.median_price_premium_pct", record.get("median_price_premium_pct"), f"retailer_degree_stats_{cat}.csv")
+            add("premium", f"{prefix}.pairs_excluded", record.get("price_premium_pairs_excluded"), f"retailer_degree_stats_{cat}.csv")
+
+    if segments_path.exists():
+        segments = pd.read_csv(segments_path)
+        add("segments", "segment_count", len(segments), "louvain_segments.csv")
+        add("segments", "segments_with_price_max_below_floor", int(
+            sum(
+                float(row["price_median_m"]) * 1e6 < min_price_for(row["category"])
+                for _, row in segments.iterrows()
+            )
+        ), "louvain_segments.csv")
+    if {"price_min", "price_max"}.issubset(products.columns):
+        price_min = pd.to_numeric(products["price_min"], errors="coerce")
+        price_max = pd.to_numeric(products["price_max"], errors="coerce")
+        ratio = price_max / price_min.where(price_min > 0)
+        outliers = products[ratio > 3]
+        add("er_anomaly", "cids_with_price_spread_gt_3x", len(outliers), "canonical_products.csv")
+        for idx, record in outliers.sort_values("price_median", ascending=False).head(20).iterrows():
+            add(
+                "er_anomaly",
+                f"{record['canonical_product_id']}.spread_ratio",
+                round(float(price_max[idx] / price_min[idx]), 1),
+                f"{record['brand']} {record['model_clean']} | {record['retailers']}",
+            )
+
+    if holes_path.exists():
+        holes = pd.read_csv(holes_path)
+        counts = holes["gap_type"].value_counts().to_dict()
+        add("holes", "retailer_blind_spot", counts.get("retailer_blind_spot", 0), "structural_holes.csv")
+        add("holes", "underserved_high_demand", counts.get("underserved_high_demand", 0), "structural_holes.csv")
+
+    for name, cat in (("smartphone", "phone"), ("laptop", "laptop")):
+        bench_path = work_dir / f"{'smartphone' if name == 'smartphone' else 'laptop'}_benchmarks.csv"
+        if bench_path.exists():
+            bench = pd.read_csv(bench_path)
+            add("benchmark", f"{name}.cpu_perf_rating_non_null", int(bench["cpu_perf_rating"].notna().sum()), bench_path.name)
+            add("benchmark", f"{name}.rows", len(bench), bench_path.name)
+
+    table = pd.DataFrame(rows)
+    print(table.to_string(index=False))
+    return table
 
 
 def detect_structural_holes(
@@ -446,6 +541,7 @@ def write_gaps_markdown(
 def run_step4(work_dir: Path = DEFAULT_WORK_DIR) -> None:
     reports_dir = work_dir / "reports"
     df_seg = pd.read_csv(work_dir / "canonical_products_segmented.csv")
+    assert_analysis_floor(df_seg)
     segments_df = pd.read_csv(work_dir / "louvain_segments.csv")
 
     categories = ("laptop", "smartphone")
