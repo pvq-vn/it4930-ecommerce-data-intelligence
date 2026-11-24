@@ -1,0 +1,108 @@
+{
+  "baseline_stage": "S4",
+  "data_commit": "24cd858",
+  "tv7_commit": "66f089b851889f662491d252dc821d631ca78f82",
+  "delivered_flags_sha256": "e3082ef3030b39d3fee87e52d70bcbd85bf6bc6b753331478a905eacb8d52dec",
+  "tv7_detector_sha256": "af3fedb66454f3702b53a65a0b8fa38ae9dc28e1fe796a6d087880d256199584",
+  "s4_manifest_sha256": "62a37245bfd58cd2a31676e8147925382013f6b6d002fb2484f6378301661aa5",
+  "script_sha256": "e830ced3860e8b1d1e041c01aafff0cd2d4bc85ca7c7da7f96d72b96f3068e1e",
+  "flag_sources": {
+    "delivered": "Retrospective: TV7 flags from the full snapshot, including held-out prices.",
+    "train_only": "Same detector refit only on the original S4 training listings in each category."
+  },
+  "filters": {
+    "S5a": "anomaly_severity == extreme",
+    "S5b": "combined_flag is true"
+  },
+  "high_price_vnd": 80000000,
+  "categories": {
+    "laptop": {
+      "train_index_sha256": "653eed8b026f785a024b37445fbe98cb26b76a9b7f81ba1884c756b0e46b6dbd",
+      "test_ids_sha256": "8a5ad040c284c66ac1e7df0aa69d3db2ceab51f3a4bdbe0af88743ea20a556ce",
+      "n_test": 819,
+      "n_test_ge_80m": 26,
+      "filters": {
+        "delivered": {
+          "S5a": {
+            "n_train": 3222,
+            "n_train_before": 3227,
+            "n_train_removed": 5,
+            "n_train_ge_80m_before": 124,
+            "n_train_removed_ge_80m": 4,
+            "removed_listing_ids_sha256": "68e3446c5a1ab55c1f7c572e4f10060915560d0d28ecbb1c95162db72348ced0"
+          },
+          "S5b": {
+            "n_train": 3106,
+            "n_train_before": 3227,
+            "n_train_removed": 121,
+            "n_train_ge_80m_before": 124,
+            "n_train_removed_ge_80m": 41,
+            "removed_listing_ids_sha256": "f1772cb6f8bdf49be6b048929f7c1343aa41a31e849268c3729eb3059d599fc8"
+          }
+        },
+        "train_only": {
+          "S5a": {
+            "n_train": 3222,
+            "n_train_before": 3227,
+            "n_train_removed": 5,
+            "n_train_ge_80m_before": 124,
+            "n_train_removed_ge_80m": 4,
+            "removed_listing_ids_sha256": "68e3446c5a1ab55c1f7c572e4f10060915560d0d28ecbb1c95162db72348ced0"
+          },
+          "S5b": {
+            "n_train": 3119,
+            "n_train_before": 3227,
+            "n_train_removed": 108,
+            "n_train_ge_80m_before": 124,
+            "n_train_removed_ge_80m": 32,
+            "removed_listing_ids_sha256": "5eba224db64d477ce7f5c12a355ee94cbfd99864e733eaf08a88ed7eebb647d1"
+          }
+        }
+      }
+    },
+    "smartphone": {
+      "train_index_sha256": "4018170e3297cb2696b3f62abb2f5e7a242fee320ddd1eab667e4d4389fc9f43",
+      "test_ids_sha256": "79c601ad4707136ac69d11fec4da7e66a5b3f4c6c9db7a68344facc2163526fe",
+      "n_test": 797,
+      "n_test_ge_80m": 11,
+      "filters": {
+        "delivered": {
+          "S5a": {
+            "n_train": 3290,
+            "n_train_before": 3300,
+            "n_train_removed": 10,
+            "n_train_ge_80m_before": 13,
+            "n_train_removed_ge_80m": 5,
+            "removed_listing_ids_sha256": "7947f34f92ddcbfc8fa73250729185b8858e6753c1b4afd211dbd0db6741db47"
+          },
+          "S5b": {
+            "n_train": 3237,
+            "n_train_before": 3300,
+            "n_train_removed": 63,
+            "n_train_ge_80m_before": 13,
+            "n_train_removed_ge_80m": 10,
+            "removed_listing_ids_sha256": "8802d91e458b2c8c441fa10c7ec3b8ce5f1859c1ce9185859bbe84db95e37ee5"
+          }
+        },
+        "train_only": {
+          "S5a": {
+            "n_train": 3286,
+            "n_train_before": 3300,
+            "n_train_removed": 14,
+            "n_train_ge_80m_before": 13,
+            "n_train_removed_ge_80m": 6,
+            "removed_listing_ids_sha256": "d33f7de82dc0c9cf1db02b3a00e820ad365e32f1a6564db9c45353fbb5d49ba7"
+          },
+          "S5b": {
+            "n_train": 3191,
+            "n_train_before": 3300,
+            "n_train_removed": 109,
+            "n_train_ge_80m_before": 13,
+            "n_train_removed_ge_80m": 10,
+            "removed_listing_ids_sha256": "c75040b2e8fb82372c854ec0e28794ad4154532dcab4575470b7754b0499c2ac"
+          }
+        }
+      }
+    }
+  }
+}

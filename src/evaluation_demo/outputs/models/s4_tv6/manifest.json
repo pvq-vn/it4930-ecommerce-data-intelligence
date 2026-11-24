@@ -1,0 +1,233 @@
+{
+  "stage": "S4",
+  "baseline_stage": "S3",
+  "data_commit": "24cd858",
+  "data_sha256": {
+    "products_cleaned.jsonl": "2cd52dcd0897167f82bee09421ed495ef5943bfc54691addf87a4179faf835a7",
+    "products_processed.jsonl": "a53a671461fc0b535f82b6a246938fc17fb2aab2abffc122252800f6be2d2dd7"
+  },
+  "tv5_code_sha256": {
+    "config.py": "26cb749650693aa48e54909fd66ca2cf023010cb8a60bbae882f8bfde7ee2891",
+    "features.py": "5ee803e85a6e945af74396182c6d52975d41ba4aa94b04e844670cce3a18f04c",
+    "utils.py": "b270c05533d021dd1ddd7e7435cf81935671b2a3905c025abd6ea65a6aafbf86",
+    "training_baseline.py": "8ec38af91dfa3f5e3275b9fa4301e43392da29f308519a119c7417812ccfb75a",
+    "training_rf.py": "8307794439d1c456c62b73a26c20d39f9c0aa513f4f6ec90b974d14c8d821df5"
+  },
+  "benchmark_sha256": {
+    "laptop": "8ae062625ca4eee9730e17916981071078d753dac4ed12b19f7b44137e66aa83",
+    "smartphone": "ebd2a07a2e1223213ef670cedaf41f9a6304537a73dae70219f0641cffd434c4"
+  },
+  "s3_manifest_sha256": "dea31e596522f6ae7673d7f4c40925492793142e7d75ce9d0ea120101aaeaa9a",
+  "libraries": {
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "lightgbm": "4.7.0",
+    "joblib": "1.6.0",
+    "scipy": "1.18.1"
+  },
+  "review_commit": "1d53f974d87bbaf3329c0ec51abf7da61ef7143c",
+  "review_sha256": "5e0a192921178cb92a82459e004df676d1939982c53b366cf6a4b39d3c4fdb6c",
+  "code_sha256": {
+    "train_tv6.py": "3ac96865606a8fcf3a6d29d45ec52b2b115f949bb72702648fb8fc0cae5ef26a",
+    "tv6_features.py": "e6fe9fdcd20ab7cfd54d995cdc144b835619c665ad78afd1be8bc77625f4ccc5",
+    "tv4_features.py": "e8137a17be1344c11a155bf79347a24925ea6df8589a62fe910d92219fa62610",
+    "tv3_features.py": "3ca0082b3b11cf39f5654b55579c734fb5dcea719ee473ef0195a9cabb76cba0",
+    "prepare_test_data.py": "aa9dbb8098400ab1490e8933946eaef6b029288240e2328f9f9b99cf81cd7ce1"
+  },
+  "count_features": [
+    "has_review_data",
+    "review_count_usable"
+  ],
+  "sentiment_features": [
+    "avg_sentiment_score",
+    "sentiment_positive_ratio",
+    "aspect_sentiment_score_battery_power",
+    "aspect_sentiment_score_performance_thermal",
+    "aspect_sentiment_score_display_design",
+    "aspect_sentiment_score_camera_audio",
+    "aspect_sentiment_score_service_logistics",
+    "brand_sentiment_prior"
+  ],
+  "prior_policy": "Train-only mean of reviewed parents per brand/category, excluding the queried parent. Fallback to the category train mean, then zero.",
+  "coverage": {
+    "laptop": {
+      "train": {
+        "n_rows": 3227,
+        "n_reviewed": 730
+      },
+      "test": {
+        "n_rows": 819,
+        "n_reviewed": 234
+      }
+    },
+    "smartphone": {
+      "train": {
+        "n_rows": 3300,
+        "n_reviewed": 2268
+      },
+      "test": {
+        "n_rows": 797,
+        "n_reviewed": 551
+      }
+    }
+  },
+  "models": [
+    {
+      "category": "laptop",
+      "model": "ridge",
+      "file": "ridge_laptop.pkl",
+      "sha256": "18dfbd265eef234250fb44dbab134a06b518fc0946e390128f813053a1b1429e",
+      "train_index_sha256": "653eed8b026f785a024b37445fbe98cb26b76a9b7f81ba1884c756b0e46b6dbd",
+      "test_ids_sha256": "8a5ad040c284c66ac1e7df0aa69d3db2ceab51f3a4bdbe0af88743ea20a556ce",
+      "fixed_estimator_params": {
+        "alpha": 1.0,
+        "copy_X": true,
+        "fit_intercept": true,
+        "max_iter": null,
+        "positive": false,
+        "random_state": null,
+        "solver": "auto",
+        "tol": 0.0001
+      }
+    },
+    {
+      "category": "laptop",
+      "model": "rf",
+      "file": "rf_laptop.pkl",
+      "sha256": "8102638d3b53983be4fbb5b6275bb3a5135c9248c48cb032e5683d0c43c5d296",
+      "train_index_sha256": "653eed8b026f785a024b37445fbe98cb26b76a9b7f81ba1884c756b0e46b6dbd",
+      "test_ids_sha256": "8a5ad040c284c66ac1e7df0aa69d3db2ceab51f3a4bdbe0af88743ea20a556ce",
+      "fixed_estimator_params": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": null,
+        "max_features": 1.0,
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      }
+    },
+    {
+      "category": "laptop",
+      "model": "lgbm",
+      "file": "lgbm_laptop.pkl",
+      "sha256": "f1daaf1b018cd6ebfc0c454f0b0eb593cef039ad927fde46cc2b772f47959359",
+      "train_index_sha256": "653eed8b026f785a024b37445fbe98cb26b76a9b7f81ba1884c756b0e46b6dbd",
+      "test_ids_sha256": "8a5ad040c284c66ac1e7df0aa69d3db2ceab51f3a4bdbe0af88743ea20a556ce",
+      "fixed_estimator_params": {
+        "boosting_type": "gbdt",
+        "class_weight": null,
+        "colsample_bytree": 1.0,
+        "importance_type": "split",
+        "learning_rate": 0.1,
+        "max_depth": -1,
+        "min_child_samples": 20,
+        "min_child_weight": 0.001,
+        "min_split_gain": 0.0,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "num_leaves": 31,
+        "objective": null,
+        "random_state": 42,
+        "reg_alpha": 0.0,
+        "reg_lambda": 0.0,
+        "subsample": 1.0,
+        "subsample_for_bin": 200000,
+        "subsample_freq": 0,
+        "deterministic": true,
+        "force_col_wise": true,
+        "verbose": -1
+      }
+    },
+    {
+      "category": "smartphone",
+      "model": "ridge",
+      "file": "ridge_smartphone.pkl",
+      "sha256": "7568042fdde11690cf830470e1dcac8946a9afa1f7b05b1ad03f7f01e1484c6e",
+      "train_index_sha256": "4018170e3297cb2696b3f62abb2f5e7a242fee320ddd1eab667e4d4389fc9f43",
+      "test_ids_sha256": "79c601ad4707136ac69d11fec4da7e66a5b3f4c6c9db7a68344facc2163526fe",
+      "fixed_estimator_params": {
+        "alpha": 1.0,
+        "copy_X": true,
+        "fit_intercept": true,
+        "max_iter": null,
+        "positive": false,
+        "random_state": null,
+        "solver": "auto",
+        "tol": 0.0001
+      }
+    },
+    {
+      "category": "smartphone",
+      "model": "rf",
+      "file": "rf_smartphone.pkl",
+      "sha256": "5349d43cf1388ff887712e0a2b57316d308991cab282d6274ddf90a63337f19f",
+      "train_index_sha256": "4018170e3297cb2696b3f62abb2f5e7a242fee320ddd1eab667e4d4389fc9f43",
+      "test_ids_sha256": "79c601ad4707136ac69d11fec4da7e66a5b3f4c6c9db7a68344facc2163526fe",
+      "fixed_estimator_params": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": null,
+        "max_features": 1.0,
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      }
+    },
+    {
+      "category": "smartphone",
+      "model": "lgbm",
+      "file": "lgbm_smartphone.pkl",
+      "sha256": "6ff024b6ac86b4acc0f7e6d9b4dbdf67c9964bf54f3ef8c23ff90970c07abd63",
+      "train_index_sha256": "4018170e3297cb2696b3f62abb2f5e7a242fee320ddd1eab667e4d4389fc9f43",
+      "test_ids_sha256": "79c601ad4707136ac69d11fec4da7e66a5b3f4c6c9db7a68344facc2163526fe",
+      "fixed_estimator_params": {
+        "boosting_type": "gbdt",
+        "class_weight": null,
+        "colsample_bytree": 1.0,
+        "importance_type": "split",
+        "learning_rate": 0.1,
+        "max_depth": -1,
+        "min_child_samples": 20,
+        "min_child_weight": 0.001,
+        "min_split_gain": 0.0,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "num_leaves": 31,
+        "objective": null,
+        "random_state": 42,
+        "reg_alpha": 0.0,
+        "reg_lambda": 0.0,
+        "subsample": 1.0,
+        "subsample_for_bin": 200000,
+        "subsample_freq": 0,
+        "deterministic": true,
+        "force_col_wise": true,
+        "verbose": -1
+      }
+    }
+  ]
+}
