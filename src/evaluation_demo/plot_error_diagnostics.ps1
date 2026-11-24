@@ -183,7 +183,7 @@ function Write-SlicedFigure {
             $byPrice = @($tier | Where-Object category -eq $category)
             $bySeller = @($seller | Where-Object category -eq $category)
             $stores = @($bySeller.segment | Sort-Object -Unique)
-            $highest = (@($byPrice + $bySeller) | Measure-Object -Property { Get-Millions $_.mae_vnd } -Maximum).Maximum
+            $highest = (@($byPrice + $bySeller) | ForEach-Object { Get-Millions $_.mae_vnd } | Measure-Object -Maximum).Maximum
             $yMax = [Math]::Max(2, [Math]::Ceiling($highest / 2) * 2)
             $left = Get-Panel 95 $top "$name | Recorded price tier" 'MAE (million VND)' 0.5 ($tierKeys.Count + 0.5) 0 $yMax
             $right = Get-Panel 1393 $top "$name | Retailer" 'MAE (million VND)' 0.5 ($stores.Count + 0.5) 0 $yMax

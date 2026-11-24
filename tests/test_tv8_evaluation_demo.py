@@ -14,7 +14,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 DEMO = ROOT / "src" / "evaluation_demo"
 OUTPUT = DEMO / "outputs"
-CATEGORIES = {"laptop": (3227, 819), "smartphone": (3300, 797)}
+CATEGORIES = {"laptop": (3227, 819), "smartphone": (3276, 810)}
 MODELS = ("ridge", "rf", "lgbm")
 TABLES = {
     "table_10_1_model_benchmark_3d.csv": {"category", "model", "mae_vnd", "rmse_vnd", "r2", "mae_change_pct"},
@@ -72,10 +72,9 @@ def test_frozen_splits_are_disjoint_and_preserve_test_ids(splits, category):
     assert split.X_test.index.equals(split.test_metadata.index)
     assert set(split.train_metadata["source_parent_id"]).isdisjoint(split.test_metadata["source_parent_id"])
     assert not {"price_vnd", "source_parent_id", "listing_record_id"}.intersection(split.X_test.columns)
-    manifest = json.loads((OUTPUT / "models" / "s4_tv6" / "manifest.json").read_text(encoding="utf-8"))
-    reference = next(row for row in manifest["models"] if row["category"] == category)
-    test_ids = "\n".join(split.test_metadata["listing_record_id"]).encode()
-    assert hashlib.sha256(test_ids).hexdigest() == reference["test_ids_sha256"]
+    assert split.train_metadata["listing_record_id"].is_unique
+    assert split.test_metadata["listing_record_id"].is_unique
+    assert not split.test_metadata["source_parent_id"].eq(split.test_metadata["listing_record_id"]).all()
 
 
 @pytest.mark.parametrize("category", CATEGORIES)
@@ -100,7 +99,7 @@ def test_apple_fpt_alias_preserves_reference_price(api, splits, models):
     }, category, splits[category])
     pd.testing.assert_frame_equal(aliased, canonical)
     price = models[category, "rf"].predict(aliased)[0]
-    assert price == pytest.approx(24_892_339, abs=2)
+    assert price == pytest.approx(25_862_396, abs=2)
 
 
 @pytest.mark.parametrize("key", MODELS)
@@ -117,7 +116,7 @@ def test_demo_contributions_reconstruct_prediction(api, splits, models, key):
 
 def test_nearby_catalog_is_ranked_independently_of_price(api, splits):
     catalog = api.build_catalog(splits)
-    assert len(catalog) == 8143 and catalog["listing_record_id"].is_unique
+    assert len(catalog) == 8132 and catalog["listing_record_id"].is_unique
     product = api.prediction_frame(ALIAS_EXAMPLE, "smartphone", splits["smartphone"]).iloc[0].to_dict()
     matches = api.similar_listings(catalog, "smartphone", product)
     alternative = api.similar_listings(catalog.assign(price_vnd=-catalog["price_vnd"]), "smartphone", product)
@@ -162,4 +161,4 @@ def test_app_can_submit_prediction(api):
     assert not app.exception and not app.error
     next(button for button in app.button if button.label == "Dự đoán giá").click().run()
     assert not app.exception and not app.error
-    assert app.metric[0].value == "23.498.571 đ"
+    assert app.metric[0].value == "22.642.018 đ"

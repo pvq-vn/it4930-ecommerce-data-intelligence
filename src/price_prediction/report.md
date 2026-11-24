@@ -95,35 +95,37 @@ Sau khi hoàn tất làm sạch dữ liệu nội bộ, pipeline dự đoán gi�
 
 ---
 
-### 3.2. Bảng So sánh Hiệu năng Mô hình (Sau Làm sạch GĐ 1 vs. Sau Tích hợp Đa Thành viên GĐ 2)
+### 3.2. Bảng So sánh Hiệu năng Mô hình (Sau Làm sạch GĐ 1 vs. Sau Tích hợp Đa Thành viên Đã Khắc phục Crosswalk ID)
 
-| Danh mục            | Mô hình                | Chỉ số    | Sau làm sạch (GĐ 1) | Sau tích hợp ĐTV (GĐ 2) | Chênh lệch ($\Delta$) |    Mức cải thiện    |
+> *Lưu ý tích hợp liên nhánh:* Khi hợp nhất vào `main`, `products_processed.jsonl` (`fd3b991`) và `anomaly_flags.csv` (TV7) sử dụng mã băm `listing_record_id` mới, trong khi `products_cleaned.jsonl` và dữ liệu TV4 giữ mã băm cũ. Bảng ánh xạ 1-1 `data/processed/listing_id_crosswalk.csv` được bổ sung để khôi phục khớp đủ **8.374/8.374 dòng** với `source_parent_id` thực tế (không rò rỉ biến thể giữa Train/Test) và ghép đầy đủ đặc trưng TV2, TV3, TV4, TV6, TV7 trước khi huấn luyện lại cả 6 mô hình.
+
+| Danh mục            | Mô hình                | Chỉ số    | Mốc cũ trước tích hợp (TV5 gốc) | Sau tích hợp ĐTV (Zero-Leakage) | Chênh lệch ($\Delta$) |    Mức cải thiện    |
 | :------------------- | :----------------------- | :---------- | :---------------------: | :-------------------------: | :-----------------------: | :--------------------: |
-| **Laptop**     | **Ridge Baseline** | MAE (VNĐ)  |      $4.897.040$      |   **$4.782.561$**   |       $-114.479$       |      $-2,34\%$      |
-|                      |                          | RMSE (VNĐ) |      $8.564.659$      |   **$8.117.433$**   |       $-447.226$       |      $-5,22\%$      |
-|                      |                          | $R^2$     |       $0,8263$       |    **$0,8623$**    |        $+0,0360$        |      $+4,36\%$      |
-|                      | **Random Forest**  | MAE (VNĐ)  |      $4.058.410$      |   **$3.742.105$**   |       $-316.305$       |      $-7,79\%$      |
-|                      |                          | RMSE (VNĐ) |      $7.463.642$      |   **$6.728.686$**   |       $-734.956$       |      $-9,85\%$      |
-|                      |                          | $R^2$     |       $0,8681$       |    **$0,9054$**    |        $+0,0373$        |      $+4,30\%$      |
-|                      | **LightGBM**       | MAE (VNĐ)  |      $3.749.220$      |   **$3.698.738$**   |        $-50.482$        |      $-1,35\%$      |
-|                      |                          | RMSE (VNĐ) |      $6.852.468$      |   **$6.728.455$**   |       $-124.013$       |      $-1,81\%$      |
-|                      |                          | $R^2$     |       $0,8888$       |    **$0,9054$**    |        $+0,0166$        |      $+1,87\%$      |
-| **Smartphone** | **Ridge Baseline** | MAE (VNĐ)  |      $2.265.246$      |   **$1.678.386$**   |       $-586.860$       | **$-25,91\%$** |
-|                      |                          | RMSE (VNĐ) | **$3.301.180$** |        $3.603.151$        |       $+301.971$       |      $+9,15\%$      |
-|                      |                          | $R^2$     |  **$0,9508$**  |         $0,9376$         |        $-0,0132$        |      $-1,39\%$      |
-|                      | **Random Forest**  | MAE (VNĐ)  |      $2.209.994$      |    **$850.581$**    |      $-1.359.413$      | **$-61,51\%$** |
-|                      |                          | RMSE (VNĐ) |      $3.429.871$      |   **$2.335.868$**   |      $-1.094.003$      | **$-31,90\%$** |
-|                      |                          | $R^2$     |       $0,9469$       |    **$0,9738$**    |        $+0,0269$        |      $+2,84\%$      |
-|                      | **LightGBM**       | MAE (VNĐ)  |      $1.841.594$      |    **$844.108$**    |       $-997.486$       | **$-54,16\%$** |
-|                      |                          | RMSE (VNĐ) |      $3.003.119$      |   **$2.142.006$**   |       $-861.113$       | **$-28,67\%$** |
-|                      |                          | $R^2$     |       $0,9593$       |    **$0,9779$**    |        $+0,0186$        |      $+1,94\%$      |
+| **Laptop**     | **Ridge Baseline** | MAE (VNĐ)  |      $4.945.224$      |   **$4.279.435$**   |       $-665.789$       |     $-13,46\%$      |
+|                      |                          | RMSE (VNĐ) |      $8.692.758$      |   **$7.035.497$**   |      $-1.657.261$      |     $-19,06\%$      |
+|                      |                          | $R^2$     |       $0,8211$       |    **$0,8828$**    |        $+0,0617$        |      $+7,51\%$      |
+|                      | **Random Forest**  | MAE (VNĐ)  |      $4.073.539$      |   **$3.828.453$**   |       $-245.086$       |      $-6,02\%$      |
+|                      |                          | RMSE (VNĐ) |      $7.486.733$      |   **$6.992.113$**   |       $-494.620$       |      $-6,61\%$      |
+|                      |                          | $R^2$     |       $0,8673$       |    **$0,8843$**    |        $+0,0170$        |      $+1,96\%$      |
+|                      | **LightGBM**       | MAE (VNĐ)  |      $3.768.480$      |   **$3.488.936$**   |       $-279.544$       |      $-7,42\%$      |
+|                      |                          | RMSE (VNĐ) |      $6.858.651$      |   **$6.079.915$**   |       $-778.736$       |     $-11,35\%$      |
+|                      |                          | $R^2$     |       $0,8886$       |    **$0,9125$**    |        $+0,0239$        |      $+2,69\%$      |
+| **Smartphone** | **Ridge Baseline** | MAE (VNĐ)  |      $2.681.182$      |   **$2.184.928$**   |       $-496.254$       | **$-18,51\%$** |
+|                      |                          | RMSE (VNĐ) |      $7.342.246$      |   **$3.264.949$**   |      $-4.077.297$      | **$-55,53\%$** |
+|                      |                          | $R^2$     |       $0,8013$       |    **$0,9518$**    |        $+0,1505$        | **$+18,78\%$** |
+|                      | **Random Forest**  | MAE (VNĐ)  |      $2.643.627$      |   **$2.114.765$**   |       $-528.862$       | **$-20,01\%$** |
+|                      |                          | RMSE (VNĐ) |      $6.757.150$      |   **$3.406.507$**   |      $-3.350.643$      | **$-49,59\%$** |
+|                      |                          | $R^2$     |       $0,8317$       |    **$0,9476$**    |        $+0,1159$        | **$+13,94\%$** |
+|                      | **LightGBM**       | MAE (VNĐ)  |      $2.510.216$      |   **$1.864.679$**   |       $-645.537$       | **$-25,72\%$** |
+|                      |                          | RMSE (VNĐ) |      $7.373.367$      |   **$3.022.967$**   |      $-4.350.400$      | **$-59,00\%$** |
+|                      |                          | $R^2$     |       $0,7996$       |    **$0,9587$**    |        $+0,1591$        | **$+19,90\%$** |
 
 ---
 
 ### 3.3. Phân tích Giá trị Đóng góp của Việc Tích hợp Đa Thành viên
 
-1. **Bứt phá toàn diện trên cả hai danh mục với các mô hình phi tuyến:**
-   * **Trên Laptop:** Cả `LightGBM` và `Random Forest` đều vượt qua mốc $R^2 = 0,90$ (đạt **$0,9054$**), trong đó `LightGBM` đạt $\text{MAE} = 3.698.738\text{ VNĐ}$ và $\text{RMSE} = 6.728.455\text{ VNĐ}$. Việc bổ sung công suất sạc (`charger_watt`), trạng thái tồn kho (`is_out_of_stock`), điểm chuẩn hiệu năng `cpu_perf_rating`/`gpu_perf_rating` (TV4) và độ phủ review (TV6) giúp mô hình tách bạch chính xác các phân khúc laptop mỏng nhẹ, gaming và workstation.
-   * **Trên Smartphone:** Việc kết hợp điểm chuẩn SoC (`cpu_benchmark_score`, `cpu_geekbench_5_multi`, `cpu_passmark` từ TV4) cùng hệ thống đặc trưng cảm xúc review và `brand_sentiment_prior` (TV6) tạo ra bước nhảy vọt: $\text{MAE}$ của `LightGBM` giảm **$-54,16\%$** (từ $1,84$ triệu xuống chỉ còn **$844.108\text{ VNĐ}$**), $\text{RMSE}$ giảm **$-28,67\%$** xuống còn **$2.142.006\text{ VNĐ}$** và $R^2$ đạt **$0,9779$**.
+1. **Bứt phá toàn diện trên cả hai danh mục với mô hình `LightGBM`:**
+   * **Trên Laptop:** `LightGBM` đạt $\text{MAE} = 3.488.936\text{ VNĐ}$, $\text{RMSE} = 6.079.915\text{ VNĐ}$ và $R^2 = \mathbf{0,9125}$ (cải thiện $+0,0239$ $R^2$ so với mốc cũ). Việc bổ sung công suất sạc (`charger_watt`), trạng thái tồn kho (`is_out_of_stock`), điểm chuẩn hiệu năng `cpu_perf_rating`/`gpu_perf_rating` (TV4), `hw_seller_count` và đặc trưng review (TV6) giúp mô hình tách bạch chính xác các phân khúc laptop mỏng nhẹ, gaming và workstation.
+   * **Trên Smartphone:** Khi giữ đúng phân chia theo nhóm `source_parent_id` và kết hợp lọc nhiễu DOM + chuẩn mạng `network_type_norm` + điểm chuẩn SoC (TV4) + cảm xúc review (TV6), `LightGBM` giảm $\text{MAE}$ **$-25,72\%$** (từ $2,51$ triệu xuống **$1.864.679\text{ VNĐ}$**), $\text{RMSE}$ giảm **$-59,00\%$** (từ $7,37$ triệu xuống **$3.022.967\text{ VNĐ}$**) và $R^2$ đạt **$0,9587$**.
 2. **Hợp nhất mô hình triển khai cuối cùng (`LightGBM` cho cả Laptop và Smartphone):**
-   * Nhờ kết hợp làm sạch dữ liệu, khóa tập nhãn `pd.CategoricalDtype` và bổ sung bộ đặc trưng đa nguồn không rò rỉ giá, `LightGBM` đạt vị trí dẫn đầu tuyệt đối trên cả $6$ chỉ số đánh giá của hai danh mục và được đóng gói làm mô hình mặc định trong `PricePredictor` để bàn giao cho TV8.
+   * Nhờ kết hợp làm sạch dữ liệu, khóa tập nhãn `pd.CategoricalDtype`, đồng bộ ánh xạ ID không rò rỉ và bổ sung bộ đặc trưng đa nguồn, `LightGBM` đạt vị trí dẫn đầu trên cả $6$ chỉ số đánh giá của hai danh mục và được đóng gói làm mô hình mặc định trong `PricePredictor` để bàn giao cho TV8.

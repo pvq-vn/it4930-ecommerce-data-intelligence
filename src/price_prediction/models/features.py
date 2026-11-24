@@ -140,7 +140,7 @@ def _merge_auxiliary_features(df: pd.DataFrame) -> pd.DataFrame:
                         df_out[col] = pd.to_numeric(df_out[col], errors='coerce').fillna(
                             pd.to_numeric(df_out[bm_col], errors='coerce')
                         )
-                        df_out.drop(columns=[bm_col], inplace=True)
+                        df_out = df_out.drop(columns=[bm_col])
 
         if SMARTPHONE_BENCHMARK_PATH.exists():
             df_sma_bm = pd.read_csv(SMARTPHONE_BENCHMARK_PATH)
@@ -157,7 +157,7 @@ def _merge_auxiliary_features(df: pd.DataFrame) -> pd.DataFrame:
                         df_out[col] = pd.to_numeric(df_out[col], errors='coerce').fillna(
                             pd.to_numeric(df_out[bm_col], errors='coerce')
                         )
-                        df_out.drop(columns=[bm_col], inplace=True)
+                        df_out = df_out.drop(columns=[bm_col])
 
     df_out['hw_seller_count'] = _compute_hw_seller_count(df_out)
 
@@ -174,12 +174,26 @@ def _merge_auxiliary_features(df: pd.DataFrame) -> pd.DataFrame:
                     df_out[col] = pd.to_numeric(df_out[col], errors='coerce').fillna(
                         pd.to_numeric(df_out[dup_col], errors='coerce')
                     )
-                    df_out.drop(columns=[dup_col], inplace=True)
+                    df_out = df_out.drop(columns=[dup_col])
 
     df_out['has_review_data'] = pd.to_numeric(df_out['has_review_data'], errors='coerce').fillna(0.0)
     df_out['review_count_usable'] = pd.to_numeric(df_out['review_count_usable'], errors='coerce').fillna(0.0)
 
     return df_out
+
+def _resolve_processed_listing_ids(df_clean: pd.DataFrame, df_proc: pd.DataFrame) -> pd.Series:
+    direct = df_clean['listing_record_id'].astype(str)
+    proc_ids = set(df_proc['listing_record_id'].astype(str))
+    if direct.isin(proc_ids).all() or not LISTING_ID_CROSSWALK_PATH.exists():
+        return direct
+    crosswalk = pd.read_csv(
+        LISTING_ID_CROSSWALK_PATH,
+        usecols=['listing_record_id_cleaned', 'listing_record_id_processed'],
+        dtype=str,
+    ).drop_duplicates(subset=['listing_record_id_cleaned'])
+    id_map = crosswalk.set_index('listing_record_id_cleaned')['listing_record_id_processed']
+    mapped = direct.map(id_map)
+    return direct.where(direct.isin(proc_ids), mapped.fillna(direct))
 
 def load_and_split_data(cleaned_filepath, processed_filepath):
     df_clean = pd.read_json(cleaned_filepath, lines=True)
@@ -199,7 +213,11 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
     available_cols = [c for c in cols_to_extract if c in df_proc.columns]
     df_proc = df_proc[available_cols].drop_duplicates(subset=['listing_record_id'])
 
-    df = pd.merge(df_clean, df_proc, on='listing_record_id', how='left', suffixes=('', '_proc'))
+    join_col = '_proc_listing_id'
+    df_clean[join_col] = _resolve_processed_listing_ids(df_clean, df_proc)
+    df_proc_join = df_proc.rename(columns={'listing_record_id': join_col})
+
+    df = pd.merge(df_clean, df_proc_join, on=join_col, how='left', suffixes=('', '_proc'))
     for col in [c for c in available_cols if c != 'listing_record_id']:
         dup_col = f'{col}_proc'
         if dup_col in df.columns:
@@ -207,7 +225,7 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
                 df[col] = df[col].fillna(df[dup_col])
             else:
                 df[col] = df[dup_col]
-            df.drop(columns=[dup_col], inplace=True)
+            df = df.drop(columns=[dup_col])
 
     df[GROUP_COL] = df[GROUP_COL].fillna(df['listing_record_id'])
 
@@ -217,7 +235,12 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
         anom_cols = [c for c in ['listing_record_id', 'anomaly_severity'] if c in df_anom.columns]
         if len(anom_cols) > 1:
             df_anom = df_anom[anom_cols].drop_duplicates(subset=['listing_record_id'])
-            df = pd.merge(df, df_anom, on='listing_record_id', how='left')
+            anom_ids = set(df_anom['listing_record_id'].astype(str))
+            anom_key = join_col if df[join_col].astype(str).isin(anom_ids).any() else 'listing_record_id'
+            df_anom_join = df_anom.rename(columns={'listing_record_id': anom_key})
+            df = pd.merge(df, df_anom_join, on=anom_key, how='left')
+
+    df = df.drop(columns=[join_col], errors='ignore')
 
     is_valid_laptop = (df['category_clean'] == 'laptop') & (df[TARGET_COL] >= 3000000)
     is_valid_phone = (df['category_clean'] == 'smartphone') & (df[TARGET_COL] >= 1000000)
@@ -248,7 +271,7 @@ def load_and_split_data(cleaned_filepath, processed_filepath):
     df_valid = _merge_auxiliary_features(df_valid)
 
     cols_to_drop = [c for c in LEAKAGE_COLS if c in df_valid.columns and c != 'anomaly_severity']
-    df_valid.drop(columns=cols_to_drop, inplace=True)
+    df_valid = df_valid.drop(columns=cols_to_drop)
 
     df_laptop = df_valid[df_valid['category_clean'] == 'laptop']
     df_smartphone = df_valid[df_valid['category_clean'] == 'smartphone']

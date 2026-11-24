@@ -4,10 +4,9 @@ from statistics import median
 import numpy as np
 import pandas as pd
 
-from prepare_test_data import REPO_ROOT
+from prepare_test_data import load_tv7_flags
 
 
-TV7_FLAGS_PATH = REPO_ROOT / "src/anomaly_detection/outputs/anomaly_flags.csv"
 CONFIG_COLUMNS = ["brand", "model_clean", "ram_gb", "storage_gb"]
 GROUP_COLUMNS = ["category", "model"]
 
@@ -129,9 +128,7 @@ def top20_audit(predictions):
         .drop_duplicates("listing_record_id")
         .head(20)
     )
-    tv7 = pd.read_csv(TV7_FLAGS_PATH, keep_default_na=False, usecols=[
-        "listing_record_id", "combined_flag", "anomaly_severity", "anomaly_reasons",
-    ])
+    tv7 = load_tv7_flags(["combined_flag", "anomaly_severity", "anomaly_reasons"])
     top = top.merge(tv7, on="listing_record_id", how="left", validate="one_to_one", indicator="tv7_join")
     top.insert(0, "rank", np.arange(1, len(top) + 1))
     return audit_hypotheses(top)

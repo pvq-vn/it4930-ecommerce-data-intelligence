@@ -49,7 +49,7 @@ Hệ thống hợp nhất dữ liệu từ 4 nhánh xử lý của dự án (`da
 
 ### Bước 1: Hợp nhất Dữ liệu & Trích xuất Độc lập (`load_and_split_data` trong `features.py`)
 
-* **Gộp thông số cốt lõi (TV2 & TV3):** Kết nối `products_cleaned.jsonl` và `products_processed.jsonl` theo `listing_record_id` để lấy `source_parent_id`, `battery_wh`, `battery_mah`, `charger_watt`, `camera_mp`, `display_type_norm`, `network_type_norm` và tạo cờ trạng thái tồn kho `is_out_of_stock` (`availability_status == 'out_of_stock'`).
+* **Gộp thông số cốt lõi (TV2 & TV3):** Kết nối `products_cleaned.jsonl` và `products_processed.jsonl` theo `listing_record_id` (sử dụng bảng ánh xạ `listing_id_crosswalk.csv` khi hai snapshot khác phiên bản mã băm `listing_record_id`, đảm bảo khớp đủ 8.374/8.374 dòng và giữ đúng nhóm `source_parent_id` không rò rỉ) để lấy `source_parent_id`, `battery_wh`, `battery_mah`, `charger_watt`, `camera_mp`, `display_type_norm`, `network_type_norm` và tạo cờ trạng thái tồn kho `is_out_of_stock` (`availability_status == 'out_of_stock'`).
 * **Lọc ngưỡng giá tối thiểu:** Giữ lại **Laptop** $\ge 3,000,000\text{ VNĐ}$ và **Smartphone** $\ge 1,000,000\text{ VNĐ}$.
 * **Ghép đặc trưng bổ trợ đa thành viên (`_merge_auxiliary_features`):**
   * **Từ TV4 (`laptop_benchmarks.csv`, `smartphone_benchmarks.csv`):** Ghép điểm chuẩn hiệu năng phần cứng (`cpu_perf_rating`, `gpu_perf_rating` cho Laptop; `cpu_benchmark_score`, `cpu_geekbench_5_multi`, `cpu_passmark` cho Smartphone) theo `listing_record_id`, và tính mật độ nhà bán lẻ trên cùng cấu hình phần cứng thuần túy `hw_seller_count` (hoàn toàn không dùng giá).
@@ -84,53 +84,53 @@ Hệ thống hợp nhất dữ liệu từ 4 nhánh xử lý của dự án (`da
 
 ### 4.1. Bảng Tổng hợp Chỉ số trên Tập Kiểm thử Độc lập (Test Set)
 
-#### A. Danh mục Laptop
+#### A. Danh mục Laptop (Train: 3.227 / Test: 819)
 
-| Mô hình                             |     MAE (VNĐ)     |     RMSE (VNĐ)     |  $R^2$ Score  | Đánh giá                                                      |
-| :------------------------------------ | :-----------------: | :-----------------: | :--------------: | :--------------------------------------------------------------- |
-| **Ridge Regression (Baseline)** |      4,782,561      |      8,117,433      |      0.8623      | Mức cơ sở tuyến tính, $R^2 > 0.86$ nhờ đặc trưng mới |
-| **Random Forest**               |      3,742,105      |      6,728,686      |      0.9054      | Cải thiện mạnh, tiệm cận LightGBM về RMSE và $R^2$      |
-| **LightGBM**                    | **3,698,738** | **6,728,455** | **0.9054** | **Tốt nhất trên cả 3 chỉ số (MAE, RMSE, $R^2$)**   |
+| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | ^2$ Score | Đánh giá |
+| :--- | :---: | :---: | :---: | :--- |
+| **Ridge Regression (Baseline)** | 4,279,435 | 7,035,497 | 0.8828 | Mức cơ sở tuyến tính, ^2 > 0.88$ nhờ đặc trưng mới |
+| **Random Forest** | 3,828,453 | 6,992,113 | 0.8843 | Cải thiện MAE so với Ridge |
+| **LightGBM** | **3,488,936** | **6,079,915** | **0.9125** | **Tốt nhất trên cả 3 chỉ số (MAE, RMSE, ^2$)** |
 
-#### B. Danh mục Smartphone
+#### B. Danh mục Smartphone (Train: 3.276 / Test: 810)
 
-| Mô hình                             |    MAE (VNĐ)    |     RMSE (VNĐ)     |  $R^2$ Score  | Đánh giá                                                                  |
-| :------------------------------------ | :---------------: | :-----------------: | :--------------: | :--------------------------------------------------------------------------- |
-| **Ridge Regression (Baseline)** |     1,678,386     |      3,603,151      |      0.9376      | MAE giảm sâu xuống ~1.68M VNĐ                                            |
-| **Random Forest**               |      850,581      |      2,335,868      |      0.9738      | Sai số dưới 1 triệu VNĐ, $R^2$ vượt 0.97                            |
-| **LightGBM**                    | **844,108** | **2,142,006** | **0.9779** | **Tốt nhất trên cả 3 chỉ số (MAE ~844k VNĐ, $R^2 = 0.9779$)** |
+| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | ^2$ Score | Đánh giá |
+| :--- | :---: | :---: | :---: | :--- |
+| **Ridge Regression (Baseline)** | 2,184,928 | 3,264,949 | 0.9518 | ^2$ đạt .9518$, vượt trội mô hình cơ sở cũ (.8013$) |
+| **Random Forest** | 2,114,765 | 3,406,507 | 0.9476 | Cải thiện MAE so với Ridge |
+| **LightGBM** | **1,864,679** | **3,022,967** | **0.9587** | **Tốt nhất trên cả 3 chỉ số (MAE ~1.86M VNĐ, ^2 = 0.9587$)** |
 
 ### 4.2. Biểu đồ Trực quan So sánh Sai số (Đơn vị: Triệu VNĐ)
 
-```text
+`	ext
 [LAPTOP - MAE (Triệu VNĐ)]
-Ridge (Baseline) | █████████████████████████████████████████████████░ 4.78M
-Random Forest    | ██████████████████████████████████████░░░░░░░░░░░░ 3.74M
-LightGBM (Best)  | ██████████████████████████████████████░░░░░░░░░░░░ 3.70M (-22.7%)
+Ridge (Baseline) | █████████████████████████████████████████████████░ 4.28M
+Random Forest    | ████████████████████████████████████████████░░░░░░ 3.83M
+LightGBM (Best)  | ████████████████████████████████████████░░░░░░░░░░ 3.49M (-18.5%)
 
 [LAPTOP - RMSE (Triệu VNĐ)]
-Ridge (Baseline) | █████████████████████████████████████████████████░ 8.12M
-Random Forest    | █████████████████████████████████████████░░░░░░░░░ 6.73M
-LightGBM (Best)  | █████████████████████████████████████████░░░░░░░░░ 6.73M (-17.1%)
+Ridge (Baseline) | █████████████████████████████████████████████████░ 7.04M
+Random Forest    | █████████████████████████████████████████████████░ 6.99M
+LightGBM (Best)  | ██████████████████████████████████████████░░░░░░░░ 6.08M (-13.6%)
 
 ---------------------------------------------------------------------------
 
 [SMARTPHONE - MAE (Triệu VNĐ)]
-Ridge (Baseline) | █████████████████████████████████████████████████░ 1.68M
-Random Forest    | █████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░ 0.85M
-LightGBM (Best)  | █████████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░ 0.84M (-49.7%)
+Ridge (Baseline) | █████████████████████████████████████████████████░ 2.18M
+Random Forest    | ███████████████████████████████████████████████░░░ 2.11M
+LightGBM (Best)  | ██████████████████████████████████████████░░░░░░░░ 1.86M (-14.7%)
 
 [SMARTPHONE - RMSE (Triệu VNĐ)]
-Ridge (Baseline) | █████████████████████████████████████████████████░ 3.60M
-Random Forest    | ████████████████████████████████░░░░░░░░░░░░░░░░░░ 2.34M
-LightGBM (Best)  | █████████████████████████████░░░░░░░░░░░░░░░░░░░░░ 2.14M (-40.5%)
-```
+Ridge (Baseline) | ███████████████████████████████████████████████░░░ 3.26M
+Random Forest    | █████████████████████████████████████████████████░ 3.41M
+LightGBM (Best)  | ████████████████████████████████████████████░░░░░░ 3.02M (-7.4%)
+`
 
 ### 4.3. Quyết định Lựa chọn Mô hình Triển khai
 
 * **Chốt sử dụng `LightGBM` cho cả hai danh mục (`lgbm_laptop.pkl` và `lgbm_smartphone.pkl`):**
-  * Trên **Laptop**, `LightGBM` đạt $\text{MAE} = 3,698,738\text{ VNĐ}$, $\text{RMSE} = 6,728,455\text{ VNĐ}$ và $R^2 = 0.9054$, vượt trội cả `Ridge` và `Random Forest`.
-  * Trên **Smartphone**, sau khi làm sạch dữ liệu, chuẩn hóa `CategoricalDtype` và tích hợp điểm chuẩn SoC (TV4) cùng đặc trưng cảm xúc review (TV6), `LightGBM` khắc phục hoàn toàn nhược điểm nhạy cảm ngoại lai trước đây, giảm $\text{MAE}$ xuống chỉ còn $844,108\text{ VNĐ}$, $\text{RMSE}$ còn $2,142,006\text{ VNĐ}$ và đạt $R^2 = 0.9779$ (vượt xa `Random Forest` ở cả 3 thước đo).
+  * Trên **Laptop**, `LightGBM` đạt $\text{MAE} = 3,488,936\text{ VNĐ}$, $\text{RMSE} = 6,079,915\text{ VNĐ}$ và $R^2 = 0.9125$, vượt trội cả `Ridge` và `Random Forest`.
+  * Trên **Smartphone**, sau khi làm sạch dữ liệu, chuẩn hóa `CategoricalDtype`, đồng bộ `source_parent_id` không rò rỉ và tích hợp điểm chuẩn SoC (TV4) cùng đặc trưng cảm xúc review (TV6), `LightGBM` dẫn đầu ở cả $3$ thước đo với $\text{MAE} = 1,864,679\text{ VNĐ}$, $\text{RMSE} = 3,022,967\text{ VNĐ}$ và $R^2 = 0.9587$.
 
 ---
 

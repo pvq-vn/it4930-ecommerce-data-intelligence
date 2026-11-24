@@ -1,14 +1,11 @@
-"""Serve the original TV5 models and their reference catalog in the TV8 demo."""
-
-from io import BytesIO
+"""Serve the integrated TV5 models and their reference catalog in the TV8 demo."""
 
 import numpy as np
 import pandas as pd
 
 from explainability import explain_lightgbm, vnd_contributions
 from model_loader import canonicalize_input, load_model
-from prepare_test_data import prepare_tv5_splits
-from train_tv7_sensitivity import TV7_FLAGS, read_tv7_file
+from prepare_test_data import load_tv7_flags, prepare_tv5_splits
 
 
 DISPLAY_LABELS = {
@@ -17,9 +14,16 @@ DISPLAY_LABELS = {
     "ram_gb": "RAM", "storage_gb": "Bộ nhớ", "ram_x_storage": "RAM × bộ nhớ",
     "screen_size_inch": "Kích thước màn hình", "display_type_norm": "Công nghệ màn hình",
     "network_type_norm": "Loại mạng", "camera_mp": "Camera",
-    "battery_wh": "Pin (Wh)", "battery_mah": "Pin (mAh)",
+    "battery_wh": "Pin (Wh)", "battery_mah": "Pin (mAh)", "charger_watt": "Công suất sạc (W)",
     "is_ram_missing": "Thiếu thông tin RAM", "is_battery_missing": "Thiếu thông tin pin",
+    "is_charger_missing": "Thiếu thông tin sạc", "is_out_of_stock": "Hết hàng",
     "is_dedicated_gpu": "GPU rời", "is_rom_high": "Bộ nhớ từ 256 GB", "is_oled": "Màn hình OLED",
+    "cpu_perf_rating": "Điểm CPU (TV4)", "gpu_perf_rating": "Điểm GPU (TV4)",
+    "cpu_benchmark_score": "Điểm CPU tổng hợp (TV4)", "cpu_geekbench_5_multi": "Geekbench 5 Multi (TV4)",
+    "cpu_passmark": "PassMark CPU (TV4)", "hw_seller_count": "Số niêm yết cùng cấu hình (TV4)",
+    "has_review_data": "Có dữ liệu review (TV6)", "review_count_usable": "Số review hợp lệ (TV6)",
+    "avg_sentiment_score": "Điểm cảm xúc TB (TV6)", "sentiment_positive_ratio": "Tỷ lệ review tích cực (TV6)",
+    "sentiment_net_score": "Điểm cảm xúc ròng (TV6)", "brand_sentiment_prior": "Uy tín cảm xúc hãng (TV6)",
 }
 LISTING_KEY = "listing_record_id"
 
@@ -33,7 +37,7 @@ def load_demo_model(category, model_key):
 
 
 def build_catalog(splits=None):
-    """Use the 8,143 eligible listings from the same snapshot as TV5 evaluation."""
+    """Use the 8,132 eligible listings matching TV5 evaluation and TV7 flags."""
     if splits is None:
         splits = load_demo_data()
     parts = []
@@ -46,10 +50,7 @@ def build_catalog(splits=None):
             provenance = metadata[[LISTING_KEY, "product_name", "availability_status", "source_parent_id"]]
             parts.append(raw.join(provenance).assign(price_vnd=price, category_clean=category))
     catalog = pd.concat(parts, ignore_index=True)
-    flags = pd.read_csv(
-        BytesIO(read_tv7_file(TV7_FLAGS)), dtype={LISTING_KEY: str},
-        usecols=[LISTING_KEY, "anomaly_severity", "anomaly_reasons"],
-    )
+    flags = load_tv7_flags(["anomaly_severity", "anomaly_reasons"])
     catalog = catalog.merge(flags, on=LISTING_KEY, how="left", validate="one_to_one")
     if catalog["anomaly_severity"].isna().any():
         raise ValueError("Bảng cờ TV7 thiếu một số dòng trong dữ liệu demo.")

@@ -11,6 +11,7 @@ ANOMALY_OUTPUTS_DIR = PROJECT_ROOT / 'src' / 'anomaly_detection' / 'outputs'
 
 CLEANED_DATA_PATH = DATA_DIR / 'products_cleaned.jsonl'
 PROCESSED_DATA_PATH = DATA_DIR / 'products_processed.jsonl'
+LISTING_ID_CROSSWALK_PATH = DATA_DIR / 'listing_id_crosswalk.csv'
 LAPTOP_BENCHMARK_PATH = MARKET_GRAPH_DIR / 'laptop_benchmarks.csv'
 SMARTPHONE_BENCHMARK_PATH = MARKET_GRAPH_DIR / 'smartphone_benchmarks.csv'
 REVIEW_FEATURES_PATH = REVIEW_NLP_DIR / 'tv5_review_features.csv'

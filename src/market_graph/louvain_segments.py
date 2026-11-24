@@ -14,6 +14,10 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
+import matplotlib
+
+if matplotlib.get_backend().lower() != "agg":
+    matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np

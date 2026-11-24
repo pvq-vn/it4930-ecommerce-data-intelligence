@@ -15,7 +15,7 @@ def train_and_eval(X, y, groups, category):
     pipeline = Pipeline(
         steps=[
             ('features_engineer', HardwareFeatureEngineer(category=category, cat_dtype='category')),
-            ('model', LGBMRegressor(random_state=RANDOM_STATE, verbose=-1))
+            ('model', LGBMRegressor(random_state=RANDOM_STATE, verbose=-1, n_jobs=1))
         ]
     )
     model = TransformedTargetRegressor(regressor=pipeline, func=np.log1p, inverse_func=np.expm1)

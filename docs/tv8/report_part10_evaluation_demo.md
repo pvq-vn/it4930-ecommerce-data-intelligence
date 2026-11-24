@@ -6,16 +6,16 @@ TV8 đánh giá khả năng ước lượng **giá niêm yết tại đợt thu 
 
 ## 10.1. Dữ liệu và cách đánh giá
 
-Dữ liệu sản phẩm được cố định ở commit `24cd858`. Ghép bảng đã làm sạch với bảng processed theo `listing_record_id` khớp đủ **8.374/8.374 dòng**. Sau các ngưỡng giá của TV5 (laptop từ 3 triệu đồng, điện thoại từ 1 triệu đồng), còn **8.143 dòng** đủ điều kiện. Dùng `GroupShuffleSplit` với seed 42 và nhóm `source_parent_id`. Các biến thể cùng sản phẩm cha trong một nguồn vào cùng một tập. Cùng một dòng máy ở hai cửa hàng có thể mang hai mã cha khác nhau, vì vậy đây là đánh giá theo nhóm sản phẩm cha trong nguồn.
+Dữ liệu đầu vào lấy từ `data/processed/` đã hợp nhất trên `main` (kết hợp bảng ánh xạ `listing_id_crosswalk.csv` để đồng bộ mã `listing_record_id` giữa bản `products_cleaned.jsonl` / TV4 và bản `products_processed.jsonl` / TV7). Ghép bảng đã làm sạch với bảng processed khớp đủ **8.374/8.374 dòng**. Sau các ngưỡng giá và bộ lọc bản ghi hỏng `_is_corrupted_record()` của TV5 (laptop từ 3 triệu đồng, điện thoại từ 1 triệu đồng), còn **8.132 dòng** đủ điều kiện. Dùng `GroupShuffleSplit` với seed 42 và nhóm `source_parent_id`. Các biến thể cùng sản phẩm cha trong một nguồn vào cùng một tập. Cùng một dòng máy ở hai cửa hàng có thể mang hai mã cha khác nhau, vì vậy đây là đánh giá theo nhóm sản phẩm cha trong nguồn.
 
 | Loại thiết bị | Train | Test |
 |---|---:|---:|
 | Laptop | 3.227 | 819 |
-| Điện thoại | 3.300 | 797 |
+| Điện thoại | 3.276 | 810 |
 
-Mã định danh được giữ riêng để ghép và kiểm toán. Mô hình hồi quy học trên `log1p(giá)`, sau đó đổi kết quả về VNĐ trước khi tính sai số. Giá gốc, tỷ lệ giảm giá, cụm đồ thị có dùng giá và cờ bất thường cũng nằm ngoài đầu vào. TV8 tái tạo đúng mã dòng test cho mọi bước và giữ nguyên 1.616 dòng test ngay cả khi lọc train ở S5. [Mã chia dữ liệu](../../src/evaluation_demo/prepare_test_data.py)
+Mã định danh được giữ riêng để ghép và kiểm toán. Mô hình hồi quy học trên `log1p(giá)`, sau đó đổi kết quả về VNĐ trước khi tính sai số. Giá gốc, tỷ lệ giảm giá, cụm đồ thị có dùng giá và cờ bất thường cũng nằm ngoài đầu vào. TV8 tái tạo đúng phép chia của TV5 với **1.629 dòng test** không trùng `source_parent_id`. [Mã chia dữ liệu](../../src/evaluation_demo/prepare_test_data.py)
 
-Đề cương nêu chiến lược kết hợp 10-fold cross-validation với tập kiểm thử độc lập. Mã TV5 dùng `GroupKFold(n_splits=10)` để tìm tham số Random Forest và LightGBM trong train. Phần 10 của TV8 báo cáo các chỉ số đo trên tập test đã chốt. [Mã huấn luyện Random Forest](../../src/price_prediction/models/training_rf.py) · [Mã huấn luyện LightGBM](../../src/price_prediction/models/training_lgbm.py)
+Đề cương nêu chiến lược kết hợp 10-fold cross-validation với tập kiểm thử độc lập. Mã TV5 dùng `GroupKFold(n_splits=10)` để tìm tham số Random Forest và LightGBM trong train. Phần 10.2–10.3 đánh giá 6 mô hình TV5 đã tích hợp đầy đủ đặc trưng liên nhóm trên `main`, còn Phần 10.4–10.6 giữ nguyên chuỗi thử nghiệm ablation có kiểm soát `S1–S5` trên snapshot cơ sở `24cd858`. [Mã huấn luyện Random Forest](../../src/price_prediction/models/training_rf.py) · [Mã huấn luyện LightGBM](../../src/price_prediction/models/training_lgbm.py)
 
 ## 10.2. So sánh sáu mô hình TV5
 
@@ -23,24 +23,24 @@ MAE là trung bình độ lệch tuyệt đối và RMSE phạt mạnh các dự
 
 | Thiết bị | Mô hình | MAE (triệu đ) | RMSE (triệu đ) | R² | ms/mẫu | MB | MAE tăng khi thiếu thông số |
 |---|---|---:|---:|---:|---:|---:|---:|
-| Laptop | Ridge | 4,945 | 8,693 | 0,821 | 12,93 | 0,067 | 13,52% |
-| Laptop | Random Forest | 4,074 | 7,487 | 0,867 | 21,89 | 49,062 | 28,04% |
-| Laptop | LightGBM | 3,768 | 6,859 | 0,889 | 16,51 | 2,425 | 22,28% |
-| Điện thoại | Ridge | 2,681 | 7,342 | 0,801 | 11,52 | 0,034 | 11,74% |
-| Điện thoại | Random Forest | 2,644 | 6,757 | 0,832 | 22,20 | 32,523 | 28,09% |
-| Điện thoại | LightGBM | 2,510 | 7,373 | 0,800 | 19,82 | 0,647 | 27,15% |
+| Laptop | Ridge | 4,279 | 7,035 | 0,883 | 87,54 | 0,125 | +13,50% |
+| Laptop | Random Forest | 3,828 | 6,992 | 0,884 | 130,49 | 49,476 | +24,61% |
+| Laptop | LightGBM | 3,489 | 6,080 | 0,912 | 144,05 | 2,546 | +29,60% |
+| Điện thoại | Ridge | 2,185 | 3,265 | 0,952 | 66,73 | 0,062 | +17,47% |
+| Điện thoại | Random Forest | 2,115 | 3,407 | 0,948 | 113,37 | 32,187 | +19,29% |
+| Điện thoại | LightGBM | 1,865 | 3,023 | 0,959 | 116,10 | 1,986 | +18,81% |
 
-LightGBM có MAE thấp nhất cho cả hai loại thiết bị. Với điện thoại, Random Forest có RMSE thấp hơn LightGBM khoảng 616 nghìn đồng, nên xếp hạng thay đổi khi ưu tiên giảm các lỗi lớn. Ridge có tệp nhỏ nhất, dự đoán nhanh nhất và mức tăng MAE nhỏ nhất trong phép che thông số này. [Bảng 10.1 — Kết quả đầy đủ](../../src/evaluation_demo/outputs/tables/table_10_1_model_benchmark_3d.csv)
+LightGBM có MAE thấp nhất, RMSE thấp nhất và R² cao nhất trên cả hai loại thiết bị (`0,912` cho Laptop và `0,959` cho Điện thoại). Ridge có tệp nhỏ nhất (`0,062`–`0,125` MB) và dự đoán nhanh nhất. [Bảng 10.1 — Kết quả đầy đủ](../../src/evaluation_demo/outputs/tables/table_10_1_model_benchmark_3d.csv)
 
 ## 10.3. Mô hình sai ở đâu?
 
 Sai số có dấu bằng giá dự đoán trừ giá ghi nhận. Một điểm âm trên Hình 10.1 cho biết mô hình định giá thấp hơn dữ liệu. Hình 10.2 dùng MAE và số dòng của các nhóm giá và cửa hàng để đọc sai số cùng với cỡ mẫu.
 
-- **Theo khoảng giá.** LightGBM điện thoại có MAE **1,028 triệu đồng** trên 450 dòng dưới 10 triệu, so với **9,174 triệu đồng** trên 66 dòng trên 35 triệu. Ở nhóm trên 35 triệu, mô hình định giá thấp hơn giá ghi nhận trung bình **7,996 triệu đồng**. [Bảng 10.3](../../src/evaluation_demo/outputs/tables/table_10_3_error_by_price_tier.csv)
+- **Theo khoảng giá.** LightGBM điện thoại có MAE **0,934 triệu đồng** trên 443 dòng dưới 10 triệu, so với **3,543 triệu đồng** trên 79 dòng trên 35 triệu (định giá thấp hơn trung bình **0,481 triệu đồng**, và **1,796 triệu đồng** ở nhóm 20–35 triệu trên 121 dòng). [Bảng 10.3](../../src/evaluation_demo/outputs/tables/table_10_3_error_by_price_tier.csv)
 - **Theo hãng và nhà bán lẻ.** Các nhóm có số dòng rất khác nhau. Khi trình bày chênh lệch MAE, đọc `n_test` cùng với giá trị sai số, nhất là ở hãng hoặc cửa hàng ít mẫu. [Bảng 10.4](../../src/evaluation_demo/outputs/tables/table_10_4_error_by_brand_and_seller.csv)
-- **Theo tồn kho và mức đầy đủ thông số.** LightGBM điện thoại có MAE **5,605 triệu** ở 100 dòng thiếu RAM và **2,066 triệu** ở 697 dòng có RAM. Theo tồn kho, hai nhóm còn hàng và hết hàng có MAE lần lượt **3,490** và **1,999 triệu đồng**. Đây là chênh lệch quan sát trên những nhóm khác nhau. [Bảng 10.5](../../src/evaluation_demo/outputs/tables/table_10_5_error_by_stock_and_missingness.csv)
-- **Theo cấu hình đã thấy ở cửa hàng khác.** Dùng khóa hãng, model, RAM và bộ nhớ để tìm trong train. LightGBM điện thoại có MAE **1,902 triệu** trên 171 dòng tìm được ở cửa hàng khác và **2,082 triệu** trên 520 dòng có đủ cấu hình nhưng chưa gặp khóa trong train. Cùng khóa này vẫn có thể khác CPU hoặc các chi tiết khác. [Bảng 10.6](../../src/evaluation_demo/outputs/tables/table_10_6_cross_store_generalization.csv)
-- **Hai mươi dòng sai nhiều nhất.** Mỗi dòng xuất hiện một lần, gắn mô hình sai nhiều nhất trong ba thuật toán. Có 6 dòng mang cờ `review` và 14 dòng mang `none`. Ví dụ XOR Titanium X2 Ebony Bundle ghi nhận **196 triệu đồng**, Ridge dự đoán **32,18 triệu đồng** và TV7 gắn `none`. Đây là đầu mối để đối chiếu lại sản phẩm, gói bán và giá trên nguồn. [Bảng 10.7](../../src/evaluation_demo/outputs/tables/table_10_7_top20_worst_predictions_audit.csv)
+- **Theo tồn kho và mức đầy đủ thông số.** LightGBM điện thoại có MAE **2,407 triệu** ở 108 dòng thiếu RAM và **1,781 triệu** ở 702 dòng có RAM. Theo tồn kho, hai nhóm còn hàng và hết hàng có MAE lần lượt **1,650** và **1,950 triệu đồng**. Đây là chênh lệch quan sát trên những nhóm khác nhau. [Bảng 10.5](../../src/evaluation_demo/outputs/tables/table_10_5_error_by_stock_and_missingness.csv)
+- **Theo cấu hình đã thấy ở cửa hàng khác.** Dùng khóa hãng, model, RAM và bộ nhớ để tìm trong train. LightGBM điện thoại có MAE **1,298 triệu** trên 167 dòng tìm được ở cửa hàng khác và **1,858 triệu** trên 527 dòng có đủ cấu hình nhưng chưa gặp khóa trong train. Cùng khóa này vẫn có thể khác CPU hoặc các chi tiết khác. [Bảng 10.6](../../src/evaluation_demo/outputs/tables/table_10_6_cross_store_generalization.csv)
+- **Hai mươi dòng sai nhiều nhất.** Mỗi dòng xuất hiện một lần, gắn mô hình sai nhiều nhất trong ba thuật toán, khớp 20/20 với bảng cờ TV7 mới nhất: có **1 dòng `extreme`**, **6 dòng `review`** và **13 dòng `none`**. Đứng đầu là `Laptop ASUS ROG Zephyrus DUO 16 GX651AX-SR050WS-Xám` ghi nhận **199,99 triệu đồng**, Random Forest dự đoán **125,17 triệu đồng** (cờ TV7 `review`). Đây là đầu mối để đối chiếu lại sản phẩm, gói bán và giá trên nguồn. [Bảng 10.7](../../src/evaluation_demo/outputs/tables/table_10_7_top20_worst_predictions_audit.csv)
 
 [Hình 10.1 — Giá ghi nhận, dự đoán và sai số](../../src/evaluation_demo/outputs/figures/fig_10_1_residual_and_actual_vs_pred.png) · [Hình 10.2 — Sai số theo giá và cửa hàng](../../src/evaluation_demo/outputs/figures/fig_10_2_error_by_price_tier_and_seller.png)
 
@@ -94,7 +94,7 @@ Thử tăng RAM 8, 16, 32, 64 GB và bộ nhớ 128, 256, 512, 1.024 GB, mỗi l
 
 ## 10.7. Demo và bàn giao
 
-Tab nhập cấu hình dùng mô hình **TV5 gốc**, đồng bộ với Bảng 10.1. Các kết quả S1–S5 và SHAP S4 được ghi rõ phiên bản ở các tab phân tích. Dải giá tham chiếu dựa vào MdAPE của tập test. Các máy tương tự được xếp bằng cấu hình, không dùng giá làm tiêu chí xếp hạng. Luồng trình bày có thể bắt đầu từ iPhone 15 Pro Max 8 GB/256 GB tại CellphoneS, dự đoán **23.498.571 đồng** bằng LightGBM. Ca kiểm thử tên `apple` và `fpt shop` với cùng cấu hình cơ bản cho dự đoán **24.892.339 đồng** bằng Random Forest sau khi chuẩn hóa nhãn.
+Tab nhập cấu hình dùng mô hình **TV5 tích hợp đa thành viên**, đồng bộ với Bảng 10.1. Các kết quả S1–S5 và SHAP S4 được ghi rõ phiên bản ở các tab phân tích. Dải giá tham chiếu dựa vào MdAPE của tập test. Các máy tương tự được xếp bằng cấu hình, không dùng giá làm tiêu chí xếp hạng. Luồng trình bày có thể bắt đầu từ iPhone 15 Pro Max 8 GB/256 GB tại FPT, dự đoán **22.642.018 đồng** bằng LightGBM. Ca kiểm thử tên `apple` và `fpt shop` với cùng cấu hình cơ bản cho dự đoán **25.862.396 đồng** bằng Random Forest sau khi chuẩn hóa nhãn.
 
 | Tab | Nội dung | Ảnh chụp thực tế |
 |---|---|---|
@@ -112,4 +112,4 @@ python -m pytest tests/test_tv8_evaluation_demo.py -q
 python -m streamlit run src/evaluation_demo/app.py --server.address 127.0.0.1
 ```
 
-Bộ kiểm thử đối chiếu sáu mô hình và tập test, ca chuẩn hóa Apple/FPT, tổng đóng góp của giải thích, bảy bảng, bảy hình 300 DPI, bốn ảnh demo và thao tác dự đoán trong Streamlit. **Cả 32 kiểm thử TV8 đều đạt** trên Anaconda cục bộ với Streamlit 1.45.1 và LightGBM 4.7.0. Bản demo cũng đã được kiểm tra bằng trình duyệt ở chiều rộng 1.440 px và 375 px. Scikit-learn trong môi trường này cũ hơn phiên bản lưu mô hình và phát cảnh báo khi nạp. So sánh MAE và RMSE với Bảng 10.1 xác nhận sáu mô hình TV5 vẫn cho cùng kết quả tại môi trường này.
+Bộ kiểm thử đối chiếu sáu mô hình và tập test, ca chuẩn hóa Apple/FPT, tổng đóng góp của giải thích, bảy bảng, bảy hình 300 DPI, bốn ảnh demo và thao tác dự đoán trong Streamlit. **Toàn bộ 31 kiểm thử TV8 đều đạt** trên môi trường tích hợp `main` (Streamlit 1.67.0, LightGBM 4.7.0, scikit-learn 1.9.1) không còn sai lệch phiên bản.

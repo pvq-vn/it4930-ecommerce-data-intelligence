@@ -13,6 +13,9 @@ if TYPE_CHECKING:
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+PROCESSED_DIR = REPO_ROOT / "data" / "processed"
+CROSSWALK_PATH = PROCESSED_DIR / "listing_id_crosswalk.csv"
+TV7_FLAGS_PATH = REPO_ROOT / "src" / "anomaly_detection" / "outputs" / "anomaly_flags.csv"
 TV5_MODELS_DIR = REPO_ROOT / "src" / "price_prediction" / "models"
 DATA_COMMIT = "24cd858"
 AUDIT_ID = "_tv8_listing_record_id"
@@ -35,8 +38,41 @@ def use_tv5_modules():
 
 
 def read_snapshot(filename):
-    git_path = f"{DATA_COMMIT}:data/processed/{filename}"
-    return subprocess.check_output(["git", "show", git_path], cwd=REPO_ROOT)
+    return (PROCESSED_DIR / filename).read_bytes()
+
+
+def load_crosswalk_map(reverse=False):
+    import pandas as pd
+
+    if not CROSSWALK_PATH.exists():
+        return {}
+    crosswalk = pd.read_csv(
+        CROSSWALK_PATH,
+        usecols=["listing_record_id_cleaned", "listing_record_id_processed"],
+        dtype=str,
+    )
+    key_col, val_col = (
+        ("listing_record_id_processed", "listing_record_id_cleaned")
+        if reverse
+        else ("listing_record_id_cleaned", "listing_record_id_processed")
+    )
+    return crosswalk.drop_duplicates(subset=[key_col]).set_index(key_col)[val_col].to_dict()
+
+
+def load_tv7_flags(usecols):
+    import pandas as pd
+
+    cols = list(dict.fromkeys(["listing_record_id", *usecols]))
+    flags = pd.read_csv(
+        TV7_FLAGS_PATH,
+        keep_default_na=False,
+        usecols=cols,
+        dtype={"listing_record_id": str},
+    )
+    proc_to_clean = load_crosswalk_map(reverse=True)
+    if proc_to_clean:
+        flags["listing_record_id"] = flags["listing_record_id"].map(proc_to_clean).fillna(flags["listing_record_id"])
+    return flags.drop_duplicates(subset=["listing_record_id"])
 
 
 def prepare_tv5_splits():
@@ -48,7 +84,13 @@ def prepare_tv5_splits():
     processed_by_id = {
         row["listing_record_id"]: row for row in processed if row["source_parent_id"]
     }
-    matched = sum(row["listing_record_id"] in processed_by_id for row in cleaned)
+    clean_to_proc = load_crosswalk_map(reverse=False)
+    resolved_ids = {
+        row["listing_record_id"]: processed_by_id.get(row["listing_record_id"])
+        or processed_by_id.get(clean_to_proc.get(row["listing_record_id"], ""))
+        for row in cleaned
+    }
+    matched = sum(proc is not None for proc in resolved_ids.values())
     print(f"Tim thay ban ghi tuong ung: {matched}/{len(cleaned)}")
     if matched != len(cleaned):
         raise SystemExit("Co ban ghi khong tim duoc ma nhom. Dung truoc khi chia tap.")
@@ -77,14 +119,14 @@ def prepare_tv5_splits():
     )
     product_names = {row["listing_record_id"]: row["product_name"] for row in cleaned}
     extra_fields = {
-        field: {listing_id: row.get(field) for listing_id, row in processed_by_id.items()}
+        field: {listing_id: proc.get(field) for listing_id, proc in resolved_ids.items() if proc is not None}
         for field in ("availability_status", "charger_watt")
     }
 
     splits = {}
     for category, rows, expected_train, expected_test in (
         ("laptop", laptops, 3227, 819),
-        ("smartphone", smartphones, 3300, 797),
+        ("smartphone", smartphones, 3276, 810),
     ):
         listing_ids = rows.pop(AUDIT_ID)
         X, y, groups = prepare_raw_data(rows)
