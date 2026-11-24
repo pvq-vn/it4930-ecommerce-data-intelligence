@@ -11,7 +11,7 @@ from features import *
 
 
 class PricePredictor:
-    def __init__(self, laptop_model='lgbm', smartphone_model='rf'):
+    def __init__(self, laptop_model='lgbm', smartphone_model='lgbm'):
         self.models = {
             'laptop': self._load_model('laptop', laptop_model),
             'smartphone': self._load_model('smartphone', smartphone_model)
@@ -21,7 +21,6 @@ class PricePredictor:
         path_map = {
             'rf': RESULTS_DIR / 'random_forest' / f"rf_{category}.pkl",
             'lgbm': RESULTS_DIR / 'lightgbm' / f"lgbm_{category}.pkl",
-            'catboost': RESULTS_DIR / 'catboost' / f"cb_{category}.pkl"
         }
         return joblib.load(path_map[model])
 
