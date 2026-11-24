@@ -38,10 +38,10 @@ flowchart TD
 
 ### Nguyên tắc Bất khả Xâm phạm về Toàn vẹn Dữ liệu:
 - **Không xâm lấn vùng lưu trữ chung**: Toàn bộ mã nguồn đặt tại `src/review_nlp/`, tài liệu tại `docs/tv6/`, dữ liệu dẫn xuất tại `data/tv6/`. Tuyệt đối không ghi đè vào `data/gold_v2/` hay `data/raw/`.
-- **Bảo toàn 100% dữ liệu gốc (Zero Data Loss)**: Toàn bộ 15.805 review được giữ nguyên vẹn trong [`reviews_tv6_all.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_all.jsonl). 
+- **Bảo toàn 100% dữ liệu gốc (Zero Data Loss)**: Toàn bộ 15.805 review được giữ nguyên vẹn trong [`reviews_tv6_all.jsonl`](../../data/tv6/reviews_tv6_all.jsonl). 
 - **Cách ly kiểm toán chuẩn mực**: Phân tách thành hai luồng xử lý:
   * **Tập Usable** ($N = 14.869$, chiếm $94,08\%$): Chứa văn bản thực tế, thỏa mãn tiền điều kiện NLP.
-  * **Tập Unusable** ($N = 936$, chiếm $5,92\%$): Bao gồm 489 review từ Viettel Store bị khuyết toàn bộ văn bản và 447 review rỗng/chỉ chứa khoảng trắng từ CellphoneS. Nhóm này được cách ly riêng trong [`reviews_tv6_unusable.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_unusable.jsonl) để phục vụ thanh tra chất lượng dữ liệu của TV8.
+  * **Tập Unusable** ($N = 936$, chiếm $5,92\%$): Bao gồm 489 review từ Viettel Store bị khuyết toàn bộ văn bản và 447 review rỗng/chỉ chứa khoảng trắng từ CellphoneS. Nhóm này được cách ly riêng trong [`reviews_tv6_unusable.jsonl`](../../data/tv6/reviews_tv6_unusable.jsonl) để phục vụ thanh tra chất lượng dữ liệu của TV8.
 - **Làm giàu ngữ cảnh**: Nối khóa `source_parent_id` với `dim_source_parents.jsonl` để bổ sung tên sản phẩm cha chuẩn mực (`product_name`), giải quyết triệt để lỗi sinh 45.651 dòng giả nếu nối nhầm với bảng biến thể listing.
 
 ### Bảng 8.1: Quy chuẩn Bảng View 23 Trường Canonical Phân hệ TV6
@@ -104,12 +104,12 @@ flowchart TD
 
 ### 8.2.2. Đặc tính Ngắn gọn & Hiện tượng Review Trùng lặp Khách quan
 *Căn cứ [table_1_3_text_length_percentiles.md](../../data/tv6/tables/table_1_3_text_length_percentiles.md) và [table_1_4_top_duplicate_texts.md](../../data/tv6/tables/table_1_4_top_duplicate_texts.md):*
-- Độ dài văn bản đánh giá rất cô đọng: Trung vị đạt **50 ký tự** (tương đương **11 từ**), $75\%$ review dưới 96 ký tự (21 từ).
-- Kiểm toán phát hiện **$6.202$ review trùng lặp văn bản** ($41,71\%$), tập trung vào các câu cửa miệng mẫu:
-  * *"Sản phẩm tốt"* (577 lần).
-  * *"Sản phẩm rất tốt"* (430 lần).
-  * *"Tốt"* (369 lần).
-  * *"Ok"* / *"Hàng tốt"* / *"Giao hàng nhanh đóng gói cẩn thận"*...
+- Độ dài văn bản đánh giá rất cô đọng: Trung vị đạt **44,0 ký tự** (tương đương **10 từ**), $75\%$ review dưới 91 ký tự (21 từ).
+- Kiểm toán phát hiện **$2.422$ review trùng lặp văn bản** ($16,29\%$ tổng số review hợp lệ, tương ứng $12.447$ văn bản độc nhất theo `quality_report.json`), tập trung vào các câu cửa miệng mẫu:
+  * *"Tốt"* (210 lần).
+  * *"Ok"* (128 lần).
+  * *"5 sao"* (104 lần).
+  * *"tốt"* (91 lần) / *"Hài lòng"* (52 lần) / *"Sản phẩm rất tốt"* (50 lần)...
 - **Khẳng định phương pháp luận khoa học**: Đây **không phải là dữ liệu giả (fake reviews)** hay lỗi cào dữ liệu lặp lại. Đây là các giao dịch mua hàng độc lập từ những khách hàng khác nhau (`author_raw` và mã giao dịch khác biệt) sử dụng các gợi ý có sẵn trên ứng dụng di động để nhanh chóng hoàn thành đánh giá. Việc TV6 giữ lại nguyên vẹn các review này đảm bảo đo lường chính xác khối lượng giao dịch và sự tín nhiệm của từng model máy.
 
 ### 8.2.3. Phát hiện Nghịch lý Bất nhất Điểm số – Văn bản (Rating–Text Mismatch)
@@ -133,7 +133,7 @@ flowchart TD
 
 ![Fig 2.1: Phân bố Tần suất Top 30 Từ tố Tiếng Việt Sau Tiền Xử Lý](../../data/tv6/figures/fig_2_1_top_tokens_frequency.png)
 
-Ngôn ngữ review thương mại điện tử công nghệ tại Việt Nam mang tính phi hình thức cao, pha trộn dày đặc từ lóng, teencode, viết tắt thuật ngữ phần cứng và tiếng lóng chuyển dịch nghĩa. Phân hệ TV6 đã thiết kế một pipeline tiền xử lý 7 tầng chuyên sâu tại [`src/review_nlp/vietnamese_nlp_utils.py`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/src/review_nlp/vietnamese_nlp_utils.py):
+Ngôn ngữ review thương mại điện tử công nghệ tại Việt Nam mang tính phi hình thức cao, pha trộn dày đặc từ lóng, teencode, viết tắt thuật ngữ phần cứng và tiếng lóng chuyển dịch nghĩa. Phân hệ TV6 đã thiết kế một pipeline tiền xử lý 7 tầng chuyên sâu tại [`src/review_nlp/vietnamese_nlp_utils.py`](../../src/review_nlp/vietnamese_nlp_utils.py):
 
 ### 8.3.1. Các Tầng Chuyển đổi Dữ liệu Cốt lõi
 *Căn cứ [table_2_1_preprocessing_pipeline_stages.md](../../data/tv6/tables/table_2_1_preprocessing_pipeline_stages.md):*
@@ -157,7 +157,7 @@ Nhiều từ viết tắt trong đánh giá công nghệ mang tính đa nghĩa t
 ### 8.3.3. Tách Từ ghép Tiếng Việt & Bộ lọc Stopword An toàn (Safe Stopwords)
 - **Tách từ phức**: Sử dụng engine `underthesea` kết hợp từ điển chuyên ngành công nghệ để gắn kết từ ghép bằng dấu gạch dưới: `màn_hình`, `pin_trâu`, `nhiệt_độ`, `bảo_hành`, `giao_hàng`, `xuất_sắc`.
 - **Bảo toàn từ phủ định**: Loại bỏ các hư từ không mang tải trọng thông tin (`thì`, `là`, `mà`, `ở`, `tại`), nhưng **tuyệt đối giữ lại các từ phủ định cốt tử** (`không`, `chẳng`, `chưa`, `kém`, `tệ`, `hỏng`) để tránh hiện tượng đảo ngược phân cực câu văn (*"máy không nóng"* nếu bỏ *không* sẽ thành *"máy nóng"*).
-- **Quy mô kho ngữ liệu Bước 2**: Sản sinh **196.819 tokens** với **11.627 từ vựng duy nhất**, lưu trữ tại [`reviews_tv6_preprocessed.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_preprocessed.jsonl).
+- **Quy mô kho ngữ liệu Bước 2**: Sản sinh **196.819 tokens** với **11.627 từ vựng duy nhất**, lưu trữ tại [`reviews_tv6_preprocessed.jsonl`](../../data/tv6/reviews_tv6_preprocessed.jsonl).
 
 ---
 
@@ -181,10 +181,10 @@ Nhiều từ viết tắt trong đánh giá công nghệ mang tính đa nghĩa t
 *Căn cứ [table_3_1_model_comparison.md](../../data/tv6/tables/table_3_1_model_comparison.md):*
 - Trích xuất đặc trưng: TF-IDF Vectorizer (Unigram + Bigram, `max_features=5000`, `min_df=2`, `sublinear_tf=True`).
 - Thử nghiệm 4 thuật toán học máy cổ điển với 5-fold Stratified Cross-Validation:
-  1. **Multinomial Naive Bayes**: Macro F1 $0,3415$ (Thất bại hoàn toàn ở lớp Neutral $F_1 = 0,02$ và Negative $F_1 = 0,11$ do giả định độc lập từ ngây thơ).
-  2. **Complement Naive Bayes**: Macro F1 $0,5591$ (Cải thiện tốt cho tập mất cân bằng).
-  3. **Linear Support Vector Machine (LinearSVC)**: Macro F1 $0,5784$.
-  4. **Logistic Regression (Class-Balanced)**: Đạt đỉnh Baseline với **Macro F1 $0,5901$**, Weighted F1 $0,8927$, Accuracy $89,17\%$.
+  1. **Multinomial Naive Bayes**: Macro F1 $0,3415$ (Thất bại hoàn toàn ở lớp Neutral $F_1 = 0,00$ và Negative $F_1 = 0,0671$ do giả định độc lập từ ngây thơ).
+  2. **Complement Naive Bayes**: Macro F1 $0,5226$ (Cải thiện tốt cho tập mất cân bằng).
+  3. **Linear Support Vector Machine (LinearSVC)**: Macro F1 $0,5778$, Accuracy $92,57\%$.
+  4. **Logistic Regression (Class-Balanced)**: Đạt đỉnh Baseline với **Macro F1 $0,5901$**, Weighted F1 $0,9116$, Accuracy **$89,81\%$**.
 - Trọng số từ tố phân cực phân giải từ Logistic Regression:
   * Phân cực Dương: `tốt`, `đẹp`, `nhanh`, `ổn_định`, `tuyệt_vời`, `chính_hãng`, `hài_lòng`.
   * Phân cực Âm: `kém`, `tệ`, `hỏng`, `thất_vọng`, `đơ`, `nóng`, `lag`, `chậm`, `lỗi`.
@@ -201,16 +201,16 @@ Nhiều từ viết tắt trong đánh giá công nghệ mang tính đa nghĩa t
 
 | Mô hình Phân loại | Accuracy | Macro F1 | Weighted F1 | $F_1$ Negative | $F_1$ Neutral (Lớp khó nhất) | $F_1$ Positive | Mức Tăng trưởng Macro F1 |
 |:---|---:|---:|---:|---:|---:|---:|:---|
-| MultinomialNB | 88,40% | 0,3415 | 0,8367 | 0,1071 | 0,0220 | 0,9382 | Mốc cơ sở thô |
-| ComplementNB | 86,18% | 0,5591 | 0,8798 | 0,4739 | 0,2656 | 0,9227 | $+63,7\%$ |
-| LinearSVC | 88,33% | 0,5784 | 0,8875 | 0,5347 | 0,2614 | 0,9352 | $+69,4\%$ |
-| Logistic Regression (Baseline tốt nhất) | 89,17% | 0,5901 | 0,8927 | 0,5629 | 0,2526 | 0,9398 | $+72,8\%$ |
-| **PhoBERT Transformer (SOTA TV6)** | **92,23%** | **0,6491** | **0,9302** | **0,6316** | **0,3472** | **0,9586** | **$+90,1\%$ (vs MNB) / $+10,0\%$ (vs LR)** |
+| MultinomialNB | 91,80% | 0,3415 | 0,8804 | 0,0671 | 0,0000 | 0,9573 | Mốc cơ sở thô |
+| ComplementNB | 86,38% | 0,5226 | 0,8856 | 0,4453 | 0,1867 | 0,9359 | $+53,0\%$ |
+| LinearSVC | 92,57% | 0,5778 | 0,9227 | 0,5606 | 0,2032 | 0,9697 | $+69,2\%$ |
+| Logistic Regression (Baseline tốt nhất) | 89,81% | 0,5901 | 0,9116 | 0,5623 | 0,2526 | 0,9556 | $+72,8\%$ |
+| **PhoBERT Transformer (SOTA TV6)** | **92,23%** | **0,6491** | **0,9302** | **0,6316** | **0,3472** | **0,9686** | **$+90,1\%$ (vs MNB) / $+10,0\%$ (vs LR)** |
 
 ### Luận chứng Khoa học vì sao 3 Epochs là "Điểm Rơi Vàng" (Golden Epoch):
 Phân tích diễn tiến Loss và Macro F1 qua 3 chu kỳ huấn luyện:
-- **Epoch 1**: Train Loss $= 0,807$, Val Loss $= 0,635$, Val Macro F1 $= 0,5789$.
-- **Epoch 2**: Train Loss $= 0,569$, Val Loss $= 0,705$, Val Macro F1 $= 0,6124$.
+- **Epoch 1**: Train Loss $= 0,807$, Val Loss $= 0,635$, Val Macro F1 $= 0,6315$.
+- **Epoch 2**: Train Loss $= 0,569$, Val Loss $= 0,705$, Val Macro F1 $= 0,6473$.
 - **Epoch 3**: Train Loss $= 0,448$, Val Loss $= 0,877$, Val Macro F1 đạt đỉnh **$0,6491$**.
 - **Kết luận**: Mặc dù Train Loss giảm liên tục nhưng Val Loss bắt đầu đảo chiều tăng từ cuối Epoch 2 do hàm mất mát bị phạt nặng bởi trọng số của lớp Neutral. Val Macro F1 đạt điểm cực đại tại Epoch 3. Nếu tiếp tục huấn luyện 4–5 epochs, mạng nơ-ron sâu sẽ rơi vào hiện tượng **Quá khớp sớm (Early Overfitting)**, khiến khả năng tổng quát hóa trên tập dữ liệu kiểm thử suy giảm mạnh. Quyết định dừng lại ở 3 Epochs là chuẩn mực khoa học dữ liệu.
 
@@ -231,11 +231,11 @@ Phân tích diễn tiến Loss và Macro F1 qua 3 chu kỳ huấn luyện:
 
 | Mã Chủ đề | Tên Chủ đề Gợi mở | Tỷ trọng Corpus | Top Từ Khóa Đặc trưng (Top Keywords) |
 |:---|:---|---:|:---|
-| **Chủ đề 0** | Cấu hình, Hiệu năng & Thiết lập Máy | **29,60%** | `máy`, `cấu_hình`, `cài_đặt`, `windows`, `ram`, `mượt`, `nhanh`, `văn_phòng`, `đồ_họa` |
-| **Chủ đề 1** | Dịch vụ Bán lẻ, Giao vận & Đóng gói | **19,10%** | `giao_hàng`, `nhanh`, `đóng_gói`, `cẩn_thận`, `nhiệt_tình`, `tư_vấn`, `hài_lòng`, `shipper` |
-| **Chủ đề 2** | Màn hình Hiển thị & Quay chụp Camera | **16,50%** | `màn_hình`, `đẹp`, `sắc_nét`, `camera`, `chụp`, `ảnh`, `màu_sắc`, `loa`, `âm_thanh` |
-| **Chủ đề 3** | Thời lượng Pin & Củ sạc Đi kèm | **16,10%** | `pin`, `trâu`, `sạc`, `nhanh`, `dùng`, `cả_ngày`, `củ_sạc`, `dây_sạc`, `nóng` |
-| **Chủ đề 4** | Trải nghiệm Thực tế & Sự cố Phát sinh | **18,70%** | `sản_phẩm`, `lỗi`, `đổi_trả`, `bảo_hành`, `chậm`, `đơ`, `thất_vọng`, `tệ`, `hỏng` |
+| **Chủ đề 0** | Cấu hình, Hiệu năng & Thiết lập Máy | **29,61%** | `không`, `được`, `máy`, `có`, `mua`, `mới`, `pin`, `bị`, `dùng`, `nhưng` |
+| **Chủ đề 1** | Màn hình Hiển thị & Quay chụp Camera | **16,46%** | `rất`, `trong`, `đẹp`, `màn_hình`, `chụp`, `máy`, `tầm`, `camera`, `sử_dụng`, `dùng` |
+| **Chủ đề 2** | Thời lượng Pin & Phụ kiện Sạc | **16,11%** | `mình`, `mua`, `nên`, `không`, `có`, `điện_thoại`, `máy`, `con`, `em`, `còn` |
+| **Chủ đề 3** | Dịch vụ Bán lẻ, Giao vận & Đóng gói | **19,09%** | `nhân_viên`, `hàng`, `nhiệt_tình`, `tư_vấn`, `shop`, `rất`, `sản_phẩm`, `nhân_viên tư_vấn`, `có`, `giao` |
+| **Chủ đề 4** | Trải nghiệm Thực tế & Sự cố Phát sinh | **18,74%** | `tốt`, `ok`, `sản_phẩm`, `máy`, `đẹp`, `rất_tốt`, `dùng`, `giá`, `quá`, `chất_lượng` |
 
 ### 8.5.2. Phân tích Cảm xúc theo 5 Khía cạnh Công nghệ Chuyên sâu (ABSA)
 *Căn cứ [table_4_3_aspect_sentiment_distribution.md](../../data/tv6/tables/table_4_3_aspect_sentiment_distribution.md):*
@@ -310,9 +310,9 @@ Phân tích diễn tiến Loss và Macro F1 qua 3 chu kỳ huấn luyện:
 | `aspect_mention_rate_service_logistics` | float32 | $[0.0, 1.0]$ | $0.0$ | Tần suất đề cập đến tư vấn, đóng gói, giao hàng, bảo hành của shop. |
 | `aspect_sentiment_score_service_logistics` | float32 | $[-1.0, +1.0]$ | $0.0$ | Điểm đánh giá chất lượng phục vụ của kênh bán lẻ. |
 | `topic_share_performance_setup` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 0 (Cấu hình, thông số, bảo hành kỹ thuật). |
-| `topic_share_service_delivery` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Giao hàng, đóng gói, chăm sóc khách hàng). |
-| `topic_share_screen_camera` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Màn hình hiển thị, quay chụp camera). |
-| `topic_share_battery_charging` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Pin sạc, phụ kiện đi kèm). |
+| `topic_share_screen_camera` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Màn hình hiển thị, quay chụp camera). |
+| `topic_share_battery_charging` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Pin sạc, phụ kiện đi kèm). |
+| `topic_share_service_delivery` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Giao hàng, đóng gói, chăm sóc khách hàng). |
 | `topic_share_usage_experience` | float32 | $[0.0, 1.0]$ | $0.0$ | Tỷ trọng đánh giá thuộc chủ đề LDA 4 (Trải nghiệm thực tế, mượt mà, sự cố phát sinh). |
 | `earliest_review_time` | string (ISO) | 2019 $\rightarrow$ 2026 | `null` | Thời điểm nhận review đầu tiên của model sản phẩm. |
 | `latest_review_time` | string (ISO) | 2019 $\rightarrow$ 2026 | `null` | Thời điểm nhận review gần nhất trước ngày snapshot cào dữ liệu. |
@@ -406,22 +406,22 @@ print(f"Sẵn sàng huấn luyện mô hình TV5 với {len(features)} đặc tr
 
 ### Danh mục Tệp Artifacts Canonical:
 - **Dữ liệu View & NLP**:
-  * [`data/tv6/reviews_tv6_all.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_all.jsonl) ($15.805$ bản ghi)
-  * [`data/tv6/reviews_tv6_usable.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_usable.jsonl) ($14.869$ bản ghi)
-  * [`data/tv6/reviews_tv6_preprocessed.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_preprocessed.jsonl) ($196.819$ tokens)
-  * [`data/tv6/reviews_tv6_aspects.jsonl`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/reviews_tv6_aspects.jsonl) ($14.869$ bản ghi enriched)
+  * [`data/tv6/reviews_tv6_all.jsonl`](../../data/tv6/reviews_tv6_all.jsonl) ($15.805$ bản ghi)
+  * [`data/tv6/reviews_tv6_usable.jsonl`](../../data/tv6/reviews_tv6_usable.jsonl) ($14.869$ bản ghi)
+  * [`data/tv6/reviews_tv6_preprocessed.jsonl`](../../data/tv6/reviews_tv6_preprocessed.jsonl) ($196.819$ tokens)
+  * [`data/tv6/reviews_tv6_aspects.jsonl`](../../data/tv6/reviews_tv6_aspects.jsonl) ($14.869$ bản ghi enriched)
 - **Dữ liệu Bàn giao TV5**:
-  * [`data/tv6/tv5_review_features.parquet`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/tv5_review_features.parquet) ($7.051$ dòng x $35$ cột)
-  * [`data/tv6/tv5_review_features.csv`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/tv5_review_features.csv) ($7.051$ dòng x $35$ cột)
+  * [`data/tv6/tv5_review_features.parquet`](../../data/tv6/tv5_review_features.parquet) ($7.051$ dòng x $35$ cột)
+  * [`data/tv6/tv5_review_features.csv`](../../data/tv6/tv5_review_features.csv) ($7.051$ dòng x $35$ cột)
 - **Báo cáo Metadata Máy đọc được**:
-  * [`data/tv6/quality_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/quality_report.json)
-  * [`data/tv6/preprocessing_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/preprocessing_report.json)
-  * [`data/tv6/sentiment_baseline_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/sentiment_baseline_report.json)
-  * [`data/tv6/sentiment_phobert_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/sentiment_phobert_report.json)
-  * [`data/tv6/topic_aspect_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/topic_aspect_report.json)
-  * [`data/tv6/tv5_feature_report.json`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/data/tv6/tv5_feature_report.json)
+  * [`data/tv6/quality_report.json`](../../data/tv6/quality_report.json)
+  * [`data/tv6/preprocessing_report.json`](../../data/tv6/preprocessing_report.json)
+  * [`data/tv6/sentiment_baseline_report.json`](../../data/tv6/sentiment_baseline_report.json)
+  * [`data/tv6/sentiment_phobert_report.json`](../../data/tv6/sentiment_phobert_report.json)
+  * [`data/tv6/topic_aspect_report.json`](../../data/tv6/topic_aspect_report.json)
+  * [`data/tv6/tv5_feature_report.json`](../../data/tv6/tv5_feature_report.json)
 - **Báo cáo Đồ án Hoàn chỉnh (File Duy nhất)**:
-  * [`docs/tv6/report_part8.md`](file:///c:/HUST/Projects/IT4930._Nhap_mon_KHDL/it4930-ecommerce-data-intelligence/docs/tv6/report_part8.md)
+  * [`docs/tv6/report_part8.md`](./report_part8.md)
 
 ### Lệnh Chạy Tái hiện Toàn bộ Pipeline TV6:
 ```bash

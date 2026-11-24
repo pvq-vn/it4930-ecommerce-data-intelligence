@@ -1,8 +1,8 @@
 {
   "pipeline_step": "Step 5: Feature Engineering & TV5 Handoff",
   "pipeline_version": "tv6-v1.0.0",
-  "execution_timestamp": "2026-11-14T20:33:35.461447+00:00",
-  "elapsed_seconds": 2.27,
+  "execution_timestamp": "2026-11-22T10:34:34.486989+00:00",
+  "elapsed_seconds": 2.19,
   "anti_leakage_audit": {
     "status": "PASS",
     "total_reviews_audited": 15805,
@@ -52,9 +52,9 @@
       "aspect_mention_rate_service_logistics",
       "aspect_sentiment_score_service_logistics",
       "topic_share_performance_setup",
-      "topic_share_service_delivery",
       "topic_share_screen_camera",
       "topic_share_battery_charging",
+      "topic_share_service_delivery",
       "topic_share_usage_experience",
       "earliest_review_time",
       "latest_review_time",

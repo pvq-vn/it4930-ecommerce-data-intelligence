@@ -215,9 +215,9 @@ def run_topic_modeling(
     # 3. Label interpretability dictionary for LDA
     topic_labels = {
         0: "Hiệu năng & Tốc độ máy",
-        1: "Dịch vụ shop & Giao hàng",
-        2: "Thiết kế & Màn hình hiển thị",
-        3: "Thời lượng pin & Phụ kiện sạc",
+        1: "Màn hình & Camera",
+        2: "Thời lượng pin & Phụ kiện sạc",
+        3: "Dịch vụ shop & Giao hàng",
         4: "Trải nghiệm sử dụng & Sự cố",
     }
 

@@ -26,9 +26,9 @@ aspect_sentiment_score_camera_audio,float32,"[-1.0, +1.0]",0.0,Điểm đánh gi
 aspect_mention_rate_service_logistics,float32,"[0.0, 1.0]",0.0,"Tần suất đề cập đến tư vấn, đóng gói, giao hàng, bảo hành của shop."
 aspect_sentiment_score_service_logistics,float32,"[-1.0, +1.0]",0.0,Điểm đánh giá chất lượng phục vụ của kênh bán lẻ.
 topic_share_performance_setup,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 0 (Cấu hình, thông số, bảo hành kỹ thuật)."
-topic_share_service_delivery,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Giao hàng, đóng gói, chăm sóc khách hàng)."
-topic_share_screen_camera,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Màn hình hiển thị, quay chụp camera)."
-topic_share_battery_charging,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Pin sạc, phụ kiện đi kèm)."
+topic_share_screen_camera,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 1 (Màn hình hiển thị, quay chụp camera)."
+topic_share_battery_charging,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 2 (Pin sạc, phụ kiện đi kèm)."
+topic_share_service_delivery,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 3 (Giao hàng, đóng gói, chăm sóc khách hàng)."
 topic_share_usage_experience,float32,"[0.0, 1.0]",0.0,"Tỷ trọng đánh giá thuộc chủ đề LDA 4 (Trải nghiệm thực tế, mượt mà, sự cố phát sinh)."
 earliest_review_time,string (ISO),2019 to 2026,null,Thời điểm nhận review đầu tiên của model sản phẩm.
 latest_review_time,string (ISO),2019 to 2026,null,Thời điểm nhận review gần nhất trước ngày snapshot cào dữ liệu.
