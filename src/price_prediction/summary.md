@@ -1,4 +1,6 @@
-# Báo cáo Quy trình Xây dựng & So sánh Mô hình Dự đoán Giá Sản phẩm (Laptop & Smartphone)
+# Báo cáo Quy trình Xây dựng & So sánh Mô hình Định giá Hợp lý theo Cấu hình (Hedonic Fair-Value Model — Laptop & Smartphone)
+
+> **Vai trò trong Hệ thống Khoa học Dữ liệu IT4930**: Phân hệ TV5 không nhằm mục đích đoán giá thay cho bảng giá có sẵn của nhà bán lẻ, mà đóng vai trò **Công cụ Ước lượng Giá trị Hợp lý Khách quan (Hedonic Fair-Value Benchmark)** dựa trên tổ hợp cấu hình phần cứng, điểm chuẩn hiệu năng (TV4), mức độ phổ biến liên sàn và uy tín cảm xúc khách hàng (TV6). Đầu ra của TV5 kết hợp với kiểm toán bất thường TV7 và giải thích SHAP của TV8 để phát hiện sản phẩm định giá hời/đắt trên 5 sàn (B2C) và hỗ trợ mô phỏng định giá SKU mới trong miền phần cứng tương thích (B2B).
 
 ## 1. Cấu trúc Mã nguồn (`src/price_prediction/`)
 
@@ -86,23 +88,23 @@ Hệ thống hợp nhất dữ liệu từ 4 nhánh xử lý của dự án (`da
 
 #### A. Danh mục Laptop (Train: 3.227 / Test: 819)
 
-| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | ^2$ Score | Đánh giá |
+| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | $R^2$ Score | Đánh giá |
 | :--- | :---: | :---: | :---: | :--- |
-| **Ridge Regression (Baseline)** | 4,279,435 | 7,035,497 | 0.8828 | Mức cơ sở tuyến tính, ^2 > 0.88$ nhờ đặc trưng mới |
+| **Ridge Regression (Baseline)** | 4,279,435 | 7,035,497 | 0.8828 | Mức cơ sở tuyến tính, $R^2 > 0.88$ nhờ đặc trưng mới |
 | **Random Forest** | 3,828,453 | 6,992,113 | 0.8843 | Cải thiện MAE so với Ridge |
-| **LightGBM** | **3,488,936** | **6,079,915** | **0.9125** | **Tốt nhất trên cả 3 chỉ số (MAE, RMSE, ^2$)** |
+| **LightGBM** | **3,488,936** | **6,079,915** | **0.9125** | **Tốt nhất trên cả 3 chỉ số (MAE, RMSE, $R^2$)** |
 
 #### B. Danh mục Smartphone (Train: 3.276 / Test: 810)
 
-| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | ^2$ Score | Đánh giá |
+| Mô hình | MAE (VNĐ) | RMSE (VNĐ) | $R^2$ Score | Đánh giá |
 | :--- | :---: | :---: | :---: | :--- |
-| **Ridge Regression (Baseline)** | 2,184,928 | 3,264,949 | 0.9518 | ^2$ đạt .9518$, vượt trội mô hình cơ sở cũ (.8013$) |
+| **Ridge Regression (Baseline)** | 2,184,928 | 3,264,949 | 0.9518 | $R^2$ đạt $0.9518$, vượt trội mô hình cơ sở cũ ($0.8013$) |
 | **Random Forest** | 2,114,765 | 3,406,507 | 0.9476 | Cải thiện MAE so với Ridge |
-| **LightGBM** | **1,864,679** | **3,022,967** | **0.9587** | **Tốt nhất trên cả 3 chỉ số (MAE ~1.86M VNĐ, ^2 = 0.9587$)** |
+| **LightGBM** | **1,864,679** | **3,022,967** | **0.9587** | **Tốt nhất trên cả 3 chỉ số (MAE ~1.86M VNĐ, $R^2 = 0.9587$)** |
 
 ### 4.2. Biểu đồ Trực quan So sánh Sai số (Đơn vị: Triệu VNĐ)
 
-`	ext
+```text
 [LAPTOP - MAE (Triệu VNĐ)]
 Ridge (Baseline) | █████████████████████████████████████████████████░ 4.28M
 Random Forest    | ████████████████████████████████████████████░░░░░░ 3.83M
@@ -124,7 +126,7 @@ LightGBM (Best)  | ████████████████████�
 Ridge (Baseline) | ███████████████████████████████████████████████░░░ 3.26M
 Random Forest    | █████████████████████████████████████████████████░ 3.41M
 LightGBM (Best)  | ████████████████████████████████████████████░░░░░░ 3.02M (-7.4%)
-`
+```
 
 ### 4.3. Quyết định Lựa chọn Mô hình Triển khai
 

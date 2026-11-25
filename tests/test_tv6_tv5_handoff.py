@@ -18,7 +18,7 @@ import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DATA_TV6 = REPO_ROOT / "data" / "tv6"
-DOCS_TV6 = REPO_ROOT / "docs" / "tv6"
+DOCS_TV6 = REPO_ROOT / "docs" / "review_nlp"
 TABLES_TV6 = DATA_TV6 / "tables"
 FIGURES_TV6 = DATA_TV6 / "figures"
 

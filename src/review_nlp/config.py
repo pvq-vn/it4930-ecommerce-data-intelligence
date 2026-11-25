@@ -20,7 +20,7 @@ REVIEWS_PROCESSED_FILE = PROCESSED_DIR / "reviews_processed.jsonl"
 
 # Output directories
 DATA_TV6_DIR = ROOT_DIR / "data" / "tv6"
-DOCS_TV6_DIR = ROOT_DIR / "docs" / "tv6"
+DOCS_TV6_DIR = ROOT_DIR / "docs" / "review_nlp"
 FIGURES_TV6_DIR = DATA_TV6_DIR / "figures"
 TABLES_TV6_DIR = DATA_TV6_DIR / "tables"
 

@@ -36,4 +36,4 @@ src/eda/
 ## Quy chuẩn & Hướng dẫn chi tiết
 
 Xem toàn văn hướng dẫn nhiệm vụ, data contracts và gói bàn giao TV5 tại:
-👉 **[docs/tv3/tv3.md](../../docs/tv3/tv3.md)**
+👉 **[docs/EDA/tv3.md](../../docs/EDA/tv3.md)**

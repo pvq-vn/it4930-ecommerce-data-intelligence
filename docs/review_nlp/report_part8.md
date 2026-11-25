@@ -37,7 +37,7 @@ flowchart TD
 ```
 
 ### Nguyên tắc Bất khả Xâm phạm về Toàn vẹn Dữ liệu:
-- **Không xâm lấn vùng lưu trữ chung**: Toàn bộ mã nguồn đặt tại `src/review_nlp/`, tài liệu tại `docs/tv6/`, dữ liệu dẫn xuất tại `data/tv6/`. Tuyệt đối không ghi đè vào `data/gold_v2/` hay `data/raw/`.
+- **Không xâm lấn vùng lưu trữ chung**: Toàn bộ mã nguồn đặt tại `src/review_nlp/`, tài liệu tại `docs/review_nlp/`, dữ liệu dẫn xuất tại `data/tv6/`. Tuyệt đối không ghi đè vào `data/gold_v2/` hay `data/raw/`.
 - **Bảo toàn 100% dữ liệu gốc (Zero Data Loss)**: Toàn bộ 15.805 review được giữ nguyên vẹn trong [`reviews_tv6_all.jsonl`](../../data/tv6/reviews_tv6_all.jsonl). 
 - **Cách ly kiểm toán chuẩn mực**: Phân tách thành hai luồng xử lý:
   * **Tập Usable** ($N = 14.869$, chiếm $94,08\%$): Chứa văn bản thực tế, thỏa mãn tiền điều kiện NLP.
@@ -421,7 +421,7 @@ print(f"Sẵn sàng huấn luyện mô hình TV5 với {len(features)} đặc tr
   * [`data/tv6/topic_aspect_report.json`](../../data/tv6/topic_aspect_report.json)
   * [`data/tv6/tv5_feature_report.json`](../../data/tv6/tv5_feature_report.json)
 - **Báo cáo Đồ án Hoàn chỉnh (File Duy nhất)**:
-  * [`docs/tv6/report_part8.md`](./report_part8.md)
+  * [`docs/review_nlp/report_part8.md`](./report_part8.md)
 
 ### Lệnh Chạy Tái hiện Toàn bộ Pipeline TV6:
 ```bash

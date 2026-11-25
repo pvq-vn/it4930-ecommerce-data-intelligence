@@ -57,7 +57,7 @@ Biểu đồ chỉ gồm listing có giá và RAM dương. Trục RAM dùng than
 
 ## Độ nhạy mô hình dự đoán giá TV5
 
-Số liệu từ Bảng 1 và Bảng 2, mục TV5.B của [báo cáo kiểm toán](../../../BAO_CAO_KIEM_TOAN_CUOI_CUNG_TV1_TV7_VA_CHI_DAN_TV8.md). Đây là kết quả dùng bộ cờ trước khi bổ sung quy tắc phần cứng. S4 là mốc so sánh; S5a lọc `extreme` và S5b lọc `combined_flag` trên tập train. Mỗi danh mục giữ cùng tập test.
+Số liệu kiểm định độ nhạy ban đầu trước khi bổ sung quy tắc phần cứng (đối chiếu thêm với kết quả S5a/S5b chính thức tại [Phần 10 — Đánh giá & Độ nhạy](../../../docs/evaluation_demo/report_part10_evaluation_demo.md)). S4 là mốc so sánh; S5a lọc `extreme` và S5b lọc `combined_flag` trên tập train. Mỗi danh mục giữ cùng tập test.
 
 | category   | stage   | train_filter          | mae_vnd   | rmse_vnd   | mape_pct   | r2     |
 |:-----------|:--------|:----------------------|:----------|:-----------|:-----------|:-------|

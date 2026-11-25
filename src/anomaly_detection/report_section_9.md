@@ -252,7 +252,7 @@ Do không có nhãn anomaly chuẩn, không thể sử dụng trực tiếp Accu
 
 ### 9.6.1. Độ nhạy của mô hình TV5
 
-Bảng dưới đây trích từ Bảng 1 và Bảng 2, mục TV5.B của [báo cáo kiểm toán](../../BAO_CAO_KIEM_TOAN_CUOI_CUNG_TV1_TV7_VA_CHI_DAN_TV8.md), dùng bộ cờ trước khi bổ sung quy tắc phần cứng. S4 là mốc so sánh. S5a lọc `extreme` và S5b lọc `combined_flag` trên tập train. Tập test được giữ cố định cho từng danh mục.
+Bảng dưới đây đối chiếu độ nhạy ban đầu trước khi bổ sung quy tắc phần cứng (xem thêm phân tích đối chứng đầy đủ trên tập kiểm thử chốt tại [Phần 10 — Đánh giá & Độ nhạy S5](../../docs/evaluation_demo/report_part10_evaluation_demo.md)). S4 là mốc so sánh; S5a lọc `extreme` và S5b lọc `combined_flag` trên tập train. Tập test được giữ cố định cho từng danh mục.
 
 | Danh mục | Kịch bản | MAE (VNĐ) | RMSE (VNĐ) | MAPE | R² |
 |---|---|---:|---:|---:|---:|

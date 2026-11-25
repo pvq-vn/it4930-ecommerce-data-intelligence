@@ -1,219 +1,151 @@
-# IT4930 - E-commerce Data Intelligence
+# IT4930 — Hệ thống Trí tuệ Dữ liệu Thị trường & Thẩm định Giá Hợp lý Sản phẩm Công nghệ Đa sàn
+*(E-Commerce Tech Market Intelligence & Fair-Value Analytics Platform)*
 
-## TV1: Web Crawling & Data Acquisition (Multi-Source Architecture)
-
-Hệ thống crawler thực tế thu thập dữ liệu gốc (Raw Data) cho bài toán phân tích và dự đoán giá sản phẩm công nghệ trong đúng 2 danh mục mục tiêu của project: **Laptop** và **Smartphone**.
-
-> **Phạm vi (Scope)**:
->
-> - Chỉ crawl dữ liệu cho 2 danh mục: **Laptop** và **Smartphone**.
-> - Không thực hiện chuẩn hóa, làm sạch (cleaning) hay khử trùng ngữ nghĩa (semantic deduplication) tại raw layer (các tác vụ này thuộc TV2).
-> - Raw Contract bất biến: **Product = 25 fields**, **Review = 19 fields**.
-> - An toàn dữ liệu thô: Raw snapshots đã crawl là bất biến (immutable), không ghi đè, không append.
+> **Học phần**: IT4930 — Nhập môn Khoa học Dữ liệu (Đại học Bách Khoa Hà Nội)  
+> **Giảng viên hướng dẫn**: Nguyễn Văn Sơn  
+> **Nhóm thực hiện**: Nhóm 12 (8 thành viên — TV1 đến TV8)
 
 ---
 
-### 1. Nguồn Dữ Liệu (Source Support)
+## 1. Định vị Dự án Khoa học Dữ liệu (Data Science vs. Pure Machine Learning)
 
-Hệ thống crawler thiết kế theo mô hình Registry mở rộng (`SOURCE_REGISTRY` trong `crawler/run_crawler.py`), phân định rõ ràng giữa nguồn đã triển khai và nguồn dự kiến tương lai:
+Thị trường bán lẻ thiết bị công nghệ tại Việt Nam (**Laptop** và **Smartphone**) có mức độ phân mảnh rất cao giữa các chuỗi lớn (**CellphoneS, Thế Giới Di Động, FPT Shop, Hoàng Hà Mobile, Viettel Store**): cùng một dòng sản phẩm nhưng tồn tại hàng chục biến thể cấu hình, chính sách giá gạch/khuyến mãi khác nhau, hàng ngừng kinh doanh lưu giá cũ (*price drift*), thông số kỹ thuật khuyết thiếu không đồng nhất và hiện tượng *lạm phát đánh giá 5 sao* (`84,79%`).
 
-- **Nguồn hiện hành (Implemented — đủ 5/5 sàn)**:
-    - `tgdd`: Thế Giới Di Động (`crawler/tgdd/`, `implemented=True`)
-    - `fptshop`: FPT Shop (`crawler/fptshop/`, `implemented=True`)
-    - `cellphones`: CellphoneS (`crawler/cellphoneS/`, `implemented=True`)
-    - `viettelstore`: Viettel Store (`crawler/viettelStore/`, `implemented=True`)
-    - `hoanghamobile`: Hoàng Hà Mobile (`crawler/hoanghamobile/`, `implemented=True`)
+Khác với một đồ án Học máy thuần túy (chỉ tập trung huấn luyện hàm dự đoán giá từ thông số nhập tay), dự án này triển khai **trọn vẹn chu trình Khoa học Dữ liệu (Data Science Lifecycle)** nhằm giải quyết **5 câu hỏi nghiệp vụ cốt lõi** cho cả **Người tiêu dùng / Đơn vị thu mua (B2C)** và **Quản trị ngành hàng bán lẻ (B2B)**:
 
-> **Lưu trữ Dữ liệu Thô (Google Drive — TV1)**:
+1. **Quy luật cấu thành giá & Vệ sinh dữ liệu (TV1–TV3)**: Cấu trúc thị phần, chiến lược chiết khấu niêm yết của 5 sàn ra sao? Thông số nào thực sự chi phối giá bán và thông số nào là "con số quảng cáo hào nhoáng" (*Pin 5.000 mAh, Camera 108 MP, Màn hình 15,6 inch*)?
+2. **Cấu trúc cạnh tranh & Khoảng trống danh mục liên sàn (TV4)**: Khi đối sánh thực thể sản phẩm chuẩn hóa liên sàn (`4.414` sản phẩm chuẩn), sàn nào dẫn đầu về độ phủ và giá rẻ? Đâu là **90 khoảng trống thị trường** (*điểm mù danh mục* và *phân khúc cầu cao nhưng ít sàn bán*)?
+3. **Tiếng nói thực chất của khách hàng sau mua (TV6)**: Sau lớp vỏ bọc `84,79%` đánh giá 5 sao trên web, khách hàng Việt Nam thực sự hài lòng và phàn nàn về khía cạnh kỹ thuật nào (*tản nhiệt, pin, màn hình, camera hay dịch vụ giao nhận*)?
+4. **Kiểm toán chất lượng danh mục & Dị biệt giá (TV7)**: Làm sao phân biệt tự động giữa **lỗi dữ liệu/sai danh mục** (`401` mẫu giá dưới sàn/phụ kiện, `93` lỗi thông số phần cứng) với **siêu phẩm cấu hình cao hợp lệ** (`65` workstation/flagship) và **nghi vấn lệch giá–cấu hình** (`156` mẫu) mà không xóa nhầm dữ liệu quý?
+5. **Thẩm định Giá Hợp lý (Hedonic Fair-Value Audit) & Hỗ trợ Quyết định (TV5 & TV8)**: Với một SKU đang niêm yết sẵn giá trên sàn, mức giá đó đang **hời (undervalued)**, **hợp lý (fair)** hay **đắt hơn mặt bằng cấu hình (overvalued)** bao nhiêu tiền, và linh kiện/yếu tố thương hiệu nào tạo ra khoản chênh lệch đó (giải thích bằng **SHAP quy đổi ra VNĐ**)?
+
+---
+
+## 2. Kiến trúc Quy trình Khoa học Dữ liệu 8 Thành viên (TV1 → TV8)
+
+| Phân hệ | Thành viên phụ trách | Vai trò trong vòng đời Khoa học Dữ liệu | Đầu ra định lượng & Hiện vật cốt lõi |
+|---|---|---|---|
+| **TV1** | Phạm Văn Quyết (`202416331`) | Thu thập dữ liệu đa nguồn bất biến (*Multi-Source Acquisition*) | `10.316` listings (`25` trường raw) & `15.805` reviews (`19` trường raw) từ 5 sàn trong `data/raw/` |
+| **TV2** | Hà Đức Anh (`20235001`) | Quản trị chất lượng dữ liệu & Tích hợp 5 tầng (*Data Governance & Star Schema*) | Pipeline 11 bước `raw → staging → silver_v2 → gold_v2 → processed`, nguyên lý *flag-don't-drop*, `listing_id_crosswalk.csv` |
+| **TV3** | Hoàng Phúc Hưng (`202416216`) | Phân tích khám phá & Kiểm định thống kê (*EDA & Hypothesis Testing*) | `15` biểu đồ 300 DPI, `36+` bảng kiểm định Spearman / Kruskal-Wallis / Mann-Whitney / VIF (`src/eda/outputs/`) |
+| **TV4** | Nguyễn Chính Minh (`202416293`) | Phân tích liên kết đồ thị thị trường & Khoảng trống danh mục (*Market Graph*) | `4.414` sản phẩm chuẩn, ma trận Jaccard, `63` cụm Louvain, `90` khoảng trống thị trường, điểm chuẩn CPU/GPU price-free (`data/market_graph/`) |
+| **TV5** | Đào Duy Anh (`20235000`) | Mô hình định giá hưởng lạc không rò rỉ (*Hedonic Fair-Value Modeling*) | 6 pipeline tự đóng gói (`Ridge`, `RF`, `LightGBM`) trên `8.132` mẫu sạch; LightGBM đạt `R² = 0,9125` (Laptop) & `R² = 0,9587` (Smartphone) |
+| **TV6** | Nguyễn Trịnh Minh Hiếu (`20235078`) | Khai phá văn bản đánh giá tiếng Việt (*PhoBERT Sentiment, LDA & ABSA*) | `14.869` review hợp lệ, PhoBERT `Macro F1 = 0,6491`, 5 chủ đề LDA, 5 khía cạnh ABSA, 35 đặc trưng cấp `source_parent_id` (`data/tv6/`) |
+| **TV7** | Nguyễn Tùng Dương (`20230024`) | Kiểm toán bất thường đa phương pháp (*Catalog & Price Anomaly Audit*) | Tổ hợp Rule + Log-IQR + Isolation Forest phát hiện `715` bản ghi (`6,93%`), tách 4 `anomaly_type` & `recommended_action` (`src/anomaly_detection/`) |
+| **TV8** | Lê Trần Anh (`202416112`) | Thẩm định 3 chiều, Ablation/Sensitivity, XAI SHAP & Nền tảng 5 Tab (*Decision App*) | Chuỗi thực nghiệm `S1–S5`, 7 bảng + 7 hình 300 DPI, giải thích SHAP VNĐ & ứng dụng 5 tab `src/evaluation_demo/app.py` |
+
+---
+
+## 3. Tài liệu Báo cáo & Cẩm nang Bảo vệ Đồ án
+
+- 📄 **[Báo cáo Khoa học Dữ liệu Tổng hợp nộp Giảng viên (Nhóm 12)](docs/BAO_CAO_KHOA_HOC_DU_LIEU_IT4930_NHOM12.md)** — Báo cáo đầy đủ 10 phần theo sườn học phần IT4930, tập trung vào bài toán nghiệp vụ, phương pháp thực hiện và tri thức rút ra của từng thành viên TV1–TV8.
+- 🎤 **[Cẩm nang Thuyết trình, Diễn giải 15 Biểu đồ EDA & Kịch bản Phản biện](docs/PRESENTATION_AND_DEFENSE_PLAYBOOK.md)** — Tuyên ngôn định vị KHDL B2B/B2C, từ điển 3 bước cho toàn bộ 15 biểu đồ EDA, 8 câu hỏi phản biện chuyên sâu và kịch bản demo 15 phút.
+- 📊 **Báo cáo chuyên sâu từng phân hệ**:
+  - TV2 (Quản trị & Tích hợp dữ liệu): [Data Contract](docs/data_contract_tv2_v1.md) · [Data Quality Report](docs/data_quality_report_tv2_v1.md) · [Gold Handoff](docs/gold_handoff.md) · [Feature Contracts](docs/feature_contracts_tv3_tv8.md)
+  - TV3 (Phân tích khám phá EDA): [Phần 5 — Báo cáo EDA](docs/EDA/report_section_5_eda.md) · [Handoff TV3 → TV5](docs/EDA/tv3_to_tv5_handoff.md)
+  - TV5 (Mô hình định giá hợp lý): [Tổng quan kiến trúc & Kết quả TV5](src/price_prediction/summary.md) · [Báo cáo kỹ thuật TV5](src/price_prediction/report.md)
+  - TV6 (Xử lý ngôn ngữ tự nhiên đánh giá): [Phần 8 — Review NLP & Sentiment Analysis](docs/review_nlp/report_part8.md)
+  - TV7 (Phát hiện bất thường danh mục & giá): [Phần 9 — Anomaly Detection](src/anomaly_detection/report_section_9.md)
+  - TV8 (Đánh giá 3 chiều, XAI & Demo): [Phần 10 — Đánh giá, Giải thích & Hệ thống Demo](docs/evaluation_demo/report_part10_evaluation_demo.md) · [Hướng dẫn chạy Demo](src/evaluation_demo/README.md)
+
+---
+
+## 4. Cài đặt Môi trường & Chạy Ứng dụng Demo 5 Tab
+
+### 4.1. Cài đặt phụ thuộc
+
+```bash
+# Cài đặt môi trường chuẩn cho toàn bộ pipeline và ứng dụng Streamlit:
+python -m pip install -r requirements.txt
+
+# (Tùy chọn) Cài đặt bổ sung cho việc chạy lại 5 Jupyter Notebooks EDA của TV3:
+python -m pip install -r requirements-eda.txt
+```
+
+### 4.2. Khởi chạy Hệ thống Hỗ trợ Quyết định 5 Tab (`Streamlit`)
+
+```bash
+python -m streamlit run src/evaluation_demo/app.py --server.address 127.0.0.1
+```
+
+Ứng dụng mở tại `http://127.0.0.1:8501` gồm **5 tab nghiệp vụ**:
+1. **Tổng quan & Quy luật giá (TV1–TV3)**: KPI thị trường + 15 biểu đồ EDA kèm hộp diễn giải *Câu hỏi nghiệp vụ → Phát hiện định lượng → Ý nghĩa & Hành động*.
+2. **Cạnh tranh đa sàn & Review (TV4 & TV6)**: Vị thế giá 5 sàn, trùng lặp Jaccard, phân khúc Louvain, bộ lọc **90 khoảng trống danh mục**, đồ thị tương tác PyVis và phân tích PhoBERT / LDA / ABSA.
+3. **Thẩm định giá hợp lý (TV5–TV8)**:
+   - *Chế độ 1 (Mặc định)*: **Thẩm định SKU thực tế đang niêm yết trên 5 sàn** — so sánh *Giá bán thực tế* với *Giá hợp lý theo cấu hình*, giải thích SHAP VNĐ, đối chiếu cờ kiểm toán TV7, review TV6 và các máy tương đương liên sàn.
+   - *Chế độ 2 (B2B)*: **Mô phỏng định giá SKU mới trong miền phần cứng tương thích** — khóa chặt tổ hợp linh kiện hợp lệ theo Hãng & Dòng máy.
+4. **Kiểm toán bất thường (TV7)**: Phân tích 4 nhóm `anomaly_type`, khuyến nghị xử lý danh mục và tra cứu chi tiết từng bản ghi.
+5. **Đánh giá mô hình & XAI (TV8)**: Benchmark 3 chiều, Ablation `S1–S4`, độ nhạy `S5a/S5b`, phân tích sai số lát cắt, Top-20 ca lệch lớn nhất và kiểm định tính đơn điệu TreeSHAP.
+
+### 4.3. Chạy Bộ Kiểm thử Tự động
+
+```bash
+# Chạy toàn bộ kiểm thử tích hợp của dự án bằng pytest:
+python -m pytest -q
+
+# Hoặc chạy riêng bộ kiểm thử hồi quy mô hình, dữ liệu & giao diện 5 tab:
+python -m pytest tests/test_tv8_evaluation_demo.py -q
+```
+
+---
+
+## 5. Hướng dẫn Vận hành Chi tiết Từng Phân hệ Dữ liệu
+
+### 5.1. TV1 — Thu thập Dữ liệu Đa nguồn (`crawler/`)
+
+Hệ thống crawler thu thập dữ liệu gốc bất biến (*Immutable Raw Data*) cho 2 danh mục **Laptop** và **Smartphone** trên đủ **5/5 sàn** (`tgdd`, `fptshop`, `cellphones`, `viettelstore`, `hoanghamobile`), tuân thủ nghiêm ngặt `robots.txt`, `AutoThrottle`, `RunnerLock` chống chạy đồng thời và hợp đồng dữ liệu thô (**Product = 25 trường**, **Review = 19 trường**).
+
+> **Lưu trữ Dữ liệu Thô (Google Drive — TV1)**:  
 > [TV1 Raw Data trên Google Drive](https://drive.google.com/drive/folders/1wQbWDOmYZFz2Ut3AShMu2o1wkMTJESuJ?usp=drive_link) (`data/raw/<source>/<category>.jsonl` & `<category>_reviews.jsonl`)
 
----
-
-### 2. Cấu trúc thư mục
-
-- `crawler/tgdd/`: Spiders và items cho Thế Giới Di Động.
-- `crawler/fptshop/`: Spiders và items cho FPT Shop.
-- `crawler/cellphoneS/`: Spiders và items cho CellphoneS (GraphQL + SSR detail/review).
-- `crawler/viettelStore/`: Spiders và items cho Viettel Store.
-- `crawler/hoanghamobile/`: Spiders và items cho Hoàng Hà Mobile.
-- `crawler/run_crawler.py`: CLI Runner tập trung điều phối các nguồn với `RunnerLock` đảm bảo chống chạy đồng thời và kiểm soát an toàn snapshot bất biến.
-- `data/raw/<source>/`: Thư mục lưu trữ raw data / raw snapshots (sản phẩm: `*.jsonl`, đánh giá: `*_reviews.jsonl`).
-- `tests/`: Bộ kiểm thử toàn diện (contract, crawler, runner lock, source routing, an toàn raw data).
-
----
-
-### 3. Nguyên tắc Thu thập (Politeness & Concurrency Safety)
-
-- **Robots.txt & Rate Limiting**:
-    - Tuân thủ robots.txt và giới hạn rate limiting theo từng sàn.
-    - Chạy tuần tự an toàn (`CONCURRENT_REQUESTS = 1`, AutoThrottle, Conservative download delay).
-    - Không bypass anti-bot, không sử dụng luồng ngầm gây quá tải hệ thống nguồn.
-- **Tiến trình an toàn (RunnerLock)**:
-    - Cơ chế lock đơn tiến trình atomic (`O_EXCL`), gắn liền với start time/PID protection.
-    - Giữ lock xuyên suốt chuỗi crawl khi chạy `--category all` hoặc `--source all`.
-    - Từ chối khởi động bất kỳ Scrapy subprocess nào nếu lock đang bị giữ bởi tiến trình khác.
-- **Chống trùng lặp HTTP & Ngữ nghĩa**:
-    - Tận dụng Scrapy RFPDupeFilter cho HTTP requests (không dùng `dont_filter=True` tùy tiện).
-    - Kiểm soát trùng lặp ngữ nghĩa ở cấp độ crawler (`seen_parent_ids`, `seen_review_ids`, `seen_page_signatures`).
-- **Immutable Raw Snapshots**:
-    - Mỗi mẻ crawl tạo snapshot mới định danh theo `batch_id` (hoặc timestamp).
-    - Từ chối chạy nếu file snapshot đích đã tồn tại (`ensure_output_path_available`).
-
----
-
-### 4. Cài đặt môi trường
-
 ```bash
-# 1. Cài đặt môi trường crawler cơ bản (TV1):
-pip install -r requirements.txt
-
-# 2. Cài đặt bổ sung môi trường phân tích khám phá dữ liệu (TV3 EDA & Notebooks):
-pip install -r requirements-eda.txt
-
-# Hoặc cài đặt đồng thời toàn bộ phụ thuộc cho dự án:
-pip install -r requirements.txt -r requirements-eda.txt
-```
-
----
-
-### 5. Thực thi Crawler (`crawler/run_crawler.py`)
-
-Entry point duy nhất để điều phối crawler là `crawler/run_crawler.py`.
-
-#### A. Chạy riêng từng nguồn (Source Isolation):
-
-```bash
-# Chỉ chạy CellphoneS:
+# Chạy riêng từng nguồn có giới hạn số lượng kiểm thử:
 python crawler/run_crawler.py --source cellphones --category laptop --limit 50
-python crawler/run_crawler.py --source cellphones --category smartphone --limit 50
-python crawler/run_crawler.py --source cellphones --category all --limit 50
-
-# Chỉ chạy Thế Giới Di Động:
-python crawler/run_crawler.py --source tgdd --category laptop --limit 50
-python crawler/run_crawler.py --source tgdd --category smartphone --limit 50
 python crawler/run_crawler.py --source tgdd --category all --limit 50
-
-# Chỉ chạy FPT Shop:
 python crawler/run_crawler.py --source fptshop --category smartphone --limit 50
-```
 
-#### B. Chạy toàn bộ các nguồn đã triển khai:
-
-```bash
-# Chạy tuần tự tất cả các nguồn đã triển khai (tgdd, fptshop, cellphones, viettelstore, hoanghamobile):
+# Chạy tuần tự tất cả 5 nguồn đã triển khai:
 python crawler/run_crawler.py --source all --category all --limit 50
-```
 
-#### C. Chế độ Full Crawl (`--full`):
-
-```bash
-# Full crawl CellphoneS Laptop:
+# Chế độ Full Crawl (--full và --limit loại trừ lẫn nhau):
 python crawler/run_crawler.py --source cellphones --category laptop --full
 ```
 
-> **Lưu ý**: Tùy chọn `--full` và `--limit` loại trừ lẫn nhau (mutually exclusive).
+### 5.2. TV2 — Quản trị Chất lượng & Tích hợp Dữ liệu 5 Tầng (`src/preprocessing/`)
 
-#### D. Chỉ định Output hoặc Batch ID tùy chỉnh:
+Biến đổi dữ liệu thô qua 5 tầng tuần tự `data/raw/ → data/staging/ → data/silver_v2/ → data/gold_v2/ → data/processed/` theo nguyên lý **không xóa dòng, chỉ gắn cờ kiểm toán (*flag-don't-drop*)**, thiết kế mô hình kho dữ liệu hình sao (**Star Schema Gold v2** gồm 5 bảng) và xuất bộ dữ liệu chuẩn hóa:
+- `data/processed/products_processed.jsonl` (`10.316` dòng × `32` trường) & `data/processed/listing_id_crosswalk.csv`
+- `data/processed/reviews_processed.jsonl` (`15.805` dòng × `14` trường)
 
-Tùy chọn `--output` chỉ hợp lệ khi crawl chính xác 1 nguồn và 1 danh mục:
-
-```bash
-python crawler/run_crawler.py --source cellphones --category laptop --limit 50 --output data/raw/cellphones/laptop/custom_run.jsonl
-```
-
----
-
-### 6. Kiểm thử Tự động
-
-Tất cả các unit tests không gọi mạng ngoài, không khởi chạy Scrapy thật, và không ghi dữ liệu giả mạo vào `data/raw`:
+> **Lưu trữ Dữ liệu Gold v2 & Processed (Google Drive — TV2)**:  
+> [TV2 Data Handoff trên Google Drive](https://drive.google.com/drive/folders/1QiIvoEL_Lo2MWF3qoRpHypQvxLDvvELE?usp=drive_link)
 
 ```bash
-python -m unittest discover tests -v
+python src/preprocessing/run_tv2_pipeline.py
 ```
 
-## TV2 — Data Quality & Integration
-
-TV2 chuyển dữ liệu raw từ crawler thành dữ liệu đã chuẩn hóa, có kiểm tra chất lượng và giữ khả năng truy nguyên.
-
-### Pipeline
-
-```text
-data/raw/
-    ↓
-data/staging/
-    ↓
-data/silver_v2/
-    ↓
-data/gold_v2/
-    ↓
-data/processed/
-```
-
-Chạy pipeline:
+### 5.3. TV3 → TV8 — Tái lập Phân tích, Đồ thị, NLP, Kiểm toán & Thẩm định
 
 ```bash
-py src/preprocessing/run_tv2_pipeline.py
+# TV3 — Tái lập 36+ bảng thống kê & 15 biểu đồ EDA 300 DPI:
+python src/eda/scripts/reproduce_all.py
+
+# TV4 — Chạy pipeline đối sánh sản phẩm chuẩn, đồ thị thị trường, Louvain & Structural Holes:
+python -m src.market_graph.cli run-all
+
+# TV6 — Tái lập pipeline NLP tiếng Việt, Sentiment, LDA & ABSA (Bước 0 -> Bước 5):
+python src/review_nlp/run_step0.py
+python src/review_nlp/run_step1.py
+python src/review_nlp/run_step2.py
+python src/review_nlp/run_step3_1.py
+python src/review_nlp/run_step4.py
+python src/review_nlp/run_step5.py
+
+# TV7 — Chạy kiểm toán bất thường đa phương pháp & xuất anomaly_flags.csv:
+python src/anomaly_detection/detect_price_anomalies.py
+
+# TV8 — Đánh giá độc lập 6 mô hình TV5, thực nghiệm Ablation S1–S5 & trích xuất SHAP:
+python src/evaluation_demo/evaluate_models.py
+python src/evaluation_demo/ablation_sensitivity.py --stage all
+python src/evaluation_demo/explainability.py
 ```
-
-Kết quả thành công:
-
-```json
-{
-    "status": "PASSED",
-    "stages_completed": 11,
-    "final_release_ready": true
-}
-```
-
-### Dữ liệu bàn giao
-
-Các thành viên TV3–TV8 sử dụng:
-
-```text
-data/processed/products_processed.jsonl
-data/processed/reviews_processed.jsonl
-```
-
-`products_processed.jsonl` có 10.316 listing và 32 trường, gồm tên sản phẩm, tên biến thể, SKU biến thể, `brand_norm`, giá, rating, availability, total_sold_normalized và các thuộc tính phần cứng.
-
-`reviews_processed.jsonl` có 15.805 review và 14 trường, gồm tên sản phẩm, `rating_raw`, `rating_norm`, nội dung review và `review_usable`.
-
-Trong dữ liệu sản phẩm:
-
-```text
-rating_raw = 0
-rating_norm = null
-has_rating = false
-```
-
-### Google Drive
-
-Bộ dữ liệu Gold v2 và hai file processed được lưu tại:
-
-[TV2 Data Handoff trên Google Drive](https://drive.google.com/drive/folders/1QiIvoEL_Lo2MWF3qoRpHypQvxLDvvELE?usp=drive_link)
-
-Bộ bàn giao gồm:
-
-- `processed/products_processed.jsonl`
-- `processed/reviews_processed.jsonl`
-- `gold_v2/` với 5 file Gold và README hướng dẫn.
-
-### Các bước xử lý chính
-
-- Giữ nguyên dữ liệu raw, không sửa hoặc ghi đè.
-- Gắn mã truy nguyên cho từng bản ghi.
-- Chuẩn hóa giá, rating, availability và thương hiệu.
-- Chuẩn hóa tên sản phẩm và loại bỏ một số hậu tố marketing chắc chắn.
-- Bóc tách CPU, GPU, RAM, storage, pin, màn hình và camera.
-- Chuẩn hóa `total_sold_raw` thành `total_sold_normalized`.
-- Giữ nguyên giá trị thiếu, không tự động điền dữ liệu.
-- Kiểm tra khóa, số dòng, schema và liên kết sản phẩm–review.
-
-### Tài liệu TV2
-
-- `docs/data_contract_tv2_v1.md`
-- `docs/data_field_decision_matrix.md`
-- `docs/feature_contracts_tv3_tv8.md`
-- `docs/data_quality_report_tv2_v1.md`
-- `docs/gold_handoff.md`
-- `docs/pipeline_execution_v1.md`

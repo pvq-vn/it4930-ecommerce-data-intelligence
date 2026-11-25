@@ -92,24 +92,32 @@ Biểu đồ giải thích từng máy phân bổ chênh lệch giá từ mức 
 
 Thử tăng RAM 8, 16, 32, 64 GB và bộ nhớ 128, 256, 512, 1.024 GB, mỗi lần thay một thông số của ASUS Vivobook 15 OLED hoặc OPPO Find N3. Các đầu vào còn lại lấy từ dòng tham chiếu. Các đặc trưng dẫn xuất của thông số đang thay tiếp tục được tính theo pipeline. Trong 12 đường thử, dự đoán giữ nguyên hoặc tăng giữa các mốc. Tuy nhiên, tập train điện thoại thiếu mức RAM 32 và 64 GB. Ridge lên tới **1,81 tỷ đồng** ở 64 GB trên cấu hình điện thoại giả lập. Đây là ví dụ về ngoại suy ngoài dữ liệu và là lý do demo giới hạn RAM điện thoại ở 24 GB, đồng thời cảnh báo mức cấu hình chưa thấy trong train. [Hình 10.7 — Phép thử dung lượng](../../src/evaluation_demo/outputs/figures/fig_10_7_monotonicity_sanity_check.png) · [Bảng dự đoán RAM/bộ nhớ](../../src/evaluation_demo/outputs/tables/monotonicity_sweeps.csv)
 
-## 10.7. Demo và bàn giao
+## 10.7. Hệ thống Hỗ trợ Quyết định Đa tầng (5-Tab Data Science Platform) và Bàn giao
 
-Tab nhập cấu hình dùng mô hình **TV5 tích hợp đa thành viên**, đồng bộ với Bảng 10.1. Các kết quả S1–S5 và SHAP S4 được ghi rõ phiên bản ở các tab phân tích. Dải giá tham chiếu dựa vào MdAPE của tập test. Các máy tương tự được xếp bằng cấu hình, không dùng giá làm tiêu chí xếp hạng. Luồng trình bày có thể bắt đầu từ iPhone 15 Pro Max 8 GB/256 GB tại FPT, dự đoán **22.642.018 đồng** bằng LightGBM. Ca kiểm thử tên `apple` và `fpt shop` với cùng cấu hình cơ bản cho dự đoán **25.862.396 đồng** bằng Random Forest sau khi chuẩn hóa nhãn.
+Ứng dụng Streamlit tại `src/evaluation_demo/app.py` (kết hợp tầng dữ liệu `demo_data.py` và `market_data.py`) được nâng cấp thành **Hệ thống Trí tuệ Dữ liệu Thị trường & Thẩm định Giá Hợp lý Đa sàn** gồm **5 tab nghiệp vụ**, tích hợp xuyên suốt kết quả của toàn bộ 8 thành viên (TV1–TV8):
 
-| Tab | Nội dung | Ảnh chụp thực tế |
+1. **Tab 1 — Tổng quan & Quy luật giá (TV1–TV3)**: Hiển thị các chỉ số toàn cảnh thị trường (`10.316` niêm yết, `15.805` đánh giá, `4.414` sản phẩm chuẩn, `8.132` mẫu sạch) và toàn bộ **15 biểu đồ EDA** kèm hộp phân tích 3 bước (*Câu hỏi nghiệp vụ → Phát hiện định lượng → Ý nghĩa kinh doanh & Quyết định hạ nguồn*).
+2. **Tab 2 — Cạnh tranh đa sàn & Review (TV4 & TV6)**: Trình bày thống kê cạnh tranh của 5 chuỗi bán lẻ, ma trận trùng lặp danh mục Jaccard, phân khúc thị trường Louvain, bộ lọc tương tác **90 khoảng trống danh mục** (`68` điểm mù theo sàn + `22` phân khúc cầu cao ít sàn bán), đồ thị hai phía tương tác PyVis và phân tích tiếng nói khách hàng tiếng Việt (PhoBERT Sentiment, 5 chủ đề LDA, 5 khía cạnh ABSA).
+3. **Tab 3 — Thẩm định giá hợp lý (TV5–TV8)**: Gồm 2 chế độ phục vụ đúng nhu cầu thực tế:
+   - **Chế độ 1 (Mặc định — B2C & B2B): Thẩm định SKU đang niêm yết thực tế** trên 5 sàn (không bắt người dùng tự gõ tay cấu hình), đối chiếu *Giá niêm yết thực tế* với *Giá hợp lý theo cấu hình (Hedonic Fair Value)*, kết luận mức hời/đắt theo ngưỡng `±MdAPE`, giải thích đóng góp SHAP bằng VNĐ, hiển thị hồ sơ cờ kiểm toán TV7 (`anomaly_type`, `recommended_action`), tóm tắt review TV6 và bảng 5 cấu hình tương đương liên sàn.
+   - **Chế độ 2 (Dành cho Quản trị ngành hàng B2B): Mô phỏng định giá SKU mới trong miền phần cứng tương thích** (`build_compatibility_options()`), khóa chặt tổ hợp linh kiện theo Hãng → Dòng máy → CPU → GPU/RAM/ROM, ngăn chặn triệt để các cấu hình phi vật lý (như chọn Apple kèm GPU RTX hoặc chip Snapdragon). Luồng tham chiếu cơ bản với iPhone 15 Pro Max 8 GB/256 GB tại FPT dự đoán **22.642.018 đồng** bằng LightGBM (và **25.862.396 đồng** bằng Random Forest với ca kiểm thử chuẩn hóa nhãn `apple` / `fpt shop`).
+4. **Tab 4 — Kiểm toán bất thường (TV7)**: Đối chiếu 3 phương pháp phát hiện (Rule-based, Log-price IQR, Isolation Forest), phân rã `715` bản ghi gắn cờ thành 4 nhóm `anomaly_type` với khuyến nghị xử lý riêng biệt, kèm bộ lọc tra cứu từng dòng và minh chứng vì sao xóa mù quáng mọi cờ bất thường sẽ làm suy giảm nghiêm trọng khả năng định giá phân khúc cao cấp.
+5. **Tab 5 — Đánh giá mô hình & XAI (TV8)**: Hợp nhất 3 chế độ chuyên sâu gồm *Benchmark 3 chiều & Ablation S1–S5*, *Phân tích sai số đa lát cắt & Top-20 ca lệch lớn nhất*, và *Giải thích mô hình toàn cục TreeSHAP & Kiểm định tính đơn điệu (Monotonicity Check)*.
+
+| Minh họa hiện vật đánh giá cốt lõi | Nội dung | Ảnh chụp tham chiếu |
 |---|---|---|
-| Dự đoán giá | Chọn cấu hình, xem giá, đóng góp và các máy tương tự | [Ảnh 10.A](../../src/evaluation_demo/outputs/demo_screenshots/01_du_doan_gia.jpg) |
-| So sánh mô hình | Chỉ số TV5, các giai đoạn S1–S4 và độ nhạy với cờ TV7 | [Ảnh 10.B](../../src/evaluation_demo/outputs/demo_screenshots/02_so_sanh_mo_hinh.jpg) |
-| Phân tích sai số | Đồ thị sai số, nhóm giá/hãng/tồn kho và ca dự đoán lệch | [Ảnh 10.C](../../src/evaluation_demo/outputs/demo_screenshots/03_phan_tich_sai_so.jpg) |
-| Giải thích mô hình | Hai biểu đồ SHAP, ba ví dụ và phép thử RAM/bộ nhớ | [Ảnh 10.D](../../src/evaluation_demo/outputs/demo_screenshots/04_giai_thich_mo_hinh.jpg) |
+| Giao diện thẩm định & dự đoán giá | Đối chiếu cấu hình, mức giá hợp lý, đóng góp SHAP VNĐ và các máy tương tự | [Ảnh 10.A](../../src/evaluation_demo/outputs/demo_screenshots/01_du_doan_gia.jpg) |
+| So sánh mô hình & Ablation | Chỉ số 3 chiều TV5, chuỗi thí nghiệm S1–S4 và độ nhạy cờ TV7 (S5a/S5b) | [Ảnh 10.B](../../src/evaluation_demo/outputs/demo_screenshots/02_so_sanh_mo_hinh.jpg) |
+| Phân tích sai số đa chiều | Đồ thị phần dư, sai số theo khoảng giá/hãng/tồn kho và 20 ca lệch lớn nhất | [Ảnh 10.C](../../src/evaluation_demo/outputs/demo_screenshots/03_phan_tich_sai_so.jpg) |
+| Giải thích mô hình & Đơn điệu | Biểu đồ TreeSHAP toàn cục, 3 ví dụ waterfall và phép thử bậc thang RAM/ROM | [Ảnh 10.D](../../src/evaluation_demo/outputs/demo_screenshots/04_giai_thich_mo_hinh.jpg) |
 
-![Tab Dự đoán giá với iPhone 15 Pro Max và biểu đồ đóng góp](../../src/evaluation_demo/outputs/demo_screenshots/01_du_doan_gia.jpg)
+![Giao diện dự đoán và giải thích đóng góp giá với iPhone 15 Pro Max](../../src/evaluation_demo/outputs/demo_screenshots/01_du_doan_gia.jpg)
 
-[Hướng dẫn chạy và tái tạo hiện vật](../../src/evaluation_demo/README.md) · [Mã demo](../../src/evaluation_demo/app.py) · [Thư viện](../../requirements.txt) · [Bộ kiểm thử TV8](../../tests/test_tv8_evaluation_demo.py)
+[Hướng dẫn chạy và tái tạo hiện vật](../../src/evaluation_demo/README.md) · [Mã ứng dụng 5 tab](../../src/evaluation_demo/app.py) · [Thư viện](../../requirements.txt) · [Bộ kiểm thử TV8](../../tests/test_tv8_evaluation_demo.py)
 
 ```powershell
 python -m pytest tests/test_tv8_evaluation_demo.py -q
 python -m streamlit run src/evaluation_demo/app.py --server.address 127.0.0.1
 ```
 
-Bộ kiểm thử đối chiếu sáu mô hình và tập test, ca chuẩn hóa Apple/FPT, tổng đóng góp của giải thích, bảy bảng, bảy hình 300 DPI, bốn ảnh demo và thao tác dự đoán trong Streamlit. **Toàn bộ 31 kiểm thử TV8 đều đạt** trên môi trường tích hợp `main` (Streamlit 1.67.0, LightGBM 4.7.0, scikit-learn 1.9.1) không còn sai lệch phiên bản.
+Bộ kiểm thử tự động kiểm tra tính toàn vẹn của phép chia dữ liệu không rò rỉ, tái lập chính xác 6 mô hình TV5, chuẩn hóa bí danh Apple/FPT, bảo toàn tổng cộng tính SHAP VNĐ, làm giàu danh mục với TV6/TV7, khóa tương thích phần cứng vật lý, chế độ thẩm định giá hợp lý SKU thực tế, 7 bảng CSV, 7 hình 300 DPI, 4 ảnh chụp tham chiếu và khả năng vận hành trọn vẹn 5 tab trên Streamlit `AppTest`.

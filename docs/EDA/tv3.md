@@ -215,8 +215,8 @@ src/eda/
 | 1 | **Mã nguồn / Notebooks** | [`src/eda/notebooks/`](../../src/eda/notebooks/) | 5 Jupyter Notebooks sạch sẽ, chạy không lỗi: `01_overview`, `02_price`, `03_missingness`, `04_hardware_price`, `05_regression_readiness`. | ✅ **Đã hoàn thành (100%)** |
 | 2 | **Bảng Thống kê Tổng hợp** | [`src/eda/outputs/tables/`](../../src/eda/outputs/tables/) | 73 bảng thống kê chuẩn hóa song song cả hai định dạng `.md` và `.csv` phục vụ trích xuất và tích hợp báo cáo. | ✅ **Đã hoàn thành (100%)** |
 | 3 | **Bộ Biểu đồ Phân tích** | [`src/eda/outputs/figures/`](../../src/eda/outputs/figures/) | Bộ biểu đồ chất lượng cao chuẩn xuất bản 300 DPI từ Fig 1.1 đến Fig 3.3, layout khoa học, không tràn viền. | ✅ **Đã hoàn thành (100%)** |
-| 4 | **Tài liệu Bàn giao TV5** | [`docs/tv3/tv3_to_tv5_handoff.md`](tv3_to_tv5_handoff.md) | Tài liệu bàn giao kỹ thuật: Candidate Feature Matrix, chiến lược target log1p, Imputation, Encoding, cảnh báo VIF và chống rò rỉ. | ✅ **Đã hoàn thành (100%)** |
-| 5 | **Nội dung Phần 5 Báo cáo** | [`docs/tv3/report_section_5_eda.md`](report_section_5_eda.md) | Bản thảo hoàn chỉnh Phần 5 Báo cáo Tổng kết Học phần: Đầy đủ 7 tiểu mục học thuật, bảng số liệu thực nghiệm và minh chứng biểu đồ. | ✅ **Đã hoàn thành (100%)** |
+| 4 | **Tài liệu Bàn giao TV5** | [`docs/EDA/tv3_to_tv5_handoff.md`](tv3_to_tv5_handoff.md) | Tài liệu bàn giao kỹ thuật: Candidate Feature Matrix, chiến lược target log1p, Imputation, Encoding, cảnh báo VIF và chống rò rỉ. | ✅ **Đã hoàn thành (100%)** |
+| 5 | **Nội dung Phần 5 Báo cáo** | [`docs/EDA/report_section_5_eda.md`](report_section_5_eda.md) | Bản thảo hoàn chỉnh Phần 5 Báo cáo Tổng kết Học phần: Đầy đủ 7 tiểu mục học thuật, bảng số liệu thực nghiệm và minh chứng biểu đồ. | ✅ **Đã hoàn thành (100%)** |
 
 
 ---

@@ -1,7 +1,5 @@
-"""Regression checks for the TV8 handover and its pinned TV5 evaluation."""
+"""Regression checks for the IT4930 Market Intelligence & Fair-Value Analytics platform."""
 
-import hashlib
-import json
 from importlib import import_module
 from pathlib import Path
 
@@ -16,6 +14,13 @@ DEMO = ROOT / "src" / "evaluation_demo"
 OUTPUT = DEMO / "outputs"
 CATEGORIES = {"laptop": (3227, 819), "smartphone": (3276, 810)}
 MODELS = ("ridge", "rf", "lgbm")
+EXPECTED_TABS = [
+    "Tổng quan & Quy luật giá (TV1–TV3)",
+    "Cạnh tranh đa sàn & Review (TV4 & TV6)",
+    "Thẩm định giá hợp lý (TV5–TV8)",
+    "Kiểm toán bất thường (TV7)",
+    "Đánh giá mô hình & XAI (TV8)",
+]
 TABLES = {
     "table_10_1_model_benchmark_3d.csv": {"category", "model", "mae_vnd", "rmse_vnd", "r2", "mae_change_pct"},
     "table_10_2_ablation_and_tv7_sensitivity.csv": {"stage", "category", "model", "n_train", "n_test", "mae_vnd"},
@@ -46,6 +51,13 @@ def api():
     with pytest.MonkeyPatch.context() as patch:
         patch.syspath_prepend(str(DEMO))
         yield import_module("demo_data")
+
+
+@pytest.fixture(scope="module")
+def market_api():
+    with pytest.MonkeyPatch.context() as patch:
+        patch.syspath_prepend(str(DEMO))
+        yield import_module("market_data")
 
 
 @pytest.fixture(scope="module")
@@ -126,6 +138,96 @@ def test_nearby_catalog_is_ranked_independently_of_price(api, splits):
     assert matches["listing_record_id"].tolist() == alternative["listing_record_id"].tolist()
 
 
+def test_catalog_enriches_tv7_audit_and_tv6_reviews(api, splits):
+    catalog = api.build_catalog(splits)
+    expected_cols = {
+        "anomaly_type",
+        "recommended_action",
+        "combined_flag",
+        "methods_agree",
+        "has_review_data",
+        "review_count_usable",
+        "avg_sentiment_score",
+        "avg_rating",
+    }
+    assert expected_cols <= set(catalog.columns)
+    assert not catalog["anomaly_type"].isna().any()
+    assert not catalog["recommended_action"].isna().any()
+    assert set(catalog["anomaly_type"]).issubset({
+        "none",
+        "low_price_or_category_noise",
+        "hardware_spec_error",
+        "rare_valid_flagship",
+        "spec_price_mismatch_review",
+    })
+
+
+def test_hardware_compatibility_blocks_invalid_cross_brand_specs(api, splits):
+    apple_lap = api.build_compatibility_options(splits["laptop"].X_train, "laptop", brand="Apple")
+    assert apple_lap["cpu_models"]
+    assert not any(
+        bad in cpu.casefold()
+        for cpu in apple_lap["cpu_models"]
+        for bad in ("snapdragon", "ryzen", "mediatek", "exynos")
+    )
+    assert not any(
+        bad in gpu.casefold()
+        for gpu in apple_lap["gpu_models"]
+        for bad in ("rtx", "gtx", "geforce", "nvidia")
+    )
+
+    apple_phone = api.build_compatibility_options(splits["smartphone"].X_train, "smartphone", brand="Apple")
+    assert apple_phone["cpu_models"]
+    assert all("apple" in cpu.casefold() or cpu.casefold().startswith("a") for cpu in apple_phone["cpu_models"])
+    assert not any("vnđ" in net.casefold() or "vnd" in net.casefold() for net in apple_phone["network_types"])
+
+    asus_lap = api.build_compatibility_options(splits["laptop"].X_train, "laptop", brand="ASUS")
+    samsung_phone = api.build_compatibility_options(splits["smartphone"].X_train, "smartphone", brand="Samsung")
+    assert not any("apple" in cpu.casefold() for cpu in asus_lap["cpu_models"])
+    assert not any("apple" in gpu.casefold() for gpu in asus_lap["gpu_models"])
+    assert not any("apple" in cpu.casefold() for cpu in samsung_phone["cpu_models"])
+
+
+@pytest.mark.parametrize("category", CATEGORIES)
+def test_audit_listing_fair_value_is_consistent(api, splits, models, category):
+    catalog = api.build_catalog(splits)
+    row = catalog.loc[catalog["category_clean"].eq(category)].iloc[0]
+    res = api.audit_listing_fair_value(row, splits[category], models[category, "lgbm"], mdape_pct=9.5)
+    assert np.isfinite(res["fair_value_vnd"]) and res["fair_value_vnd"] > 0
+    assert res["gap_vnd"] == pytest.approx(res["recorded_price_vnd"] - res["fair_value_vnd"], rel=1e-9)
+    assert res["low_fair_vnd"] <= res["fair_value_vnd"] <= res["high_fair_vnd"]
+    assert res["verdict"] in {"undervalued", "fair", "overvalued"}
+
+
+def test_market_data_loaders_cover_all_tv1_to_tv7_pillars(market_api):
+    kpis = market_api.load_platform_kpis()
+    assert kpis["total_listings"] == 10_316
+    assert kpis["total_reviews"] == 15_805
+    assert kpis["usable_reviews"] == 14_869
+    assert kpis["canonical_products"] == 4_414
+    assert kpis["flagged_anomalies"] == 715
+
+    eda_items = market_api.get_eda_items()
+    assert len(eda_items) == 15
+    for item in eda_items:
+        assert item["figure_path"].is_file()
+        assert item["question"] and item["finding"] and item["action"]
+
+    holes = market_api.load_structural_holes()
+    assert len(holes) == 90
+    assert int(holes["gap_type"].eq("retailer_blind_spot").sum()) == 68
+    assert int(holes["gap_type"].eq("underserved_high_demand").sum()) == 22
+
+    flags = market_api.load_tv7_full_flags()
+    type_summary = market_api.summarize_tv7_types(flags)
+    assert len(flags) == 10_316
+    assert int(type_summary["listing_count"].sum()) == 715
+    assert len(type_summary) == 4
+
+    tv6_charts = market_api.get_tv6_charts()
+    assert len(tv6_charts) == 4 and all(c["figure_path"].is_file() for c in tv6_charts)
+
+
 @pytest.mark.parametrize("filename", TABLES)
 def test_report_tables_are_readable(filename):
     table = pd.read_csv(OUTPUT / "tables" / filename)
@@ -153,12 +255,22 @@ def test_demo_screenshots_are_valid_jpeg(filename):
         image.verify()
 
 
-def test_app_can_submit_prediction(api):
+def test_app_renders_five_tabs_and_supports_both_fair_value_modes():
     from streamlit.testing.v1 import AppTest
 
-    app = AppTest.from_file(str(DEMO / "app.py"), default_timeout=60).run()
-    assert [tab.label for tab in app.tabs] == ["Dự đoán giá", "So sánh mô hình", "Phân tích sai số", "Giải thích mô hình"]
+    app = AppTest.from_file(str(DEMO / "app.py"), default_timeout=90).run()
+    assert [tab.label for tab in app.tabs] == EXPECTED_TABS
+    assert not app.exception and not app.error
+
+    initial_metrics = {metric.label: metric.value for metric in app.metric}
+    assert initial_metrics["Tổng sản phẩm thu thập (TV1)"] == "10.316"
+    assert "Giá niêm yết thực tế tại sàn" in initial_metrics
+    assert "Giá hợp lý theo cấu hình (Fair Value)" in initial_metrics
+    assert "Độ lệch (Thực tế − Hợp lý)" in initial_metrics
+
+    app.radio(key="fair_value_mode").set_value("simulate_sku").run()
     assert not app.exception and not app.error
     next(button for button in app.button if button.label == "Dự đoán giá").click().run()
     assert not app.exception and not app.error
-    assert app.metric[0].value == "22.642.018 đ"
+    sim_metrics = {metric.label: metric.value for metric in app.metric}
+    assert sim_metrics["Giá dự đoán"] == "22.642.018 đ"
